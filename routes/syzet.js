@@ -118,6 +118,94 @@ exports.findAllDielli = function (req, res, next) {
     console.log('test');
     //console.log(products2);
 };
+
+exports.getSlider1 = function (req, res, next) {
+  //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
+  //TODO : than it means that the function needs to be changed in  order to handle all request
+    var offset = parseInt(req.body.offset);
+    var responseD;
+    console.log(offset);
+    pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+      console.log('Connected to postgres! slider 1');
+
+      client
+        .query('SELECT DISTINCT ON (products2.pershkrimiangartikulli) * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE magazina.sasia>0 AND products2.marka=\'slider1\' AND products2.grupi=\'Syze Dielli\'  limit 20 offset ' + offset)
+        .on('row', function(row) {
+          syzetD.push(row);
+          console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+        }).on('end',function(){
+          console.log(syzetD.length);
+          if(offset !== 0){
+            responseD = syzetD.splice(0,offset);
+          }else{
+            responseD = syzetD;
+          }
+
+          console.log('------------------ ',responseD.length);
+          console.log(responseD);
+          res.send(responseD);
+          client.end();
+          done();
+        });
+    });
+    pg.end(function(err) {
+        if (err) throw err;
+        console.log('closed connection');
+    });
+    syzetD = [];
+    console.log('too early');
+    //res.send(products2);
+    console.log('test');
+    //console.log(products2);
+};
+
+exports.getSlider2 = function (req, res, next) {
+  //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
+  //TODO : than it means that the function needs to be changed in  order to handle all request
+    var offset = parseInt(req.body.offset);
+    var responseD;
+    console.log(offset);
+    pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+      console.log('Connected to postgres! slider 1');
+
+      client
+        .query('SELECT DISTINCT ON (products2.pershkrimiangartikulli) * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE magazina.sasia>0 AND products2.marka=\'slider2\' AND products2.grupi=\'Syze Dielli\'  limit 20 offset ' + offset)
+        .on('row', function(row) {
+          syzetD.push(row);
+          console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+        }).on('end',function(){
+          console.log(syzetD.length);
+          if(offset !== 0){
+            responseD = syzetD.splice(0,offset);
+          }else{
+            responseD = syzetD;
+          }
+
+          console.log('------------------ ',responseD.length);
+          console.log(responseD);
+          res.send(responseD);
+          client.end();
+          done();
+        });
+    });
+    pg.end(function(err) {
+        if (err) throw err;
+        console.log('closed connection');
+    });
+    syzetD = [];
+    console.log('too early');
+    //res.send(products2);
+    console.log('test');
+    //console.log(products2);
+};
 exports.findAllOptike = function (req, res, next) {
   //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
   //TODO : than it means that the function needs to be changed in  order to handle all request

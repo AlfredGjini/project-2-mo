@@ -21,6 +21,8 @@ app.all('*', function(req, res, next) {
 
 app.post('/kreu', syzet.findAll);
 app.post('/syze-dielli', syzet.findAllDielli);
+app.post('/slider1', syzet.getSlider1);
+app.post('/slider2', syzet.getSlider2);
 app.post('/syze-optike', syzet.findAllOptike);
 app.post('/syze-koleksion', syzet.findAllKoleksion);
 app.post('/syze-lente', syzet.findAllLente);

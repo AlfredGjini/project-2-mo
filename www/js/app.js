@@ -196,6 +196,25 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
       }
     }
   })
+  .state('app.slider1', {
+    url: '/slider1',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/slider1.html",
+        controller: 'slider1Ctrl'
+      }
+    }
+  })
+
+    .state('app.slider2', {
+    url: '/slider2',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/slider2.html",
+        controller: 'slider2Ctrl'
+      }
+    }
+  })
 
   .state('app.forgotPassword', {
     url: '/forgotPassword',

@@ -454,6 +454,1008 @@ angular.module('directory.controllers', ['ionic', 'ngOpenFB','angCamera', 'ionMd
 
 })
 
+.controller('slider1Ctrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope) {
+  console.log("test");
+  console.log($scope.offsetD);
+
+  $scope.$watch('$viewContentLoaded', function(){
+    //do something
+    console.log('do thirrem ne fund fare');
+});
+
+
+$scope.itemchecked=false;
+$scope.filterNotActivated=true;
+$scope.data.gjinia=[];
+$scope.skaRezultat=false;
+
+
+
+// $scope.shfaqFiltraTag=false;
+// var defaultMinPrice=0;
+// var defaultMaxPrice=100;
+
+// $scope.slider = {
+//   minValue: defaultMinPrice,
+//   maxValue: defaultMaxPrice,
+//   options: {
+//     floor: defaultMinPrice,
+//     ceil: defaultMaxPrice,
+//     translate: function(value, sliderId, label) {
+//       switch (label) {
+//         case 'model':
+//           return '<b>Cmimi Min:</b> '+value+' LEK';
+//         case 'high':
+//           return '<b>Cmimi Max:</b> '+value+' LEK';
+//         default:
+//           return '$' + value
+//       }
+//     }
+//   }
+// };
+
+
+//   $http({
+//        method: 'POST',
+//        //url: 'https://tarzantest.herokuapp.com/login',
+//        url: 'https://max-optika-server.herokuapp.com/getCmimiFilter',
+//        headers: {
+//          'Content-Type': 'application/x-www-form-urlencoded'
+//        },
+//        transformRequest: function(obj) {
+//          var str = [];
+//          for (var p in obj)
+//            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//          return str.join("&");
+//        },
+//      }).success(function(response) {
+//         //console.log(response.rows);
+
+//         response.rows.forEach( function(element, index) {
+//           console.log(element);
+//           if (element.id==1) {
+//              $scope.slider.options.floor=element.cmimimin;
+//              $scope.slider.options.ceil=element.cmimimax;
+//              $scope.slider.minValue=element.cmimimin;
+//              $scope.slider.maxValue=element.cmimimax;
+//             }
+//         });
+
+
+          
+//       });
+
+
+
+// $scope.shfaqF= function(){
+//   $scope.data.shfaq=true;
+//   $timeout(function () { 
+//     $scope.$broadcast('rzSliderForceRender');
+//     console.log('koha') 
+//   });
+// }
+
+// $scope.shfaqF2= function(){
+//   $scope.data.shfaq=false;
+// }
+
+
+
+
+//   $scope.singleModel = 1;
+
+//   $scope.radioModel = 'Middle';
+
+//   $scope.checkModel = {
+//     Rayban: false,
+//     Police: false,
+//     Emporio: false
+//   };
+
+//   $scope.checkResults = [];
+
+
+
+
+//   $scope.$watchCollection('checkModel', function () {
+//     $scope.checkResults = [];
+//     angular.forEach($scope.checkModel, function (value, key) {
+//       if (value) {
+//         $scope.checkResults.push(key);
+//       }
+//     });
+//   });
+
+
+//   $scope.singleModel = 1;
+
+//   $scope.radioModel = 'Middle';
+
+//   $scope.checkModelForma = {
+//     Square: false,
+//     Circle: false,
+//     Oval: false
+//   };
+
+//   $scope.checkResultsForma = [];
+
+//   $scope.$watchCollection('checkModelForma', function () {
+//     $scope.checkResultsForma = [];
+//     angular.forEach($scope.checkModelForma, function (value, key) {
+//       if (value) {
+//         $scope.checkResultsForma.push(key);
+//       }
+//     });
+//   });
+
+
+
+// $scope.klasaSfond=['product--blue','product--orange','product--red','product--green','product--yellow','product--pink'];
+
+// $scope.ktheNgjyre= function(index){
+//   var kodi=index%6;
+//   if(kodi==0){
+//     kodi=6;
+//   }
+//   return kodi
+// }
+
+
+// Chech which filter tag to show and which one not
+// $scope.checkFilterValues=function(){
+//   $scope.fshihCmimeVar=false;
+//   $scope.fshihFormaVar=false;
+//   $scope.fshihGjiniaVar=false;
+//   $scope.fshihMarkaVar=false;
+//   $scope.filterNotActivated=true;
+
+
+
+//   if ($scope.slider.minValue == defaultMinPrice && $scope.slider.maxValue == defaultMaxPrice) {
+//     $scope.fshihCmimeVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//   }
+
+//   if ($scope.checkResultsForma=='') {
+//     $scope.fshihFormaVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//     $scope.fshihFormaVar=false;
+//   }
+
+//   if($scope.data.gjinia==undefined || $scope.data.gjinia==''){
+//     $scope.fshihGjiniaVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//   }
+
+//   if ($scope.checkResults=='') {
+//     $scope.fshihMarkaVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//   }
+
+
+// }
+
+// $scope.data.gjinia=new Array(' ');
+
+// $scope.filtroProduktet =  function(){
+//   $scope.checkFilterValues();
+//   console.log($scope.syzeD);
+//   //$scope.syzeDCopy=$scope.syzeDOriginalBackup;
+//   console.log($scope.syzeDOriginalBackup);
+//   var newSyzeDHolder1=[];
+//   var newSyzeDHolder2=[];
+//   var newSyzeDHolder3=[];
+//   var newSyzeDHolder4=[];
+
+//   // Cmimi Filter
+//   $scope.syzeDOriginalBackup.forEach( function(element, index) {
+//     if(element.cmimi>=$scope.slider.minValue && element.cmimi<=$scope.slider.maxValue){
+//       newSyzeDHolder1.push(element);
+//     }
+//   });
+
+//   // Forma Filter
+//   // Check if any value is selected from Forma
+//   if ($scope.checkResultsForma!='') {
+//     // First loop through the array of all the products
+//     newSyzeDHolder1.forEach( function(element, index) {
+//       // Then loop through all the selected Forma values and check them all with the products values
+//       $scope.checkResultsForma.forEach( function(elementt, indexx) {
+//         if(element.zonakadastrale==elementt){
+//         newSyzeDHolder2.push(element);
+//       }
+//       });
+      
+//     });
+//   }else{
+//     newSyzeDHolder2=newSyzeDHolder1;
+//   }
+
+//   // Gjinia Filter
+//   if($scope.data.gjinia.length>0){
+//     //console.log('brenda gjinia');
+//     newSyzeDHolder2.forEach( function(element, index) {
+//       if(element.vitprodhimi==$scope.data.gjinia){
+//         newSyzeDHolder3.push(element);
+//       }
+//     });
+
+//   }else{
+//     //console.log('jo brenda gjinia');
+//     newSyzeDHolder3=newSyzeDHolder2;
+//   }
+
+//   // Marka Filter
+//   // Check if any value is selected from Forma
+//   if ($scope.checkResults!='') {
+//     // Replace Emporio with Emporio Armani in the result array
+//     $scope.checkResults.forEach( function(element, index) {
+//       if(element=='Emporio'){
+//         $scope.checkResults[index]='Emporio Armani';
+//       }
+//     });
+
+//     // First loop through the array of all the products
+//     newSyzeDHolder3.forEach( function(element, index) {
+//       // Then loop through all the selected Forma values and check them all with the products values
+//       $scope.checkResults.forEach( function(elementt, indexx) {
+//         if(element.kodifikimartikulli2==elementt){
+//         newSyzeDHolder4.push(element);
+//       }
+//       });
+      
+//     });
+//   }else{
+//     newSyzeDHolder4=newSyzeDHolder3;
+//   }
+
+//   $scope.shfaqFiltraTag=true;
+//   // if filter don't return any result then don't change a thing
+//   if(newSyzeDHolder4==''){
+//     $scope.skaRezultat=true;
+
+//     $timeout(function () { 
+//       $scope.skaRezultat = false; 
+//     }, 3000);
+
+//     console.log("bosh 2");
+//     $scope.data.shfaq=false;
+//   }else {
+//       // Set the old array to the new modified one
+//       $scope.syzeD=newSyzeDHolder4;
+//       console.log($scope.syzeD);
+//       $scope.data.shfaq=false;
+//   }
+
+
+
+
+
+
+// }
+
+
+
+// Delete the Cmimi filters
+// $scope.fshiCmimiFilter =function(){
+//   //console.log($scope.slider);
+//   $scope.slider.minValue= defaultMinPrice;
+//   $scope.slider.maxValue= defaultMaxPrice;
+//   $scope.fshihCmimeVar=true;
+//   // TODO: Call filtroProduktet and filter them again
+//   $scope.filtroProduktet();
+// }
+
+
+// // Delete the Forma filters
+// $scope.fshiFormaFilter =function(){
+//   for (var key in $scope.checkModelForma) {
+//   if ($scope.checkModelForma.hasOwnProperty(key)) {
+//     $scope.checkResultsForma.forEach( function(element, index) {
+//       if (key==element) {
+//         $scope.checkModelForma[key]=false;
+//       }
+//     });
+//   }
+// }
+
+//   $scope.checkResultsForma=[];
+//   $scope.filtroProduktet();
+//   $scope.fshihFormaVar=true;
+// }
+
+
+// // Delete the gjinia filters
+// $scope.fshiGjiniaFilter =function(){
+//   $scope.data.gjinia=[];
+//   $scope.fshihGjiniaVar=true;
+//   // TODO: Call filtroProduktet and filter them again
+//   $scope.filtroProduktet();
+// }
+
+
+// // Delete the marka filters
+// $scope.fshiMarkaFilter =function(){
+//   //console.log($scope.checkModel);
+//   //console.log($scope.checkResults);
+//   for (var key in $scope.checkModel) {
+//   if ($scope.checkModel.hasOwnProperty(key)) {
+//     $scope.checkResults.forEach( function(element, index) {
+//       if(element=='Emporio Armani'){
+//         $scope.checkResults[index]='Emporio';
+//       }
+//       if (key==element) {
+//         $scope.checkModel[key]=false;
+//       }
+//     });
+//   }
+// }
+
+//   $scope.checkResults=[];
+//   $scope.filtroProduktet();
+//   $scope.fshihMarkaVar=true;
+
+// }
+
+
+
+
+
+
+
+
+
+
+      
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+
+  $scope.data = {};
+  /*$ionicLoading.show({
+    template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Loading...'
+  });*/
+  //offset to get data and implement infinite scroll
+  $scope.limit  = 20; //gets 20 objects the first time
+  $scope.offsetD = 0;
+  $scope.syzeD   = [];
+  $scope.countForBackUp   = 1;
+  $scope.loadNextProducts = function(){
+      // $scope.fshihCmimeVar=false;
+      // $scope.fshihFormaVar=false;
+      // $scope.fshihGjiniaVar=false;
+      // $scope.fshihMarkaVar=false;
+
+    console.log($scope.data.search);
+    console.log('t');
+    $ionicLoading.hide();
+  /*  var params = [];
+    $http.get('https://max-optika-server.herokuapp.com/kreu',{limit:$scope.limit,offset:$scope.offset})
+     .success(function(response){
+       console.log(response);
+       $scope.limit  += 20; //gets another limt data
+       $scope.offset += 20;
+       $scope.push(response);
+     });
+     console.log('Infinite scroll on course!!!!!!');*/
+     var count = 1;
+     console.log('Reuqest number : ',count++);
+     $http({
+       method: 'POST',
+       url: 'https://max-optika-server.herokuapp.com/slider1',
+       // url: 'https://max-optika-server.herokuapp.com/syze-dielli',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         offset : $scope.offsetD
+       }
+     }).success(function(response) {
+      console.log(response);
+       $scope.$broadcast('scroll.infiniteScrollComplete');
+
+
+       response.forEach(function(item){
+        $scope.syzeD.push(item);
+
+        
+
+      });
+
+       $scope.syzeD.forEach( function(element, index) {
+         $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
+         if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
+          $scope.pershkrimiSakte.length=3;
+         }else{
+          // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
+          $scope.pershkrimiSakte.length=2;
+         }
+         element.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
+
+       });
+
+
+       if ($scope.filterNotActivated==false) {
+        console.log('eshte aktivizuar');
+        $scope.filtroProduktet();
+       }else{
+        console.log('nuk eshte aktivizuar');
+       }
+
+       if($scope.countForBackUp==1){
+        $scope.syzeDOriginalBackup=$scope.syzeD;
+        console.log("First and only call");
+       }
+       
+
+
+
+
+       // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
+       // console.log($scope.treArray);
+      
+       // console.log(response);
+       //gets another limt data
+       $scope.offsetD += 20;
+       console.log($scope.offsetD);
+     });
+
+     console.log("fs");
+  // $scope.fshihCmimeVar=false;
+  console.log($scope.fshihCmimeVar);
+
+  };
+  /*$scope.syze = Syze.query(function() {
+    $ionicLoading.hide();
+  });*/
+  
+
+})
+
+
+.controller('slider2Ctrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope) {
+  console.log("test");
+  console.log($scope.offsetD);
+
+  $scope.$watch('$viewContentLoaded', function(){
+    //do something
+    console.log('do thirrem ne fund fare');
+});
+
+
+$scope.itemchecked=false;
+$scope.filterNotActivated=true;
+$scope.data.gjinia=[];
+$scope.skaRezultat=false;
+
+
+
+// $scope.shfaqFiltraTag=false;
+// var defaultMinPrice=0;
+// var defaultMaxPrice=100;
+
+// $scope.slider = {
+//   minValue: defaultMinPrice,
+//   maxValue: defaultMaxPrice,
+//   options: {
+//     floor: defaultMinPrice,
+//     ceil: defaultMaxPrice,
+//     translate: function(value, sliderId, label) {
+//       switch (label) {
+//         case 'model':
+//           return '<b>Cmimi Min:</b> '+value+' LEK';
+//         case 'high':
+//           return '<b>Cmimi Max:</b> '+value+' LEK';
+//         default:
+//           return '$' + value
+//       }
+//     }
+//   }
+// };
+
+
+//   $http({
+//        method: 'POST',
+//        //url: 'https://tarzantest.herokuapp.com/login',
+//        url: 'https://max-optika-server.herokuapp.com/getCmimiFilter',
+//        headers: {
+//          'Content-Type': 'application/x-www-form-urlencoded'
+//        },
+//        transformRequest: function(obj) {
+//          var str = [];
+//          for (var p in obj)
+//            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//          return str.join("&");
+//        },
+//      }).success(function(response) {
+//         //console.log(response.rows);
+
+//         response.rows.forEach( function(element, index) {
+//           console.log(element);
+//           if (element.id==1) {
+//              $scope.slider.options.floor=element.cmimimin;
+//              $scope.slider.options.ceil=element.cmimimax;
+//              $scope.slider.minValue=element.cmimimin;
+//              $scope.slider.maxValue=element.cmimimax;
+//             }
+//         });
+
+
+          
+//       });
+
+
+
+// $scope.shfaqF= function(){
+//   $scope.data.shfaq=true;
+//   $timeout(function () { 
+//     $scope.$broadcast('rzSliderForceRender');
+//     console.log('koha') 
+//   });
+// }
+
+// $scope.shfaqF2= function(){
+//   $scope.data.shfaq=false;
+// }
+
+
+
+
+//   $scope.singleModel = 1;
+
+//   $scope.radioModel = 'Middle';
+
+//   $scope.checkModel = {
+//     Rayban: false,
+//     Police: false,
+//     Emporio: false
+//   };
+
+//   $scope.checkResults = [];
+
+
+
+
+//   $scope.$watchCollection('checkModel', function () {
+//     $scope.checkResults = [];
+//     angular.forEach($scope.checkModel, function (value, key) {
+//       if (value) {
+//         $scope.checkResults.push(key);
+//       }
+//     });
+//   });
+
+
+//   $scope.singleModel = 1;
+
+//   $scope.radioModel = 'Middle';
+
+//   $scope.checkModelForma = {
+//     Square: false,
+//     Circle: false,
+//     Oval: false
+//   };
+
+//   $scope.checkResultsForma = [];
+
+//   $scope.$watchCollection('checkModelForma', function () {
+//     $scope.checkResultsForma = [];
+//     angular.forEach($scope.checkModelForma, function (value, key) {
+//       if (value) {
+//         $scope.checkResultsForma.push(key);
+//       }
+//     });
+//   });
+
+
+
+// $scope.klasaSfond=['product--blue','product--orange','product--red','product--green','product--yellow','product--pink'];
+
+// $scope.ktheNgjyre= function(index){
+//   var kodi=index%6;
+//   if(kodi==0){
+//     kodi=6;
+//   }
+//   return kodi
+// }
+
+
+// // Chech which filter tag to show and which one not
+// $scope.checkFilterValues=function(){
+//   $scope.fshihCmimeVar=false;
+//   $scope.fshihFormaVar=false;
+//   $scope.fshihGjiniaVar=false;
+//   $scope.fshihMarkaVar=false;
+//   $scope.filterNotActivated=true;
+
+
+
+//   if ($scope.slider.minValue == defaultMinPrice && $scope.slider.maxValue == defaultMaxPrice) {
+//     $scope.fshihCmimeVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//   }
+
+//   if ($scope.checkResultsForma=='') {
+//     $scope.fshihFormaVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//     $scope.fshihFormaVar=false;
+//   }
+
+//   if($scope.data.gjinia==undefined || $scope.data.gjinia==''){
+//     $scope.fshihGjiniaVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//   }
+
+//   if ($scope.checkResults=='') {
+//     $scope.fshihMarkaVar=true;
+//   }else{
+//     $scope.filterNotActivated=false;
+//   }
+
+
+// }
+
+// $scope.data.gjinia=new Array(' ');
+
+// $scope.filtroProduktet =  function(){
+//   $scope.checkFilterValues();
+//   console.log($scope.syzeD);
+//   //$scope.syzeDCopy=$scope.syzeDOriginalBackup;
+//   console.log($scope.syzeDOriginalBackup);
+//   var newSyzeDHolder1=[];
+//   var newSyzeDHolder2=[];
+//   var newSyzeDHolder3=[];
+//   var newSyzeDHolder4=[];
+
+//   // Cmimi Filter
+//   $scope.syzeDOriginalBackup.forEach( function(element, index) {
+//     if(element.cmimi>=$scope.slider.minValue && element.cmimi<=$scope.slider.maxValue){
+//       newSyzeDHolder1.push(element);
+//     }
+//   });
+
+//   // Forma Filter
+//   // Check if any value is selected from Forma
+//   if ($scope.checkResultsForma!='') {
+//     // First loop through the array of all the products
+//     newSyzeDHolder1.forEach( function(element, index) {
+//       // Then loop through all the selected Forma values and check them all with the products values
+//       $scope.checkResultsForma.forEach( function(elementt, indexx) {
+//         if(element.zonakadastrale==elementt){
+//         newSyzeDHolder2.push(element);
+//       }
+//       });
+      
+//     });
+//   }else{
+//     newSyzeDHolder2=newSyzeDHolder1;
+//   }
+
+//   // Gjinia Filter
+//   if($scope.data.gjinia.length>0){
+//     //console.log('brenda gjinia');
+//     newSyzeDHolder2.forEach( function(element, index) {
+//       if(element.vitprodhimi==$scope.data.gjinia){
+//         newSyzeDHolder3.push(element);
+//       }
+//     });
+
+//   }else{
+//     //console.log('jo brenda gjinia');
+//     newSyzeDHolder3=newSyzeDHolder2;
+//   }
+
+//   // Marka Filter
+//   // Check if any value is selected from Forma
+//   if ($scope.checkResults!='') {
+//     // Replace Emporio with Emporio Armani in the result array
+//     $scope.checkResults.forEach( function(element, index) {
+//       if(element=='Emporio'){
+//         $scope.checkResults[index]='Emporio Armani';
+//       }
+//     });
+
+//     // First loop through the array of all the products
+//     newSyzeDHolder3.forEach( function(element, index) {
+//       // Then loop through all the selected Forma values and check them all with the products values
+//       $scope.checkResults.forEach( function(elementt, indexx) {
+//         if(element.kodifikimartikulli2==elementt){
+//         newSyzeDHolder4.push(element);
+//       }
+//       });
+      
+//     });
+//   }else{
+//     newSyzeDHolder4=newSyzeDHolder3;
+//   }
+
+//   $scope.shfaqFiltraTag=true;
+//   // if filter don't return any result then don't change a thing
+//   if(newSyzeDHolder4==''){
+//     $scope.skaRezultat=true;
+
+//     $timeout(function () { 
+//       $scope.skaRezultat = false; 
+//     }, 3000);
+
+//     console.log("bosh 2");
+//     $scope.data.shfaq=false;
+//   }else {
+//       // Set the old array to the new modified one
+//       $scope.syzeD=newSyzeDHolder4;
+//       console.log($scope.syzeD);
+//       $scope.data.shfaq=false;
+//   }
+
+
+
+
+
+
+// }
+
+
+
+// // Delete the Cmimi filters
+// $scope.fshiCmimiFilter =function(){
+//   //console.log($scope.slider);
+//   $scope.slider.minValue= defaultMinPrice;
+//   $scope.slider.maxValue= defaultMaxPrice;
+//   $scope.fshihCmimeVar=true;
+//   // TODO: Call filtroProduktet and filter them again
+//   $scope.filtroProduktet();
+// }
+
+
+// // Delete the Forma filters
+// $scope.fshiFormaFilter =function(){
+//   for (var key in $scope.checkModelForma) {
+//   if ($scope.checkModelForma.hasOwnProperty(key)) {
+//     $scope.checkResultsForma.forEach( function(element, index) {
+//       if (key==element) {
+//         $scope.checkModelForma[key]=false;
+//       }
+//     });
+//   }
+// }
+
+//   $scope.checkResultsForma=[];
+//   $scope.filtroProduktet();
+//   $scope.fshihFormaVar=true;
+// }
+
+
+// // Delete the gjinia filters
+// $scope.fshiGjiniaFilter =function(){
+//   $scope.data.gjinia=[];
+//   $scope.fshihGjiniaVar=true;
+//   // TODO: Call filtroProduktet and filter them again
+//   $scope.filtroProduktet();
+// }
+
+
+// // Delete the marka filters
+// $scope.fshiMarkaFilter =function(){
+//   //console.log($scope.checkModel);
+//   //console.log($scope.checkResults);
+//   for (var key in $scope.checkModel) {
+//   if ($scope.checkModel.hasOwnProperty(key)) {
+//     $scope.checkResults.forEach( function(element, index) {
+//       if(element=='Emporio Armani'){
+//         $scope.checkResults[index]='Emporio';
+//       }
+//       if (key==element) {
+//         $scope.checkModel[key]=false;
+//       }
+//     });
+//   }
+// }
+
+//   $scope.checkResults=[];
+//   $scope.filtroProduktet();
+//   $scope.fshihMarkaVar=true;
+
+// }
+
+
+
+
+
+
+
+
+
+
+      
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+
+  $scope.data = {};
+  /*$ionicLoading.show({
+    template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Loading...'
+  });*/
+  //offset to get data and implement infinite scroll
+  $scope.limit  = 20; //gets 20 objects the first time
+  $scope.offsetD = 0;
+  $scope.syzeD   = [];
+  $scope.countForBackUp   = 1;
+  $scope.loadNextProducts = function(){
+      // $scope.fshihCmimeVar=false;
+      // $scope.fshihFormaVar=false;
+      // $scope.fshihGjiniaVar=false;
+      // $scope.fshihMarkaVar=false;
+
+    console.log($scope.data.search);
+    console.log('t');
+    $ionicLoading.hide();
+  /*  var params = [];
+    $http.get('https://max-optika-server.herokuapp.com/kreu',{limit:$scope.limit,offset:$scope.offset})
+     .success(function(response){
+       console.log(response);
+       $scope.limit  += 20; //gets another limt data
+       $scope.offset += 20;
+       $scope.push(response);
+     });
+     console.log('Infinite scroll on course!!!!!!');*/
+     var count = 1;
+     console.log('Reuqest number : ',count++);
+     $http({
+       method: 'POST',
+       url: 'https://max-optika-server.herokuapp.com/slider2',
+       // url: 'https://max-optika-server.herokuapp.com/syze-dielli',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         offset : $scope.offsetD
+       }
+     }).success(function(response) {
+      console.log(response);
+       $scope.$broadcast('scroll.infiniteScrollComplete');
+
+
+       response.forEach(function(item){
+        $scope.syzeD.push(item);
+
+        
+
+      });
+
+       $scope.syzeD.forEach( function(element, index) {
+         $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
+         if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
+          $scope.pershkrimiSakte.length=3;
+         }else{
+          // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
+          $scope.pershkrimiSakte.length=2;
+         }
+         element.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
+
+       });
+
+
+       if ($scope.filterNotActivated==false) {
+        console.log('eshte aktivizuar');
+        $scope.filtroProduktet();
+       }else{
+        console.log('nuk eshte aktivizuar');
+       }
+
+       if($scope.countForBackUp==1){
+        $scope.syzeDOriginalBackup=$scope.syzeD;
+        console.log("First and only call");
+       }
+       
+
+
+
+
+       // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
+       // console.log($scope.treArray);
+      
+       // console.log(response);
+       //gets another limt data
+       $scope.offsetD += 20;
+       console.log($scope.offsetD);
+     });
+
+     console.log("fs");
+  // $scope.fshihCmimeVar=false;
+  console.log($scope.fshihCmimeVar);
+
+  };
+  /*$scope.syze = Syze.query(function() {
+    $ionicLoading.hide();
+  });*/
+  
+
+})
+
+
+
+
 .controller('syzeDielliCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope) {
   console.log("test");
   console.log($scope.offsetD);
