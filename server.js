@@ -26,6 +26,7 @@ app.post('/syze-koleksion', syzet.findAllKoleksion);
 app.post('/syze-lente', syzet.findAllLente);
 app.post('/search-result', syzet.findAllSearch);
 app.post('/register', syzet.regjistroUser);
+app.post('/modifiko', syzet.modifikoUser);
 app.post('/login-real', syzet.loginUser);
 app.post('/forgot-password', syzet.forgotPassword);
 app.post('/pick-up-store', syzet.pickUpStore);

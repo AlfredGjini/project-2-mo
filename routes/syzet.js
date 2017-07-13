@@ -433,6 +433,126 @@ exports.regjistroUser = function (req, res, next) {
 };
 
 
+exports.modifikoUser = function (req, res, next) {
+  //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
+  //TODO : than it means that the function needs to be changed in  order to handle all request
+    var emer = req.body.emer;
+    var mbiemer = req.body.mbiemer;
+    var tel = req.body.tel;
+    var email = req.body.email;
+    var fjalekalimi = req.body.fjalekalimi;
+    var date = req.body.date;
+
+    var queryTextRegister = 'insert into users(name,username,password,emailval) values(\''+emer+'\',\''+emer+'.'+mbiemer+'\',\''+fjalekalimi+'\',\''+email+'\')';
+    var queryTextEmailCheck = 'SELECT * FROM users WHERE emailval = \''+email+'\'';
+    //var queryTextRegisterClients = 'insert into clients(emer,mbiemer,mosha,gjinia,vendlindja,celular,email,user_id) values(\''+emer+'\',\''+emer+'.'+mbiemer+'\',\''+tel+'\',\''+email+'\',\''+fjalekalimi+'\',\''+date+'\')';
+    
+
+    // console.log(queryTextRegister);
+    console.log(queryTextEmailCheck);
+    var emailNjejt = [];
+    var emailNjejt2 = [];
+    var sukses;
+    
+    pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+      console.log('Connected to postgres! 7');
+
+      client
+        .query(queryTextEmailCheck)
+        .on('row', function(row) {
+          emailNjejt.push(row);
+          // done();
+          // client.end();
+      }).on('end',function(){
+          console.log(emailNjejt);
+          if (emailNjejt.length==0) {
+            console.log('bosh');
+
+            client.query(queryTextRegister, function(err, result, done) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("brenda 1");
+                    //client.end();
+                    //done();
+                  //   client.query(queryTextEmailCheck, function(err, result, done) {
+                  //     if (err) {
+                  //       console.log(err);
+                  //     } else {
+                  //       //console.log('Regjistrimi perfundoi me sukses');
+                  //       //res.send(JSON.stringify({regjistrimi:1}));
+                  //       //client.end();
+                  //       console.log(result.id);
+                  //       console.log("brenda2")
+                  //     }
+
+                  // });
+
+
+                   client
+                    .query(queryTextEmailCheck)
+                    .on('row', function(row) {
+                      emailNjejt2.push(row);
+                      // done();
+                      // client.end();
+                  }).on('end',function(){
+                     //console.log(emailNjejt2);
+                     //console.log("brenda2");
+                     //console.log(emailNjejt2[0].id);
+
+                     var queryTextRegisterClients = 'insert into clients(emer,mbiemer,mosha,gjinia,vendlindja,celular,email,user_id) values(\''+emer+'\',\''+mbiemer+'\',\'0\',\'a\',\'Pa Percaktuar\',\''+tel+'\',\''+email+'\',\''+emailNjejt2[0].id+'\')';
+
+
+
+                     client.query(queryTextRegisterClients, function(err, result, done) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+
+                        console.log('u shtuan tek klientet');
+                        console.log('Regjistrimi perfundoi me sukses');
+                        res.send(JSON.stringify({regjistrimi:1}));
+                        // client.end();
+                        //done();
+                      }
+                      });
+
+
+                  });
+
+
+
+                
+              }
+
+            });
+
+          }else {
+            console.log('jo bosh');
+            res.send(JSON.stringify({regjistrimi:0}));
+            //client.end();
+          }
+          //done();
+        });
+
+      // done();
+    });
+    pg.end(function(err) {
+        if (err) throw err;
+        console.log('closed connection');
+    });
+    // res.send(sukses);
+    console.log('too early');
+    //res.send(products2);
+    console.log('test');
+    //console.log(products2);
+};
+
+
 exports.loginUser = function (req, res, next) {
   //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
   //TODO : than it means that the function needs to be changed in  order to handle all request

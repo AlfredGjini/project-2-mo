@@ -2083,6 +2083,174 @@ $scope.fshiMarkaFilter =function(){
 
 })
 
+
+
+.controller('modifikoProfilinCtrl', function($scope, $resource, $http, $ionicPopup, $location, $state, ngFB, $ionicLoading) {
+
+      $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
+      $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
+      console.log($scope.loggedInSakte);
+      $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
+
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+
+
+      if (window.localStorage.token && window.localStorage.token !== undefined) {
+        console.log('User already logged in');
+        // $state.go('app.kreu');
+        alert('User already logged in register');
+      } else {
+        $scope.dataR = $scope.loggedInSakte;
+        $scope.showAlert = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login Failed',
+            template: '<p align="center">Ju lutemi plotesoni te gjitha te dhenat!</p>'
+          });
+        };
+
+        $scope.showAlertPassShkurter = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Regjistrimi Deshtoi',
+            template: '<p align="center">Passwordi juaj eshte shume i shkurter! (Min: 6 karaktere)</p>'
+          });
+        };
+        $scope.showAlertPassDontMatch = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Regjistrimi Deshtoi',
+            template: '<p align="center">Fjalekalimi dhe konfirmimi i fjalekalimit nuk jane te njejte</p>'
+          });
+        };
+        $scope.showAlertEmail = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Regjistrimi Deshtoi',
+            template: '<p align="center">Ju lutem vendosni nje email te sakte!</p>'
+          });
+        };
+
+        $scope.showAlertNotRegistered = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Login Failed',
+            template: '<p align="center">Perdoruesi nuk eshte i regjistruar!</p>'
+          });
+        };
+        $scope.showAlertRegjistrimSukses = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Regjistrimi Perfundoi',
+            template: '<p align="center">Regjistrimi Perfundoi Me Sukses, Ju Lutem beni login</p>'
+          });
+        };
+        $scope.showAlertEmailEkziston = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Regjistrimi Deshtoi',
+            template: '<p align="center">Ky email ekziston njehere! Ju lutem perdorni nje tjeter.</p>'
+          });
+        };
+
+        $scope.prepareStr = function(str) {
+          return str.substring(0, 3).split("").reverse().join("").toUpperCase();
+        };
+
+       $scope.validateEmail= function (email) {
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+      }
+
+      $scope.modifiko = function() {
+        var sakteEmail=$scope.validateEmail($scope.dataR.email);
+        //console.log($scope.dataR);
+
+      if ($scope.dataR.emer === "" || $scope.dataR.mbiemer === "" ||
+        $scope.dataR.emer === undefined || $scope.dataR.mbiemer === undefined || 
+        $scope.dataR.celular === "" || $scope.dataR.celular === undefined) {
+        $scope.showAlert();
+      }else {
+        console.log($scope.dataR);
+          // Setup the loader
+          $ionicLoading.show({
+            template: 'Loading',
+            content: 'Loading',
+            animation: 'fade-in',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+          });
+
+        $http({
+          method: 'POST',
+          //url: 'https://tarzantest.herokuapp.com/login',
+          url: 'https://max-optika-server.herokuapp.com/modifiko',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          transformRequest: function(obj) {
+            var str = [];
+            for (var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+          data: {
+            emer: $scope.dataR.emer,
+            mbiemer: $scope.dataR.mbiemer,
+            tel: $scope.dataR.celular,
+            email: $scope.dataR.email
+          }
+        }).success(function(response) {
+          $ionicLoading.hide();
+          console.log('Pergjigja ');
+          console.log(response);
+          // var pergjigje=JSON.parse(response);
+          if (response.regjistrimi==1) {
+            console.log('sukses');
+            $scope.showAlertRegjistrimSukses();
+            window.location = "#/app/login";
+          }else if (response.regjistrimi==0) {
+            console.log('jo sukses');
+            $scope.showAlertEmailEkziston();
+          }else{
+            console.log('gabim tjeter');
+          }
+        });
+      }
+    }
+  }
+
+
+
+})
+
 //geolocation api
 /*.controller('geoCtrl', function($scope, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
 
