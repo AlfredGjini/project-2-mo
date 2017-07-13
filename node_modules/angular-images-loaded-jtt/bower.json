@@ -1,0 +1,26 @@
+{
+  "name": "angular-images-loaded-jtt",
+  "description": "Image load detector",
+  "main": "dist/angular-images-loaded-directive.min.js",
+  "version": "1.0.0",
+  "authors": [
+    "Jonathan Hornung <jonathan.hornung@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "images",
+    "loaded"
+  ],
+  "homepage": "https://github.com/JohnnyTheTank/angular-images-loaded-custom",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "*"
+  }
+}

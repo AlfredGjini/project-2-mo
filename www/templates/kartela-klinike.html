@@ -1,0 +1,214 @@
+<ion-view title="Kartela Klinike">
+    <ion-nav-buttons side="left">
+        <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <div class="kartela-container">
+        <div class="row" ng-show="showSpinner"><img style="margin: 10px auto;width: 40px;height: 40px;" src="img/loadOff.gif"></div>
+
+        <h4 align="center" ng-show="userPaKartele">Klienti nuk ka kartele klinike. Ju lutemi vizitoni dyqanet tona per me shume informacion.</h4>
+           <div ng-repeat="vizite in data.clinic">
+            <!-- <div class="button button-full button-calm">
+              
+            </div> -->
+
+            <div class="card button button-full ngjyraButoni" style="height: initial;" ng-click="fshi($index++1)">
+              <div class="item item-text-wrap" style="color: #fff;padding: 5px;">
+                <div>Vizita numer: {{$index+1}}</div>
+                <div>Data: {{vizite.data_vizites}}</div>
+              </div>
+            </div>
+            <div ng-show="vizita{{$index++1}}">
+            <div class="row responsve-sm">
+              <div class="col col-10">
+              </div>
+              <!-- <div class="col col-80">
+                <h3 align="center">Data e vizites</h3>
+                <input type="text" style="text-align: center;" readonly value={{vizite.data_vizites}}>
+              </div> -->
+              <div class="col col-10">
+              </div>
+            </div>
+            <div class="row responsive-sm kartela">
+                <div class="col syri">
+                    <h3 align="center" class="syriTitle">Syri i Djathte (OD) </h3>
+                    <!-- <h4 align="center">Larg</h4> -->
+                    <div class="row resposive-sm" style="height: 70px;">
+                        <div class="" style="width: 50px;">
+                            <div for="sphLD">&nbsp;</div>
+                            <h4 class="syriName">Larg</h4>
+                        </div>
+                        <div class="col col-90">
+                        <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriName">Sph.</label>
+                            <input type="text" name="sphLD" readonly value="{{vizite.djathte_larg_sph}}">
+                        </div>
+                        <div class="col">
+                            <label for="cylLD" class="syriName">Cyl.</label>
+                            <input type="text" name="cylLD" readonly value="{{vizite.djathte_larg_cyl}}">
+                        </div>
+                        <div class="col">
+                            <label for="axeLD" class="syriName">Axe.</label>
+                            <input type="text" name="axeLD" readonly value="{{vizite.djathte_larg_axe}}">
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- <h4 align="center">Afer</h4> -->
+                    <div class="row resposive-sm" style="height: 60px;">
+                    <div class="" style="width: 50px;">
+                            <!-- <div for="sphLD">&nbsp;</div> -->
+                            <h4 class="syriName">Afer</h4>
+                        </div>
+                        <div class="col col-90">
+                        <div class="row resposive-sm">
+                        <div class="col">
+                            <!-- <label for="sphAD" class="syriName">Sph.</label> -->
+                            <input type="text" name="sphAD" readonly value="{{vizite.djathte_afer_sph}}">
+                        </div>
+                        <div class="col">
+                            <!-- <label for="cylAD" class="syriName">Cyl.</label> -->
+                            <input type="text" name="cylAD" readonly value="{{vizite.djathte_afer_cyl}}">
+                        </div>
+                        <div class="col">
+                            <!-- <label for="axeAD" class="syriName">Axe.</label> -->
+                            <input type="text" name="axeAD" readonly value="{{vizite.djathte_afer_axe}}">
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col syri">
+                    <h3 align="center" class="syriTitle">Syri i Majte (Os) </h3>
+                    <!-- <h4 align="center">Larg</h4> -->
+                    <div class="row resposive-sm" style="height: 70px;">
+                        <div class="" style="width: 50px;">
+                            <div for="sphLD">&nbsp;</div>
+                            <h4 class="syriName">Larg</h4>
+                        </div>
+                        <div class="col col-90">
+                        <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriName">Sph.</label>
+                            <input type="text" name="sphLD" readonly value="{{vizite.majte_larg_sph}}">
+                        </div>
+                        <div class="col">
+                            <label for="cylLD" class="syriName">Cyl.</label>
+                            <input type="text" name="cylLD" readonly value="{{vizite.majte_larg_cyl}}">
+                        </div>
+                        <div class="col">
+                            <label for="axeLD" class="syriName">Axe.</label>
+                            <input type="text" name="axeLD" readonly value="{{vizite.majte_larg_axe}}">
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- <h4 align="center">Afer</h4> -->
+                    <div class="row resposive-sm" style="height: 60px;">
+                    <div class="" style="width: 50px;">
+                            <!-- <div for="sphLD">&nbsp;</div> -->
+                            <h4 class="syriName">Afer</h4>
+                        </div>
+                        <div class="col col-90">
+                        <div class="row resposive-sm">
+                        <div class="col">
+                            <!-- <label for="sphAD" class="syriName">Sph.</label> -->
+                            <input type="text" name="sphAD" readonly value="{{vizite.majte_afer_sph}}">
+                        </div>
+                        <div class="col">
+                            <!-- <label for="cylAD" class="syriName">Cyl.</label> -->
+                            <input type="text" name="cylAD" readonly value="{{vizite.majte_afer_cyl}}">
+                        </div>
+                        <div class="col">
+                            <!-- <label for="axeAD" class="syriName">Axe.</label> -->
+                            <input type="text" name="axeAD" readonly value="{{vizite.majte_afer_axe}}">
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        <div class="row responsive-sm">
+            <div class="col syri">
+                    <h3 align="center" class="syriTitle">Distanca Pupilare</h3>
+                    <!-- <h4 align="center">Larg</h4> -->
+                    <div class="row resposive-sm" style="height: 70px;">
+                    <div class="col">
+                    <div class="row resposive-sm">
+                        <div class="" style="width: 50px;">
+                            <!-- <div for="sphLD">&nbsp;</div> -->
+                            <h4 class="syriName">Larg</h4>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="disPL" readonly value="{{vizite.distanca_pupilare_larg}}">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                    <div class="row resposive-sm">
+                        <div class="" style="width: 50px;">
+                            <!-- <div for="sphLD">&nbsp;</div> -->
+                            <h4 class="syriName">Afer</h4>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="disPA" readonly value="{{vizite.distanca_pupilare_afer}}">
+                        </div>
+                    </div>
+                    </div>
+                        
+                        
+                    </div>
+
+                </div>
+            <div class="col syri">
+                <h3 align="center" class="syriTitle">Shenime</h3>
+              <textarea style="text-align: center;border-radius: 10px;" placeholder="Shenime..." readonly width="100%" rows="5">{{vizite.shenime}}</textarea>
+            </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <br><br><br><br>
+    </ion-content>
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu">
+      <i class="icon ion-ios-home-outline"></i>
+      Kreu
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/sherbime">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      Sherbime
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/profile">
+      <i class="icon ion-ios-person-outline"></i>
+      Profili
+    </a>
+  </div>
+</ion-view>

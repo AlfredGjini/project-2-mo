@@ -1,0 +1,537 @@
+<link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css'>
+
+<style type="text/css">
+  .timeline {
+  list-style: none;
+  margin: 25px 0 22px;
+  padding: 0;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.timeline:after {
+  border: 6px solid;
+  border-top-width: 13px;
+  border-color: #00637d transparent transparent transparent;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -19px;
+  left: 15px;
+}
+
+.timeline-horizontal:after {
+  border-top-width: 6px;
+  border-left-width: 13px;
+  border-color: transparent transparent transparent #00637d;
+  top: 15px;
+  right: 0;
+  bottom: auto;
+  left: auto;
+}
+.timeline-horizontal .timeline-milestone {
+  border-top: 2px solid #00637d;
+  display: inline;
+  float: left;
+  margin: 20px 0 0 0;
+  padding: 40px 0 0 0;
+}
+.timeline-horizontal .timeline-milestone:before {
+  top: -17px;
+  left: auto;
+}
+.timeline-horizontal .timeline-milestone.is-completed:after {
+  top: -17px;
+  left: 0;
+}
+
+.timeline-milestone {
+  border-left: 2px solid #00637d;
+  margin: 0 0 0 20px;
+  padding: 0 0 5px 25px;
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.timeline-milestone:before {
+  border: 7px solid #00637d;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  position: absolute;
+  left: -17px;
+  width: 32px;
+  height: 32px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.timeline-milestone.is-completed:before {
+  background-color: #00637d;
+}
+.timeline-milestone.is-completed:after {
+  color: #FFF;
+  content: "\f00c";
+  display: block;
+  font-family: "FontAwesome";
+  line-height: 32px;
+  position: absolute;
+  top: 0;
+  left: -17px;
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.timeline-milestone.is-current:before {
+  background-color: #EEE;
+}
+.timeline-milestone.is-future:before {
+  background-color: #8DACB8;
+  border: 0;
+}
+.timeline-milestone.is-future .timeline-action .title {
+  color: #8DACB8;
+}
+
+.timeline-action {
+  background-color: #FFF;
+  padding: 12px 10px 12px 20px;
+  position: relative;
+  top: -15px;
+  margin-right: 15px;
+}
+.timeline-action.is-expandable .title {
+  cursor: pointer;
+  position: relative;
+}
+.timeline-action.is-expandable .title:focus {
+  outline: 0;
+  text-decoration: underline;
+}
+.timeline-action.is-expandable .title:after {
+  border: 6px solid #666;
+  border-color: transparent transparent transparent #666;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 13px;
+  right: 0;
+}
+.timeline-action.is-expandable .content {
+  display: none;
+}
+.timeline-action.is-expandable.is-expanded .title:after {
+  border-color: #666 transparent transparent transparent;
+  top: 17px;
+  right: 5px;
+}
+.timeline-action.is-expandable.is-expanded .content {
+  display: block;
+}
+.timeline-action .title, .timeline-action .content {
+  word-wrap: break-word;
+}
+.timeline-action .title {
+  color: #00637d;
+  font-size: 18px;
+  margin: 0;
+}
+.timeline-action .date {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.timeline-action .content {
+  font-size: 14px;
+}
+
+.file-list {
+  line-height: 1.4;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.title {
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 35px;
+    color: #777;
+    padding-bottom: 10px;
+    padding-left: 0px;
+}
+
+body {
+  background-color: #EEE;
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 40px 30px;
+}
+
+a {
+  color: #00637d;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+.video-link:before {
+  content: "\f03d";
+  display: inline-block;
+  font-family: "FontAwesome";
+  margin-right: 5px;
+}
+
+a[href*=".pdf"]:before {
+  content: "\f0f6";
+  display: inline-block;
+  font-family: "FontAwesome";
+  margin-right: 8px;
+}
+
+
+</style>
+
+
+<ion-view title="Rreth Nesh">
+  <ion-nav-buttons side="left">
+    <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
+  </ion-nav-buttons>
+  <ion-content class="has-header" style="background-color: #eee;">
+    <!-- <div class="card" style="margin-bottom:60px;">
+    <div class="item item-text-wrap">
+    <img style="margin:2px auto;box-shadow:none;" dnd-resizable src="img/logox.png"><br />
+
+      Max Optika është rrjeti i parë i shitjes me pakicë të produkteve për kujdesin e syrit duke operuar në 21 dyqane në Shqipëri dhe Kosovë.<br /><br />
+
+      Dyqanet Max Optika sot janë pikat e referimit jo vetëm për ata që kanë nevojë për një vizitë optometrie dhe syze, por edhe për ata që janë në kërkim të dhuratava të çmuara apo aksesorëve të modës si syzet e diellit ose ato optike, tek ne do të gjeni koleksionet më të fundit me çmimet më të mira në treg. <br /><br /> Police, Chopard, Givenchy dhe shumë, më tepër.<br /><br />
+
+
+      MaxOptika ju ofron klientëve të saj një përzgjedhje të gjerë të skeletesh, syzesh dhe lentesh që i përshtaten të gjitha nevojat dhe preferencat tuaja. Mundësia e zgjedhjes së skeleteve dhe syzeve të diellit janë të gjera dhe të larmishme; Top Brands nga, Vogue, Bvlgari, Prada, Dolce&Gabbana, Persol, Ray Ban, Fendi, Flair, Roberto Cavalli, Maui Jim etj.
+    </div>
+  </div>
+
+    <ion-spinner icon="spiral"></ion-spinner> -->
+
+<!-- Milestone Start -->
+
+  <!-- <h2 style="text-align: center;color: #00637d;padding-top: 15px;font-family: montserrat;">Max Optika</h2> -->
+  <ul class="timeline">
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2009 – Mars</h2>
+        <div class="content">
+        Hapja e Max Optika QTU si dyqani pioner që do të paraprinte hapjen e një sërë dyqanesh të tjera.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2009 – Prill</h2>
+        <div class="content">
+        Fillesat e bashkëpunimit me Luxottica. Fill pas hapjes së dyqanit të parë Max Optika vendosi një marrëdhënie bashkëpunimi me gjigandin e markave Luxottica, duke sjellë një sërë markash në tregun Shqiptar si Dolce & Gabbana, Versace, Bvlgari, Ray Ban, Vogue e shumë të tjera.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2009 – Tetor</h2>
+        <div class="content">
+        Vazhdimi i zgjerimit të dyqaneve Max Optika, me hapjen e dyqanit të ri Max Optika në qytetin e Fierit.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2009 – Dhjetor</h2>
+        <div class="content">
+        Zgjerimi i mëtejshëm i dyqaneve Max Optika, me hapjen e dyqanit në qytetin e Durrësit.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2010 – Maj</h2>
+        <div class="content">
+        Hapja e dyqanit të dytë në Tiranë, si tregues i suksesit dhe pëlqimit nga konsumatori, në qendrën tregëtare Citypark.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2010 – Shtator</h2>
+        <div class="content">
+        Fillesat e bashkëpunimit me gjigandin gjerman të prodhimit të syzeve, Flair.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2011 – Mars</h2>
+        <div class="content">
+        Fillimi i bashkëpunimit me kompaninë lider për syzet e diellit, Maui Jim.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2011 – Shtator</h2>
+        <div class="content">
+        Futja në treg e një marke ekonomike italiane si Polar.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2012 – Shkurt</h2>
+        <div class="content">
+        Risia e vazhdueshme që Max Optika sjell në treg, për t’ju përgjigjur më së miri nevojave të klientëve vazhdon me rekrutimin e stafit mjekësor të huaj.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2012 – Tetor</h2>
+        <div class="content">
+        Fillimi i bashkëpunimit me grupin De Rigo, i cili ka në përërjen e tij një sërë markash prestigjoze si Chopard, Furla, Blumarine, Police, Trussardi e shumë të tjera.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2013 – Korrik</h2>
+        <div class="content">
+        Vazhdimi i zgjerimit të rrjetit Max Optika edhe në qytetin e Lezhës.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2013 – Shtator</h2>
+        <div class="content">
+        Hapja e dyqanit Max Optika tek 21 Dhjetori.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2014 – Prill</h2>
+        <div class="content">
+        Vazhdimi i zgjerimit të rrjetit në qytetin e Tiranës, me haapjen e dyqanit Max Optika në Myslym Shyri.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2014 – Korrik</h2>
+        <div class="content">
+        Hapja e dyqanit Max Optika në qytetin e Elbasanit.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2014 – Nëntor</h2>
+        <div class="content">
+        Zgjerimi i rrjetit edhe në juglindje të Shqipërisë me hapjen e dyqanit Max Optika në  Pogradec.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Shkurt</h2>
+        <div class="content">
+        Hapja e dyqanit Max Optika në qytetin e Lushnjes.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Prill</h2>
+        <div class="content">
+        Zhvillimi brenda pak kohe në Shqipëri, dhe krijimi i emrit të mirë, solli nevojën e zgjerimit përtej kufinjve, me dyqanin e parë pioner Max Optika në Kosovë, me vendodhje në qendrën tregtare Minimax.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Gusht</h2>
+        <div class="content">
+        Vazhdimi i zgjerimit të rrjetit Max Optika me hapjen e dyqanit pranë Sheshit Wilson.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Tetor</h2>
+        <div class="content">
+        Hapja e dyqanit Max Optika në qytetin e Vlorës.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Nëntor</h2>
+        <div class="content">
+        Performanca e lartë e dyqanit të parë pioner në Kosovë, solli nevojën e hapjes së një dyqani tjetër Max Optika në Ulpjanë, Prishtinë.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Nëntor</h2>
+        <div class="content">
+        Hapja e Max Optika QTU si dyqani pioner që do të paraprinte hapjen e një sërë dyqanesh të tjera.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2015 – Dhjetor</h2>
+        <div class="content">
+        Hapja e dyqanit tjetër Max Optika në qytetin e Korçës.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2016 – Janar</h2>
+        <div class="content">
+        Fillimi i bashkëpunimit me gjigandin japonez të prodhimit të lenteve HOYA, duke sjellë në tregun shqiptar një gamë të gjerë produktesh me cilësi maksimale.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2016 – Shtator</h2>
+        <div class="content">
+        Fillimi i bashkëpunimit me njërën prej kompanive lider në tregun global, Kering, kompania që ka një sërë markash luksi në portofolin e saj si :Boucheron, Alexander McQueen, Saint Laurent, Stella McCartney, marka risi për tregun shqiptar. Kering që prej Janarit të 2017 është kompania që ka ekskluzivitetin e GUCCI-t në botë.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2016 – Nëntor</h2>
+        <div class="content">
+        Hapja e dyqanit tjetër në Kosovë, në qytetin e Podujevës.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2017 – Prill</h2>
+        <div class="content">
+        Zgjerimi i gamës së produkteve për kujdesin e syrit solli nevojën e bashkëpunimit me kompaninë e prodhimit të këtyre produkteve, Optox.
+        </div>
+      </div>
+    </li>
+    <li class="timeline-milestone is-current">
+      <div class="timeline-action is-expandable expanded is-expanded">
+        <h2 class="title">2017 – Qershor</h2>
+        <div class="content">
+        Bashkëpunimi me kompaninë Centrostyle, njëra prej kompanive më të mira për prodhimin e aksesorëve të syzeve, si portofola, solucione pastrimi etj.
+        </div>
+      </div>
+    </li>
+  </ul>
+
+<!-- Milestone Ends -->
+
+
+
+
+
+  </ion-content>
+<!--   <div class="bar bar-footer bar-balanced">
+  <div class="title" style="text-align: left;">
+    MAX OPTICA<sup>&reg;</sup>
+    </div>
+    <div class="title" style="text-align: right;">
+    DEA
+    </div>
+  </div> -->
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu">
+      <i class="icon ion-ios-home-outline"></i>
+      Kreu
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/sherbime">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      Sherbime
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/profile">
+      <i class="icon ion-ios-person-outline"></i>
+      Profili
+    </a>
+  </div>
+</ion-view>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $timelineExpandableTitle = $('.timeline-action.is-expandable .title');
+  
+  $($timelineExpandableTitle).attr('tabindex', '0');
+  
+  // Give timelines ID's
+  $('.timeline').each(function(i, $timeline) {
+    var $timelineActions = $($timeline).find('.timeline-action.is-expandable');
+    
+    $($timelineActions).each(function(j, $timelineAction) {
+      var $milestoneContent = $($timelineAction).find('.content');
+      
+      $($milestoneContent).attr('id', 'timeline-' + i + '-milestone-content-' + j).attr('role', 'region');
+      $($milestoneContent).attr('aria-expanded', $($timelineAction).hasClass('expanded'));
+      
+      $($timelineAction).find('.title').attr('aria-controls', 'timeline-' + i + '-milestone-content-' + j);
+    });
+  });
+  
+  $($timelineExpandableTitle).click(function() {
+    $(this).parent().toggleClass('is-expanded');
+    $(this).siblings('.content').attr('aria-expanded', $(this).parent().hasClass('is-expanded'));
+  });
+  
+  // Expand or navigate back and forth between sections
+  $($timelineExpandableTitle).keyup(function(e) {
+    if (e.which == 13){ //Enter key pressed
+      $(this).click();
+    } else if (e.which == 37 ||e.which == 38) { // Left or Up
+      $(this).closest('.timeline-milestone').prev('.timeline-milestone').find('.timeline-action .title').focus();
+    } else if (e.which == 39 ||e.which == 40) { // Right or Down
+      $(this).closest('.timeline-milestone').next('.timeline-milestone').find('.timeline-action .title').focus();
+    }
+  });
+});
+</script>

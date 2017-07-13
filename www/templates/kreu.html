@@ -1,0 +1,134 @@
+<ion-view hide-nav-bar="true">
+
+  <ion-content style="background:#eef0f2;">
+    <div class="row" style="background:#f8f8f8;padding: 0px;">
+      <img style="margin: 10px auto 10px;height: 30px;" src="img/logox.png">
+    </div>
+    <!-- <form  id='search-form' ng-submit='dergoInput(myVar)'>
+    <div class="searchFillimKreu list list-inset">
+      <label class="item item-input" style="min-height: 25px;height: 25px;border-radius: 5px;">
+        <i ng-show="myVar.length==0 || myVar==''" class="icon ion-search placeholder-icon" style="left: 50%;position: absolute;margin-left: -35px;font-size: 16px; margin-top: 1px;"></i>
+        <input type="text" placeholder="Search" style="text-align: center;margin-right: -50px;font-size: 13px;" ng-model="myVar" ng-init="myVar =''">
+        Is needed for the keyboard submit
+        <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+      </label>
+    </div>
+    </form> -->
+    <form  ng-submit='dergoInput(myVar)'>
+    <div class="bar bar-header item-input-inset search-home" style="">
+            <label class="item-input-wrapper textbox-search" style="background: #f8f8f8;">
+              <i class="icon ion-ios7-search placeholder-icon"></i>
+              <input type="search" placeholder="Kërko Markë, Model, Kolor, Përmasë" ng-model="myVar">
+              <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+            </label>
+    </div>
+    </form>
+    <!-- ng-model="myVar"  -->
+
+    <!-- search box and button -->
+    <!-- <div id='search-box'>
+      <form  id='search-form' >
+      <input id='search-text' name='q' placeholder='RayBan Oval SD12144' type='text' ng-model="myVar"/>
+      <i class="ion-ios-search"></i>
+      <button id='search-button' type='button' ng-click='dergoInput(myVar)'><span>Kerko</span></button>
+      </form>
+    </div> --> 
+    <!-- <div class="row">Just for the space below search</div> -->
+    <!-- <ion-scroll zooming="true" direction="x" scrollbar-x="true" paging="true" style="white-space: nowrap;">
+         <img src="img/home.jpg" style="width:100%">
+         <img src="img/home.jpg" style="width:100%">
+         <img src="img/kreu_big2.png" style="width:100%">
+    </ion-scroll> -->
+    <ion-slide-box auto-play="true" does-continue="true" slide-interval="5000" class="kreuuu" style="text-align: center;">
+          <ion-slide>
+            <img src="img/Slider_1.jpg" style="width:100%;">
+          </ion-slide>
+          <ion-slide>
+            <img src="img/Slider_2.jpg" style="width:100%;">
+          </ion-slide>
+          <ion-slide>
+            <a href="#/app/sherbime/takim"><img src="img/Slider_3.jpg" style="width:100%;"></a>
+          </ion-slide>
+        </ion-slide-box>
+
+<div style="margin-top: -4px;">
+<div class="row" style="text-align: center;padding: 0px;margin-bottom: -6px;">
+      <div class="col">
+      <a href="#/app/syze-dielli">
+        <img  src="img/syze_dielli_re2.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/syze-optike">
+        <img src="img/syze_optike_re3.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;padding: 0px;margin-bottom: -6px;">
+      <div class="col">
+      <a href="#/app/lente">
+        <img src="img/lente_kontakti_re2.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/koleksioniRi">
+        <img  src="img/aksesore2.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;margin-bottom: 40px;padding: 0px;">
+      <div class="col">
+      <a href="#/app/rreth-nesh"> 
+        <img  src="img/rreth_nesh_re3.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/sherbime/pika">
+        <img src="img/dyqani_afer_meje_re.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+    </div>
+  </ion-content>
+
+
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu" style="color: #d12127">
+      <i class="icon ion-ios-home" style="color: #d12127"></i>
+      Kreu
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/sherbime">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      Sherbime
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/profile">
+      <i class="icon ion-ios-person-outline"></i>
+      Profili
+    </a>
+  </div>
+
+</ion-view>
