@@ -481,7 +481,7 @@ exports.modifikoUser = function (req, res, next) {
 
 
             console.log('jo bosh');
-            res.send(JSON.stringify({regjistrimi:0}));
+            res.send(JSON.stringify({regjistrimi:1}));
             //client.end();
     
           //done();

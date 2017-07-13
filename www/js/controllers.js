@@ -2169,7 +2169,7 @@ $scope.fshiMarkaFilter =function(){
         $scope.showAlertRegjistrimSukses = function() {
           var alertPopup = $ionicPopup.alert({
             title: 'Regjistrimi Perfundoi',
-            template: '<p align="center">Regjistrimi Perfundoi Me Sukses, Ju Lutem beni login</p>'
+            template: '<p align="center">Te dhenat u modifikuan me sukses.</p>'
           });
         };
         $scope.showAlertEmailEkziston = function() {
