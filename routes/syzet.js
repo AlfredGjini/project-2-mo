@@ -442,7 +442,7 @@ exports.modifikoUser = function (req, res, next) {
     var email = req.body.email;
 
 
-    var queryTextRegister = 'insert into users(name,username,password,emailval) values(\''+emer+'\',\''+emer+'.'+mbiemer+'\',\''+fjalekalimi+'\',\''+email+'\')';
+    //var queryTextRegister = 'insert into users(name,username,password,emailval) values(\''+emer+'\',\''+emer+'.'+mbiemer+'\',\''+fjalekalimi+'\',\''+email+'\')';
     // update users set name='alfred2' ,  username='alfred2.gjini' where emailval='sdvb@gmail.com'
     var queryTextupdateUsers = 'update users set name=\''+emer+'\', username=\''+emer+'.'+mbiemer+'\' where emailval=\''+email+'\'';
     var queryTextupdateClients = 'update clients set emer=\''+emer+'\', mbiemer=\''+mbiemer+'\' , celular=\''+tel+'\' where email=\''+email+'\'';
