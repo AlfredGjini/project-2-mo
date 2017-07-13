@@ -440,16 +440,18 @@ exports.modifikoUser = function (req, res, next) {
     var mbiemer = req.body.mbiemer;
     var tel = req.body.tel;
     var email = req.body.email;
-    var fjalekalimi = req.body.fjalekalimi;
-    var date = req.body.date;
+
 
     var queryTextRegister = 'insert into users(name,username,password,emailval) values(\''+emer+'\',\''+emer+'.'+mbiemer+'\',\''+fjalekalimi+'\',\''+email+'\')';
-    var queryTextEmailCheck = 'SELECT * FROM users WHERE emailval = \''+email+'\'';
+    // update users set name='alfred2' ,  username='alfred2.gjini' where emailval='sdvb@gmail.com'
+    var queryTextupdateUsers = 'update users set name=\''+emer+'\', username=\''+emer+'.'+mbiemer+'\' where emailval=\''+email+'\'';
+    var queryTextupdateClients = 'update clients set emer=\''+emer+'\', mbiemer=\''+mbiemer+'\' , celular=\''+tel+'\' where email=\''+email+'\'';
+    // var queryTextEmailCheck = 'SELECT * FROM users WHERE emailval = \''+email+'\'';
     //var queryTextRegisterClients = 'insert into clients(emer,mbiemer,mosha,gjinia,vendlindja,celular,email,user_id) values(\''+emer+'\',\''+emer+'.'+mbiemer+'\',\''+tel+'\',\''+email+'\',\''+fjalekalimi+'\',\''+date+'\')';
     
 
     // console.log(queryTextRegister);
-    console.log(queryTextEmailCheck);
+    console.log(queryTextupdateUsers);
     var emailNjejt = [];
     var emailNjejt2 = [];
     var sukses;
@@ -462,80 +464,26 @@ exports.modifikoUser = function (req, res, next) {
       console.log('Connected to postgres! 7');
 
       client
-        .query(queryTextEmailCheck)
-        .on('row', function(row) {
-          emailNjejt.push(row);
-          // done();
-          // client.end();
-      }).on('end',function(){
-          console.log(emailNjejt);
-          if (emailNjejt.length==0) {
-            console.log('bosh');
+        .query(queryTextupdateUsers)
+        .on('end',function(){
+          console.log("mbaroi e para");
 
-            client.query(queryTextRegister, function(err, result, done) {
+            client.query(queryTextupdateClients, function(err, result, done) {
               if (err) {
                 console.log(err);
               } else {
-                console.log("brenda 1");
-                    //client.end();
-                    //done();
-                  //   client.query(queryTextEmailCheck, function(err, result, done) {
-                  //     if (err) {
-                  //       console.log(err);
-                  //     } else {
-                  //       //console.log('Regjistrimi perfundoi me sukses');
-                  //       //res.send(JSON.stringify({regjistrimi:1}));
-                  //       //client.end();
-                  //       console.log(result.id);
-                  //       console.log("brenda2")
-                  //     }
-
-                  // });
+                console.log("mbaroi e dyta");
 
 
-                   client
-                    .query(queryTextEmailCheck)
-                    .on('row', function(row) {
-                      emailNjejt2.push(row);
-                      // done();
-                      // client.end();
-                  }).on('end',function(){
-                     //console.log(emailNjejt2);
-                     //console.log("brenda2");
-                     //console.log(emailNjejt2[0].id);
-
-                     var queryTextRegisterClients = 'insert into clients(emer,mbiemer,mosha,gjinia,vendlindja,celular,email,user_id) values(\''+emer+'\',\''+mbiemer+'\',\'0\',\'a\',\'Pa Percaktuar\',\''+tel+'\',\''+email+'\',\''+emailNjejt2[0].id+'\')';
-
-
-
-                     client.query(queryTextRegisterClients, function(err, result, done) {
-                      if (err) {
-                        console.log(err);
-                      } else {
-
-                        console.log('u shtuan tek klientet');
-                        console.log('Regjistrimi perfundoi me sukses');
-                        res.send(JSON.stringify({regjistrimi:1}));
-                        // client.end();
-                        //done();
-                      }
-                      });
-
-
-                  });
-
-
-
-                
               }
 
             });
 
-          }else {
+
             console.log('jo bosh');
             res.send(JSON.stringify({regjistrimi:0}));
             //client.end();
-          }
+    
           //done();
         });
 
