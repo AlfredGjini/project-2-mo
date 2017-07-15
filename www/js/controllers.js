@@ -64,9 +64,10 @@ angular.module('directory.controllers', ['ionic', 'ngOpenFB','angCamera', 'ionMd
 
 
 
-.controller('produkteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate){
+.controller('produkteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal){
 
     $scope.showSpinner=true;
+    $scope.shfaqMonedhenTjeter=true;
 
 //     angular.element(document).ready(function () {
 //     console.log('page loading completed');
@@ -82,6 +83,28 @@ angular.module('directory.controllers', ['ionic', 'ngOpenFB','angCamera', 'ionMd
 //     //call it here
 //       console.log('do thirrem ne fund fare 2');
 //   });
+
+
+$scope.shfaqNgjyrat=function(){
+  $ionicModal.fromTemplateUrl('templates/ngjyrat.html', {
+        scope: $scope
+      }).then(function(modal) {
+        $scope.modal = modal;
+        $scope.modal.show();
+      });
+}
+
+        $scope.$on('$stateChangeStart', function () {
+            $scope.modal.hide();
+          });
+
+
+    $scope.ktheMonedhe=function(){
+      $scope.shfaqMonedhenTjeter=!$scope.shfaqMonedhenTjeter;
+    }
+
+        
+  
 
 
     $scope.provoVirtual=function (item){

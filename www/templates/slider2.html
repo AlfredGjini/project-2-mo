@@ -210,8 +210,8 @@ header i:nth-of-type(2) {
 
         </ul> -->
 
-          <div ng-hide="data.shfaq" style="" data-ng-click="shfaqF()" class="cmimiFilter2">Filtrat<i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></div>
-          <div ng-show="data.shfaq" style="color: #43cee6;" data-ng-click="shfaqF2()" class="cmimiFilter2">Filtrat<i style="color: #43cee6;padding-left: 5px;"  class="icon ion-ios-arrow-up" s></i></div>
+          <!-- <div ng-hide="data.shfaq" style="" data-ng-click="shfaqF()" class="cmimiFilter2">Filtrat<i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></div>
+          <div ng-show="data.shfaq" style="color: #43cee6;" data-ng-click="shfaqF2()" class="cmimiFilter2">Filtrat<i style="color: #43cee6;padding-left: 5px;"  class="icon ion-ios-arrow-up" s></i></div> -->
 
           <div ng-show="shfaqFiltraTag" class="row" style="margin-top: -10px;">
           <span ng-hide="fshihCmimeVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Cmimi: {{slider.minValue}}-{{slider.maxValue}} $<i ng-click="fshiCmimiFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
@@ -377,7 +377,8 @@ header i:nth-of-type(2) {
     <!-- </div> -->
 
 
-  <!-- <br><br><br><br><br><br> -->
+  <br><br><br>
+  <!-- <br><br><br> -->
     <ion-infinite-scroll
     on-infinite="loadNextProducts()"
     distance="1%" immediate-check="false">

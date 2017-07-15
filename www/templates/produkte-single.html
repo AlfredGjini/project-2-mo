@@ -1,3 +1,13 @@
+<style type="text/css">
+  .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
+    display: inline-block;
+    padding: 0 0 1px 0;
+    vertical-align: inherit;
+    font-size: 20px;
+    line-height: 41px;
+    pointer-events: none;
+}
+</style>
 <ion-view title="{{syze.kodifikimartikulli2}}">
   <ion-nav-buttons side="left">
     <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
@@ -35,29 +45,32 @@
           <h2 class="produktSingleTitle" align="center" style="color: #333333;"><b>{{syze.pershkrimartikulli}}</b></h2>
           <hr style="opacity: 0.3;">
           <div class="row">
-            <!-- <div class="col" style="margin-top: -20px;">
-              <h2 class="ngjyraProduktSingle" style="color: #4e5259;">Ngjyra</h2>
-              <div class="zgjidhNgjyre1"></div>
-              <div class="zgjidhNgjyre2"></div>
-              <div class="zgjidhNgjyre3"></div>
-            </div> -->
+
             <div class="col" style="margin-top: -20px;margin-bottom: -20px;">
             <h2 class="cmimiProduktSingle" style="color: #4e5259;float: left;">Cmimi</h2>
-              <h2 class="cmimiProduktSingle2" style="color: #4e5259;float: right;"><b style="font-size: 90%;">{{syze.cmimi}} {{syze.monedha}}</b></h2> 
+              <h2 class="cmimiProduktSingle2" style="color: #4e5259;float: right;"><b style="font-size: 90%;">
+              <span ng-show="shfaqMonedhenTjeter">{{syze.cmimilek}} <!-- {{syze.monedha}} --> LEK</span>
+              <span ng-hide="shfaqMonedhenTjeter">{{syze.cmimieur}} EUR</span>
+              <button ng-click="ktheMonedhe()" style="background-color: #b71c1c;margin-top: -1px; margin-right: 0px;padding: 2px 15px;">
+                <i ng-show="shfaqMonedhenTjeter" style="color: #fff;" class="icon ion-social-euro"></i>
+                <i ng-hide="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;" class="">LEK</i>
+              </button>
+              </b></h2> 
             </div>
           </div>
           <br>
           <hr style="opacity: 0.3;margin-top:-10px;">
-          <h2 class="ngjyraProduktSingle" style="color: #4e5259;margin-bottom: -10px;">Ngjyra</h2>
+          <!-- <h2 class="ngjyraProduktSingle" style="color: #4e5259;margin-bottom: -10px;">Ngjyra</h2> -->
+          <button ng-click="shfaqNgjyrat()" class="button button-full button-positive" style="background-color: #b71c1c;min-height: 40px;font-size: 15px;margin-bottom: -10px;">Ngjyrat e tjera<i class="icon ion-chevron-right" style="float: right;"></i></button>
             </div>
           </div>
 
-          <ion-scroll zooming="true" direction="x" scrollbar-x="true" style=" white-space: nowrap;padding-left: 20px;margin-top:-5px;margin-bottom: -5px;">
+          <!-- <ion-scroll zooming="true" direction="x" scrollbar-x="true" style=" white-space: nowrap;padding-left: 20px;margin-top:-5px;margin-bottom: -5px;">
             <span ng-repeat="image in ngjyratSyze" style="width: 100px;"> 
             <a href="#/app/produkte/{{image.kodartikulli}}"><img  ng-src="http://maxoptika-app.com/maxoptikaFTP/{{image.kodartikulli}}_list.png" style="width: 110px;"></a>
             </span>
 
-          </ion-scroll>
+          </ion-scroll> -->
           <div class="list card pSingleContainer" style="height:auto;">
         <div class="item item-body">
           <hr style="opacity: 0.3;margin-top:-10px;">
@@ -71,9 +84,37 @@
           <hr style="opacity: 0.3;margin-top:20px;">
 
           <div>
-          <h2 align="center">{{syze.pershkrimartikulli}}</h2>
+          <h2 class="cmimiProduktSingle" style="color: #4e5259;text-align: center;">Info</h2>
+          <h2 align="center" style='font-family: arial;padding: 10px;color: #444;'>{{syze.pershkrimartikulli}} Humanly readable product description Lorem ipsum Humanly readable product description Lorem ipsumHumanly readable product description Lorem ipsum</h2>
             <!-- <p align="justify">{{syze.pershkrimartikulli}}</p> -->
           </div>
+          <hr style="opacity: 0.3;margin-top:20px;">
+
+            <div class="list">
+
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Marka
+                  <span class="item-note" style="color:#444">
+                    Ray Ban
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Marka
+                  <span class="item-note" style="color:#444">
+                    Ray Ban
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Marka
+                  <span class="item-note" style="color:#444">
+                    Ray Ban
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Marka
+                  <span class="item-note" style="color:#444">
+                    Ray Ban
+                  </span>
+                </div>
+
+            </div>
+            <hr style="opacity: 0.3;margin-top:20px;">
 
 
           <!-- <div>
