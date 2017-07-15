@@ -4172,7 +4172,7 @@ $scope.fshiMarkaFilter =function(){
         $scope.example[item]=1;
         }else if ($scope.example[item]>=1){
            var total = $scope.response.reduce(function (r, a) {
-                return r + Number(a.cmimi) * Number($scope.example[a.kodartikulli]);
+                return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
             }, 0);
 
           console.log( $scope.example); 
@@ -4202,7 +4202,7 @@ $scope.fshiMarkaFilter =function(){
 
 
           var total = $scope.response.reduce(function (r, a) {
-                return r + Number(a.cmimi) * Number($scope.example[a.kodartikulli]);
+                return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
             }, 0);
 
           console.log( $scope.example); 
@@ -4279,7 +4279,7 @@ $scope.fshiMarkaFilter =function(){
       console.log("pos");
        var pos = $scope.response.map(function(e) { return e.kodartikulli; }).indexOf(item.target.parentElement.id);
        console.log(pos);
-       $scope.checkoutTotal=$scope.checkoutTotal-($scope.response[pos].cmimi*$scope.example[item.target.parentElement.id]);
+       $scope.checkoutTotal=$scope.checkoutTotal-($scope.response[pos].cmimilek*$scope.example[item.target.parentElement.id]);
        $scope.checkoutTotal=$scope.checkoutTotal.toFixed(2);
        // console.log(item.target.parentElement.parentElement); 
        // console.log($scope.example[item.target.parentElement.id])
@@ -4381,7 +4381,7 @@ $scope.fshiMarkaFilter =function(){
         $scope.wishbosh3=true;
         for (var i in $scope.response) {
           // console.log($scope.response[i].name);
-          $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimi);
+          $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimilek);
           $scope.checkoutTotal=Number($scope.checkoutTotal).toFixed(2);
 
 
