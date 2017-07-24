@@ -253,6 +253,7 @@ exports.getOraretZene = function(req,res,next){
   var dataZgjdhur = req.body.dataZgjdhur;
   var dyqani = req.body.dyqani;
   console.log('dyqani eshte'+dyqani);
+  console.log('data eshte'+dataZgjdhur);
   var queryText="SELECT * FROM oraret2 WHERE data ='"+dataZgjdhur+"' and dyqani ='"+dyqani+"'";
 
   pg.connect(connectionStr, function(err, client, done) {
