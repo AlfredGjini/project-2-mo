@@ -196,6 +196,33 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
       }
     }
   })
+  .state('app.kontakt', {
+    url: '/kontakt',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/kontakt.html",
+        controller: 'kontaktCtrl'
+      }
+    }
+  })
+  .state('app.pagesat', {
+    url: '/pagesat',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/pagesat.html",
+        controller: 'pagesatCtrl'
+      }
+    }
+  })
+  .state('app.privacyPolicy', {
+    url: '/privacyPolicy',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/privacyPolicy.html",
+        controller: 'privacyPolicyCtrl'
+      }
+    }
+  })
   .state('app.slider1', {
     url: '/slider1',
     views: {

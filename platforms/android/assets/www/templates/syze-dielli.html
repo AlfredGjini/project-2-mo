@@ -196,90 +196,132 @@ header i:nth-of-type(2) {
               <input type="search" placeholder="Kërko Markë, Model, Kolor, Përmasë" ng-model="searchh">
             </label>
           </div>
-          <!-- <ul class="list" style="margin-top:0px;margin-bottom: -10px; ">
-
-          <li class="item item-toggle cmimiFilter2">
-             Shfaq Filtrat
-             <label class="toggle toggle-assertive">
-               <input type="checkbox" ng-model="data.shfaq">
-               <div class="track">
-                 <div class="handle"></div>
-               </div>
-             </label>
-          </li>
-
-        </ul> -->
+          
 
           <div ng-hide="data.shfaq" style="" data-ng-click="shfaqF()" class="cmimiFilter2">Filtrat<i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></div>
           <div ng-show="data.shfaq" style="color: #43cee6;" data-ng-click="shfaqF2()" class="cmimiFilter2">Filtrat<i style="color: #43cee6;padding-left: 5px;"  class="icon ion-ios-arrow-up" s></i></div>
 
           <div ng-show="shfaqFiltraTag" class="row" style="margin-top: -10px;">
-          <span ng-hide="fshihCmimeVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Cmimi: {{slider.minValue}}-{{slider.maxValue}} $<i ng-click="fshiCmimiFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
+          <span ng-hide="fshihCmimeVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Cmimi: {{slider.minValue}}-{{slider.maxValue}} LEK<i ng-click="fshiCmimiFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
 
-          <span ng-hide="fshihFormaVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Forma: <span ng-repeat="forma in checkResultsForma">{{forma}} </span><i  ng-click="fshiFormaFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
+          
 
-          <span ng-hide="fshihGjiniaVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Gjinia: {{data.gjinia}}<i ng-click="fshiGjiniaFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
+          <span ng-hide="fshihGjiniaVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Gjinia: <span ng-repeat="gjinia in checkResultsGjinia">{{gjinia}} </span><i  ng-click="fshiGjinia2Filter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
 
-          <span ng-hide="fshihMarkaVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Marka: <span ng-repeat="marka in checkResults">{{marka}} </span><i ng-click="fshiMarkaFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
+          <span ng-hide="fshihFormaVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Forma: <span ng-repeat="forma in formatZgjedhur">{{forma}} </span><i  ng-click="fshiFormaFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
+
+
+          <span ng-hide="fshihMarkaVar" style="margin-top: 15px;" data-ng-click="data.shfaq=false" class="filterTag">Marka: <span ng-repeat="marka in markatZgjedhur">{{marka}} </span><i ng-click="fshiMarkaFilter()" style="padding-left: 5px;color: #EF6F6C;text-align: right;margin-left: 5px;margin-right: 5px;"  class="icon ion-close-round" s></i></span>
 
           </div>
 
 
 
-
-
-<!--           <div>
-            <div class="checkbox">
-              <label>M:<input type="radio" ng-model="gjinia" value="M"/></label>
-            </div>
-            <div class="checkbox">
-              <label>F:<input type="radio" ng-model="gjinia" value="F"/></label>
-            </div>
-          </div> -->
         </div>
       </div>
-          <!-- <ion-toggle ng-model="item.checked" ng-checked="false" ng-init="item.checked=false">
-          Shfaq filtrat {{itemchecked}}
-          </ion-toggle> -->
+
 
             <div ng-show="data.shfaq" class="item item-text-wrap" style="text-align: center;">
 
-            <div class="cmimiFilter" style="">Cmimi</div>
-              <hr style="width: 30%;text-align: center;margin-bottom: 10px;">
+
+<div>
+    <div id="accordion" simple-accordion toggle-speed="fast" toggle-easing="linear" slide-up-speed="fast" slide-up-easing="linear">
+         <h4 class="accordion-toggle cmimiFilter" data-ng-click="shfaqCmimiRender()">Cmimi <i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></h4>
+
+        <div class="accordion-content default">
                 <rzslider rz-slider-model="slider.minValue"
                               rz-slider-high="slider.maxValue"
                               rz-slider-options="slider.options"> 
                 </rzslider>
-              
+        </div>
+         <h4 class="accordion-toggle cmimiFilter">Gjinia <i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></h4>
 
-            <!-- <pre>Model: {{checkModel}}</pre> -->
-            <div class="cmimiFilter" style="margin-top: 15px;">Forma</div>
-            <hr style="width: 30%;text-align: center;margin-bottom: 10px;">
+        <div class="accordion-content default">
             <div class="btn-group klaseVecimi">
+                <label class="btn btn-primary notActive" ng-model="checkModelGjinia.Woman" uib-btn-checkbox>Femer</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelGjinia.Man" uib-btn-checkbox>Mashkull</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelGjinia.Unisex" uib-btn-checkbox>Unisex</label>
+            </div>
+            <!-- {{checkResultsGjinia}} -->
+        </div>
+         <h4 class="accordion-toggle cmimiFilter">Forma <i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></h4>
+
+
+        <div class="accordion-content default">
+              <ion-list class="marka" >
+
+              <ion-checkbox ng-repeat="forma in formaSyzesh" ng-model="filter[forma]" ng-change="printC()">{{forma}}</ion-checkbox>
+
+
+            </ion-list>
+            <!-- {{filter}} -->
+        </div>
+
+        <h4 class="accordion-toggle cmimiFilter">Marka <i style="color: #000000;padding-left: 5px;"  class="icon ion-ios-arrow-down" s></i></h4>
+
+
+        <div class="accordion-content default">
+            <!-- <ion-scroll on-scroll="checkScroll()" zooming="true" delegate-handle="scroller" direction="y" style="height: 200px"> -->
+              <ion-list class="marka" >
+
+              <ion-checkbox ng-repeat="marka in markaSyzesh" ng-model="filterM[marka]" ng-change="getMarka()">{{marka}}</ion-checkbox>
+
+
+            </ion-list>
+             <!-- </ion-scroll> -->
+             <!-- <div ng-show="shfaqPoshte" class="arrow bounce"></div> -->
+        </div>
+    </div>
+</div>
+            <!-- <div class="btn-group klaseVecimi">
                 <label class="btn btn-primary notActive" ng-model="checkModelForma.Circle" uib-btn-checkbox>Circle</label>
                 <label class="btn btn-primary notActive" ng-model="checkModelForma.Square" uib-btn-checkbox>Square</label>
                 <label class="btn btn-primary notActive" ng-model="checkModelForma.Oval" uib-btn-checkbox>Oval</label>
-                <!-- {{checkResultsForma}} -->
-            </div>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Circle" uib-btn-checkbox>Circle</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Square" uib-btn-checkbox>Square</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Oval" uib-btn-checkbox>Oval</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Circle" uib-btn-checkbox>Circle</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Square" uib-btn-checkbox>Square</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Oval" uib-btn-checkbox>Oval</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Circle" uib-btn-checkbox>Circle</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Square" uib-btn-checkbox>Square</label>
+                <label class="btn btn-primary notActive" ng-model="checkModelForma.Oval" uib-btn-checkbox>Oval</label>
+                {{checkResultsForma}}
+            </div> -->
             
-            <div class="cmimiFilter" style="margin-top: 25px;">Gjinia</div>
+<!--             <div class="cmimiFilter" style="margin-top: 25px;">Gjinia</div>
             <hr style="width: 30%;text-align: center;margin-bottom: 0px;">
             <div class="radios">
                 <input type="radio" name="rGroup" value="Woman" id="r1" ng-model="data.gjinia" ng-init="data.gjinia = ''" />
                 <label class="radio" class="10:00-10:20" name="10:00-10:20" for="r1">Woman</label>
                 <input type="radio" name="rGroup" value="Man" id="r2" ng-model="data.gjinia" ng-init="data.gjinia = ''"/>
                 <label class="radio" id="10:20-10:40" name="10:20-10:40" for="r2">Man</label>
-            </div>
+            </div> -->
+
+
+<!--             <div class="cmimiFilter" style="margin-top: 25px;">Marka</div>
+            <hr style="width: 30%;text-align: center;margin-bottom: 0px;">
+
+            <ion-scroll on-scroll="checkScroll()" zooming="true" delegate-handle="scroller" direction="y" style="height: 200px">
+              <ion-list class="marka" >
+
+              <ion-checkbox ng-repeat="marka in markaSyzesh" ng-model="filter" >{{marka}}</ion-checkbox>
+
+
+            </ion-list>
+             </ion-scroll>
+             <div ng-show="shfaqPoshte" class="arrow bounce"></div> -->
+            
             <!-- {{data.ora}} -->
 
-            <div class="cmimiFilter" style="margin-top: 20px;">Marka</div>
+            <!-- <div class="cmimiFilter" style="margin-top: 20px;">Marka</div>
             <hr style="width: 30%;text-align: center;margin-bottom: 10px;">
             <div class="btn-group klaseVecimi">
                 <label class="btn btn-primary notActive" ng-model="checkModel.Rayban" uib-btn-checkbox>Ray Ban</label>
                 <label class="btn btn-primary notActive" ng-model="checkModel.Police" uib-btn-checkbox>Police</label>
                 <label class="btn btn-primary notActive" ng-model="checkModel.Emporio" uib-btn-checkbox>Emporio Armani</label>
-                <!-- {{checkResultsForma}} -->
-            </div>
+                {{checkResultsForma}}
+            </div> -->
 
             <div style="margin-top: 20px;">
               <button class="button button-small button-calm" data-ng-click="filtroProduktet()">Filtro</button>
@@ -307,7 +349,7 @@ header i:nth-of-type(2) {
                     background-color: #cacaca;
                     padding: 5px;
                     color: #fff;
-                    border-radius: 5px;
+                    border-radius: 2px;
                   }
                   .klaseVecimi .active{
                     background-color: #337ab7;
@@ -377,8 +419,9 @@ header i:nth-of-type(2) {
     <!-- </div> -->
 
 
-  <!-- <br><br><br><br><br><br> -->
+  <!-- <br><br><br>--><br><br><br> 
     <ion-infinite-scroll
+    ng-if="moreDataCanBeLoaded"
     on-infinite="loadNextProducts()"
     distance="1%" immediate-check="false">
   </ion-infinite-scroll>

@@ -251,6 +251,8 @@ exports.getOrariTakim = function(req,res,next){
 
 exports.getOraretZene = function(req,res,next){
   var dataZgjdhur = req.body.dataZgjdhur;
+  var dyqani = req.body.dyqani;
+  console.log('dyqani eshte'+dyqani);
 
   pg.connect(connectionStr, function(err, client, done) {
       if (err) {

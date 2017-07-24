@@ -1509,6 +1509,7 @@ table.ui-datepicker-calendar {border-collapse: separate;}
     font-size: 16px;
     font-family: 'Montserrat Light', arial;
     margin-bottom: -5px;
+    color:#929292;
 }
 
 .cmimiFilter2 {
@@ -1645,4 +1646,134 @@ table.ui-datepicker-calendar {border-collapse: separate;}
 .ngjyraButoni:hover{
   background-color: #41bdac;
 }
+
+.marka .item {
+  /*padding-top:10px;*/
+}
+
+.marka .list .item {
+    border: 1px solid #eee;
+    min-height: 42px;
+    text-align: left;
+}
+.marka label{
+    line-height: 10px;
+}
+.marka .list {
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    margin-bottom: 20px;
+}
+
+
+/*arrow down animation*/
+@-moz-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -moz-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@-webkit-keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+  60% {
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+.arrow {
+  position: fixed;
+  bottom: -130px;
+  left: 50%;
+  margin-left: -20px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../img/poshte2.png');
+  background-size: contain;
+}
+
+.arrow2 {
+  position: fixed;
+  margin-top: -30px;
+  left: 50%;
+  margin-left: -20px;
+  width: 20px;
+  height: 20px;
+  background-image: url('../img/poshte2.png');
+  background-size: contain;
+}
+
+.bounce {
+  -moz-animation: bounce 3s infinite;
+  -webkit-animation: bounce 3s infinite;
+  animation: bounce 3s infinite;
+}
+
+
+
+#accordion {
+    width: 100%;
+    margin: 1em auto;
+}
+.accordion-toggle {
+    padding: 1em;
+    border: 1px solid #DBDBDB;
+    /*border-left: 1px solid #DBDBDB;
+    border-right: 1px solid #DBDBDB;*/
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
+.last-child {
+    border-bottom: 1px solid #DBDBDB;
+}
+.accordion-content {
+    padding: 1em;
+    background-color: #fff;
+    display: block;
+    /*border-left: 1px solid #DBDBDB;
+    border-right: 1px solid #DBDBDB;*/
+}
+.accordion-content.default {
+    display: none;
+}
+
+
 

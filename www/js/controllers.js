@@ -1479,7 +1479,7 @@ $scope.skaRezultat=false;
 
 
 
-.controller('syzeDielliCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope) {
+.controller('syzeDielliCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope, $ionicScrollDelegate) {
   console.log("test");
   console.log($scope.offsetD);
 
@@ -1487,6 +1487,42 @@ $scope.skaRezultat=false;
     //do something
     console.log('do thirrem ne fund fare');
 });
+
+  $scope.moreDataCanBeLoaded=true;
+  // $scope.shfaqPoshte=true;
+
+  // $scope.callPoshte=function(){
+  //   console.log('called poshte');
+  //   $timeout(function () { 
+  //       $scope.shfaqPoshte = !$scope.shfaqPoshte; 
+  //       $scope.shfaqq=$scope.shfaqPoshte;
+  //       $scope.callPoshte();
+  //       console.log($scope.shfaqPoshte);
+  //   }, 15000);
+  // }
+
+
+
+
+  // $scope.callPoshte();
+
+  // $scope.checkScroll = function () {
+  //       var currentTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition().top;
+  //       var maxTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollView().__maxScrollTop;
+
+  //       if (currentTop >= maxTop)
+  //       {
+  //           // hit the bottom
+  //         $scope.shfaqPoshte=false;
+  //       }else{
+  //         $scope.shfaqPoshte=true;
+  //       }
+  //   };
+
+
+
+
+   
 
 
 $scope.itemchecked=false;
@@ -1513,7 +1549,7 @@ $scope.slider = {
         case 'high':
           return '<b>Cmimi Max:</b> '+value+' LEK';
         default:
-          return '$' + value
+          return value + ' LEK'
       }
     }
   }
@@ -1543,6 +1579,8 @@ $scope.slider = {
              $scope.slider.options.ceil=element.cmimimax;
              $scope.slider.minValue=element.cmimimin;
              $scope.slider.maxValue=element.cmimimax;
+             $scope.cmimiMinF=element.cmimimin;
+             $scope.cmimiMaxF=element.cmimimax;
             }
         });
 
@@ -1554,14 +1592,21 @@ $scope.slider = {
 
 $scope.shfaqF= function(){
   $scope.data.shfaq=true;
-  $timeout(function () { 
-    $scope.$broadcast('rzSliderForceRender');
-    console.log('koha') 
-  });
+  // $timeout(function () { 
+  //   $scope.$broadcast('rzSliderForceRender');
+  //   console.log('koha') 
+  // });
 }
 
 $scope.shfaqF2= function(){
   $scope.data.shfaq=false;
+}
+
+$scope.shfaqCmimiRender= function(){
+  $timeout(function () { 
+    $scope.$broadcast('rzSliderForceRender');
+    console.log('koha') 
+  });
 }
 
 
@@ -1596,19 +1641,19 @@ $scope.shfaqF2= function(){
 
   $scope.radioModel = 'Middle';
 
-  $scope.checkModelForma = {
-    Square: false,
-    Circle: false,
-    Oval: false
+  $scope.checkModelGjinia = {
+    Woman: false,
+    Man: false,
+    Unisex: false
   };
 
-  $scope.checkResultsForma = [];
+  $scope.checkResultsGjinia = [];
 
-  $scope.$watchCollection('checkModelForma', function () {
-    $scope.checkResultsForma = [];
-    angular.forEach($scope.checkModelForma, function (value, key) {
+  $scope.$watchCollection('checkModelGjinia', function () {
+    $scope.checkResultsGjinia = [];
+    angular.forEach($scope.checkModelGjinia, function (value, key) {
       if (value) {
-        $scope.checkResultsForma.push(key);
+        $scope.checkResultsGjinia.push(key);
       }
     });
   });
@@ -1625,6 +1670,38 @@ $scope.ktheNgjyre= function(index){
   return kodi
 }
 
+$scope.filter={};
+$scope.filterM={};
+$scope.formatZgjedhur=[];
+$scope.markatZgjedhur=[];
+
+$scope.printC = function() {
+  $scope.formatZgjedhur=[];
+    console.log($scope.filter);
+        for(i in $scope.filter) {
+        console.log($scope.filter[i]);
+        if($scope.filter[i] == true) {
+            $scope.formatZgjedhur.push(i);
+        }
+    }
+    console.log($scope.formatZgjedhur);
+}
+
+$scope.getMarka = function() {
+  $scope.markatZgjedhur=[];
+    console.log($scope.filterM);
+        for(i in $scope.filterM) {
+        console.log($scope.filterM[i]);
+        if($scope.filterM[i] == true) {
+            $scope.markatZgjedhur.push(i);
+        }
+    }
+    console.log($scope.markatZgjedhur);
+}
+
+
+
+
 
 // Chech which filter tag to show and which one not
 $scope.checkFilterValues=function(){
@@ -1636,29 +1713,31 @@ $scope.checkFilterValues=function(){
 
 
 
-  if ($scope.slider.minValue == defaultMinPrice && $scope.slider.maxValue == defaultMaxPrice) {
+  if ($scope.slider.minValue == $scope.cmimiMinF && $scope.slider.maxValue == $scope.cmimiMaxF) {
     $scope.fshihCmimeVar=true;
   }else{
     $scope.filterNotActivated=false;
   }
 
-  if ($scope.checkResultsForma=='') {
+  if ($scope.checkResultsGjinia=='') {
+    $scope.fshihGjiniaVar=true;
+  }else{
+    $scope.filterNotActivated=false;
+    $scope.fshihGjiniaVar=false;
+  }
+
+  if ($scope.formatZgjedhur=='') {
     $scope.fshihFormaVar=true;
   }else{
     $scope.filterNotActivated=false;
     $scope.fshihFormaVar=false;
   }
 
-  if($scope.data.gjinia==undefined || $scope.data.gjinia==''){
-    $scope.fshihGjiniaVar=true;
-  }else{
-    $scope.filterNotActivated=false;
-  }
-
-  if ($scope.checkResults=='') {
+  if ($scope.markatZgjedhur=='') {
     $scope.fshihMarkaVar=true;
   }else{
     $scope.filterNotActivated=false;
+    $scope.fshihMarkaVar=false;
   }
 
 
@@ -1667,7 +1746,14 @@ $scope.checkFilterValues=function(){
 $scope.data.gjinia=new Array(' ');
 
 $scope.filtroProduktet =  function(){
+
+  $scope.moreDataCanBeLoaded=false;
   $scope.checkFilterValues();
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
   console.log($scope.syzeD);
   //$scope.syzeDCopy=$scope.syzeDOriginalBackup;
   console.log($scope.syzeDOriginalBackup);
@@ -1678,19 +1764,21 @@ $scope.filtroProduktet =  function(){
 
   // Cmimi Filter
   $scope.syzeDOriginalBackup.forEach( function(element, index) {
-    if(element.cmimi>=$scope.slider.minValue && element.cmimi<=$scope.slider.maxValue){
+    if(element.cmimilek>=$scope.slider.minValue && element.cmimilek<=$scope.slider.maxValue){
       newSyzeDHolder1.push(element);
     }
   });
+  console.log(newSyzeDHolder1);
 
-  // Forma Filter
-  // Check if any value is selected from Forma
-  if ($scope.checkResultsForma!='') {
+  // Gjinia Filter
+  // Check if any value is selected from Gjinia
+  if ($scope.checkResultsGjinia!='') {
+    
     // First loop through the array of all the products
     newSyzeDHolder1.forEach( function(element, index) {
       // Then loop through all the selected Forma values and check them all with the products values
-      $scope.checkResultsForma.forEach( function(elementt, indexx) {
-        if(element.zonakadastrale==elementt){
+      $scope.checkResultsGjinia.forEach( function(elementt, indexx) {
+        if(element.vitprodhimi==elementt){
         newSyzeDHolder2.push(element);
       }
       });
@@ -1699,35 +1787,34 @@ $scope.filtroProduktet =  function(){
   }else{
     newSyzeDHolder2=newSyzeDHolder1;
   }
+  console.log(newSyzeDHolder2);
 
-  // Gjinia Filter
-  if($scope.data.gjinia.length>0){
-    //console.log('brenda gjinia');
+  // Forma Filter
+  // Check if any value is selected from Forma
+  if ($scope.formatZgjedhur!='') {
+    // First loop through the array of all the products
     newSyzeDHolder2.forEach( function(element, index) {
-      if(element.vitprodhimi==$scope.data.gjinia){
+      // Then loop through all the selected Forma values and check them all with the products values
+      $scope.formatZgjedhur.forEach( function(elementt, indexx) {
+        if(element.zonakadastrale==elementt){
         newSyzeDHolder3.push(element);
       }
+      });
+      
     });
-
   }else{
-    //console.log('jo brenda gjinia');
     newSyzeDHolder3=newSyzeDHolder2;
   }
+  console.log(newSyzeDHolder3);
+
 
   // Marka Filter
   // Check if any value is selected from Forma
-  if ($scope.checkResults!='') {
-    // Replace Emporio with Emporio Armani in the result array
-    $scope.checkResults.forEach( function(element, index) {
-      if(element=='Emporio'){
-        $scope.checkResults[index]='Emporio Armani';
-      }
-    });
-
+  if ($scope.markatZgjedhur!='') {
     // First loop through the array of all the products
     newSyzeDHolder3.forEach( function(element, index) {
       // Then loop through all the selected Forma values and check them all with the products values
-      $scope.checkResults.forEach( function(elementt, indexx) {
+      $scope.markatZgjedhur.forEach( function(elementt, indexx) {
         if(element.kodifikimartikulli2==elementt){
         newSyzeDHolder4.push(element);
       }
@@ -1737,6 +1824,48 @@ $scope.filtroProduktet =  function(){
   }else{
     newSyzeDHolder4=newSyzeDHolder3;
   }
+  console.log(newSyzeDHolder4);
+  
+
+
+
+  // // Gjinia Filter
+  // if($scope.data.gjinia.length>0){
+  //   //console.log('brenda gjinia');
+  //   newSyzeDHolder2.forEach( function(element, index) {
+  //     if(element.vitprodhimi==$scope.data.gjinia){
+  //       newSyzeDHolder3.push(element);
+  //     }
+  //   });
+
+  // }else{
+  //   //console.log('jo brenda gjinia');
+  //   newSyzeDHolder3=newSyzeDHolder2;
+  // }
+
+  // Marka Filter
+  // Check if any value is selected from Forma
+  // if ($scope.checkResults!='') {
+  //   // Replace Emporio with Emporio Armani in the result array
+  //   $scope.checkResults.forEach( function(element, index) {
+  //     if(element=='Emporio'){
+  //       $scope.checkResults[index]='Emporio Armani';
+  //     }
+  //   });
+
+  //   // First loop through the array of all the products
+  //   newSyzeDHolder3.forEach( function(element, index) {
+  //     // Then loop through all the selected Forma values and check them all with the products values
+  //     $scope.checkResults.forEach( function(elementt, indexx) {
+  //       if(element.kodifikimartikulli2==elementt){
+  //       newSyzeDHolder4.push(element);
+  //     }
+  //     });
+      
+  //   });
+  // }else{
+  //   newSyzeDHolder4=newSyzeDHolder3;
+  // }
 
   $scope.shfaqFiltraTag=true;
   // if filter don't return any result then don't change a thing
@@ -1754,7 +1883,10 @@ $scope.filtroProduktet =  function(){
       $scope.syzeD=newSyzeDHolder4;
       console.log($scope.syzeD);
       $scope.data.shfaq=false;
+
   }
+
+
 
 
 
@@ -1768,63 +1900,120 @@ $scope.filtroProduktet =  function(){
 // Delete the Cmimi filters
 $scope.fshiCmimiFilter =function(){
   //console.log($scope.slider);
-  $scope.slider.minValue= defaultMinPrice;
-  $scope.slider.maxValue= defaultMaxPrice;
+  $scope.slider.minValue= $scope.cmimiMinF;
+  $scope.slider.maxValue= $scope.cmimiMaxF;
   $scope.fshihCmimeVar=true;
   // TODO: Call filtroProduktet and filter them again
   $scope.filtroProduktet();
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
 
-// Delete the Forma filters
-$scope.fshiFormaFilter =function(){
-  for (var key in $scope.checkModelForma) {
-  if ($scope.checkModelForma.hasOwnProperty(key)) {
-    $scope.checkResultsForma.forEach( function(element, index) {
+// Delete the Gjinia filters
+$scope.fshiGjinia2Filter =function(){
+  for (var key in $scope.checkModelGjinia) {
+  if ($scope.checkModelGjinia.hasOwnProperty(key)) {
+    $scope.checkResultsGjinia.forEach( function(element, index) {
       if (key==element) {
-        $scope.checkModelForma[key]=false;
+        $scope.checkModelGjinia[key]=false;
       }
     });
   }
 }
 
-  $scope.checkResultsForma=[];
+  $scope.checkResultsGjinia=[];
   $scope.filtroProduktet();
-  $scope.fshihFormaVar=true;
+  $scope.fshihGjiniaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
+// Delete the Forma filters
+$scope.fshiFormaFilter =function(){
+  for (var key in $scope.filter) {
+  if ($scope.filter.hasOwnProperty(key)) {
+    $scope.formatZgjedhur.forEach( function(element, index) {
+      if (key==element) {
+        $scope.filter[key]=false;
+      }
+    });
+  }
+}
 
-// Delete the gjinia filters
-$scope.fshiGjiniaFilter =function(){
-  $scope.data.gjinia=[];
-  $scope.fshihGjiniaVar=true;
-  // TODO: Call filtroProduktet and filter them again
+  $scope.formatZgjedhur=[];
   $scope.filtroProduktet();
+  $scope.fshihFormaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
 
 // Delete the marka filters
 $scope.fshiMarkaFilter =function(){
-  //console.log($scope.checkModel);
-  //console.log($scope.checkResults);
-  for (var key in $scope.checkModel) {
-  if ($scope.checkModel.hasOwnProperty(key)) {
-    $scope.checkResults.forEach( function(element, index) {
-      if(element=='Emporio Armani'){
-        $scope.checkResults[index]='Emporio';
-      }
+  for (var key in $scope.filterM) {
+  if ($scope.filterM.hasOwnProperty(key)) {
+    $scope.markatZgjedhur.forEach( function(element, index) {
       if (key==element) {
-        $scope.checkModel[key]=false;
+        $scope.filterM[key]=false;
       }
     });
   }
 }
 
-  $scope.checkResults=[];
+  $scope.markatZgjedhur=[];
   $scope.filtroProduktet();
   $scope.fshihMarkaVar=true;
-
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
+
+
+
+
+
+$scope.remove_duplicates= function(origArr) {
+      var newArr = [],
+          origLen = origArr.length,
+          found, x, y;
+
+      for (x = 0; x < origLen; x++) {
+          found = undefined;
+          for (y = 0; y < newArr.length; y++) {
+              if (origArr[x] === newArr[y]) {
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              newArr.push(origArr[x]);
+          }
+      }
+      return newArr;
+  }
+
+$scope.cleanArray= function(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+
 
 
 
@@ -1879,6 +2068,8 @@ $scope.fshiMarkaFilter =function(){
   $scope.limit  = 20; //gets 20 objects the first time
   $scope.offsetD = 0;
   $scope.syzeD   = [];
+  $scope.markaSyzesh = [];
+  $scope.formaSyzesh = [];
   $scope.countForBackUp   = 1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
@@ -1923,10 +2114,17 @@ $scope.fshiMarkaFilter =function(){
 
        response.forEach(function(item){
         $scope.syzeD.push(item);
+        $scope.markaSyzesh.push(item.kodifikimartikulli2);
+        $scope.formaSyzesh.push(item.zonakadastrale);
 
         
 
       });
+       $scope.markaSyzesh = $scope.remove_duplicates($scope.markaSyzesh);
+       $scope.formaSyzesh = $scope.remove_duplicates($scope.formaSyzesh);
+       $scope.formaSyzesh = $scope.cleanArray($scope.formaSyzesh);
+       // console.log($scope.markaSyzesh);
+       // console.log($scope.formaSyzesh);
 
        $scope.syzeD.forEach( function(element, index) {
          $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
@@ -1941,12 +2139,12 @@ $scope.fshiMarkaFilter =function(){
        });
 
 
-       if ($scope.filterNotActivated==false) {
-        console.log('eshte aktivizuar');
-        $scope.filtroProduktet();
-       }else{
-        console.log('nuk eshte aktivizuar');
-       }
+       // if ($scope.filterNotActivated==false) {
+       //  console.log('eshte aktivizuar');
+       //  $scope.filtroProduktet();
+       // }else{
+       //  console.log('nuk eshte aktivizuar');
+       // }
 
        if($scope.countForBackUp==1){
         $scope.syzeDOriginalBackup=$scope.syzeD;
@@ -1982,6 +2180,8 @@ $scope.fshiMarkaFilter =function(){
   console.log("test");
   console.log($scope.offsetD);
 
+$scope.moreDataCanBeLoaded=true;
+
 $scope.itemchecked=false;
 $scope.filterNotActivated=true;
 $scope.data.gjinia=[];
@@ -1989,7 +2189,7 @@ $scope.skaRezultat=false;
 
 $scope.shfaqFiltraTag=false;
 var defaultMinPrice=0;
-var defaultMaxPrice=1000;
+var defaultMaxPrice=100;
 
 $scope.slider = {
   minValue: defaultMinPrice,
@@ -2004,11 +2204,61 @@ $scope.slider = {
         case 'high':
           return '<b>Cmimi Max:</b> '+value+' LEK';
         default:
-          return '$' + value
+          return value + ' LEK'
       }
     }
   }
 };
+
+
+  $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/getCmimiFilter',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+     }).success(function(response) {
+        //console.log(response.rows);
+
+        response.rows.forEach( function(element, index) {
+          console.log(element);
+          if (element.id==1) {
+             $scope.slider.options.floor=element.cmimimin;
+             $scope.slider.options.ceil=element.cmimimax;
+             $scope.slider.minValue=element.cmimimin;
+             $scope.slider.maxValue=element.cmimimax;
+             $scope.cmimiMinF=element.cmimimin;
+             $scope.cmimiMaxF=element.cmimimax;
+            }
+        });
+
+
+          
+      });
+
+
+
+$scope.shfaqF= function(){
+  $scope.data.shfaq=true;
+}
+
+$scope.shfaqF2= function(){
+  $scope.data.shfaq=false;
+}
+
+$scope.shfaqCmimiRender= function(){
+  $timeout(function () { 
+    $scope.$broadcast('rzSliderForceRender');
+    console.log('koha') 
+  });
+}
 
   $scope.singleModel = 1;
 
@@ -2036,19 +2286,19 @@ $scope.slider = {
 
   $scope.radioModel = 'Middle';
 
-  $scope.checkModelForma = {
-    Square: false,
-    Circle: false,
-    Oval: false
+$scope.checkModelGjinia = {
+    Woman: false,
+    Man: false,
+    Unisex: false
   };
 
-  $scope.checkResultsForma = [];
+  $scope.checkResultsGjinia = [];
 
-  $scope.$watchCollection('checkModelForma', function () {
-    $scope.checkResultsForma = [];
-    angular.forEach($scope.checkModelForma, function (value, key) {
+  $scope.$watchCollection('checkModelGjinia', function () {
+    $scope.checkResultsGjinia = [];
+    angular.forEach($scope.checkModelGjinia, function (value, key) {
       if (value) {
-        $scope.checkResultsForma.push(key);
+        $scope.checkResultsGjinia.push(key);
       }
     });
   });
@@ -2065,6 +2315,38 @@ $scope.ktheNgjyre= function(index){
   return kodi
 }
 
+$scope.filter={};
+$scope.filterM={};
+$scope.formatZgjedhur=[];
+$scope.markatZgjedhur=[];
+
+$scope.printC = function() {
+  $scope.formatZgjedhur=[];
+    console.log($scope.filter);
+        for(i in $scope.filter) {
+        console.log($scope.filter[i]);
+        if($scope.filter[i] == true) {
+            $scope.formatZgjedhur.push(i);
+        }
+    }
+    console.log($scope.formatZgjedhur);
+}
+
+$scope.getMarka = function() {
+  $scope.markatZgjedhur=[];
+    console.log($scope.filterM);
+        for(i in $scope.filterM) {
+        console.log($scope.filterM[i]);
+        if($scope.filterM[i] == true) {
+            $scope.markatZgjedhur.push(i);
+        }
+    }
+    console.log($scope.markatZgjedhur);
+}
+
+
+
+
 
 // Chech which filter tag to show and which one not
 $scope.checkFilterValues=function(){
@@ -2076,29 +2358,31 @@ $scope.checkFilterValues=function(){
 
 
 
-  if ($scope.slider.minValue == defaultMinPrice && $scope.slider.maxValue == defaultMaxPrice) {
+  if ($scope.slider.minValue == $scope.cmimiMinF && $scope.slider.maxValue == $scope.cmimiMaxF) {
     $scope.fshihCmimeVar=true;
   }else{
     $scope.filterNotActivated=false;
   }
 
-  if ($scope.checkResultsForma=='') {
+  if ($scope.checkResultsGjinia=='') {
+    $scope.fshihGjiniaVar=true;
+  }else{
+    $scope.filterNotActivated=false;
+    $scope.fshihGjiniaVar=false;
+  }
+
+  if ($scope.formatZgjedhur=='') {
     $scope.fshihFormaVar=true;
   }else{
     $scope.filterNotActivated=false;
     $scope.fshihFormaVar=false;
   }
 
-  if($scope.data.gjinia==undefined || $scope.data.gjinia==''){
-    $scope.fshihGjiniaVar=true;
-  }else{
-    $scope.filterNotActivated=false;
-  }
-
-  if ($scope.checkResults=='') {
+  if ($scope.markatZgjedhur=='') {
     $scope.fshihMarkaVar=true;
   }else{
     $scope.filterNotActivated=false;
+    $scope.fshihMarkaVar=false;
   }
 
 
@@ -2108,79 +2392,86 @@ $scope.data.gjinia=new Array(' ');
 
 $scope.filtroProduktet =  function(){
   $scope.checkFilterValues();
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
+
   console.log($scope.syzeO);
   //$scope.syzeOCopy=$scope.syzeOOriginalBackup;
   console.log($scope.syzeOOriginalBackup);
-  var newsyzeOHolder1=[];
-  var newsyzeOHolder2=[];
-  var newsyzeOHolder3=[];
-  var newsyzeOHolder4=[];
+  var newSyzeOHolder1=[];
+  var newSyzeOHolder2=[];
+  var newSyzeOHolder3=[];
+  var newSyzeOHolder4=[];
+
 
   // Cmimi Filter
   $scope.syzeOOriginalBackup.forEach( function(element, index) {
-    if(element.cmimi>=$scope.slider.minValue && element.cmimi<=$scope.slider.maxValue){
-      newsyzeOHolder1.push(element);
+    if(element.cmimilek>=$scope.slider.minValue && element.cmimilek<=$scope.slider.maxValue){
+      newSyzeOHolder1.push(element);
     }
   });
 
-  // Forma Filter
-  // Check if any value is selected from Forma
-  if ($scope.checkResultsForma!='') {
+  // Gjinia Filter
+  // Check if any value is selected from Gjinia
+  if ($scope.checkResultsGjinia!='') {
+    
     // First loop through the array of all the products
-    newsyzeOHolder1.forEach( function(element, index) {
+    newSyzeOHolder1.forEach( function(element, index) {
       // Then loop through all the selected Forma values and check them all with the products values
-      $scope.checkResultsForma.forEach( function(elementt, indexx) {
-        if(element.zonakadastrale==elementt){
-        newsyzeOHolder2.push(element);
+      $scope.checkResultsGjinia.forEach( function(elementt, indexx) {
+        if(element.vitprodhimi==elementt){
+        newSyzeOHolder2.push(element);
       }
       });
       
     });
   }else{
-    newsyzeOHolder2=newsyzeOHolder1;
+    newSyzeOHolder2=newSyzeOHolder1;
   }
 
-  // Gjinia Filter
-  if($scope.data.gjinia.length>0){
-    //console.log('brenda gjinia');
-    newsyzeOHolder2.forEach( function(element, index) {
-      if(element.vitprodhimi==$scope.data.gjinia){
-        newsyzeOHolder3.push(element);
+  // Forma Filter
+  // Check if any value is selected from Forma
+  if ($scope.formatZgjedhur!='') {
+    // First loop through the array of all the products
+    newSyzeOHolder2.forEach( function(element, index) {
+      // Then loop through all the selected Forma values and check them all with the products values
+      $scope.formatZgjedhur.forEach( function(elementt, indexx) {
+        if(element.zonakadastrale==elementt){
+        newSyzeOHolder3.push(element);
       }
+      });
+      
     });
-
   }else{
-    //console.log('jo brenda gjinia');
-    newsyzeOHolder3=newsyzeOHolder2;
+    newSyzeOHolder3=newSyzeOHolder2;
   }
+
 
   // Marka Filter
   // Check if any value is selected from Forma
-  if ($scope.checkResults!='') {
-    // Replace Emporio with Emporio Armani in the result array
-    $scope.checkResults.forEach( function(element, index) {
-      if(element=='Emporio'){
-        $scope.checkResults[index]='Emporio Armani';
-      }
-    });
-
+  if ($scope.markatZgjedhur!='') {
     // First loop through the array of all the products
-    newsyzeOHolder3.forEach( function(element, index) {
+    newSyzeOHolder3.forEach( function(element, index) {
       // Then loop through all the selected Forma values and check them all with the products values
-      $scope.checkResults.forEach( function(elementt, indexx) {
+      $scope.markatZgjedhur.forEach( function(elementt, indexx) {
         if(element.kodifikimartikulli2==elementt){
-        newsyzeOHolder4.push(element);
+        newSyzeOHolder4.push(element);
       }
       });
       
     });
   }else{
-    newsyzeOHolder4=newsyzeOHolder3;
+    newSyzeOHolder4=newSyzeOHolder3;
   }
+  console.log(newSyzeOHolder4);
+
 
   $scope.shfaqFiltraTag=true;
   // if filter don't return any result then don't change a thing
-  if(newsyzeOHolder4==''){
+  if(newSyzeOHolder4==''){
     $scope.skaRezultat=true;
 
     $timeout(function () { 
@@ -2191,13 +2482,11 @@ $scope.filtroProduktet =  function(){
     $scope.data.shfaq=false;
   }else {
       // Set the old array to the new modified one
-      $scope.syzeO=newsyzeOHolder4;
+      $scope.syzeO=newSyzeOHolder4;
       console.log($scope.syzeO);
       $scope.data.shfaq=false;
+
   }
-
-
-
 
 
 
@@ -2208,68 +2497,119 @@ $scope.filtroProduktet =  function(){
 // Delete the Cmimi filters
 $scope.fshiCmimiFilter =function(){
   //console.log($scope.slider);
-  $scope.slider.minValue= defaultMinPrice;
-  $scope.slider.maxValue= defaultMaxPrice;
+  $scope.slider.minValue= $scope.cmimiMinF;
+  $scope.slider.maxValue= $scope.cmimiMaxF;
   $scope.fshihCmimeVar=true;
   // TODO: Call filtroProduktet and filter them again
   $scope.filtroProduktet();
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
 
-// Delete the Forma filters
-$scope.fshiFormaFilter =function(){
-  for (var key in $scope.checkModelForma) {
-  if ($scope.checkModelForma.hasOwnProperty(key)) {
-    $scope.checkResultsForma.forEach( function(element, index) {
+// Delete the Gjinia filters
+$scope.fshiGjinia2Filter =function(){
+  for (var key in $scope.checkModelGjinia) {
+  if ($scope.checkModelGjinia.hasOwnProperty(key)) {
+    $scope.checkResultsGjinia.forEach( function(element, index) {
       if (key==element) {
-        $scope.checkModelForma[key]=false;
+        $scope.checkModelGjinia[key]=false;
       }
     });
   }
 }
 
-  $scope.checkResultsForma=[];
+  $scope.checkResultsGjinia=[];
   $scope.filtroProduktet();
-  $scope.fshihFormaVar=true;
+  $scope.fshihGjiniaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
+// Delete the Forma filters
+$scope.fshiFormaFilter =function(){
+  for (var key in $scope.filter) {
+  if ($scope.filter.hasOwnProperty(key)) {
+    $scope.formatZgjedhur.forEach( function(element, index) {
+      if (key==element) {
+        $scope.filter[key]=false;
+      }
+    });
+  }
+}
 
-// Delete the gjinia filters
-$scope.fshiGjiniaFilter =function(){
-  $scope.data.gjinia=[];
-  $scope.fshihGjiniaVar=true;
-  // TODO: Call filtroProduktet and filter them again
+  $scope.formatZgjedhur=[];
   $scope.filtroProduktet();
+  $scope.fshihFormaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
 
 // Delete the marka filters
 $scope.fshiMarkaFilter =function(){
-  //console.log($scope.checkModel);
-  //console.log($scope.checkResults);
-  for (var key in $scope.checkModel) {
-  if ($scope.checkModel.hasOwnProperty(key)) {
-    $scope.checkResults.forEach( function(element, index) {
-      if(element=='Emporio Armani'){
-        $scope.checkResults[index]='Emporio';
-      }
+  for (var key in $scope.filterM) {
+  if ($scope.filterM.hasOwnProperty(key)) {
+    $scope.markatZgjedhur.forEach( function(element, index) {
       if (key==element) {
-        $scope.checkModel[key]=false;
+        $scope.filterM[key]=false;
       }
     });
   }
 }
 
-  $scope.checkResults=[];
+  $scope.markatZgjedhur=[];
   $scope.filtroProduktet();
   $scope.fshihMarkaVar=true;
-
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
 }
 
 
 
 
 
+$scope.remove_duplicates= function(origArr) {
+      var newArr = [],
+          origLen = origArr.length,
+          found, x, y;
+
+      for (x = 0; x < origLen; x++) {
+          found = undefined;
+          for (y = 0; y < newArr.length; y++) {
+              if (origArr[x] === newArr[y]) {
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              newArr.push(origArr[x]);
+          }
+      }
+      return newArr;
+  }
+
+$scope.cleanArray= function(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
 
 
 
@@ -2319,6 +2659,8 @@ $scope.fshiMarkaFilter =function(){
   $scope.limit  = 20; //gets 20 objects the first time
   $scope.offsetD = 0;
   $scope.syzeO   = [];
+  $scope.markaSyzesh = [];
+  $scope.formaSyzesh = [];
   $scope.countForBackUp   = 1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
@@ -2362,10 +2704,17 @@ $scope.fshiMarkaFilter =function(){
 
        response.forEach(function(item){
         $scope.syzeO.push(item);
+        $scope.markaSyzesh.push(item.kodifikimartikulli2);
+        $scope.formaSyzesh.push(item.zonakadastrale);
 
         
 
       });
+       $scope.markaSyzesh = $scope.remove_duplicates($scope.markaSyzesh);
+       $scope.formaSyzesh = $scope.remove_duplicates($scope.formaSyzesh);
+       $scope.formaSyzesh = $scope.cleanArray($scope.formaSyzesh);
+       // console.log($scope.markaSyzesh);
+       // console.log($scope.formaSyzesh);
 
 
        $scope.syzeO.forEach( function(element, index) {
@@ -2381,12 +2730,12 @@ $scope.fshiMarkaFilter =function(){
        });
 
 
-       if ($scope.filterNotActivated==false) {
-        console.log('eshte aktivizuar');
-        $scope.filtroProduktet();
-       }else{
-        console.log('nuk eshte aktivizuar');
-       }
+       // if ($scope.filterNotActivated==false) {
+       //  console.log('eshte aktivizuar');
+       //  $scope.filtroProduktet();
+       // }else{
+       //  console.log('nuk eshte aktivizuar');
+       // }
 
        if($scope.countForBackUp==1){
         $scope.syzeOOriginalBackup=$scope.syzeO;
@@ -4822,8 +5171,20 @@ $scope.vazhdoPorosine= function(allCmimi){
 
 })
 
-.controller('takimCtrl', function($scope, $stateParams, $http, $ionicPopup, $window, $timeout) {
+.controller('takimCtrl', function($scope, $stateParams, $http, $ionicPopup, $window, $timeout, $ionicScrollDelegate, $location) {
       
+  $scope.maxP=5;
+  $scope.listaOrareve=[];
+
+
+      
+
+
+
+
+
+  $scope.oraretngdb=["02/01/2017","02/02/2017","02/03/2017","02/04/2017","02/05/2017","03/30/2017","05/01/2017","05/17/2017","06/11/2017","06/15/2017","06/16/2017","06/21/2017","07/12/2017","08/18/2017","08/23/2017","11/15/2017","11/25/2017","01/02/2018"];
+
       $scope.userPaPrenotim = false;
       $scope.showtakim=false;
       $scope.showSpinner=true;
@@ -4866,8 +5227,12 @@ $scope.vazhdoPorosine= function(allCmimi){
       $scope.showtakim=false;
     }else{
       $scope.showtakim=true;
+      $location.hash('rezervimi');   //set the location hash
+      var handle = $ionicScrollDelegate.$getByHandle('myPageDelegate');
+      handle.anchorScroll(true);  // 'true' for animation
     }
   }
+
 
   $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
   $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
@@ -5060,49 +5425,38 @@ $scope.vazhdoPorosine= function(allCmimi){
   $scope.dyqanetListaSelected={};
   $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
-
-  jQuery('#mdp-demo').multiDatesPicker({
-        // disable the 1st and 3rd of the current month
-        onSelect: function() {
-        $scope.dyqaniNdryshoi('test');
-      }
-      });
+ 
 
 
+  $scope.testdates=function(){
+    console.log('po therrimet nga directiva');
+    console.log($scope.maxP);
+    var numer=5;
 
-  $scope.dyqaniNdryshoi = function(dyqani){
-    console.log('u thirr nga jquery');
-    console.log(dyqani);
-    $scope.data.date=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
-    // Check if date is set
-    if ($scope.data.date=='' || $scope.data.date==null) {
-      $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
-      $ionicPopup.alert({
-            title: 'Data bosh',
-            template: '<p align="center">Ju lutemi zgjidhni nje date me siper</p>'
-          });
-
+    var dataSelected=$scope.getDateSelected();
+    if (!dataSelected) {
+      $scope.shfaqOrett=false;
+      console.log('nuk eshte zgjedh');
+      $scope.$apply();
     }else{
-      // Check if dyqani is selected
-      if ( $scope.dyqanetListaSelected.dyqani=='Zgjidhni nje dyqan') {
-        $ionicPopup.alert({
-            title: 'Dyqani bosh',
-            template: '<p align="center">Ju lutemi zgjidhni nje dyqan</p>'
-          });
-      }
+      console.log('eshte zgjedh');
+      $scope.shfaqOrett=true;
+    
+    console.log('data eshte');
+    console.log(dataSelected);
 
-      // Get the day of the week from that date selected
+    // Get the day of the week from that date selected
 
-      var days = ['diele', 'hene', 'marte', 'merkure', 'enjte', 'premte', 'shtune'];
-      var d = new Date($scope.data.date);
-      var dayName = days[d.getDay()];
-      console.log(dayName);
+    var days = ['diele', 'hene', 'marte', 'merkure', 'enjte', 'premte', 'shtune'];
+    var d = new Date(dataSelected);
+    var dayName = days[d.getDay()];
+    console.log(dayName);
 
       for (var key in $scope.dyqanet) {
         if ($scope.dyqanet.hasOwnProperty(key)) {
           //console.log(key + " -> " + $scope.dyqanet[key]);
           // Select the correct dyqani
-          if ($scope.dyqanet[key].emri==dyqani) {
+          if ($scope.dyqanet[key].emri==$scope.dyqaniZ) {
 
             // $scope.dyqanet[key].oraret.forEach( function(element, index) {
             //   // statements
@@ -5116,20 +5470,78 @@ $scope.vazhdoPorosine= function(allCmimi){
                 //console.log(tempObject2);
 
                 for (var key3 in tempObject2) {
+
+                  
+
+
+
                   //console.log(key3);
                   if (key3==dayName) {
-                    //console.log(tempObject2[key3]);
-                    if (tempObject2[key3].length==0) {
-                      $ionicPopup.alert({
-                        title: '',
-                        template: '<p align="center">Ne daten e zgjedhur nuk ka vizita te lira</p>'
-                      });
-                      $scope.listaOrareve=[];
-                      $scope.showNoDate=true;
-                    }else{
-                      $scope.showNoDate=false;
-                      $scope.listaOrareve=tempObject2[key3];
-                    }
+                    $scope.listaOrareve=tempObject2[key3];
+                    console.log('brenda 2');
+                    $scope.showNoDate=false;
+                    $scope.$apply();
+                    console.log('po durres 4');
+                    console.log(tempObject2[key3]);
+
+
+                    $http({
+                      method: 'POST',
+                      url: 'https://max-optika-server.herokuapp.com/oraretZene',
+                      cach: false,
+                      headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                      },
+                      transformRequest: function(obj) {
+                        var str = [];
+                        for (var p in obj)
+                          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                      },
+                      data: {
+                        dataZgjdhur: dataSelected,
+                        dyqani: $scope.dyqaniZ
+                      }
+                    }).success(function(response) {
+                      console.log(response);
+                      console.log(response.success);
+                      //console.log(typeof response);
+                      if (response.success) {
+                        $ionicPopup.alert({
+                          title: 'Rezervo Takim',
+                          template: '<p align="center">Rezervimi u krye me sukses!</p>'
+                        });
+                      } else {
+                        $ionicPopup.alert({
+                          title: 'Rezervo Takim',
+                          template: '<p align="center">Rezervimi nuk mund te kryhet per momentin. Ju lutemi provoni serisht me vone!</p>'
+                        });
+                      }
+                    });
+
+
+
+
+
+
+
+
+                    // if (tempObject2[key3].length==0) {
+                    //   console.log('brenda 1');
+  
+                    //   $ionicPopup.alert({
+                    //     title: '',
+                    //     template: '<p align="center">Ne daten e zgjedhur nuk ka vizita te lira</p>'
+                    //   });
+                    //   $scope.listaOrareve=[];
+                    //   $scope.showNoDate=true;
+                    // }else{
+                    //   $scope.listaOrareve=tempObject2[key3];
+                    //   console.log('brenda 2');
+                    //   $scope.showNoDate=false;
+                    //   $scope.$apply();
+                      
+                    // }
                   }
 
                 }
@@ -5147,8 +5559,101 @@ $scope.vazhdoPorosine= function(allCmimi){
         }
       }
 
+}
 
-    }
+
+
+    //return numer;
+  }
+
+
+
+  $scope.dyqaniNdryshoi = function(dyqani){
+    console.log('u thirr nga jquery');
+    console.log(dyqani);
+    $scope.dyqaniZ=dyqani;
+    
+    $scope.disableDays(dyqani);
+    
+
+
+
+    // $scope.data.date=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
+    // Check if date is set
+    // if ($scope.data.date=='' || $scope.data.date==null) {
+    //   $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
+    //   $ionicPopup.alert({
+    //         title: 'Data bosh',
+    //         template: '<p align="center">Ju lutemi zgjidhni nje date me siper</p>'
+    //       });
+
+    // }else{
+    //   // Check if dyqani is selected
+    //   if ( $scope.dyqanetListaSelected.dyqani=='Zgjidhni nje dyqan') {
+    //     $ionicPopup.alert({
+    //         title: 'Dyqani bosh',
+    //         template: '<p align="center">Ju lutemi zgjidhni nje dyqan</p>'
+    //       });
+    //   }
+
+      // // Get the day of the week from that date selected
+
+      // var days = ['diele', 'hene', 'marte', 'merkure', 'enjte', 'premte', 'shtune'];
+      // var d = new Date($scope.data.date);
+      // var dayName = days[d.getDay()];
+      // console.log(dayName);
+
+      // for (var key in $scope.dyqanet) {
+      //   if ($scope.dyqanet.hasOwnProperty(key)) {
+      //     //console.log(key + " -> " + $scope.dyqanet[key]);
+      //     // Select the correct dyqani
+      //     if ($scope.dyqanet[key].emri==dyqani) {
+
+      //       // $scope.dyqanet[key].oraret.forEach( function(element, index) {
+      //       //   // statements
+      //       // });
+      //       var tempObject=$scope.dyqanet[key];
+      //       //console.log(tempObject);
+      //       // separate all oraret from that object
+      //       for (var key2 in tempObject) {
+      //         if (key2=='oraret') {
+      //           var tempObject2=tempObject[key2];
+      //           //console.log(tempObject2);
+
+      //           for (var key3 in tempObject2) {
+      //             //console.log(key3);
+      //             if (key3==dayName) {
+      //               //console.log(tempObject2[key3]);
+      //               if (tempObject2[key3].length==0) {
+      //                 $ionicPopup.alert({
+      //                   title: '',
+      //                   template: '<p align="center">Ne daten e zgjedhur nuk ka vizita te lira</p>'
+      //                 });
+      //                 $scope.listaOrareve=[];
+      //                 $scope.showNoDate=true;
+      //               }else{
+      //                 $scope.showNoDate=false;
+      //                 $scope.listaOrareve=tempObject2[key3];
+      //               }
+      //             }
+
+      //           }
+
+
+
+
+      //         }
+
+      //       }
+
+
+      //       //console.log($scope.dyqanet[key]);
+      //     }
+      //   }
+      // }
+
+
+    //}
   }
 
 
@@ -5365,6 +5870,120 @@ $scope.vazhdoPorosine= function(allCmimi){
          }
        }
     console.log('Rreth Nesh');
+  })
+
+  .controller('kontaktCtrl', function($scope, $stateParams) {
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+    console.log('Kontakt');
+  })
+
+  .controller('pagesatCtrl', function($scope, $stateParams) {
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+    console.log('Menyrat e pagesave');
+  })
+
+  .controller('privacyPolicyCtrl', function($scope, $stateParams) {
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+    console.log('Menyrat e pagesave');
   })
 
 

@@ -1,0 +1,69 @@
+<ion-view title="Kontakto">
+  <ion-nav-buttons side="left">
+    <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
+  </ion-nav-buttons>
+  <ion-content class="has-header" style="background-color: #fff;">
+    <div class="card" style="margin-bottom:60px;box-shadow:none;">
+    <div class="item item-text-wrap" style="box-shadow:none;">
+    <img style="margin:2px auto;box-shadow:none;width: 100px;" dnd-resizable src="img/logox.png"><br />
+
+    Max Optika - Departamenti i Marketingut - Marketing Department<br />
+    Telefon: +355 68 90 92 401<br />
+    marketing@maxoptika.al<br />
+    Tirana, Albania<br /><br />
+
+    Max Optika - Departamenti i Shitjes - Sales Department<br />
+    Telefon: +355 69 40 00 618<br />
+    sales@maxoptika.al<br />
+    Tirana, Albania<br /><br />
+
+    Max Optika - Departamenti i Burimeve Njerëzore - HR Department<br />
+    Telefon: +355 69 40 45 453<br />
+    hr@maxoptika.al<br />
+    Tirana, Albania<br /><br />
+    </div>
+  </div>
+
+
+  </ion-content>
+
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu">
+      <i class="icon ion-ios-home-outline"></i>
+      Kreu
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/sherbime">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      Sherbime
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/profile">
+      <i class="icon ion-ios-person-outline"></i>
+      Profili
+    </a>
+  </div>
+</ion-view>
+
