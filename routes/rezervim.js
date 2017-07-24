@@ -253,6 +253,7 @@ exports.getOraretZene = function(req,res,next){
   var dataZgjdhur = req.body.dataZgjdhur;
   var dyqani = req.body.dyqani;
   console.log('dyqani eshte'+dyqani);
+  var queryText="SELECT * FROM oraret2 WHERE data ='"+dataZgjdhur+"' and dyqani ='"+dyqani+"'";
 
   pg.connect(connectionStr, function(err, client, done) {
       if (err) {
@@ -262,11 +263,11 @@ exports.getOraretZene = function(req,res,next){
       console.log('Connected to postgresss! get orare');
 
       client
-        .query('SELECT * FROM oraret2 WHERE data = $1;',[dataZgjdhur])
+        .query(queryText)
          // .query('SELECT grupi,kodartikulli,kodifikimartikulli2,pershkrimartikulli FROM products2 WHERE kodartikulli = $1',[productId])
         
         .on('end', function(row) {
-          //console.log(row);
+          console.log(row);
           //console.log('Single item : ', productId);
           res.send(row);
           // client.end();
