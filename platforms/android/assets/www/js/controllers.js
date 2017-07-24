@@ -5175,6 +5175,8 @@ $scope.vazhdoPorosine= function(allCmimi){
       
   $scope.maxP=5;
   $scope.listaOrareve=[];
+  $scope.shfaqLoadingOraret=false;
+  $scope.oraModel = { checked: "" };
 
 
       
@@ -5434,13 +5436,18 @@ $scope.vazhdoPorosine= function(allCmimi){
     var numer=5;
 
     var dataSelected=$scope.getDateSelected();
+    $scope.dataSelected2=dataSelected;
     if (!dataSelected) {
       $scope.shfaqOrett=false;
       console.log('nuk eshte zgjedh');
+      $scope.listaOrareve=[];
+      dataSelected='';
+      $scope.oraModel.checked='';
       $scope.$apply();
     }else{
       console.log('eshte zgjedh');
       $scope.shfaqOrett=true;
+      $scope.shfaqLoadingOraret=true;
     
     console.log('data eshte');
     console.log(dataSelected);
@@ -5470,27 +5477,97 @@ $scope.vazhdoPorosine= function(allCmimi){
                 //console.log(tempObject2);
 
                 for (var key3 in tempObject2) {
+
+                  
+
+
+
                   //console.log(key3);
                   if (key3==dayName) {
-                    console.log('po durres 4');
-                    console.log(tempObject2[key3]);
-                    if (tempObject2[key3].length==0) {
-                      console.log('brenda 1');
-  
-                      $ionicPopup.alert({
-                        title: '',
-                        template: '<p align="center">Ne daten e zgjedhur nuk ka vizita te lira</p>'
-                      });
-                      $scope.listaOrareve=[];
-                      $scope.showNoDate=true;
-                    }else{
-                      $scope.listaOrareve=tempObject2[key3];
-                      console.log('brenda 2');
-                      $scope.showNoDate=false;
-                      $scope.showOre=true;
-                      $scope.$apply();
-                      
-                    }
+                    $scope.listaOrareve2=tempObject2[key3];
+                    console.log($scope.listaOrareve2);
+
+
+                    $http({
+                      method: 'POST',
+                      url: 'https://max-optika-server.herokuapp.com/oraretZene',
+                      cach: false,
+                      headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                      },
+                      transformRequest: function(obj) {
+                        var str = [];
+                        for (var p in obj)
+                          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        return str.join("&");
+                      },
+                      data: {
+                        dataZgjdhur: dataSelected,
+                        dyqani: $scope.dyqaniZ
+                      }
+                    }).success(function(response) {
+                      $scope.shfaqLoadingOraret=false;
+                      $scope.listaOrareve=$scope.listaOrareve2;
+                      // console.log(response.rows[0]);
+                      // console.log($scope.listaOrareve);
+                      //console.log(typeof response);
+
+                      if (response.rowCount!=0) {
+                        // Get all clients that have made a reservation in this day
+                        $scope.allClients=response.rows[0].klientet.split(',');
+                        // Get current loggedin client
+                        console.log($scope.allClients);
+                        console.log($scope.loggedInSakte.id);
+                        $scope.allClients.forEach( function(element, index) {
+                          if (element==$scope.loggedInSakte.id) {
+                            console.log('2');
+                            jQuery('#butoniRezervo').prop('disabled', true);
+                            //alert('Ju nuk mund te beni me shume se 1 rezervin ne dite!');
+                            $ionicPopup.alert({
+                               title: 'Gabim',
+                               template: '<p align="center">Ju nuk mund te beni me shume se 1 rezervin ne dite!</p>'
+                             });
+                            
+                          }else{
+                            console.log('jam enable butoni');
+                            jQuery('#butoniRezervo').prop('disabled', false);
+                          }
+                        });
+
+
+                        var oraretDBZene=response.rows[0].oraret;
+                        
+                        oraretDBZene=oraretDBZene.split(',');
+                        console.log(oraretDBZene);
+
+                        for (var i = 0; i<oraretDBZene.length; i++) {
+                            var arrlen = $scope.listaOrareve.length;
+                            for (var j = 0; j<arrlen; j++) {
+                                if (oraretDBZene[i] == $scope.listaOrareve[j]) {
+                                    $scope.listaOrareve = $scope.listaOrareve.slice(0, j).concat($scope.listaOrareve.slice(j+1, arrlen));
+                                }
+                            }
+                        }
+
+                        //console.log($scope.listaOrareve);
+                        //console.log('bla');
+                        if ($scope.listaOrareve.length==0) {
+                          $scope.listaOrareve=[];
+                          $scope.showNoDate=true;
+                        }else{
+                          $scope.showNoDate=false;
+                          //$scope.$apply();
+                        }
+
+                      } else {
+                        // $ionicPopup.alert({
+                        //   title: 'Rezervo Takim',
+                        //   template: '<p align="center">Rezervimi nuk mund te kryhet per momentin. Ju lutemi provoni serisht me vone!</p>'
+                        // });
+                      }
+                    });
+
+
                   }
 
                 }
@@ -5524,85 +5601,6 @@ $scope.vazhdoPorosine= function(allCmimi){
     
     $scope.disableDays(dyqani);
     
-
-
-
-    // $scope.data.date=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
-    // Check if date is set
-    // if ($scope.data.date=='' || $scope.data.date==null) {
-    //   $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
-    //   $ionicPopup.alert({
-    //         title: 'Data bosh',
-    //         template: '<p align="center">Ju lutemi zgjidhni nje date me siper</p>'
-    //       });
-
-    // }else{
-    //   // Check if dyqani is selected
-    //   if ( $scope.dyqanetListaSelected.dyqani=='Zgjidhni nje dyqan') {
-    //     $ionicPopup.alert({
-    //         title: 'Dyqani bosh',
-    //         template: '<p align="center">Ju lutemi zgjidhni nje dyqan</p>'
-    //       });
-    //   }
-
-      // // Get the day of the week from that date selected
-
-      // var days = ['diele', 'hene', 'marte', 'merkure', 'enjte', 'premte', 'shtune'];
-      // var d = new Date($scope.data.date);
-      // var dayName = days[d.getDay()];
-      // console.log(dayName);
-
-      // for (var key in $scope.dyqanet) {
-      //   if ($scope.dyqanet.hasOwnProperty(key)) {
-      //     //console.log(key + " -> " + $scope.dyqanet[key]);
-      //     // Select the correct dyqani
-      //     if ($scope.dyqanet[key].emri==dyqani) {
-
-      //       // $scope.dyqanet[key].oraret.forEach( function(element, index) {
-      //       //   // statements
-      //       // });
-      //       var tempObject=$scope.dyqanet[key];
-      //       //console.log(tempObject);
-      //       // separate all oraret from that object
-      //       for (var key2 in tempObject) {
-      //         if (key2=='oraret') {
-      //           var tempObject2=tempObject[key2];
-      //           //console.log(tempObject2);
-
-      //           for (var key3 in tempObject2) {
-      //             //console.log(key3);
-      //             if (key3==dayName) {
-      //               //console.log(tempObject2[key3]);
-      //               if (tempObject2[key3].length==0) {
-      //                 $ionicPopup.alert({
-      //                   title: '',
-      //                   template: '<p align="center">Ne daten e zgjedhur nuk ka vizita te lira</p>'
-      //                 });
-      //                 $scope.listaOrareve=[];
-      //                 $scope.showNoDate=true;
-      //               }else{
-      //                 $scope.showNoDate=false;
-      //                 $scope.listaOrareve=tempObject2[key3];
-      //               }
-      //             }
-
-      //           }
-
-
-
-
-      //         }
-
-      //       }
-
-
-      //       //console.log($scope.dyqanet[key]);
-      //     }
-      //   }
-      // }
-
-
-    //}
   }
 
 
@@ -5610,23 +5608,30 @@ $scope.vazhdoPorosine= function(allCmimi){
 
 
   $scope.rezervo = function() {
-    $scope.data.date=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
-    console.log($scope.data.date);
-    var days = ['diele', 'hene', 'marte', 'merkure', 'enjte', 'premte', 'shtune'];
-    var d = new Date($scope.data.date);
-    var dayName = days[d.getDay()];
-    console.log(dayName);
-    console.log('siper');
+
+    //$scope.data.date=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
+    console.log($scope.oraModel.checked);
+    console.log($scope.dyqaniZ);
+    console.log($scope.dataSelected2);
+    console.log($scope.data.shenime);
+    // var days = ['diele', 'hene', 'marte', 'merkure', 'enjte', 'premte', 'shtune'];
+    // var d = new Date($scope.data.date);
+    // var dayName = days[d.getDay()];
+    // console.log(dayName);
+    // console.log('siper');
 
 
 
 
-    $scope.dataExists=$window.dataExists;
-    console.log($scope.dataExists);
-    console.log("siper");
-    if ($scope.data.dyqan === undefined || $scope.data.date === undefined ||
-      $scope.data.ora == undefined || $scope.data.shenime === undefined) {
-      alert('Plotesoni te dhenat!');
+    // $scope.dataExists=$window.dataExists;
+    // console.log($scope.dataExists);
+    // console.log("siper");
+    if ($scope.dyqaniZ == undefined || $scope.dyqaniZ == '' || $scope.dataSelected2 === undefined || $scope.dataSelected2 == '' ||
+      $scope.oraModel.checked == undefined || $scope.oraModel.checked == '' || $scope.data.shenime === undefined) {
+          $ionicPopup.alert({
+             title: 'Gabim',
+             template: '<p align="center">Ju lutemi plotesoni gjithe te dhenat!</p>'
+           });
     } else {
       console.log('Success');
       $http({
@@ -5643,12 +5648,11 @@ $scope.vazhdoPorosine= function(allCmimi){
           return str.join("&");
         },
         data: {
-          date: $scope.data.date,
-          ora: $scope.data.ora,
+          date: $scope.dataSelected2,
+          ora: $scope.oraModel.checked,
           shenime: $scope.data.shenime,
-          dyqan: $scope.data.dyqan,
+          dyqan: $scope.dyqaniZ,
           id: $scope.data.id,
-          dataExists: $scope.dataExists,
           klient_id: $scope.data.klient_id,
           emer: $scope.data.emer,
           mbiemer: $scope.data.mbiemer,

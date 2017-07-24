@@ -110,7 +110,7 @@ exports.setReservation = function(req,res,next){
         //console.log('jam brenda 2');
 
         client
-          .query('INSERT INTO oraret2 (data,oraret, klientet) VALUES($1,$2,$3)',[data,ora,klient_id])
+          .query('INSERT INTO oraret2 (data,oraret, klientet,dyqani) VALUES($1,$2,$3,$4)',[data,ora,klient_id,dyqan])
           // .query('SELECT grupi,kodartikulli,kodifikimartikulli2,pershkrimartikulli FROM products2 WHERE kodartikulli = $1',[productId])
                 
           .on('end', function(row) {
@@ -152,6 +152,7 @@ exports.setReservation = function(req,res,next){
     } else {
       console.log("dataexist true");
       // Get the row from oraret2 and update it's values
+      var queryText2="SELECT * FROM oraret2 WHERE data ='"+data+"' and dyqani ='"+dyqan+"'";
 
       pg.connect(connectionStr, function(err, client, done) {
         if (err) {
@@ -159,7 +160,7 @@ exports.setReservation = function(req,res,next){
           throw err;
         }
       client
-        .query('SELECT * FROM oraret2 WHERE data = $1;',[data])
+        .query(queryText2)
         .on('end', function(row) {
           //console.log('inside 123....');
           //console.log(row);
@@ -168,7 +169,7 @@ exports.setReservation = function(req,res,next){
           var newKlient= pergjigje.klientet+','+klient_id;
           //console.log(newOra);
           //console.log(newKlient);
-          var updateQuery="UPDATE oraret2 set oraret='"+newOra+"',  klientet='"+newKlient+"' WHERE DATA='"+data+"'";
+          var updateQuery="UPDATE oraret2 set oraret='"+newOra+"',  klientet='"+newKlient+"' WHERE DATA='"+data+"' and dyqani ='"+dyqan+"'";
           //console.log(updateQuery);
           client.query(updateQuery,
             function(err, result,done) {
@@ -268,7 +269,7 @@ exports.getOraretZene = function(req,res,next){
          // .query('SELECT grupi,kodartikulli,kodifikimartikulli2,pershkrimartikulli FROM products2 WHERE kodartikulli = $1',[productId])
         
         .on('end', function(row) {
-          console.log(row);
+          //console.log(row);
           //console.log('Single item : ', productId);
           res.send(row);
           // client.end();

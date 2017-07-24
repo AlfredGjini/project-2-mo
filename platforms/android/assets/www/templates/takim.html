@@ -67,19 +67,19 @@
 
         <!-- Ora -->
         <div class="item item-divider" style="text-align: center;font-size: 18px;margin-bottom: -20px;padding-top: 0px;">
-         <span class="loadingOraret" style="padding-top: 15px;float: left;margin-left: -10px;margin-top: -5px;display: none;"><img src="img/loading.gif" style="width: 20px;"></span><span style="margin-left: -10px;">Ora</span>
+         <span ng-show="shfaqLoadingOraret" class="loadingOraret" style="padding-top: 15px;float: left;margin-left: -10px;margin-top: -5px;"><img src="img/loading.gif" style="width: 20px;"></span><span style="margin-left: -10px;">Ora</span>
         </div>
         <div class="item item-text-wrap" style="text-align: center;">
          <div class="radios">
          <div style="text-align: center;" ng-show="showNoDate">Nuk ka vizita per kete date.</div>
          <span ng-repeat="orari in listaOrareve" ng-show="shfaqOrett">
-              <input type="radio" name="rGroup" value="{{orari}}" id="r{{$index+1}}" ng-model="orari"/>
+              <input type="radio" name="rGroup" value="{{orari}}" id="r{{$index+1}}" ng-model="oraModel.checked"/>
               <label class="radio" class="{{orari}}" name="{{orari}}" for="r{{$index+1}}">{{orari}}</label>
          </span>
 
           </div>
         </div>
-        <!-- {{data.ora}} -->
+        <!-- {{oraModel}} -->
         <!-- Shenime -->
         <div class="item item-divider" style="text-align: center;font-size: 18px;margin-bottom: -20px;padding-top: 0px;">
          Shenime
