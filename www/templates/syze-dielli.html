@@ -74,6 +74,12 @@ header i:nth-of-type(2) {
     flex: auto;
     border: 1px solid #d2d2d2;
 }
+.oddK {
+  flex: 0 1 49%;
+}
+.evenK {
+  margin-left: 4px;
+}
 
 /*.product--blue {
   background: -webkit-linear-gradient(135deg, #92DCE5 50%, rgba(255, 255, 255, 0.5) 50%);
@@ -380,7 +386,7 @@ header i:nth-of-type(2) {
 
     <div class='row' >
         <div class='row cmimiFilter2' ng-show="skaRezultat" >Filtrat nuk nxorren asnje rezultat. Produktet jane te njejte.</div>
-      <div ng-repeat="syzet in syzeD | filter:searchh" class='product--blue {{klasaSfond[ktheNgjyre($index)]}}'>
+      <div ng-repeat="syzet in syzeD | filter:searchh" ng-class="{true: 'oddK'}[$last%2 == 1]" class='product--blue {{klasaSfond[ktheNgjyre($index)]}}'>
         <a style="text-decoration: none;" href="#/app/produkte/{{syzeD[$index].kodartikulli}}">
         <div class='product_inner'>
         

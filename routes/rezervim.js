@@ -120,6 +120,7 @@ exports.setReservation = function(req,res,next){
                   function(err, result,done) {
                     if (err) {
                       console.log(err);
+                      res.send(JSON.stringify({success:2}));
                     } else {
                       //console.log('Inserted successfully to the reservations table case 1...');
                       //done();
@@ -132,8 +133,11 @@ exports.setReservation = function(req,res,next){
                               console.log('1');
                               console.log(error);
                               return console.log(error);
+                              res.send(JSON.stringify({success:2}));
                           }
                           console.log('Message sent: ' + info.response);
+                          res.send(JSON.stringify({success:1}));
+
                       });
 
                     }
@@ -194,8 +198,10 @@ exports.setReservation = function(req,res,next){
                               console.log('1');
                               console.log(error);
                               return console.log(error);
+                              res.send(JSON.stringify({success:2}));
                           }
                           console.log('Message sent: ' + info.response);
+                          res.send(JSON.stringify({success:1}));
                       });
 
                     }

@@ -185,6 +185,8 @@ $scope.shfaqNgjyrat=function(){
          $scope.pershkrimiSakte=$scope.syze.pershkrimartikulli.split(' ');
          if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
           $scope.pershkrimiSakte.length=3;
+         }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
+          $scope.pershkrimiSakte.length=4;
          }else{
           // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
           $scope.pershkrimiSakte.length=2;
@@ -2130,6 +2132,8 @@ $scope.cleanArray= function(actual) {
          $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
          if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
           $scope.pershkrimiSakte.length=3;
+         }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
+          $scope.pershkrimiSakte.length=4;
          }else{
           // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
           $scope.pershkrimiSakte.length=2;
@@ -2721,6 +2725,8 @@ $scope.cleanArray= function(actual) {
          $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
          if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
           $scope.pershkrimiSakte.length=3;
+         }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
+          $scope.pershkrimiSakte.length=4;
          }else{
           // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
           $scope.pershkrimiSakte.length=2;
@@ -5997,13 +6003,12 @@ $scope.vazhdoPorosine= function(allCmimi){
     }
     $scope.loadImage = function() {
         var options = {
-            quality: 80,
+            quality: 100,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            allowEdit: true,
+            allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 250,
-            targetHeight: 250,
+            targetWidth: 350,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
@@ -6176,9 +6181,29 @@ $scope.vazhdoPorosine= function(allCmimi){
     //     });
     // }
 
+      $scope.takeImage = function() {
+        var options = {
+            quality: 100,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: false,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 350,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: true,
+            cameraDirection:1
+        };
+         
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.srcImage = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+            // error
+        });
+    }
+
     $scope.loadImage = function() {
         var options = {
-            quality: 80,
+            quality: 100,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             allowEdit: false,
