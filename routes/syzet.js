@@ -305,7 +305,7 @@ exports.findAllLente = function (req, res, next) {
       console.log('Connected to postgres! 5');
 
       client
-        .query('SELECT products2.grupi, products2.kodartikulli,products2.kodifikimartikulli2,products2.pershkrimartikulli, cmime2.cmimi, cmime2.monedha FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE products2.grupi=\'Lente Kontakti\'  limit 20 offset ' + offset)
+        .query('SELECT * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE magazina.sasia>0 and products2.grupi=\'Lente Kontakti\'  limit 20 offset ' + offset)
         .on('row', function(row) {
           syzetL.push(row);
           console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');

@@ -5,7 +5,7 @@
   <ion-content class="has-header" scroll="false">
 
      <!--  <img ng-src="{{srcImage || 'img/dummy.jpg'}}" id="srcImage" width="90%" height="65%" style="display: block; margin: 10px auto;"/><br/> -->
-     <div style="border:2px solid red;width: 90%;height: 65%;padding:0;padding-top:140px;padding-left:12%;margin:10px auto;background:url({{srcImage || 'img/faceTemplate.jpg'}});background-size: 100% 100%;">
+     <div style="border:2px solid red;width: 90%;min-height: 65%;padding:0;padding-top:140px;padding-left:12%;margin:10px auto;background:url({{srcImage || 'img/faceTemplate.jpg'}});background-size: 100% 100%;">
      <div dnd-draggable dnd-resizable dnd-containment="body" dnd-on-resizestart = "resizeStart()"  style="width: 250px;height: 98px;z-index: 9999999;">
         <img  ng-src="http://maxoptika-app.com/maxoptikaFTP/{{fotoUrl2}}.png" id="srcImage" width="100%" height="auto" />
      </div>

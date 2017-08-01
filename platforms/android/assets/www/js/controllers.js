@@ -5513,14 +5513,18 @@ $scope.vazhdoPorosine= function(allCmimi){
                       //console.log(typeof response);
 
                       if (response.rowCount!=0) {
+                        $scope.dataExists=true;
                         // Get all clients that have made a reservation in this day
                         $scope.allClients=response.rows[0].klientet.split(',');
                         // Get current loggedin client
                         console.log($scope.allClients);
                         console.log($scope.loggedInSakte.id);
+                        jQuery('#butoniRezervo').prop('disabled', false);
+                        console.log('butoni enable');
                         $scope.allClients.forEach( function(element, index) {
                           if (element==$scope.loggedInSakte.id) {
                             console.log('2');
+                            
                             jQuery('#butoniRezervo').prop('disabled', true);
                             //alert('Ju nuk mund te beni me shume se 1 rezervin ne dite!');
                             $ionicPopup.alert({
@@ -5529,9 +5533,11 @@ $scope.vazhdoPorosine= function(allCmimi){
                              });
                             
                           }else{
+                            $scope.allClients='';
                             console.log('jam enable butoni');
-                            jQuery('#butoniRezervo').prop('disabled', false);
+                            
                           }
+
                         });
 
 
@@ -5560,6 +5566,8 @@ $scope.vazhdoPorosine= function(allCmimi){
                         }
 
                       } else {
+                        $scope.dataExists=false;
+                        jQuery('#butoniRezervo').prop('disabled', false);
                         // $ionicPopup.alert({
                         //   title: 'Rezervo Takim',
                         //   template: '<p align="center">Rezervimi nuk mund te kryhet per momentin. Ju lutemi provoni serisht me vone!</p>'
@@ -5653,6 +5661,7 @@ $scope.vazhdoPorosine= function(allCmimi){
           shenime: $scope.data.shenime,
           dyqan: $scope.dyqaniZ,
           id: $scope.data.id,
+          dataExists: $scope.dataExists,
           klient_id: $scope.data.klient_id,
           emer: $scope.data.emer,
           mbiemer: $scope.data.mbiemer,
@@ -5946,15 +5955,35 @@ $scope.vazhdoPorosine= function(allCmimi){
   
   
 
-      $scope.takeImage = function() {
+    //   $scope.takeImage = function() {
+    //     var options = {
+    //         quality: 80,
+    //         destinationType: Camera.DestinationType.DATA_URL,
+    //         sourceType: Camera.PictureSourceType.CAMERA,
+    //         allowEdit: true,
+    //         encodingType: Camera.EncodingType.JPEG,
+    //         targetWidth: 250,
+    //         targetHeight: 250,
+    //         popoverOptions: CameraPopoverOptions,
+    //         saveToPhotoAlbum: true,
+    //         cameraDirection:1
+    //     };
+         
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //         $scope.srcImage = "data:image/jpeg;base64," + imageData;
+    //     }, function(err) {
+    //         // error
+    //     });
+    // }
+
+        $scope.takeImage = function() {
         var options = {
-            quality: 80,
+            quality: 100,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
-            allowEdit: true,
+            allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 250,
-            targetHeight: 250,
+            targetWidth: 350,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true,
             cameraDirection:1
@@ -6127,34 +6156,34 @@ $scope.vazhdoPorosine= function(allCmimi){
 
           
 
-    $scope.takeImage = function() {
-        var options = {
-            quality: 80,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            allowEdit: true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 250,
-            targetHeight: 250,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true
-        };
+    // $scope.takeImage = function() {
+    //     var options = {
+    //         quality: 80,
+    //         destinationType: Camera.DestinationType.DATA_URL,
+    //         sourceType: Camera.PictureSourceType.CAMERA,
+    //         allowEdit: true,
+    //         encodingType: Camera.EncodingType.JPEG,
+    //         targetWidth: 250,
+    //         targetHeight: 250,
+    //         popoverOptions: CameraPopoverOptions,
+    //         saveToPhotoAlbum: true
+    //     };
          
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            $scope.srcImage = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
-            // error
-        });
-    }
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //         $scope.srcImage = "data:image/jpeg;base64," + imageData;
+    //     }, function(err) {
+    //         // error
+    //     });
+    // }
+
     $scope.loadImage = function() {
         var options = {
             quality: 80,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            allowEdit: true,
+            allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 250,
-            targetHeight: 250,
+            targetWidth: 350,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };

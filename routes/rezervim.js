@@ -218,7 +218,7 @@ exports.setReservation = function(req,res,next){
     }
 
       
-  res.send(JSON.stringify({success:1}));
+  // res.send(JSON.stringify({success:1}));
 };
 
 

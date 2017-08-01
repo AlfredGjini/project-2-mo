@@ -33,6 +33,9 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         }
     },
     "dependent_plugins": {
