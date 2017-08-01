@@ -2586,6 +2586,16 @@ module.directive('multidatess', ['$http',function($http) {
                        }
                     });
 
+        }else if(dyqani=='Zgjidhni nje dyqan'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            return [false, ""];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
         }
 
     }

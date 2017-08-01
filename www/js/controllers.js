@@ -5682,6 +5682,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             title: 'Rezervo Takim',
             template: '<p align="center">Rezervimi u krye me sukses!</p>'
           });
+          $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
+
         }else if(response.success==2){
           $ionicPopup.alert({
             title: 'Rezervo Takim',

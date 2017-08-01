@@ -20,7 +20,7 @@ var connectionStr = 'postgres://dekixmpqcprkpu:MNbCC56WQ1ZaNRqX8GHmTBaUv-@ec2-23
         });
     });
       pg.end(function(err) {
-        if (err) throw err;
+        if (err) throw err; 
     });
 //console.log(rezervime);
 
