@@ -5677,11 +5677,17 @@ $scope.vazhdoPorosine= function(allCmimi){
         console.log(response);
         console.log(response.success);
         //console.log(typeof response);
-        if (response.success) {
+        if (response.success==1) {
           $ionicPopup.alert({
             title: 'Rezervo Takim',
             template: '<p align="center">Rezervimi u krye me sukses!</p>'
           });
+        }else if(response.success==2){
+          $ionicPopup.alert({
+            title: 'Rezervo Takim',
+            template: '<p align="center">Rezervimi nuk mund te kryhet per momentin. Ju lutemi provoni serisht me vone!</p>'
+          });
+
         } else {
           $ionicPopup.alert({
             title: 'Rezervo Takim',

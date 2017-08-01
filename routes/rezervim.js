@@ -126,6 +126,7 @@ exports.setReservation = function(req,res,next){
                       //done();
                       // This closes all the connection on single dataexist=false
                       client.end();
+                      res.send(JSON.stringify({success:1}));
 
                       mailOptions.html = 'Pershendetje!</b><br>Klienti ' + emer + " " + mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + data + "<br><b>Ora</b> : "+ ora + "<br>" + "<b>Dyqani</b> : " + dyqan + "<br><b>Shenime</b> : " + shenime + "<br><b>Celular</b> : " + celular + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>";// html body
                       transporter.sendMail(mailOptions, function(error, info){
@@ -136,7 +137,7 @@ exports.setReservation = function(req,res,next){
                               res.send(JSON.stringify({success:2}));
                           }
                           console.log('Message sent: ' + info.response);
-                          res.send(JSON.stringify({success:1}));
+                          //res.send(JSON.stringify({success:1}));
 
                       });
 
@@ -190,6 +191,7 @@ exports.setReservation = function(req,res,next){
                     } else {
                       //console.log('Inserted successfully to the reservations table case 2...');
                       //done();
+                      res.send(JSON.stringify({success:1}));
                       client.end();
 
                       mailOptions.html = 'Pershendetje!</b><br>Klienti ' + emer + " " + mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + data + "<br><b>Ora</b> : "+ ora + "<br>" + "<b>Dyqani</b> : " + dyqan + "<br><b>Shenime</b> : " + shenime + "<br><b>Celular</b> : " + celular + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>";// html body
@@ -201,7 +203,7 @@ exports.setReservation = function(req,res,next){
                               res.send(JSON.stringify({success:2}));
                           }
                           console.log('Message sent: ' + info.response);
-                          res.send(JSON.stringify({success:1}));
+                          
                       });
 
                     }
