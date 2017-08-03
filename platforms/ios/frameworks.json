@@ -12,12 +12,13 @@
     "libc++.dylib": 2,
     "CFNetwork.framework": 1,
     "CoreLocation.framework": 3,
-    "MessageUI.framework": 1,
+    "MessageUI.framework": 2,
     "SafariServices.framework": 1,
-    "SystemConfiguration.framework": 2,
+    "SystemConfiguration.framework": 3,
     "libPayPalMobile.a": 1,
     "EventKit.framework": 1,
     "EventKitUI.framework": 1,
     "ImageIO.framework": 1,
-    "CoreTelephony.framework": 1
+    "CoreTelephony.framework": 1,
+    "Social.framework": 1
 }

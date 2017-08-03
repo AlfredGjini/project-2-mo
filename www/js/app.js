@@ -15,6 +15,19 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
 
 .run(function($ionicPlatform, ngFB, $ionicPopup) {
   $ionicPlatform.ready(function() {
+
+
+  //   var notificationOpenedCallback = function(jsonData) {
+  //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  // };
+
+  // window.plugins.OneSignal
+  //   .startInit("c90c1593-2211-49d8-89a3-8700027d29da")
+  //   .handleNotificationOpened(notificationOpenedCallback)
+  //   .endInit();
+
+
+
     ngFB.init({
       appId: '1791859544427676'
     });
@@ -113,7 +126,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
     }
   })
   .state('app.lente', {
-    url: "/lente",
+    url: "/lente/:lenteMarke",
     views: {
       'menuContent': {
         templateUrl: "templates/lente.html",
@@ -335,6 +348,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+  .state('app.lenteBallore', {
+      url: "/lenteBallore",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/lenteBallore.html",
+          controller: 'lenteBalloreCtrl'
+        }
+      }
+    })
+  
 
   .state('app.search-results', {
       url: "/search-results",

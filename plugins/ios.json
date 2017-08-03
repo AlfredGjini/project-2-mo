@@ -12,10 +12,16 @@
         },
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "com.ionicframework.test129416"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.test129416"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.test129416"
+        },
+        "es6-promise-plugin": {
             "PACKAGE_NAME": "com.ionicframework.test129416"
         }
     }

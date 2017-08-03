@@ -36,6 +36,12 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         }
     },
     "dependent_plugins": {

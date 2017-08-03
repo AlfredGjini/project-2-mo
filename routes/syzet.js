@@ -286,6 +286,7 @@ exports.findAllKoleksion = function (req, res, next) {
         if (err) throw err;
         console.log('closed connection');
     });
+    syzetK = [];
     console.log('too early');
     //res.send(products2);
     console.log('test');
@@ -328,6 +329,7 @@ exports.findAllLente = function (req, res, next) {
         if (err) throw err;
         console.log('closed connection');
     });
+    syzetL = [];
     console.log('too early');
     //res.send(products2);
     console.log('test');

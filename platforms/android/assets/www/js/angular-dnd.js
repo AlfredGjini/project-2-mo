@@ -2466,6 +2466,12 @@ module.directive('multidatess', ['$http',function($http) {
 
                     });
 
+    $scope.deSelectDate=function(datee){
+        $element.multiDatesPicker('removeDates', datee);;
+        console.log('deselect');
+        console.log(datee);
+    };
+
     $scope.disableDays=function(dyqani){
 
         if(dyqani=='Fier'){
@@ -2581,6 +2587,16 @@ module.directive('multidatess', ['$http',function($http) {
           $element.multiDatesPicker({
                         beforeShowDay: function(date) {
                             return [true, ""];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Zgjidhni nje dyqan'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            return [false, ""];
                         },onSelect: function() {
                             $scope.testdates();
                        }

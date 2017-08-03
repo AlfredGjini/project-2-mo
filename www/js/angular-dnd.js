@@ -2466,6 +2466,12 @@ module.directive('multidatess', ['$http',function($http) {
 
                     });
 
+    $scope.deSelectDate=function(datee){
+        $element.multiDatesPicker('removeDates', datee);;
+        console.log('deselect');
+        console.log(datee);
+    };
+
     $scope.disableDays=function(dyqani){
 
         if(dyqani=='Fier'){

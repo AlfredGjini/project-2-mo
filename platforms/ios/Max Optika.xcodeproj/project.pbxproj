@@ -66,6 +66,10 @@
 		6BD088647CBB40C4BB55D5F9 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FACBD667CA42229FC50B06 /* CoreTelephony.framework */; };
 		CF529C9450E0437598A0158E /* ALRecheckScreenOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = B51CFA887FF44816AEB57070 /* ALRecheckScreenOrientation.m */; };
 		EBDF9E888CD14F1897AE149D /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C763ACFFD74CD99B474C43 /* CDVOrientation.m */; };
+		EFD59B3CB69B42178EA133F4 /* NSString+SSURLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9C54B641F842F58E3740CA /* NSString+SSURLEncoding.m */; };
+		3543694BF6C74526AE5B5F4C /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E49AB908AD9460F92B741A0 /* SocialSharing.m */; };
+		00587637BFDD409BAF6349C4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C43BC1F94E42E39FF4451C /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0131C3BF3845476C866A1E6F /* OneSignalPush.m in Sources */ = {isa = PBXBuildFile; fileRef = F092A2128BCD47EFB0D28E79 /* OneSignalPush.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +199,13 @@
 		CBA84DD8F14446468A8E0FA4 /* ALRecheckScreenOrientation.h */ = {isa = PBXFileReference; name = "ALRecheckScreenOrientation.h"; path = "org.adlotto.cordova.recheck-screen-orientation/ALRecheckScreenOrientation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		87C763ACFFD74CD99B474C43 /* CDVOrientation.m */ = {isa = PBXFileReference; name = "CDVOrientation.m"; path = "cordova-plugin-screen-orientation/CDVOrientation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		726B2B9742944A72838813FC /* CDVOrientation.h */ = {isa = PBXFileReference; name = "CDVOrientation.h"; path = "cordova-plugin-screen-orientation/CDVOrientation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		EA9C54B641F842F58E3740CA /* NSString+SSURLEncoding.m */ = {isa = PBXFileReference; name = "NSString+SSURLEncoding.m"; path = "cordova-plugin-x-socialsharing/NSString+SSURLEncoding.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		6E49AB908AD9460F92B741A0 /* SocialSharing.m */ = {isa = PBXFileReference; name = "SocialSharing.m"; path = "cordova-plugin-x-socialsharing/SocialSharing.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		C5D61369F5F04B7EAAA470B5 /* NSString+SSURLEncoding.h */ = {isa = PBXFileReference; name = "NSString+SSURLEncoding.h"; path = "cordova-plugin-x-socialsharing/NSString+SSURLEncoding.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		DCC72E3E3B334A93A40EA574 /* SocialSharing.h */ = {isa = PBXFileReference; name = "SocialSharing.h"; path = "cordova-plugin-x-socialsharing/SocialSharing.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		47C43BC1F94E42E39FF4451C /* Social.framework */ = {isa = PBXFileReference; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		F092A2128BCD47EFB0D28E79 /* OneSignalPush.m */ = {isa = PBXFileReference; name = "OneSignalPush.m"; path = "onesignal-cordova-plugin/OneSignalPush.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		420D90B428E54F17BD1C2357 /* OneSignalPush.h */ = {isa = PBXFileReference; name = "OneSignalPush.h"; path = "onesignal-cordova-plugin/OneSignalPush.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +239,7 @@
 				E3ED23B77BDE43B996F66D34 /* EventKitUI.framework in Frameworks */,
 				3DD0D335C7B34F9584F91364 /* ImageIO.framework in Frameworks */,
 				6BD088647CBB40C4BB55D5F9 /* CoreTelephony.framework in Frameworks */,
+				00587637BFDD409BAF6349C4 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +337,7 @@
 				29800C40D2B44FDD89CD76CF /* EventKitUI.framework */,
 				2F886F43785B49008A3D7BEF /* ImageIO.framework */,
 				34FACBD667CA42229FC50B06 /* CoreTelephony.framework */,
+				47C43BC1F94E42E39FF4451C /* Social.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -412,6 +425,12 @@
 				CBA84DD8F14446468A8E0FA4 /* ALRecheckScreenOrientation.h */,
 				87C763ACFFD74CD99B474C43 /* CDVOrientation.m */,
 				726B2B9742944A72838813FC /* CDVOrientation.h */,
+				EA9C54B641F842F58E3740CA /* NSString+SSURLEncoding.m */,
+				6E49AB908AD9460F92B741A0 /* SocialSharing.m */,
+				C5D61369F5F04B7EAAA470B5 /* NSString+SSURLEncoding.h */,
+				DCC72E3E3B334A93A40EA574 /* SocialSharing.h */,
+				F092A2128BCD47EFB0D28E79 /* OneSignalPush.m */,
+				420D90B428E54F17BD1C2357 /* OneSignalPush.h */,
 			);
 			name = Plugins;
 			path = "Max Optika/Plugins";
@@ -549,6 +568,9 @@
 				2DC5852FBA354C1B8A5A84BC /* CDVReachability.m in Sources */,
 				CF529C9450E0437598A0158E /* ALRecheckScreenOrientation.m in Sources */,
 				EBDF9E888CD14F1897AE149D /* CDVOrientation.m in Sources */,
+				EFD59B3CB69B42178EA133F4 /* NSString+SSURLEncoding.m in Sources */,
+				3543694BF6C74526AE5B5F4C /* SocialSharing.m in Sources */,
+				0131C3BF3845476C866A1E6F /* OneSignalPush.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

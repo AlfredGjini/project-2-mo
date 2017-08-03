@@ -100,6 +100,22 @@ module.exports = [
         "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
         "pluginId": "cordova-plugin-geolocation",
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-x-socialsharing.SocialSharing",
+        "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+        "pluginId": "cordova-plugin-x-socialsharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
+        ]
+    },
+    {
+        "id": "onesignal-cordova-plugin.OneSignal",
+        "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
+        "pluginId": "onesignal-cordova-plugin",
+        "clobbers": [
+            "OneSignal"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -116,7 +132,9 @@ module.exports.metadata =
     "cordova-plugin-screen-orientation": "2.0.1",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-camera": "2.4.1",
-    "cordova-plugin-geolocation": "2.4.3"
+    "cordova-plugin-geolocation": "2.4.3",
+    "cordova-plugin-x-socialsharing": "5.1.8",
+    "onesignal-cordova-plugin": "2.1.2"
 };
 // BOTTOM OF METADATA
 });

@@ -421,6 +421,28 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.screenorientation"
         ]
+    },
+    {
+        "id": "es6-promise-plugin.Promise",
+        "file": "plugins/es6-promise-plugin/www/promise.js",
+        "pluginId": "es6-promise-plugin",
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-x-socialsharing.SocialSharing",
+        "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+        "pluginId": "cordova-plugin-x-socialsharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
+        ]
+    },
+    {
+        "id": "onesignal-cordova-plugin.OneSignal",
+        "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
+        "pluginId": "onesignal-cordova-plugin",
+        "clobbers": [
+            "OneSignal"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -444,7 +466,10 @@ module.exports.metadata =
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-network-information": "1.3.1",
     "org.adlotto.cordova.recheck-screen-orientation": "0.1.0",
-    "cordova-plugin-screen-orientation": "2.0.1"
+    "cordova-plugin-screen-orientation": "2.0.1",
+    "es6-promise-plugin": "4.1.0",
+    "cordova-plugin-x-socialsharing": "5.1.8",
+    "onesignal-cordova-plugin": "2.1.2"
 };
 // BOTTOM OF METADATA
 });

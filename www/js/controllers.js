@@ -2863,8 +2863,10 @@ $scope.cleanArray= function(actual) {
 
 })
 
-.controller('lenteCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http) {
+.controller('lenteCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $stateParams) {
       
+      $scope.lenteMarke=$stateParams.lenteMarke;
+
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
       var wishlistItems=window.localStorage.getItem('wishlist');
@@ -4145,6 +4147,8 @@ $scope.cleanArray= function(actual) {
       var wishlistItems=window.localStorage.getItem('wishlist');
       if (wishlistItems==null){
         $scope.wishlistItemsLength=null;
+        $scope.pojamboshw=true;
+        $scope.pojambosh2w=false;
       }else {
       numriWish=wishlistItems.split(',');
       
@@ -4594,13 +4598,14 @@ $scope.cleanArray= function(actual) {
       $scope.shportaElem= shportlistItems;
       if (shportlistItems==null){
         $scope.shportlistItemsLength=null;
+        $scope.pojambosh=true;
+        $scope.pojambosh2=false;
       }else {
       // console.log(shportlistItems);
       numriShport=shportlistItems.split(',');
       // console.log(numriShport);
       
          if (numriShport[0]=="") {
-          // console.log('po jam bosh');
           $scope.shportlistItemsLength=null;
           $scope.pojambosh=true;
          }else {
@@ -4695,7 +4700,10 @@ $scope.cleanArray= function(actual) {
     var data = window.localStorage.getItem('shporta') || "";
     if ($scope.pojambosh==false) {
       $scope.pojambosh2=true;
+      console.log('po nuk eshte thirr');
 
+    }else{
+      console.log('po nuk eshte thirr asd');
     }
     // console.log(typeof(data));
     // var varg = [];
@@ -5640,7 +5648,7 @@ $scope.vazhdoPorosine= function(allCmimi){
     // $scope.dataExists=$window.dataExists;
     // console.log($scope.dataExists);
     // console.log("siper");
-    if ($scope.dyqaniZ == undefined || $scope.dyqaniZ == '' || $scope.dataSelected2 === undefined || $scope.dataSelected2 == '' ||
+    if ($scope.dyqaniZ == undefined || $scope.dyqaniZ == '' || $scope.dyqaniZ == 'Zgjidhni nje dyqan' || $scope.dataSelected2 === undefined || $scope.dataSelected2 == '' ||
       $scope.oraModel.checked == undefined || $scope.oraModel.checked == '' || $scope.data.shenime === undefined) {
           $ionicPopup.alert({
              title: 'Gabim',
@@ -5683,6 +5691,11 @@ $scope.vazhdoPorosine= function(allCmimi){
             template: '<p align="center">Rezervimi u krye me sukses!</p>'
           });
           $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
+          $scope.dyqaniZ='Zgjidhni nje dyqan';
+          $scope.disableDays('Zgjidhni nje dyqan');
+          $scope.deSelectDate($scope.dataSelected2);
+          $scope.shfaqOrett=false;
+          //$('selector').datepicker('setDate')
 
         }else if(response.success==2){
           $ionicPopup.alert({
@@ -5848,6 +5861,45 @@ $scope.vazhdoPorosine= function(allCmimi){
     console.log('Rreth Nesh');
   })
 
+
+  .controller('lenteBalloreCtrl', function($scope, $stateParams) {
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+    console.log('Rreth Nesh');
+  })
+
   .controller('kontaktCtrl', function($scope, $stateParams) {
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
@@ -5963,9 +6015,48 @@ $scope.vazhdoPorosine= function(allCmimi){
   })
 
 
-.controller('KamerCtrl', function($scope, $cordovaCamera, $ionicSideMenuDelegate, $ionicModal, $http) {
+.controller('KamerCtrl', function($scope, $cordovaCamera, $ionicSideMenuDelegate, $ionicModal, $http, $cordovaSocialSharing, html2canvasAngular, $ionicLoading) {
+
+  // $scope.shareAnywhere = function() {
+  //       $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
+  //   }
+
+  // $cordovaSocialSharing
+  //   .share("This is your message", "This is your subject", canvas.toDataURL(), "https://www.thepolyglotdeveloper.com") // Share via native share sheet
+  //   .then(function(result) {
+  //     // Success!
+  //     alert('sukses');
+  //     alert(result);
+  //   }, function(err) {
+  //     alert(err);
+  //     // An error occured. Show a message to the user
+  //   });
 
 
+    $scope.saveDivAsScreenShoot  = function(){
+      $ionicLoading.show({
+         template: 'Loading...'
+      });
+
+        jQuery('.angular-dnd-resizable-handle-se').hide();
+        html2canvasAngular.renderBody().then(function(canvas){
+          jQuery('.angular-dnd-resizable-handle-se').show();        
+          $cordovaSocialSharing
+            .share("Max Optika", "Max Optika", canvas.toDataURL(), "http://maxoptika.al/") // Share via native share sheet
+            .then(function(result) {
+              $ionicLoading.hide();
+              // Success!
+              //alert('sukses');
+              //alert(result);
+            }, function(err) {
+              //alert(err);
+              // An error occured. Show a message to the user
+            });
+          // console.log(canvas);
+          // console.log("test me screen");
+          //document.getElementById("tryOnID").appendChild(canvas);
+        });
+      }
   
   
 
@@ -5997,7 +6088,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             sourceType: Camera.PictureSourceType.CAMERA,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 350,
+            targetWidth: 800,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true,
             cameraDirection:1
@@ -6016,7 +6107,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 350,
+            targetWidth: 800,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
@@ -6196,7 +6287,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             sourceType: Camera.PictureSourceType.CAMERA,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 350,
+            targetWidth: 800,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true,
             cameraDirection:1
@@ -6216,7 +6307,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 350,
+            targetWidth: 800,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
@@ -6265,9 +6356,15 @@ $scope.vazhdoPorosine= function(allCmimi){
         // }];
         $scope.images=['img/tryon/SD12203_front.png','img/tryon/SD12207_front.png','img/tryon/SD12224_front.png','img/tryon/SD12228_front.png'];
 
+        $scope.testImage='http://maxoptika-app.com/maxoptikaFTP/SD12178_front.png';
         $scope.shtoLart=function(fotoUrl){
-          $scope.fotoUrl2=$scope.syzetFront4[fotoUrl];
+
+          var fotoP='http://maxoptika-app.com/maxoptikaFTP/';
+          // {{fotoUrl2 || 'SD12178_front.png'}}
+
+          $scope.fotoUrl2=fotoP+$scope.syzetFront4[fotoUrl]+'.png';
           console.log('test foto');
+          //$scope.apply();
 
         };
 
