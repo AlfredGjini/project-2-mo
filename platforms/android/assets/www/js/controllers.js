@@ -2863,8 +2863,10 @@ $scope.cleanArray= function(actual) {
 
 })
 
-.controller('lenteCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http) {
+.controller('lenteCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $stateParams) {
       
+      $scope.lenteMarke=$stateParams.lenteMarke;
+
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
       var wishlistItems=window.localStorage.getItem('wishlist');
@@ -5822,6 +5824,45 @@ $scope.vazhdoPorosine= function(allCmimi){
   })
 
   .controller('rrethNeshCtrl', function($scope, $stateParams) {
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+    console.log('Rreth Nesh');
+  })
+
+
+  .controller('lenteBalloreCtrl', function($scope, $stateParams) {
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
       var wishlistItems=window.localStorage.getItem('wishlist');

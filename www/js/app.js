@@ -22,7 +22,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   // };
 
   // window.plugins.OneSignal
-  //   .startInit("c90c1593-2211-49d8-89a3-8700027d29da")
+  //   .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
   //   .handleNotificationOpened(notificationOpenedCallback)
   //   .endInit();
 

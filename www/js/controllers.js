@@ -2939,7 +2939,8 @@ $scope.cleanArray= function(actual) {
          return str.join("&");
        },
        data: {
-         offset : $scope.offsetL
+         offset : $scope.offsetL,
+         marka: $scope.lenteMarke
        }
      }).success(function(response) {
        $scope.$broadcast('scroll.infiniteScrollComplete');

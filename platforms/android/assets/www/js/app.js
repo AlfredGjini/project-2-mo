@@ -22,24 +22,9 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   };
 
   window.plugins.OneSignal
-    .startInit("c90c1593-2211-49d8-89a3-8700027d29da")
+    .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
     .handleNotificationOpened(notificationOpenedCallback)
     .endInit();
-
-  // // One Signal Push Notification Setup
-  // // Enable to debug issues.
-  // // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-  // var notificationOpenedCallback = function(jsonData) {
-  // console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-  // };
-
-  // window.plugins.OneSignal.init("c90c1593-2211-49d8-89a3-8700027d29da",
-  // {googleProjectNumber: "202680901001"},
-  // notificationOpenedCallback);
-
-  // // Show an alert box if a notification comes in when the user is in your app.
-  // window.plugins.OneSignal.enableInAppAlertNotification(true);
-
 
 
 
@@ -141,7 +126,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
     }
   })
   .state('app.lente', {
-    url: "/lente",
+    url: "/lente/:lenteMarke",
     views: {
       'menuContent': {
         templateUrl: "templates/lente.html",
@@ -363,6 +348,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+  .state('app.lenteBallore', {
+      url: "/lenteBallore",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/lenteBallore.html",
+          controller: 'lenteBalloreCtrl'
+        }
+      }
+    })
+  
 
   .state('app.search-results', {
       url: "/search-results",

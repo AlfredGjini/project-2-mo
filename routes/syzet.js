@@ -296,6 +296,8 @@ exports.findAllLente = function (req, res, next) {
   //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
   //TODO : than it means that the function needs to be changed in  order to handle all request
     var offset = parseInt(req.body.offset);
+    var marka = req.body.marka;
+    console.log('marka eshte '+marka);
     var responseL;
     console.log(offset);
     pg.connect(connectionStr, function(err, client, done) {
