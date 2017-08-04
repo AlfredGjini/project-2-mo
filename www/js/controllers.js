@@ -2866,6 +2866,7 @@ $scope.cleanArray= function(actual) {
 .controller('lenteCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $stateParams) {
       
       $scope.lenteMarke=$stateParams.lenteMarke;
+      console.log($scope.lenteMarke);
 
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
