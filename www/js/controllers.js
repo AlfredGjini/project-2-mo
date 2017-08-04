@@ -2940,7 +2940,7 @@ $scope.cleanArray= function(actual) {
        },
        data: {
          offset : $scope.offsetL,
-         marka: $scope.lenteMarke
+         markaa: $stateParams.lenteMarke,
        }
      }).success(function(response) {
        $scope.$broadcast('scroll.infiniteScrollComplete');

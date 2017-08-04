@@ -296,8 +296,9 @@ exports.findAllLente = function (req, res, next) {
   //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
   //TODO : than it means that the function needs to be changed in  order to handle all request
     var offset = parseInt(req.body.offset);
-    var marka = req.body.marka;
+    var marka = req.body.markaa;
     console.log('marka eshte '+marka);
+    console.log(marka);
     var responseL;
     console.log(offset);
     var queryTextLente='SELECT * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE magazina.sasia>0 , products2.kodifikimartikulli2=\''+marka+'\' and products2.grupi=\'Lente Kontakti\'  limit 20 offset ' + offset;
