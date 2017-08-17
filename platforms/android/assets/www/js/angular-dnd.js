@@ -2410,6 +2410,34 @@ module.directive('dndSortableList', ['$parse', '$compile', function($parse, $com
     };
 }]);
 
+
+module.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit(attr.onFinishRender);
+                });
+            }
+        }
+    }
+});
+
+
+module.directive("showOnLoad", function() {
+    return {
+        link: function(scope, element) {
+            element.on("load", function() {
+                console.log('loading complete');
+                scope.$apply(function() {
+                    scope.artist.visible = true;
+                });
+            });
+        }
+    };
+});
+
 module.directive('simpleAccordion', function () {
     return {
         // attribute

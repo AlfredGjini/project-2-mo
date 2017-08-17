@@ -179,19 +179,321 @@ $scope.shfaqNgjyrat=function(){
      }).success(function(response) {
       console.log(response);
          $scope.syze = response[0].produkti;
+         
+         $scope.syze.pershkrimiangartikulli=$scope.syze.pershkrimiangartikulli.slice(3);
+         
+
+
+         $scope.pershkrimiSakte=$scope.syze.tedhenateknike.split(';');
+         //console.log($scope.pershkrimiSakte);
+         $scope.syze.masaA=$scope.pershkrimiSakte[0];
+         $scope.syze.bridge=$scope.pershkrimiSakte[1];
+         $scope.syze.bishti=$scope.pershkrimiSakte[2];
+         console.log($scope.syze);
+         // $scope.syze.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
+
+
+         // Split the string and get all the views in an array 
+         $scope.syzeView=$scope.syze.vendodhjeartikulli.split(';');
+
+         // Split the view into 2 parts: the id and the view direction
+         $scope.syzeView.forEach(function(item,indexB){
+            var res = item.split("_");
+
+            // If the view direction is list then shift it to the first place
+            res.forEach( function(element, index) {
+              if (element=="list") {
+                $scope.syzeView.splice(indexB, 1);
+                $scope.syzeView.unshift(item);
+              }
+              
+            });
+
+          
+          });
+
+         window.onload = function() {
+              // this will fire after the entire page is loaded, including images
+              console.log("after images");
+          };
+
+         // console.log($scope.syzeView);
+         // jQuery('.slider-slides,.slider-slide').width('100%');
+         // $ionicSlideBoxDelegate.update();
+
+
+
+
+
+
+
+         $scope.ngjyratSyze=response[1];
+         console.log($scope.ngjyratSyze);
+      });
+
+     
+     var i=1;
+     $scope.updateSlider = function () {
+      i++;
+      if ($scope.syzeView.length==i) {
+        console.log('1 here e fundit');
+         $ionicSlideBoxDelegate.update();
+         $scope.showSpinner=false;
+      }
+            //or just return the function
+      }
+
+
+
+
+      $scope.addToWishlist = function(item) {
+        $scope.alreadyExistWishlist=true;
+        // window.localStorage eshte si session ne php
+        console.log("item "+item);
+
+        $scope.items = [];
+        // Lajmeron qe produkti u shtua ne wishlistin tuaj (therritet me poshte)
+        $scope.add = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'WISHLIST',
+            template: '<p align="center">Produkti u shtua ne Wishlisten tuaj!</p>'
+          });
+        };
+        // Lajmeron nqs produkti ekziston ne wishlist tuaj (therritet me poshte)
+        $scope.exists = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'WISHLIST',
+            template: '<p align="center">Produkti i zgjedhur ndodhet ne Wishlisten tuaj!</p>'
+          });
+        };
+        // Nqs jane vendosur produkte ne wishlist i merr dhe i ndan me , dhe i shton tek array items
+        if (window.localStorage.getItem('wishlist')) {
+          $scope.items = window.localStorage.getItem('wishlist').split(",");
+        }
+        // Marrim te dhenat si string dhe i konvertojme ne objekt
+          var produktD=item.target.id;
+          // Objekt
+          var produktD = JSON.parse(produktD);
+          // console.log(produktD.kodartikulli);
+
+           $rootScope.itemsFullData = [];
+           $rootScope.itemsFullData.push(produktD);
+          console.log($rootScope.itemsFullData);
+
+        // Kontrollon nqs produkti qe duam te shtojme nuk ndodhet ne wishlist dhe e shton nqs eshte true. Ne te kundert lajmeron qe produkti ekziston.
+        if ($scope.items.indexOf(produktD.kodartikulli) == -1) {
+          
+
+
+          // console.log(item.target);
+          var id = produktD.kodartikulli;
+          $scope.items.push(id);
+          $scope.add();
+        } else {
+          $scope.exists();
+        }
+        // console.log( $scope.items );
+        // Krijon localStorage dhe shton aty produktet per wishlist
+        window.localStorage.setItem('wishlist', $scope.items);
+
+
+        var numriWish=[];
+        var wishlistItems=window.localStorage.getItem('wishlist');
+        numriWish=wishlistItems.split(',');
+        
+         if (numriWish[0]=="") {
+          // console.log('po jam bosh');
+          $scope.wishlistItemsLength=null;
+         }else {
+           $scope.wishlistItemsLength=numriWish.length;
+         }
+
+      };
+
+
+
+        $scope.shtoNeShporte = function(itemm) {
+        // window.localStorage eshte si session ne php
+        console.log("item "+itemm);
+
+        $scope.items2 = [];
+        // Lajmeron qe produkti u shtua ne wishlistin tuaj (therritet me poshte)
+        $scope.addd = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Shporta',
+            template: '<p align="center">Produkti u shtua ne shporten tuaj!</p>'
+          });
+        };
+        // Lajmeron nqs produkti ekziston ne wishlist tuaj (therritet me poshte)
+        $scope.existss = function() {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Shporta',
+            template: '<p align="center">Produkti i zgjedhur ndodhet ne shporten tuaj!</p>'
+          });
+        };
+        // Nqs jane vendosur produkte ne wishlist i merr dhe i ndan me , dhe i shton tek array items
+        if (window.localStorage.getItem('shporta')) {
+          $scope.items2 = window.localStorage.getItem('shporta').split(",");
+        }
+        // Marrim te dhenat si string dhe i konvertojme ne objekt
+          var produktD=itemm.target.id;
+          console.log(produktD);
+          // Objekt
+          var produktD = JSON.parse(produktD);
+          // console.log(produktD.kodartikulli);
+
+           $rootScope.items2FullData = [];
+           $rootScope.items2FullData.push(produktD);
+          console.log($rootScope.items2FullData);
+
+        // Kontrollon nqs produkti qe duam te shtojme nuk ndodhet ne wishlist dhe e shton nqs eshte true. Ne te kundert lajmeron qe produkti ekziston.
+        if ($scope.items2.indexOf(produktD.kodartikulli) == -1) {
+          
+
+
+          // console.log(item.target);
+          var id = produktD.kodartikulli;
+          $scope.items2.push(id);
+          $scope.addd();
+        } else {
+          $scope.existss();
+        }
+        // console.log( $scope.items );
+        // Krijon localStorage dhe shton aty produktet per wishlist
+        window.localStorage.setItem('shporta', $scope.items2);
+
+        var numriShport=[];
+        var shportlistItems=window.localStorage.getItem('shporta');
+        // console.log(shportlistItems);
+        numriShport=shportlistItems.split(',');
+        // console.log(numriShport);
+        
+         if (numriShport[0]=="") {
+          // console.log('po jam bosh');
+          $scope.shportlistItemsLength=null;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+        };
+
+       var treArrayGet = localStorage.getItem('treArray'); 
+       
+       $scope.treArrayAll=JSON.parse(treArrayGet);
+       console.log($scope.treArrayAll);
+
+
+})
+
+
+.controller('lenteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal,$ionicScrollDelegate, $location){
+
+    $scope.showSpinner=true;
+    $scope.shfaqMonedhenTjeter=true;
+    $scope.showlentePorosi=false;
+
+
+
+
+        $scope.$on('$stateChangeStart', function () {
+            $scope.modal.hide();
+          });
+
+
+    $scope.ktheMonedhe=function(){
+      $scope.shfaqMonedhenTjeter=!$scope.shfaqMonedhenTjeter;
+    }
+
+    $scope.porositLente = function() {
+    if ($scope.showlentePorosi==true) {
+      $scope.showlentePorosi=false;
+    }else{
+      $scope.showlentePorosi=true;
+      $location.hash('lentePorosi');   //set the location hash
+      var handle = $ionicScrollDelegate.$getByHandle('lenteDelegate');
+      handle.anchorScroll(true);  // 'true' for animation
+    }
+  }
+
+        
+  
+
+
+    $ionicSideMenuDelegate.canDragContent(false);
+    $scope.alreadyExistWishlist=false;
+
+      // Check the number of elements in the cart and wishlist
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+       }else {
+        for (var i = 0; i < numriWish.length; i++) {
+            if (numriWish[i] === $stateParams.productId) {
+                $scope.alreadyExistWishlist=true;
+            }
+        }
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+       if (numriShport[0]=="") {
+        // console.log('po jam bosh');
+        $scope.shportlistItemsLength=null;
+       }else {
+         $scope.shportlistItemsLength=numriShport.length;
+       }
+       }
+
+  console.log($stateParams.productId);
+  $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/product-single',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         productId : $stateParams.productId
+       }
+     }).success(function(response) {
+      console.log(response);
+         $scope.syze = response[0].produkti;
          console.log($scope.syze);
 
 
-         $scope.pershkrimiSakte=$scope.syze.pershkrimartikulli.split(' ');
-         if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
-          $scope.pershkrimiSakte.length=3;
-         }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
-          $scope.pershkrimiSakte.length=4;
-         }else{
-          // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
-          $scope.pershkrimiSakte.length=2;
-         }
-         $scope.syze.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
+         // $scope.pershkrimiSakte=$scope.syze.pershkrimartikulli.split(' ');
+         // if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
+         //  $scope.pershkrimiSakte.length=3;
+         // }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
+         //  $scope.pershkrimiSakte.length=4;
+         // }else{
+         //  // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
+         //  $scope.pershkrimiSakte.length=2;
+         // }
+         // $scope.syze.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
 
 
          // Split the string and get all the views in an array 
@@ -1481,7 +1783,7 @@ $scope.skaRezultat=false;
 
 
 
-.controller('syzeDielliCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope, $ionicScrollDelegate) {
+.controller('syzeDielliCtrl', function($scope, Syze, $location, $sce, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope, $ionicScrollDelegate) {
   console.log("test");
   console.log($scope.offsetD);
 
@@ -1520,6 +1822,26 @@ $scope.skaRezultat=false;
   //         $scope.shfaqPoshte=true;
   //       }
   //   };
+
+
+$scope.checkPromotion=function(promo){
+  if (promo==undefined || promo =='') {
+    // Do nothing
+    // return "nope";
+  }else if(promo=='New Collection'){
+
+    return "img/promotions/new-collection.png";
+
+  }else if(promo=='New Style'){
+
+    return "img/promotions/new-style.png";
+
+  }else if(promo=='New Color'){
+
+    return "img/promotions/new-color.png";
+  }
+
+}
 
 
 
@@ -2111,7 +2433,7 @@ $scope.cleanArray= function(actual) {
        }
      }).success(function(response) {
       console.log(response);
-       $scope.$broadcast('scroll.infiniteScrollComplete');
+       
 
 
        response.forEach(function(item){
@@ -2128,19 +2450,23 @@ $scope.cleanArray= function(actual) {
        // console.log($scope.markaSyzesh);
        // console.log($scope.formaSyzesh);
 
-       $scope.syzeD.forEach( function(element, index) {
-         $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
-         if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
-          $scope.pershkrimiSakte.length=3;
-         }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
-          $scope.pershkrimiSakte.length=4;
-         }else{
-          // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
-          $scope.pershkrimiSakte.length=2;
-         }
-         element.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
-
+        $scope.syzeD.forEach( function(element, index) {
+        element.pershkrimiangartikulliNew=element.pershkrimiangartikulli.slice(3);
        });
+
+       // $scope.syzeD.forEach( function(element, index) {
+       //   $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
+       //   if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
+       //    $scope.pershkrimiSakte.length=3;
+       //   }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
+       //    $scope.pershkrimiSakte.length=4;
+       //   }else{
+       //    // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
+       //    $scope.pershkrimiSakte.length=2;
+       //   }
+       //   element.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
+
+       // });
 
 
        // if ($scope.filterNotActivated==false) {
@@ -2158,7 +2484,7 @@ $scope.cleanArray= function(actual) {
 
 
 
-
+       $scope.$broadcast('scroll.infiniteScrollComplete');
        // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
        // console.log($scope.treArray);
       
@@ -2722,17 +3048,7 @@ $scope.cleanArray= function(actual) {
 
 
        $scope.syzeO.forEach( function(element, index) {
-         $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
-         if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
-          $scope.pershkrimiSakte.length=3;
-         }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
-          $scope.pershkrimiSakte.length=4;
-         }else{
-          // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
-          $scope.pershkrimiSakte.length=2;
-         }
-         element.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
-
+        element.pershkrimiangartikulliNew=element.pershkrimiangartikulli.slice(3);
        });
 
 
@@ -2866,6 +3182,7 @@ $scope.cleanArray= function(actual) {
 .controller('lenteCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http, $stateParams) {
       
       $scope.lenteMarke=$stateParams.lenteMarke;
+      console.log($scope.lenteMarke);
 
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
@@ -2939,7 +3256,8 @@ $scope.cleanArray= function(actual) {
          return str.join("&");
        },
        data: {
-         offset : $scope.offsetL
+         offset : $scope.offsetL,
+         markaa: $stateParams.lenteMarke,
        }
      }).success(function(response) {
        $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -6015,7 +6333,7 @@ $scope.vazhdoPorosine= function(allCmimi){
   })
 
 
-.controller('KamerCtrl', function($scope, $cordovaCamera, $ionicSideMenuDelegate, $ionicModal, $http, $cordovaSocialSharing, html2canvasAngular, $ionicLoading) {
+.controller('KamerCtrl', function($scope, $cordovaCamera, $ionicSideMenuDelegate, $ionicModal, $http, $cordovaSocialSharing, html2canvasAngular, $ionicLoading, $q, $timeout) {
 
   // $scope.shareAnywhere = function() {
   //       $cordovaSocialSharing.share("This is your message", "This is your subject", "www/imagefile.png", "https://www.thepolyglotdeveloper.com");
@@ -6031,6 +6349,23 @@ $scope.vazhdoPorosine= function(allCmimi){
   //     alert(err);
   //     // An error occured. Show a message to the user
   //   });
+
+
+
+$scope.loadingPerfundoi=true;
+
+  //the controller
+$scope.totalDisplayed = 10;
+
+$scope.scrollEnd = function () {
+  $scope.totalDisplayed += 10;
+  if ($scope.syzetFront4.length<=$scope.totalDisplayed) {
+    $scope.noMorePictures=true;
+  }else{
+    $scope.noMorePictures=false;
+  }
+};
+
 
 
     $scope.saveDivAsScreenShoot  = function(){
@@ -6159,6 +6494,25 @@ $scope.vazhdoPorosine= function(allCmimi){
      }).success(function(response) {
       console.log(response);
 
+           $http({
+       method: 'POST',
+       url: 'https://max-optika-server.herokuapp.com/syze-optike',
+       // url: 'https://max-optika-server.herokuapp.com/syze-dielli',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         offset : $scope.offsetD
+       }
+     }).success(function(response) {
+      console.log(response);
+
       
       // Get only the vendodhja part from the ajax response
       response.forEach(function(item){
@@ -6201,6 +6555,90 @@ $scope.vazhdoPorosine= function(allCmimi){
        $scope.offsetD += 20;
        //console.log($scope.offsetD);
      });
+
+
+
+
+
+
+
+
+      
+      // Get only the vendodhja part from the ajax response
+      response.forEach(function(item){
+        $scope.syzetFront.push(item.vendodhjeartikulli);
+      });
+
+       // Split the string and get all the views in an array 
+       $scope.syzetFront.forEach(function(item){
+          var res = item.split(";");
+
+          res.forEach( function(element, index) {
+            $scope.syzetFront2.push(element);
+          });
+
+        
+        });
+
+       // Split the view into 2 parts: the id and the view direction
+       $scope.syzetFront2.forEach(function(item){
+          var res = item.split("_");
+
+          // If the view direction is front then added to our array
+          res.forEach( function(element, index) {
+            if (element=="front") {
+              $scope.syzetFront3.push(item);
+            }
+            
+          });
+
+        
+        });
+
+      jQuery.each($scope.syzetFront3, function(i, el){
+          if(jQuery.inArray(el, $scope.syzetFront4) === -1) $scope.syzetFront4.push(el);
+      });
+       console.log($scope.syzetFront4);
+      
+       // console.log(response);
+       //gets another limt data
+       $scope.offsetD += 20;
+       //console.log($scope.offsetD);
+     });
+
+     
+
+
+       $scope.$on('dataLoaded', function(ngRepeatFinishedEvent) {
+        // your code to check whether images has loaded
+        var promises = [];
+        var imageList = jQuery('#syzeFoto img');
+        console.log(imageList);
+        for(var i = 0; i < imageList.length; i++) {
+
+          // imageList[i].on('load', function() {
+          //   promises.push(imageList[i]);
+          // });
+
+            imageList[i] = new Image(imageList[i]);
+            imageList[i].onload = function(){
+              //console.log('loading complete');
+                promises.push(imageList[i]);
+            };
+
+          // imageList[i].on("load", function() {
+          //       console.log('loading complete');
+          //       promises.push(imageList[i]);
+          //   });
+
+            // promises.push(imageList[i].on('load', function() {}););
+        }
+        $q.all(promises).then(function(){
+            // all images finished loading now
+            console.log('te gjitha fotot u ngarkuan me sukses');
+            $scope.loadingPerfundoi=false;
+        });
+    });
 
 
 
@@ -6257,6 +6695,10 @@ $scope.vazhdoPorosine= function(allCmimi){
     $scope.modal = modal;
     $scope.modal.show();
   });
+
+  $timeout(function () { 
+       $scope.modal.hide();
+     }, 3000);
 
           
 
@@ -6372,7 +6814,7 @@ $scope.vazhdoPorosine= function(allCmimi){
         if ($scope.provoVirtualKodi!=null) {
           console.log('inside');
           // The real code
-          var imageFoto=$scope.provoVirtualKodi+"_front";
+          var imageFoto='http://maxoptika-app.com/maxoptikaFTP/'+$scope.provoVirtualKodi+"_front.png";
           //var imageFoto="img/tryon/SD12203_front.png";
           console.log(imageFoto);
           // $scope.shtoLart(imageFoto);

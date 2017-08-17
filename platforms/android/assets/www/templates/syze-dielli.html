@@ -184,6 +184,13 @@ header i:nth-of-type(2) {
   font-size: 1.5em;
 }
 
+.fotoPromocion {
+    position: absolute;
+    width: 40px;
+    top: 0px;
+    right: 0px;
+}
+
 </style>
 
 
@@ -391,9 +398,12 @@ header i:nth-of-type(2) {
         <div class='product_inner'>
         
         <img src='http://maxoptika-app.com/maxoptikaFTP/{{syzeD[$index].kodartikulli}}_list.png' width='300'>
+        <!-- <span ng-bind-html=""></span> -->
+        
+        <img ng-src='{{checkPromotion(syzeD[$index].nrpasurie)}}' width='100' class="fotoPromocion">
           <!-- <img src='http://maxoptika-app.com/maxoptikaFTP/{{syzeD[$index].kodartikulli}}_front.png' width='300'> -->
           <div style="position: absolute;bottom: 0px;margin-left: auto;margin-right: auto;left: 0;right: 0;">
-          <p class="produkteShkrim">{{syzeD[$index].pershkrimartikulli}}</p>
+          <p class="produkteShkrim">{{syzeD[$index].kodifikimartikulli2}} {{syzeD[$index].pershkrimiangartikulliNew}}</p>
           <!-- <p>{{syzeD[$index].grupi}}</p> -->
           <p class="produkteShkrim">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</p>
           <!-- <button>Add to basket</button> -->

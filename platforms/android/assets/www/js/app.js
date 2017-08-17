@@ -17,14 +17,14 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   $ionicPlatform.ready(function() {
 
 
-    var notificationOpenedCallback = function(jsonData) {
-    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-  };
+  //   var notificationOpenedCallback = function(jsonData) {
+  //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  // };
 
-  window.plugins.OneSignal
-    .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
-    .handleNotificationOpened(notificationOpenedCallback)
-    .endInit();
+  // window.plugins.OneSignal
+  //   .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
+  //   .handleNotificationOpened(notificationOpenedCallback)
+  //   .endInit();
 
 
 
@@ -141,6 +141,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         'menuContent': {
             templateUrl: 'templates/produkte-single.html',
             controller: 'produkteSingleCtrl'
+          }
+    }
+  })
+
+  .state('app.lenteSingle', {
+    url: "/lenteSingle/:productId",
+    views: {
+        'menuContent': {
+            templateUrl: 'templates/lenteSingle.html',
+            controller: 'lenteSingleCtrl'
           }
     }
   })

@@ -1,0 +1,545 @@
+<style type="text/css">
+select options{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+/* Reset Select */
+.select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    /* background: #2c3e50; */
+    background: #eaeaea;
+    background-image: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: block;
+  /*width: 20em;*/
+  height: 3em;
+  line-height: 3;
+  background: #b71c1c;
+  overflow: hidden;
+  border-radius: .25em;
+}
+.select select {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 0 0 .5em;
+    color: #000;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.select select::-ms-expand {
+  display: none;
+}
+/* Arrow */
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    bottom: 0;
+    height: 30px;
+    padding: 0 7px;
+    background: #676767;
+    pointer-events: none;
+    color: #fff;
+    /* border-radius: 5px; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-top: 2px;
+}
+/* Transition */
+.select:hover::after {
+  color: #7faddd;
+}
+.select::after {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+
+
+
+.button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
+    display: inline-block;
+    padding: 0 0 1px 0;
+    vertical-align: inherit;
+    font-size: 20px;
+    line-height: 41px;
+    pointer-events: none;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.buton {
+  padding: 10px 15px;
+  /*border: 1px solid #000;*/
+  display: inline-block;
+  font-size: 13px;
+  font-family: Open Sans;
+  cursor: pointer;
+  background-color: #afcceb;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  /*margin-bottom: -5px;*/
+  width: 49%;
+  text-align: center;
+}
+
+.buton.aktif {
+  background: #7faddd;
+  color: #fff;
+}
+
+.buton.aktif a {
+  color: #fff;
+}
+
+/*.tabicerik {
+  width: 700px;
+}*/
+
+.tabicerik div {
+  padding: 5px;
+  background-color: #7faddd;
+  color: #fff;
+  font-family: Open Sans;
+  font-size: 13px;
+  line-height: 25px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.syriName {
+    color: #fff;
+    /* font-family: 'Montserrat Light', arial; */
+    font-size: 14px;
+    border: 1px solid #fff;
+    padding: 5px;
+    border-radius: 5px;
+}
+.shkrimiFund{
+    background-color: #fff !important;
+    color: #000 !important;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 5px 10px !important;
+}
+
+
+</style>
+<ion-view title="{{syze.kodifikimartikulli2}}">
+  <ion-nav-buttons side="left">
+    <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
+    
+    <!-- <button  class="button button-icon icon ion-navicon"></button> -->
+    <!-- <i class="icon ion-ios-heart-outline"></i> -->
+  </ion-nav-buttons>
+  
+  <ion-nav-buttons side="right" >
+  <div ng-hide="showSpinner">
+    <!-- <button ng-hide="alreadyExistWishlist" style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i style="color: #eee;" id='{{syze}}' class="icon ion-heart" s></i></button>
+    <button ng-show="alreadyExistWishlist" style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i style="color: #a4a1a5;" id='{{syze}}' class="icon ion-heart" s></i></button> -->
+    </div>
+  </ion-nav-buttons>
+  
+  <div class="row" ng-show="showSpinner"><img style="margin: 100px auto;width: 40px;height: 40px;" src="img/loadOff.gif"></div>
+  <ion-content class="has-header" ng-hide="showSpinner" delegate-handle="lenteDelegate">
+
+
+
+
+
+        <ion-slide-box style="margin-top:5px;text-align: center;">
+          <ion-slide ng-repeat="image in syzeView" ng-init="updateSlider()">
+            <img src="http://maxoptika-app.com/maxoptikaFTP/{{image}}.png" style="width:90%">
+          </ion-slide>
+        </ion-slide-box>
+
+
+
+    <div class="list card pSingleContainer" style="height:auto;">
+        <div class="item item-body">
+        
+          <!-- <img class="full-image" src="pics/1.jpg"/ > -->
+          <h2 class="produktSingleTitle" align="center" style="color: #333333;font-size: 24px !important;"><b>{{syze.pershkrimartikulli}}</b></h2>
+          <hr style="opacity: 0.3;">
+          <div class="row">
+
+            <div class="col" style="margin-top: -20px;margin-bottom: -20px;">
+            <h2 class="cmimiProduktSingle" style="color: #4e5259;float: left;padding-top: 5px;">Cmimi</h2>
+              <h2 class="cmimiProduktSingle2" style="color: #4e5259;float: right;"><b style="font-size: 90%;">
+              <span ng-show="shfaqMonedhenTjeter">{{syze.cmimilek}} <!-- {{syze.monedha}} --> LEK</span>
+              <span ng-hide="shfaqMonedhenTjeter">{{syze.cmimieur}} EUR</span>
+              <button ng-click="ktheMonedhe()" style="background-color: #b71c1c;margin-top: -1px; margin-right: 0px;padding: 2px 15px;">
+                <i ng-show="shfaqMonedhenTjeter" style="color: #fff;" class="icon ion-social-euro"></i>
+                <i ng-hide="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;" class="">LEK</i>
+              </button>
+              </b></h2> 
+            </div>
+          </div>
+          <br>
+          <!-- <hr style="opacity: 0.3;margin-top:-10px;"> -->
+          <!-- <h2 class="ngjyraProduktSingle" style="color: #4e5259;margin-bottom: -10px;">Ngjyra</h2> -->
+          <!-- <button ng-click="shfaqNgjyrat()" class="button button-full button-positive" style="background-color: #b71c1c;min-height: 40px;font-size: 15px;margin-bottom: -10px;">Ngjyrat e tjera<i class="icon ion-chevron-right" style="float: right;"></i></button> -->
+            </div>
+          </div>
+
+          <!-- <ion-scroll zooming="true" direction="x" scrollbar-x="true" style=" white-space: nowrap;padding-left: 20px;margin-top:-5px;margin-bottom: -5px;">
+            <span ng-repeat="image in ngjyratSyze" style="width: 100px;"> 
+            <a href="#/app/produkte/{{image.kodartikulli}}"><img  ng-src="http://maxoptika-app.com/maxoptikaFTP/{{image.kodartikulli}}_list.png" style="width: 110px;"></a>
+            </span>
+
+          </ion-scroll> -->
+          <div class="list card pSingleContainer" style="height:auto;margin-top: -30px;">
+        <div class="item item-body">
+          <hr style="opacity: 0.3;margin-top:-10px;">
+          <!-- <h2 align="center">{{syze.pershkrimartikulli}}{{gjinia}}</h2>
+          <p align="center">{{syze.grupi}}</p>
+          <p align="center">{{syze.cmimi}} {{syze.monedha}}</p> -->
+          <!-- <button style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i id='{{syze}}' class="icon ion-heart" s></i></button> -->
+          <!-- <button class="shtoNeShporte" data-ng-click="shtoNeShporte($event)"><i id='{{syze}}' class="icon ion-heart" s></i>Shto ne shporte</button> -->
+          <!-- <div id='{{syze}}' class="shtoNeShporte" data-ng-click="provoVirtual(syze.kodartikulli)"></i>Prove virtuale</div> -->
+          <div id='{{syze}}' class="shtoNeShporte" data-ng-click="porositLente($event)"></i>Porosit</div>
+          <hr style="opacity: 0.3;margin-top:20px;">
+
+          <div>
+          <h2 class="cmimiProduktSingle" style="color: #4e5259;text-align: center;">Info</h2>
+          <h2 align="center" style='font-family: arial;padding: 10px;color: #444;'>{{syze.pershkrimartikulli}} Humanly readable product description Lorem ipsum Humanly readable product description Lorem ipsumHumanly readable product description Lorem ipsum</h2>
+            <!-- <p align="justify">{{syze.pershkrimartikulli}}</p> -->
+          </div>
+          <hr style="opacity: 0.3;margin-top:20px;">
+
+            <div class="list">
+
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;border-bottom: 1px dashed #eee;">Water Content
+                  <span class="item-note" style="color:#444">
+                    48%
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;border-bottom: 1px dashed #eee;">Diameter
+                  <span class="item-note" style="color:#444">
+                    14.0 mm
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;border-bottom: 1px dashed #eee;">Oxygen transmission
+                  <span class="item-note" style="color:#444">
+                    160 Dk / t
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;border-bottom: 1px dashed #eee;">Multifocal
+                  <span class="item-note" style="color:#444">
+                    No
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;border-bottom: 1px dashed #eee;">Toric
+                  <span class="item-note" style="color:#444">
+                    No
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">UV protection
+                  <span class="item-note" style="color:#444">
+                    None
+                  </span>
+                </div>
+
+            </div>
+            <hr style="opacity: 0.3;margin-top:-15px;">
+
+            <div id="lentePorosi" ng-show="showlentePorosi" style="margin-top: 15px;">
+            <h2 class="cmimiProduktSingle" style="color: #4e5259;float: none;text-align: left;">Zgjidhni nje "diopter":</h2>
+              <div ng-init="tab = '1'">
+                <div class="buton" ng-class="{aktif: tab == '1'}" ng-click="tab = '1'">
+                  <a href="">Sy te ndryshem</a>
+                </div>
+                <div style="float: right;" class="buton" ng-class="{aktif: tab == '2'}" ng-click="tab = '2'">
+                  <a href="">Sy te njejte</a>
+                </div>
+                
+
+                <div class="tabicerik" ng-switch="tab" >
+                  <div ng-switch-when="1">
+                  <div class="row resposive-sm" style="margin-bottom: 10px;text-align: left;">
+                        <div class="col">
+                            <label for="sphLD" class="syriName">Syri Majtas</label>
+                        </div>
+                        <div class="col">
+                            <label for="cylLD" class="syriName">Syri Djathtas</label>
+                        </div>
+                      </div>
+                      <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                      </div>
+                                            <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                      </div>
+                                            <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                      </div>
+                    <div class="shkrimiFund">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam in cupiditate ex et, dicta accusantium non enim quisquam fuga repudiandae, ducimus illo neque vel, reiciendis beatae, esse cumque facilis deleniti sunt voluptas rerum expedita!
+                    </div>
+                    <div style="width: 100%;margin-top:10px;margin-bottom:10px;text-align: center;">
+                      <button class="button button-dark" id="butoniRezervo" ng-click="rezervo()">Rezervo</button>
+                    </div>
+                  </div>
+                  <div ng-switch-when="2">
+                  <!-- <div class="row resposive-sm" style="margin-bottom: 10px;text-align: center;">
+                        <div class="col">
+                            <label for="sphLD" class="syriName">Syri Majtas</label>
+                        </div>
+                        <div class="col">
+                            <label for="cylLD" class="syriName">Syri Djathtas</label>
+                        </div>
+                      </div> -->
+                      <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <!-- <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div> -->
+                      </div>
+                        <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <!-- <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div> -->
+                      </div>
+                                            <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <!-- <div class="col">
+                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select>
+                                                <option>Blue</option>
+                                                <option selected>Green</option>
+                                                <option>Red</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div> -->
+                      </div>
+                    <div class="shkrimiFund">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam in cupiditate ex et, dicta accusantium non enim quisquam fuga repudiandae, ducimus illo neque vel, reiciendis beatae, esse cumque facilis deleniti sunt voluptas rerum expedita!
+                    </div>
+                    <div style="width: 100%;margin-top:10px;margin-bottom:10px;text-align: center;">
+                      <button class="button button-dark" id="butoniRezervo" ng-click="rezervo()">Rezervo</button>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+
+
+          <!-- <div>
+            <h3><button style="display:block;margin:0 auto;margin-top:5px;" class="button button-balanced"><i class="icon ion-star"></i> Try it On</button></h3>
+          </div>
+          <div>
+            <button class="button button-calm" style="display:block;margin:0 auto;margin-top:5px;">Pickup on Store</button>
+          </div>
+          <div>
+            <button class="button button-positive" style="display:block;margin:0 auto;margin-top:5px;">Paypal</button>
+          </div> -->
+
+          
+      </div>
+    </div>
+          <!-- <div style="width: 100%;background-color: #e4e9ee;display: none;">
+          <h2 class="prodtjeraTitle">Produkte te tjera</h2>
+            <div class="row" style="width: 95%;margin: 15px auto;" ng-repeat="syz in treArrayAll">
+            
+              <div class="col"  style="background-color: white;margin:1px auto;text-align: center;">
+              <div style="border-bottom:1px solid #e4e9ee;padding-top:20px;">
+              <a style="text-decoration: none;" href="#/app/produkte/{{syz.kodartikulli}}">
+                <img src="img/SD12203_front.png" style="width: 80%;" />
+                </a>
+                </div>
+                <h3 class="prodtjeraTitle2" align="center"><span style="float: left;font-size:16px;">{{syz.kodifikimartikulli2}} {{syz.kodartikulli}}</span><span style="float: right;font-size:16px;">{{syz.cmimi}} {{syz.monedha}}</span></h3>
+              </div>
+              
+            </div>
+          </div> -->
+    <br><br><br><br>
+  </ion-content>
+  <!--<div class="bar bar-footer bar-balanced">
+    <div class="title" style="text-align: left;">
+      MAX OPTICA<sup>&reg;</sup>
+    </div>
+    <div class="title" style="text-align: right;">
+      DEA
+    </div>
+  </div>-->
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu">
+      <i class="icon ion-ios-home-outline"></i>
+      Kreu
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/sherbime">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      Sherbime
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/profile">
+      <i class="icon ion-ios-person-outline"></i>
+      Profili
+    </a>
+  </div>
+</ion-view>

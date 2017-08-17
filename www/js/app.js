@@ -145,6 +145,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
     }
   })
 
+  .state('app.lenteSingle', {
+    url: "/lenteSingle/:productId",
+    views: {
+        'menuContent': {
+            templateUrl: 'templates/lenteSingle.html',
+            controller: 'lenteSingleCtrl'
+          }
+    }
+  })
+
   .state('app.oferta', {
       url: "/oferta",
       views: {
