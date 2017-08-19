@@ -42,6 +42,9 @@
         },
         "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         }
     },
     "dependent_plugins": {
