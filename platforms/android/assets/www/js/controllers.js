@@ -2433,6 +2433,17 @@ $scope.cleanArray= function(actual) {
        }
      }).success(function(response) {
       console.log(response);
+
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Syze Dielli',
+          template: '<p align="center">Nuk ka syze dielli per tu shfaqur!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
        
 
 
@@ -2492,6 +2503,7 @@ $scope.cleanArray= function(actual) {
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+     }
      });
 
      console.log("fs");
@@ -3030,6 +3042,18 @@ $scope.cleanArray= function(actual) {
        }
      }).success(function(response) {
       console.log(response);
+
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Syze Optike',
+          template: '<p align="center">Nuk ka syze optike per tu shfaqur!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
+
        $scope.$broadcast('scroll.infiniteScrollComplete');
 
        response.forEach(function(item){
@@ -3071,6 +3095,7 @@ $scope.cleanArray= function(actual) {
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+     }
      });
 
      console.log("fs");
@@ -3085,7 +3110,572 @@ $scope.cleanArray= function(actual) {
 
 })
 
-.controller('koleksioniRiCtrl', function($scope, Syze, $location, $state, $ionicLoading, $ionicPopup, $http) {
+// Aksesore controller
+.controller('koleksioniRiCtrl', function($scope, Syze, $location, $sce, $state, $ionicLoading, $ionicPopup, $http, $timeout, $rootScope, $ionicScrollDelegate) {
+  console.log("test");
+  console.log($scope.offsetD);
+
+  $scope.$watch('$viewContentLoaded', function(){
+    //do something
+    console.log('do thirrem ne fund fare');
+});
+
+  $scope.moreDataCanBeLoaded=true;
+  // $scope.shfaqPoshte=true;
+
+  // $scope.callPoshte=function(){
+  //   console.log('called poshte');
+  //   $timeout(function () { 
+  //       $scope.shfaqPoshte = !$scope.shfaqPoshte; 
+  //       $scope.shfaqq=$scope.shfaqPoshte;
+  //       $scope.callPoshte();
+  //       console.log($scope.shfaqPoshte);
+  //   }, 15000);
+  // }
+
+
+
+
+  // $scope.callPoshte();
+
+  // $scope.checkScroll = function () {
+  //       var currentTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollPosition().top;
+  //       var maxTop = $ionicScrollDelegate.$getByHandle('scroller').getScrollView().__maxScrollTop;
+
+  //       if (currentTop >= maxTop)
+  //       {
+  //           // hit the bottom
+  //         $scope.shfaqPoshte=false;
+  //       }else{
+  //         $scope.shfaqPoshte=true;
+  //       }
+  //   };
+
+
+$scope.checkPromotion=function(promo){
+  if (promo==undefined || promo =='') {
+    // Do nothing
+    // return "nope";
+  }else if(promo=='New Collection'){
+
+    return "img/promotions/new-collection.png";
+
+  }else if(promo=='New Style'){
+
+    return "img/promotions/new-style.png";
+
+  }else if(promo=='New Color'){
+
+    return "img/promotions/new-color.png";
+  }
+
+}
+
+
+
+
+   
+
+
+$scope.itemchecked=false;
+$scope.filterNotActivated=true;
+$scope.data.gjinia=[];
+$scope.skaRezultat=false;
+
+
+
+$scope.shfaqFiltraTag=false;
+var defaultMinPrice=0;
+var defaultMaxPrice=100;
+
+$scope.slider = {
+  minValue: defaultMinPrice,
+  maxValue: defaultMaxPrice,
+  options: {
+    floor: defaultMinPrice,
+    ceil: defaultMaxPrice,
+    translate: function(value, sliderId, label) {
+      switch (label) {
+        case 'model':
+          return '<b>Cmimi Min:</b> '+value+' LEK';
+        case 'high':
+          return '<b>Cmimi Max:</b> '+value+' LEK';
+        default:
+          return value + ' LEK'
+      }
+    }
+  }
+};
+
+
+  $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/getCmimiFilter',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+     }).success(function(response) {
+        //console.log(response.rows);
+
+        response.rows.forEach( function(element, index) {
+          console.log(element);
+          if (element.id==1) {
+             $scope.slider.options.floor=element.cmimimin;
+             $scope.slider.options.ceil=element.cmimimax;
+             $scope.slider.minValue=element.cmimimin;
+             $scope.slider.maxValue=element.cmimimax;
+             $scope.cmimiMinF=element.cmimimin;
+             $scope.cmimiMaxF=element.cmimimax;
+            }
+        });
+
+
+          
+      });
+
+
+
+$scope.shfaqF= function(){
+  $scope.data.shfaq=true;
+  // $timeout(function () { 
+  //   $scope.$broadcast('rzSliderForceRender');
+  //   console.log('koha') 
+  // });
+}
+
+$scope.shfaqF2= function(){
+  $scope.data.shfaq=false;
+}
+
+$scope.shfaqCmimiRender= function(){
+  $timeout(function () { 
+    $scope.$broadcast('rzSliderForceRender');
+    console.log('koha') 
+  });
+}
+
+
+
+
+  $scope.singleModel = 1;
+
+  $scope.radioModel = 'Middle';
+
+  $scope.checkModel = {
+    Rayban: false,
+    Police: false,
+    Emporio: false
+  };
+
+  $scope.checkResults = [];
+
+
+
+
+  $scope.$watchCollection('checkModel', function () {
+    $scope.checkResults = [];
+    angular.forEach($scope.checkModel, function (value, key) {
+      if (value) {
+        $scope.checkResults.push(key);
+      }
+    });
+  });
+
+
+  $scope.singleModel = 1;
+
+  $scope.radioModel = 'Middle';
+
+  $scope.checkModelGjinia = {
+    Woman: false,
+    Man: false,
+    Unisex: false
+  };
+
+  $scope.checkResultsGjinia = [];
+
+  $scope.$watchCollection('checkModelGjinia', function () {
+    $scope.checkResultsGjinia = [];
+    angular.forEach($scope.checkModelGjinia, function (value, key) {
+      if (value) {
+        $scope.checkResultsGjinia.push(key);
+      }
+    });
+  });
+
+
+
+$scope.klasaSfond=['product--blue','product--orange','product--red','product--green','product--yellow','product--pink'];
+
+$scope.ktheNgjyre= function(index){
+  var kodi=index%6;
+  if(kodi==0){
+    kodi=6;
+  }
+  return kodi
+}
+
+$scope.filter={};
+$scope.filterM={};
+$scope.formatZgjedhur=[];
+$scope.markatZgjedhur=[];
+
+$scope.printC = function() {
+  $scope.formatZgjedhur=[];
+    console.log($scope.filter);
+        for(i in $scope.filter) {
+        console.log($scope.filter[i]);
+        if($scope.filter[i] == true) {
+            $scope.formatZgjedhur.push(i);
+        }
+    }
+    console.log($scope.formatZgjedhur);
+}
+
+$scope.getMarka = function() {
+  $scope.markatZgjedhur=[];
+    console.log($scope.filterM);
+        for(i in $scope.filterM) {
+        console.log($scope.filterM[i]);
+        if($scope.filterM[i] == true) {
+            $scope.markatZgjedhur.push(i);
+        }
+    }
+    console.log($scope.markatZgjedhur);
+}
+
+
+
+
+
+// Chech which filter tag to show and which one not
+$scope.checkFilterValues=function(){
+  $scope.fshihCmimeVar=false;
+  $scope.fshihFormaVar=false;
+  $scope.fshihGjiniaVar=false;
+  $scope.fshihMarkaVar=false;
+  $scope.filterNotActivated=true;
+
+
+
+  if ($scope.slider.minValue == $scope.cmimiMinF && $scope.slider.maxValue == $scope.cmimiMaxF) {
+    $scope.fshihCmimeVar=true;
+  }else{
+    $scope.filterNotActivated=false;
+  }
+
+  if ($scope.checkResultsGjinia=='') {
+    $scope.fshihGjiniaVar=true;
+  }else{
+    $scope.filterNotActivated=false;
+    $scope.fshihGjiniaVar=false;
+  }
+
+  if ($scope.formatZgjedhur=='') {
+    $scope.fshihFormaVar=true;
+  }else{
+    $scope.filterNotActivated=false;
+    $scope.fshihFormaVar=false;
+  }
+
+  if ($scope.markatZgjedhur=='') {
+    $scope.fshihMarkaVar=true;
+  }else{
+    $scope.filterNotActivated=false;
+    $scope.fshihMarkaVar=false;
+  }
+
+
+}
+
+$scope.data.gjinia=new Array(' ');
+
+$scope.filtroProduktet =  function(){
+
+  $scope.moreDataCanBeLoaded=false;
+  $scope.checkFilterValues();
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
+  console.log($scope.syzeD);
+  //$scope.syzeDCopy=$scope.syzeDOriginalBackup;
+  console.log($scope.syzeDOriginalBackup);
+  var newSyzeDHolder1=[];
+  var newSyzeDHolder2=[];
+  var newSyzeDHolder3=[];
+  var newSyzeDHolder4=[];
+
+  // Cmimi Filter
+  $scope.syzeDOriginalBackup.forEach( function(element, index) {
+    if(element.cmimilek>=$scope.slider.minValue && element.cmimilek<=$scope.slider.maxValue){
+      newSyzeDHolder1.push(element);
+    }
+  });
+  console.log(newSyzeDHolder1);
+
+  // Gjinia Filter
+  // Check if any value is selected from Gjinia
+  if ($scope.checkResultsGjinia!='') {
+    
+    // First loop through the array of all the products
+    newSyzeDHolder1.forEach( function(element, index) {
+      // Then loop through all the selected Forma values and check them all with the products values
+      $scope.checkResultsGjinia.forEach( function(elementt, indexx) {
+        if(element.vitprodhimi==elementt){
+        newSyzeDHolder2.push(element);
+      }
+      });
+      
+    });
+  }else{
+    newSyzeDHolder2=newSyzeDHolder1;
+  }
+  console.log(newSyzeDHolder2);
+
+  // Forma Filter
+  // Check if any value is selected from Forma
+  if ($scope.formatZgjedhur!='') {
+    // First loop through the array of all the products
+    newSyzeDHolder2.forEach( function(element, index) {
+      // Then loop through all the selected Forma values and check them all with the products values
+      $scope.formatZgjedhur.forEach( function(elementt, indexx) {
+        if(element.zonakadastrale==elementt){
+        newSyzeDHolder3.push(element);
+      }
+      });
+      
+    });
+  }else{
+    newSyzeDHolder3=newSyzeDHolder2;
+  }
+  console.log(newSyzeDHolder3);
+
+
+  // Marka Filter
+  // Check if any value is selected from Forma
+  if ($scope.markatZgjedhur!='') {
+    // First loop through the array of all the products
+    newSyzeDHolder3.forEach( function(element, index) {
+      // Then loop through all the selected Forma values and check them all with the products values
+      $scope.markatZgjedhur.forEach( function(elementt, indexx) {
+        if(element.kodifikimartikulli2==elementt){
+        newSyzeDHolder4.push(element);
+      }
+      });
+      
+    });
+  }else{
+    newSyzeDHolder4=newSyzeDHolder3;
+  }
+  console.log(newSyzeDHolder4);
+  
+
+
+
+  // // Gjinia Filter
+  // if($scope.data.gjinia.length>0){
+  //   //console.log('brenda gjinia');
+  //   newSyzeDHolder2.forEach( function(element, index) {
+  //     if(element.vitprodhimi==$scope.data.gjinia){
+  //       newSyzeDHolder3.push(element);
+  //     }
+  //   });
+
+  // }else{
+  //   //console.log('jo brenda gjinia');
+  //   newSyzeDHolder3=newSyzeDHolder2;
+  // }
+
+  // Marka Filter
+  // Check if any value is selected from Forma
+  // if ($scope.checkResults!='') {
+  //   // Replace Emporio with Emporio Armani in the result array
+  //   $scope.checkResults.forEach( function(element, index) {
+  //     if(element=='Emporio'){
+  //       $scope.checkResults[index]='Emporio Armani';
+  //     }
+  //   });
+
+  //   // First loop through the array of all the products
+  //   newSyzeDHolder3.forEach( function(element, index) {
+  //     // Then loop through all the selected Forma values and check them all with the products values
+  //     $scope.checkResults.forEach( function(elementt, indexx) {
+  //       if(element.kodifikimartikulli2==elementt){
+  //       newSyzeDHolder4.push(element);
+  //     }
+  //     });
+      
+  //   });
+  // }else{
+  //   newSyzeDHolder4=newSyzeDHolder3;
+  // }
+
+  $scope.shfaqFiltraTag=true;
+  // if filter don't return any result then don't change a thing
+  if(newSyzeDHolder4==''){
+    $scope.skaRezultat=true;
+
+    $timeout(function () { 
+      $scope.skaRezultat = false; 
+    }, 3000);
+
+    console.log("bosh 2");
+    $scope.data.shfaq=false;
+  }else {
+      // Set the old array to the new modified one
+      $scope.syzeD=newSyzeDHolder4;
+      console.log($scope.syzeD);
+      $scope.data.shfaq=false;
+
+  }
+
+
+
+
+
+
+
+
+}
+
+
+
+// Delete the Cmimi filters
+$scope.fshiCmimiFilter =function(){
+  //console.log($scope.slider);
+  $scope.slider.minValue= $scope.cmimiMinF;
+  $scope.slider.maxValue= $scope.cmimiMaxF;
+  $scope.fshihCmimeVar=true;
+  // TODO: Call filtroProduktet and filter them again
+  $scope.filtroProduktet();
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
+}
+
+
+// Delete the Gjinia filters
+$scope.fshiGjinia2Filter =function(){
+  for (var key in $scope.checkModelGjinia) {
+  if ($scope.checkModelGjinia.hasOwnProperty(key)) {
+    $scope.checkResultsGjinia.forEach( function(element, index) {
+      if (key==element) {
+        $scope.checkModelGjinia[key]=false;
+      }
+    });
+  }
+}
+
+  $scope.checkResultsGjinia=[];
+  $scope.filtroProduktet();
+  $scope.fshihGjiniaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
+}
+
+// Delete the Forma filters
+$scope.fshiFormaFilter =function(){
+  for (var key in $scope.filter) {
+  if ($scope.filter.hasOwnProperty(key)) {
+    $scope.formatZgjedhur.forEach( function(element, index) {
+      if (key==element) {
+        $scope.filter[key]=false;
+      }
+    });
+  }
+}
+
+  $scope.formatZgjedhur=[];
+  $scope.filtroProduktet();
+  $scope.fshihFormaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
+}
+
+
+// Delete the marka filters
+$scope.fshiMarkaFilter =function(){
+  for (var key in $scope.filterM) {
+  if ($scope.filterM.hasOwnProperty(key)) {
+    $scope.markatZgjedhur.forEach( function(element, index) {
+      if (key==element) {
+        $scope.filterM[key]=false;
+      }
+    });
+  }
+}
+
+  $scope.markatZgjedhur=[];
+  $scope.filtroProduktet();
+  $scope.fshihMarkaVar=true;
+  if ($scope.filterNotActivated==true) {
+    $scope.moreDataCanBeLoaded=true;
+  }else{
+    $scope.moreDataCanBeLoaded=false;
+  }
+}
+
+
+
+
+
+$scope.remove_duplicates= function(origArr) {
+      var newArr = [],
+          origLen = origArr.length,
+          found, x, y;
+
+      for (x = 0; x < origLen; x++) {
+          found = undefined;
+          for (y = 0; y < newArr.length; y++) {
+              if (origArr[x] === newArr[y]) {
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              newArr.push(origArr[x]);
+          }
+      }
+      return newArr;
+  }
+
+$scope.cleanArray= function(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+
+
+
+
+
+
+
+
+
+
+
       
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
@@ -3128,9 +3718,17 @@ $scope.cleanArray= function(actual) {
   });*/
   //offset to get data and implement infinite scroll
   $scope.limit  = 20; //gets 20 objects the first time
-  $scope.offsetK = 0;
-  $scope.syzeK   = [];
+  $scope.offsetD = 0;
+  $scope.syzeD   = [];
+  $scope.markaSyzesh = [];
+  $scope.formaSyzesh = [];
+  $scope.countForBackUp   = 1;
   $scope.loadNextProducts = function(){
+      // $scope.fshihCmimeVar=false;
+      // $scope.fshihFormaVar=false;
+      // $scope.fshihGjiniaVar=false;
+      // $scope.fshihMarkaVar=false;
+
     console.log($scope.data.search);
     console.log('t');
     $ionicLoading.hide();
@@ -3147,8 +3745,8 @@ $scope.cleanArray= function(actual) {
      console.log('Reuqest number : ',count++);
      $http({
        method: 'POST',
-       //url: 'https://tarzantest.herokuapp.com/login',
        url: 'https://max-optika-server.herokuapp.com/syze-koleksion',
+       // url: 'https://max-optika-server.herokuapp.com/syze-dielli',
        headers: {
          'Content-Type': 'application/x-www-form-urlencoded'
        },
@@ -3159,23 +3757,94 @@ $scope.cleanArray= function(actual) {
          return str.join("&");
        },
        data: {
-         offset : $scope.offsetK
+         offset : $scope.offsetD
        }
      }).success(function(response) {
-       $scope.$broadcast('scroll.infiniteScrollComplete');
-      response.forEach(function(item){
-        $scope.syzeK.push(item);
-        console.log('tttttt');
+      console.log(response);
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Aksesore',
+          template: '<p align="center">Nuk ka aksesore per tu shfaqur!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
+       
+
+
+       response.forEach(function(item){
+        $scope.syzeD.push(item);
+        $scope.markaSyzesh.push(item.kodifikimartikulli2);
+        $scope.formaSyzesh.push(item.zonakadastrale);
+
+        
+
       });
-       console.log(response);
+       $scope.markaSyzesh = $scope.remove_duplicates($scope.markaSyzesh);
+       $scope.formaSyzesh = $scope.remove_duplicates($scope.formaSyzesh);
+       $scope.formaSyzesh = $scope.cleanArray($scope.formaSyzesh);
+       // console.log($scope.markaSyzesh);
+       // console.log($scope.formaSyzesh);
+
+        $scope.syzeD.forEach( function(element, index) {
+        element.pershkrimiangartikulliNew=element.pershkrimiangartikulli.slice(3);
+       });
+
+       // $scope.syzeD.forEach( function(element, index) {
+       //   $scope.pershkrimiSakte=element.pershkrimartikulli.split(' ');
+       //   if ($scope.pershkrimiSakte[0]=="Emporio" || $scope.pershkrimiSakte[0]=="Ray" || $scope.pershkrimiSakte[0]=="RAY" || $scope.pershkrimiSakte[0]=="EMPORIO") {
+       //    $scope.pershkrimiSakte.length=3;
+       //   }else if($scope.pershkrimiSakte[0]=="DOLCE" || $scope.pershkrimiSakte[0]=="Dolce"){
+       //    $scope.pershkrimiSakte.length=4;
+       //   }else{
+       //    // $scope.pershkrimiSakte=$scope.pershkrimiSakte.splice(-0,3);
+       //    $scope.pershkrimiSakte.length=2;
+       //   }
+       //   element.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
+
+       // });
+
+
+       // if ($scope.filterNotActivated==false) {
+       //  console.log('eshte aktivizuar');
+       //  $scope.filtroProduktet();
+       // }else{
+       //  console.log('nuk eshte aktivizuar');
+       // }
+
+       if($scope.countForBackUp==1){
+        $scope.syzeDOriginalBackup=$scope.syzeD;
+        console.log("First and only call");
+       }
+       
+
+
+
+       $scope.$broadcast('scroll.infiniteScrollComplete');
+       // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
+       // console.log($scope.treArray);
+      
+       // console.log(response);
        //gets another limt data
-       $scope.offsetK += 20;
+       $scope.offsetD += 20;
+       console.log($scope.offsetD);
+
+         }
      });
+
+     console.log("fs");
+  // $scope.fshihCmimeVar=false;
+  console.log($scope.fshihCmimeVar);
+
+
 
   };
   /*$scope.syze = Syze.query(function() {
     $ionicLoading.hide();
   });*/
+  
 
 })
 
@@ -4603,6 +5272,9 @@ $scope.cleanArray= function(actual) {
       $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
 
 
+
+
+
     // Geolocation Script Start
 
     $scope.gjejVendodhjen=function(){
@@ -4833,10 +5505,54 @@ $scope.cleanArray= function(actual) {
       // Geolocation Script Ends
 
 
+      $scope.active = 'lek';
+      $scope.monedhaZgjedhur="lek";
+      $scope.monedhaNameZgjedhur='LEK';
+
+      $scope.setActive = function(type) {
+        $scope.active = type;
+        console.log(type);
+        $scope.monedhaZgjedhur=type;
+        $scope.monedhaNameZgjedhur=type;
+        $scope.checkCurrencySelected();
+      };
+
+      $scope.isActive = function(type){
+        //console.log(type);
+        return type === $scope.active;
+      };
+
+
 
       $scope.remBut=false;
 
       $scope.example={};
+
+      $scope.checkCurrencySelected=function(){
+        if ($scope.monedhaZgjedhur=="lek") {
+          console.log('po jam brenda');
+          var total = $scope.response.reduce(function (r, a) {
+                return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
+            }, 0);
+
+          console.log( $scope.example); 
+           $scope.checkoutTotal=Number(total).toFixed(2);
+           console.log('shuma eshte');
+           console.log($scope.checkoutTotal);
+
+        }else{
+          console.log('nope jam brenda');
+          var total = $scope.response.reduce(function (r, a) {
+                return r + Number(a.cmimieur) * Number($scope.example[a.kodartikulli]);
+            }, 0);
+
+          console.log( $scope.example); 
+           $scope.checkoutTotal=Number(total).toFixed(2);
+           console.log('shuma eshte');
+           console.log($scope.checkoutTotal);
+        }
+
+      }
       
       
 
@@ -4848,13 +5564,14 @@ $scope.cleanArray= function(actual) {
         // not allowed to go below 1
         $scope.example[item]=1;
         }else if ($scope.example[item]>=1){
-           var total = $scope.response.reduce(function (r, a) {
-                return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
-            }, 0);
+          //  var total = $scope.response.reduce(function (r, a) {
+          //       return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
+          //   }, 0);
 
-          console.log( $scope.example); 
-          console.log( $scope.example);
-           $scope.checkoutTotal=Number(total).toFixed(2);
+          // console.log( $scope.example); 
+          // console.log( $scope.example);
+          //  $scope.checkoutTotal=Number(total).toFixed(2);
+          $scope.checkCurrencySelected();
         }
 
 
@@ -4878,12 +5595,13 @@ $scope.cleanArray= function(actual) {
         }else if ($scope.example[item]>=1){
 
 
-          var total = $scope.response.reduce(function (r, a) {
-                return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
-            }, 0);
+          // var total = $scope.response.reduce(function (r, a) {
+          //       return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
+          //   }, 0);
 
-          console.log( $scope.example); 
-           $scope.checkoutTotal=Number(total).toFixed(2);
+          // console.log( $scope.example); 
+          //  $scope.checkoutTotal=Number(total).toFixed(2);
+          $scope.checkCurrencySelected();
 
         }
 

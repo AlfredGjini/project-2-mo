@@ -17,14 +17,14 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   $ionicPlatform.ready(function() {
 
 
-    var notificationOpenedCallback = function(jsonData) {
-    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-  };
+  //   var notificationOpenedCallback = function(jsonData) {
+  //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  // };
 
-  window.plugins.OneSignal
-    .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
-    .handleNotificationOpened(notificationOpenedCallback)
-    .endInit();
+  // window.plugins.OneSignal
+  //   .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
+  //   .handleNotificationOpened(notificationOpenedCallback)
+  //   .endInit();
 
 
 
@@ -44,6 +44,11 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
 
                 if (navigator.connection.type == Connection.NONE) {
 
+                  var alertPopup = $ionicPopup.alert({
+                    title: 'Internet',
+                    template: '<p align="center">Ju lutemi lidhuni me internet qe programi te punoje plotesisht!</p>'
+                  });
+
         //             $ionicPopup.confirm({
 
         //                 title: "Internet is not working",
@@ -51,7 +56,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         //                 content: "Internet is not working on your device."
 
         // });
-        alert("Ju lutemi lidhuni me internet qe programi te punoje plotesisht");
+        //alert("Ju lutemi lidhuni me internet qe programi te punoje plotesisht");
 
       }
 

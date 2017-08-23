@@ -1,6 +1,46 @@
+<style type="text/css">
+  @import url(https://fonts.googleapis.com/css?family=Oswald:700,300);
+
+body .button-bar {
+
+  position:absolute;
+  right: 90px;
+  top: 8px;
+  background: #fff;
+  border-color: #fff;
+  border-radius: 5px;
+}
+body .button-bar .button {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  background: #8c0d0d;
+  border-color: #b71c1c;
+  border-width: 4px;
+  height: 25px;
+  min-height: 21px !important;
+  line-height: 21px !important;
+  color: #fff;
+  padding:2px;
+
+}
+
+body .button-bar .button-positive {
+  background-color: #333;
+}
+
+body .button-bar .button-positive:hover {
+  background-color: #333 !important;
+}
+
+
+</style>
 <ion-view title="Shporta" cache-view="false">
-  <ion-nav-buttons side="left">
+  <ion-nav-buttons side="right">
    <!--  <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
+      <span class="button-bar">
+      <button class="button button-lek" ng-class="{'button-positive' : isActive('lek')}" ng-click="setActive('lek')">LEK</button>
+      <button class="button button-eur" ng-class="{'button-positive' : isActive('eur')}" ng-click="setActive('eur')">EUR</button>
+    <span>
   </ion-nav-buttons>
   <ion-content class="has-header">
     <!-- <h1 style="margin:10px auto;background-color: #eee;" align="center">My wishlist</h1> -->
@@ -12,7 +52,7 @@
       <div class="shporta" ng-repeat="syze in response track by $index">
         <div class="item item-avatar">
           <div class="shportaFotoContainer">
-            <img class="shportaFoto" src="http://maxoptika-app.com/maxoptikaFTP/{{syze.kodartikulli}}_front.png"/>
+            <img class="shportaFoto" src="http://maxoptika-app.com/maxoptikaFTP/{{syze.kodartikulli}}_list.png"/>
           </div>
           <!-- href="#/app/produkte/{{syze.kodartikulli}}" -->
           <a style="text-decoration: none;" ><h2 class="shportaKategori1"><b>{{syze.kodifikimartikulli2}}</b></h2></a>
@@ -29,7 +69,7 @@
       <h2 ng-show="pojambosh2" style="text-align: center;"><img  style="width: 60px;margin-top: 20px;" src="img/loading.gif"></h2>
       <h2 class="wishBoshClassB" ng-show="pojambosh">shporta eshte bosh</h2> 
       <div class="subtotaliContainer2">
-      <div ng-show="wishbosh3" class="subtotaliContainer"><p class="subtotali">Subtotali</p><p class="subtotaliCmim">{{checkoutTotal}} LEK</p></div>
+      <div ng-show="wishbosh3" class="subtotaliContainer"><p class="subtotali">Subtotali</p><p class="subtotaliCmim">{{checkoutTotal}} {{monedhaNameZgjedhur | uppercase}}</p></div>
       <div style="border: 1px solid #eee;width: 97%;float: right;opacity: 0.6;"></div>
       </div>
       <span ng-show="wishbosh3">
