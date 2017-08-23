@@ -53,7 +53,11 @@ app.post('/takimOrari',reservation.getOrariTakim);
 app.post('/oraretZene',reservation.getOraretZene);
 
 app.get('/test', function(req, res) {
-    res.send("Test");
+    res.send("Testgh");
+});
+
+app.post('/test', function(req, res) {
+    res.send("Testgh numer");
 });
 app.get('/test/:id', function(req, res) {
     res.send("Test : " + req.params.id);
