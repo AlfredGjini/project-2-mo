@@ -84,7 +84,112 @@ angular.module('directory.controllers', ['ionic', 'ngOpenFB','angCamera', 'ionMd
 //       console.log('do thirrem ne fund fare 2');
 //   });
 
+$scope.getShnamo=function(){
+
+    $http({
+       method: 'GET',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/test',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       // data: {
+       //   productId : $stateParams.productId
+       // }
+     }).success(function(response) {
+      console.log(response);
+
+      });
+
+}
+
 $scope.testApi=function(){
+
+
+
+
+  var ip = 'http://79.106.161.194:3040';
+  var username = "dea";  
+  var encrypted='52f47b027746c6a9d000cb866d8b92ab446a67aea3c264cc9ea02a70ce1bbd04';
+
+  var kokaPrefiks='SHNAMO';
+
+
+
+
+  var trupiEksport = new Array();
+  var kokaEksport = new Array();
+
+  var kokeNew = {
+          'ID_DOKIMPORT':'99999999999999999999999999999999999999999',
+          'NENKATEGORIA':'USH',
+          'LLOJDOKUMENTI':'USHmag',
+          'NRDOK': '999999999999999999999999999999999999999',
+          // 'NDERMARRJEKOD': vlera,
+          'DATEDOK': '2017-11-11',
+          'KLIENTFURNITOR': 'KL83',
+          'MENYREPAGESE': 'Pagese',
+          'DTREGJISTRIMI': '2017-11-11', 
+          'EMERKLIENTI': 'Test Klienttt',
+          'KONTAKTI': '069121212',
+     };
+
+    kokaEksport.push(kokeNew);
+
+    // Trupi eshte nje array me objetet qe do te shiten brenda
+    // for (var j = 0; j < trupi.length; j++) {
+    //     var trupNew = {
+    //         'ID_DOKIMPORTKOKA': '99999999999999999999999999999999999999999', //Këtu duhet vendosur id e kokës së dokumentit.
+    //         'LLOJVEPRIMI': 'Artikull',
+    //         'KODI': 'SD13137',  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+    //         'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+    //         'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+    //         'CMIMI': 23900,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh. 
+    //         // 'ZBRITJE': vlera,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+    //         'VLEFTAPATVSH': 23900,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+    //         'VLEFTAMETVSH': 23900,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+    //         'MAGAZINA ': 'qendra',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+    //         'SHENIME': "test nga aplikacioni",
+    //         // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+  
+    //                    };
+    //     trupiEksport.push(trupNew);
+    // }
+
+            var trupNew = {
+            'ID_DOKIMPORTKOKA': '99999999999999999999999999999999999999999', //Këtu duhet vendosur id e kokës së dokumentit.
+            'LLOJVEPRIMI': 'Artikull',
+            'KODI': 'SD13137',  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+            'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+            'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+            'CMIMI': 23900,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh. 
+            'ZBRITJE': "Vlere",  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+            'TVSH': 20,
+            'VLEFTAPATVSH': 23900,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+            'VLEFTAMETVSH': 23900,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+            'MAGAZINA ': 'qendra',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+            'SHENIME': "test nga aplikacioni",
+            // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+  
+                       };
+        trupiEksport.push(trupNew);
+
+
+// }
+
+var dokPerTeDerguar = {kokaEksport: kokaEksport, trupiEksport: trupiEksport};
+
+var dataToSend = JSON.stringify({
+    listEksportuar: dokPerTeDerguar,
+    formatPerImport: 'ImportShitjeDEA',
+    formatObjekti: "Shitje"
+});
 
 
 
@@ -94,10 +199,10 @@ $scope.testApi=function(){
            //  xhr.setRequestHeader("Authorization", "Basic " + btoa(username +":"+encrypted));
            //  },
             url:"https://max-optika-server.herokuapp.com/test",
-            type: 'GET',
+            type: 'POST',
             contentType: 'application/x-www-form-urlencoded',
             // data: dataToSend,
-            dataType: 'json',
+            // dataType: 'json',
            //  headers: {
            //  'ndermarrjaserver': 'MAXOPTIKA',
            //  'eksportprefixid': 'Shitje'

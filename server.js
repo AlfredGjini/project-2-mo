@@ -34,6 +34,7 @@ app.post('/forgot-password', syzet.forgotPassword);
 app.post('/pick-up-store', syzet.pickUpStore);
 app.post('/pay-on-delivery', syzet.payOnDelivery);
 app.post('/getCmimiFilter', syzet.getCmimiFilter);
+app.post('/shnamo', syzet.shnamo);
 
 
 app.post('/kartela-klinike', clinic.getClinicCard);

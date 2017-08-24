@@ -191,6 +191,37 @@ header i:nth-of-type(2) {
     right: 0px;
 }
 
+body .button-bar {
+
+  position:absolute;
+  right: 90px;
+  top: 8px;
+  background: #fff;
+  border-color: #fff;
+  border-radius: 5px;
+}
+body .button-bar .button {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  background: #8c0d0d;
+  border-color: #b71c1c;
+  border-width: 4px;
+  height: 25px;
+  min-height: 21px !important;
+  line-height: 21px !important;
+  color: #fff;
+  padding:2px;
+
+}
+
+body .button-bar .button-positive {
+  background-color: #333;
+}
+
+body .button-bar .button-positive:hover {
+  background-color: #333 !important;
+}
+
 </style>
 
 
@@ -198,6 +229,11 @@ header i:nth-of-type(2) {
   <ion-nav-buttons side="right">
     <!-- <button ng-hide="itemchecked" style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="itemchecked=true"><i style="color: #fff;font-size: 28px;"  class="icon ion-ios-toggle-outline" s></i></button>
     <button ng-show="itemchecked" style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="itemchecked=false"><i style="color: #fff;font-size: 28px;" class="icon ion-ios-toggle" s></i></button> -->
+
+    <span class="button-bar">
+      <button class="button button-lek" ng-class="{'button-positive' : isActive('lek')}" ng-click="setActive('lek')">LEK</button>
+      <button class="button button-eur" ng-class="{'button-positive' : isActive('eur')}" ng-click="setActive('eur')">EUR</button>
+    <span>
   </ion-nav-buttons>
   <ion-content class="has-header">
     <div class="filter">
@@ -405,7 +441,7 @@ header i:nth-of-type(2) {
           <div style="position: absolute;bottom: 0px;margin-left: auto;margin-right: auto;left: 0;right: 0;">
           <p class="produkteShkrim">{{syzeD[$index].kodifikimartikulli2}} {{syzeD[$index].pershkrimiangartikulliNew}}</p>
           <!-- <p>{{syzeD[$index].grupi}}</p> -->
-          <p class="produkteShkrim">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</p>
+          <p class="produkteShkrim"><span ng-show="shfaqLek">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></p>
           <!-- <button>Add to basket</button> -->
           </div>
         </div>

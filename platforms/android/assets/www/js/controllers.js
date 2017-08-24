@@ -84,6 +84,69 @@ angular.module('directory.controllers', ['ionic', 'ngOpenFB','angCamera', 'ionMd
 //       console.log('do thirrem ne fund fare 2');
 //   });
 
+$scope.testApi=function(){
+
+
+
+
+          $.ajax({
+           // beforeSend: function (xhr) {
+           //  xhr.setRequestHeader("Authorization", "Basic " + btoa(username +":"+encrypted));
+           //  },
+            url:"https://max-optika-server.herokuapp.com/test",
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
+            // data: dataToSend,
+            // dataType: 'json',
+           //  headers: {
+           //  'ndermarrjaserver': 'MAXOPTIKA',
+           //  'eksportprefixid': 'Shitje'
+           // },
+           success: function (res) {
+            $scope.$apply(function () {
+                console.log('rezultati erdhi');
+                console.log(res);
+            });
+
+            
+
+
+
+           },
+            error: function (res) {
+            
+            //console.log(res);
+            $scope.$apply(function () {
+               console.log('something went wrong');
+                console.log(res);
+            });
+          }   
+        });
+
+
+  // $http({
+  //      method: 'GET',
+  //      //url: 'https://tarzantest.herokuapp.com/login',
+  //      url: 'https://max-optika-server.herokuapp.com/test',
+  //      headers: {
+  //        'Content-Type': 'application/x-www-form-urlencoded'
+  //      },
+  //      transformRequest: function(obj) {
+  //        var str = [];
+  //        for (var p in obj)
+  //          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+  //        return str.join("&");
+  //      },
+  //      // data: {
+  //      //   productId : $stateParams.productId
+  //      // }
+  //    }).success(function(response) {
+  //     console.log(response);
+
+  //     });
+
+}
+
 
 $scope.shfaqNgjyrat=function(){
   $ionicModal.fromTemplateUrl('templates/ngjyrat.html', {
@@ -1824,6 +1887,23 @@ $scope.skaRezultat=false;
   //   };
 
 
+  $scope.active = 'lek';
+  $scope.shfaqLek=true;
+
+  $scope.setActive = function(type) {
+    $scope.active = type;
+    if(type=='lek'){
+      $scope.shfaqLek=true;
+    }else{
+      $scope.shfaqLek=false;
+    }
+  };
+
+  $scope.isActive = function(type){
+    return type === $scope.active;
+  };
+
+
 $scope.checkPromotion=function(promo){
   if (promo==undefined || promo =='') {
     // Do nothing
@@ -2524,6 +2604,23 @@ $scope.cleanArray= function(actual) {
 
 $scope.moreDataCanBeLoaded=true;
 
+
+  $scope.active = 'lek';
+  $scope.shfaqLek=true;
+
+  $scope.setActive = function(type) {
+    $scope.active = type;
+    if(type=='lek'){
+      $scope.shfaqLek=true;
+    }else{
+      $scope.shfaqLek=false;
+    }
+  };
+
+  $scope.isActive = function(type){
+    return type === $scope.active;
+  };
+
 $scope.itemchecked=false;
 $scope.filterNotActivated=true;
 $scope.data.gjinia=[];
@@ -3150,6 +3247,23 @@ $scope.cleanArray= function(actual) {
   //         $scope.shfaqPoshte=true;
   //       }
   //   };
+
+
+  $scope.active = 'lek';
+  $scope.shfaqLek=true;
+
+  $scope.setActive = function(type) {
+    $scope.active = type;
+    if(type=='lek'){
+      $scope.shfaqLek=true;
+    }else{
+      $scope.shfaqLek=false;
+    }
+  };
+
+  $scope.isActive = function(type){
+    return type === $scope.active;
+  };
 
 
 $scope.checkPromotion=function(promo){
@@ -5654,6 +5768,7 @@ $scope.cleanArray= function(actual) {
   // localStorage.removeItem('shporta');
 
   $scope.removeFromShporta = function(item) {
+
     
     var wsh = window.localStorage.shporta.split(',');
     var i = wsh.indexOf(item.target.id);
@@ -5714,6 +5829,8 @@ $scope.cleanArray= function(actual) {
          $scope.shportlistItemsLength=numriShport.length;
          // window.location.reload();
        }
+       $scope.checkCurrencySelected();
+
 
        // $timeout(function() {
        //     var pos = $scope.response.map(function(e) { return e.kodartikulli; }).indexOf(item.target.parentElement.id);
