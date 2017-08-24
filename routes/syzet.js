@@ -938,7 +938,7 @@ exports.shnamo = function (req, res, next) {
       client
         .query(queryTextLente)
         .on('end',function(end){
-          responseSh.pergjigje1=end;
+          responseSh.pergjigje1=end.rows["0"];
           responseSh.pergjigje2='sukses';
           res.send(responseSh);
           client.end();
