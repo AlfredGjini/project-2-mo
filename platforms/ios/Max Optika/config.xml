@@ -18,9 +18,6 @@
     <feature name="CardIO">
         <param name="ios-package" onload="false" value="CardIOCordovaPlugin" />
     </feature>
-    <feature name="PayPalMobile">
-        <param name="ios-package" onload="true" value="PayPalMobileCordovaPlugin" />
-    </feature>
     <feature name="Calendar">
         <param name="ios-package" value="Calendar" />
     </feature>

@@ -1,7 +1,7 @@
 angular.module('directory', ['ionic', 'directory.controllers', 'directory.services','angCamera', 'ngCordova', 'ngOpenFB', 'ionMdInput', 'ionic-material','dnd']).constant('shopSettings',{
    
    
-   payPalSandboxId : 'APP-80W284485P519543T',
+   payPalSandboxId : 'AWI-LUYyIkI87pMWNYZ7zm4mIoEtJU0EZnh7zTiZLo76jpzxU4g-3ZOABwmcZ2ntHktPrLoMeR2YQaLO',
    payPalProductionId : 'AUmyx6mOYuPW8G2TgEODuwwzPWEY7jZ5IiKBX2vHTuXHvwymPC1GoICNvel7AG7mYAt24KifG6TpOarx',
    payPalEnv: 'PayPalEnvironmentSandbox',   // for testing  production for production
    payPalShopName : 'MyShopName',

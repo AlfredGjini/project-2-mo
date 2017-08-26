@@ -9,14 +9,6 @@ module.exports = [
         ]
     },
     {
-        "id": "com.paypal.cordova.mobilesdk.PayPalMobile",
-        "file": "plugins/com.paypal.cordova.mobilesdk/www/cdv-plugin-paypal-mobile-sdk.js",
-        "pluginId": "com.paypal.cordova.mobilesdk",
-        "clobbers": [
-            "PayPalMobile"
-        ]
-    },
-    {
         "id": "cordova-plugin-calendar.Calendar",
         "file": "plugins/cordova-plugin-calendar/www/Calendar.js",
         "pluginId": "cordova-plugin-calendar",
@@ -449,7 +441,6 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "card.io.cordova.mobilesdk": "2.1.0",
-    "com.paypal.cordova.mobilesdk": "3.3.1",
     "cordova-plugin-calendar": "4.5.5",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-camera": "2.3.0",

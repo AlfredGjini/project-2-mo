@@ -133,6 +133,22 @@ module.exports = [
         "clobbers": [
             "Connection"
         ]
+    },
+    {
+        "id": "card.io.cordova.mobilesdk.CardIO",
+        "file": "plugins/card.io.cordova.mobilesdk/www/cdv-plugin-card-io.js",
+        "pluginId": "card.io.cordova.mobilesdk",
+        "clobbers": [
+            "CardIO"
+        ]
+    },
+    {
+        "id": "com.paypal.cordova.mobilesdk.PayPalMobile",
+        "file": "plugins/com.paypal.cordova.mobilesdk/www/cdv-plugin-paypal-mobile-sdk.js",
+        "pluginId": "com.paypal.cordova.mobilesdk",
+        "clobbers": [
+            "PayPalMobile"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -152,7 +168,9 @@ module.exports.metadata =
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-x-socialsharing": "5.1.8",
     "onesignal-cordova-plugin": "2.1.2",
-    "cordova-plugin-network-information": "1.3.3"
+    "cordova-plugin-network-information": "1.3.3",
+    "card.io.cordova.mobilesdk": "2.1.0",
+    "com.paypal.cordova.mobilesdk": "3.5.0"
 };
 // BOTTOM OF METADATA
 });

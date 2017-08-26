@@ -13,10 +13,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"PayPalMobile\"><param name=\"ios-package\" onload=\"true\" value=\"PayPalMobileCordovaPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Calendar\"><param name=\"ios-package\" value=\"Calendar\" /></feature>",
                             "count": 1
                         },
@@ -171,9 +167,6 @@
         "card.io.cordova.mobilesdk": {
             "PACKAGE_NAME": "com.ionicframework.test129416"
         },
-        "com.paypal.cordova.mobilesdk": {
-            "PACKAGE_NAME": "com.ionicframework.test129416"
-        },
         "cordova-plugin-calendar": {
             "CALENDAR_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.ionicframework.test129416"
@@ -249,14 +242,6 @@
             "pluginId": "card.io.cordova.mobilesdk",
             "clobbers": [
                 "CardIO"
-            ]
-        },
-        {
-            "id": "com.paypal.cordova.mobilesdk.PayPalMobile",
-            "file": "plugins/com.paypal.cordova.mobilesdk/www/cdv-plugin-paypal-mobile-sdk.js",
-            "pluginId": "com.paypal.cordova.mobilesdk",
-            "clobbers": [
-                "PayPalMobile"
             ]
         },
         {
@@ -690,7 +675,6 @@
     ],
     "plugin_metadata": {
         "card.io.cordova.mobilesdk": "2.1.0",
-        "com.paypal.cordova.mobilesdk": "3.3.1",
         "cordova-plugin-calendar": "4.5.5",
         "cordova-plugin-compat": "1.1.0",
         "cordova-plugin-camera": "2.3.0",

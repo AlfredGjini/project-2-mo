@@ -45,6 +45,9 @@
         },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "com.paypal.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         }
     },
     "dependent_plugins": {
@@ -52,6 +55,9 @@
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         },
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "card.io.cordova.mobilesdk": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         }
     }

@@ -89,6 +89,8 @@ ext {
 
 // PLUGIN GRADLE EXTENSIONS START
 apply from: "onesignal-cordova-plugin/yourpackagename-build-extras-onesignal.gradle"
+apply from: "card.io.cordova.mobilesdk/yourpackagename-build.gradle"
+apply from: "com.paypal.cordova.mobilesdk/yourpackagename-build.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()

@@ -756,7 +756,8 @@ exports.pickUpStore = function (req, res, next) {
     var email = req.body.email;
     var emailTo = req.body.emailTo;
     var shportaElem = req.body.shportaElem;
-    console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+emailTo+' '+shportaElem);
+    var dyqani=req.body.dyqani;
+    console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+emailTo+' '+shportaElem+' '+dyqani);
 
     // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
     //   var transporter = mailer.createTransport( {
@@ -787,7 +788,7 @@ exports.pickUpStore = function (req, res, next) {
     
     // mailOptions.to=passData[0].email;
     // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    mailOptions.html = 'Pershendetje <br> Klienti ' + emer + " " + mbiemer + " me nr.tel: "+tel +" dhe Email: "+email +" ka zgjedhur per te blere produktet me ID <br><br>" + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
+    mailOptions.html = 'Pershendetje <br> Klienti ' + emer + " " + mbiemer + " me nr.tel: "+tel +" dhe Email: "+email +" ka zgjedhur dyqanin " + dyqani + " per te blere produktet me ID <br><br>" + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
     transporter.sendMail(mailOptions, function(error, info){
       if(error){
         return console.log(error);

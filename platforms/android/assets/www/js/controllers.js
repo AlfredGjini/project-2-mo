@@ -84,28 +84,154 @@ angular.module('directory.controllers', ['ionic', 'ngOpenFB','angCamera', 'ionMd
 //       console.log('do thirrem ne fund fare 2');
 //   });
 
-$scope.testApi=function(){
+$scope.getShnamo=function(action,id){
+  // var action=action;
+  //console.log("u thirra kot");
+    $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/shnamo',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         action : action,
+         idd: id
+       }
+     }).success(function(response) {
+      console.log(response);
+      if (response.pergjigje1!='perditesim') {
+
+
+            var ip = 'http://79.106.161.194:3040';
+            var username = "dea";  
+            var encrypted='52f47b027746c6a9d000cb866d8b92ab446a67aea3c264cc9ea02a70ce1bbd04';
+
+            var kokaPrefiks='SHNAMO';
+            var currId=response.pergjigje1.shnamo;
+            var id_dok=kokaPrefiks+response.pergjigje1.shnamo;
+            
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            var dataS = mm+'/'+dd+'/'+yyyy;
+            //console.log(todayy);
+            //var dataS='08/25/2017';
+            var currCmimiTvsh=$scope.syze.cmimilek;
+            var currCmimiPaTvsh=currCmimiTvsh/1.2;
+            currCmimiPaTvsh=currCmimiPaTvsh.toFixed(2);
+            // console.log(currCmimiTvsh);
+            // console.log(currCmimiPaTvsh);
+
+
+
+
+            var trupiEksport = new Array();
+            var kokaEksport = new Array();
+
+            var kokeNew = {
+                    'ID_DOKIMPORT':id_dok,
+                    'NENKATEGORIA':'USH',
+                    'LLOJDOKUMENTI':'USHmag',
+                    'NRDOK': id_dok,
+                    // 'NDERMARRJEKOD': vlera,
+                    'DATEDOK': dataS,
+                    'KLIENTFURNITOR': 'KL83',
+                    'MENYREPAGESE': 'Pagese',
+                    'DTREGJISTRIMI': dataS, 
+                    'EMERKLIENTI': 'Test Klienttt',
+                    'KONTAKTI': '069121212',
+               };
+
+              kokaEksport.push(kokeNew);
+
+              // Trupi eshte nje array me objetet qe do te shiten brenda
+              // for (var j = 0; j < trupi.length; j++) {
+              //     var trupNew = {
+              //         'ID_DOKIMPORTKOKA': '99999999999999999999999999999999999999999', //Këtu duhet vendosur id e kokës së dokumentit.
+              //         'LLOJVEPRIMI': 'Artikull',
+              //         'KODI': 'SD13137',  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+              //         'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+              //         'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+              //         'CMIMI': 23900,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh. 
+              //         // 'ZBRITJE': vlera,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+              //         'VLEFTAPATVSH': 23900,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+              //         'VLEFTAMETVSH': 23900,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+              //         'MAGAZINA ': 'qendra',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+              //         'SHENIME': "test nga aplikacioni",
+              //         // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+            
+              //                    };
+              //     trupiEksport.push(trupNew);
+              // }
+
+                      var trupNew = {
+                      'ID_DOKIMPORTKOKA': id_dok, //Këtu duhet vendosur id e kokës së dokumentit.
+                      'LLOJVEPRIMI': 'Artikull',
+                      'KODI': 'SD13137',  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+                      'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+                      'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+                      'CMIMI': currCmimiTvsh,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh.
+                      'LLOJZBRITJE': 'Perqindje', 
+                      'ZBRITJE': 0,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+                      'TVSH': 20,
+                      'VLEFTAPATVSH': currCmimiPaTvsh,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+                      'VLEFTAMETVSH': currCmimiTvsh,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+                      'MAGAZINA': 'MX83',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+                      'SHENIME': "test nga aplikacioni i sakte",
+                      // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+            
+                                 };
+                  trupiEksport.push(trupNew);
+
+
+          // }
+
+          var dokPerTeDerguar = {kokaEksport: kokaEksport, trupiEksport: trupiEksport};
+
+          var dataToSend = JSON.stringify({
+              listEksportuar: dokPerTeDerguar,
+              formatPerImport: 'ImportShitjeDEA',
+              formatObjekti: "Shitje"
+          });
+          console.log(dataToSend);
 
 
 
 
           $.ajax({
-           // beforeSend: function (xhr) {
-           //  xhr.setRequestHeader("Authorization", "Basic " + btoa(username +":"+encrypted));
-           //  },
-            url:"https://max-optika-server.herokuapp.com/test",
+           beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(username +":"+encrypted));
+            },
+            url: ip + "/importoEksportin",
             type: 'POST',
-            contentType: 'application/x-www-form-urlencoded',
-            // data: dataToSend,
-            // dataType: 'json',
-           //  headers: {
-           //  'ndermarrjaserver': 'MAXOPTIKA',
-           //  'eksportprefixid': 'Shitje'
-           // },
+            contentType: 'application/json',
+            data: dataToSend,
+            dataType: 'json',
+            headers: {
+            'ndermarrjaserver': 'MAXOPTIKA',
+            'eksportprefixid': 'Shitje'
+           },
            success: function (res) {
             $scope.$apply(function () {
-                console.log('rezultati erdhi');
+                console.log('rezultati erdhiii');
                 console.log(res);
+                $scope.getShnamo('perditeso',currId+1);
             });
 
             
@@ -122,6 +248,30 @@ $scope.testApi=function(){
             });
           }   
         });
+
+         }else{
+          console.log('rast perditesimi')
+         } 
+
+      });
+
+}
+
+$scope.testApi=function(){
+  //console.log('u thirra');
+
+
+
+
+
+  $scope.getShnamo('merr','bosh');
+  // $scope.getShnamo('perditeso',0);
+  
+
+
+
+
+  
 
 
   // $http({
@@ -5927,7 +6077,18 @@ $scope.cleanArray= function(actual) {
 
 $scope.vazhdoPorosine= function(allCmimi){
   $scope.gjejVendodhjen();
-  // alert(allCmimi);
+   // console.log(allCmimi);
+   // var gjithCmimi=parseInt(allCmimi);
+   // var gjithCmimi2=Number(allCmimi);
+   // console.log(typeof(gjithCmimi));
+   // console.log(typeof(gjithCmimi2));
+   // gjithCmimi2=gjithCmimi2+1;
+   // console.log(gjithCmimi2);
+   // gjithCmimi2=gjithCmimi2-1;
+   // console.log(gjithCmimi2);
+   var gjithCmimi2=359;
+
+   //alert(typeof(gjithCmimi));
     $ionicModal.fromTemplateUrl('templates/vazhdoPorosine.html', {
         scope: $scope
       }).then(function(modal) {
@@ -5953,11 +6114,12 @@ $scope.vazhdoPorosine= function(allCmimi){
       if ($scope.selected=="PayPal") {
         // alert("paypal");
         PaypalService.initPaymentUI().then(function () {
-          PaypalService.makePayment(allCmimi, "Total").then(function (response) {
+          PaypalService.makePayment(gjithCmimi2, "Total").then(function (response) {
 
             alert("success"+JSON.stringify(response));
 
             }, function (error) {
+              alert(error);
 
             alert("Transaction Canceled");
 
