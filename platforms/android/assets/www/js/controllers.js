@@ -6074,6 +6074,9 @@ $scope.cleanArray= function(actual) {
 
 //   }
 // }, 3000); 
+$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','QTU','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec'];
+$scope.dyqanetListaSelected={};
+$scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
 $scope.vazhdoPorosine= function(allCmimi){
   $scope.gjejVendodhjen();
@@ -6127,6 +6130,17 @@ $scope.vazhdoPorosine= function(allCmimi){
           })
       }else if ($scope.selected=="Pick Up On Store") {
         $scope.modal.hide();
+        $ionicModal.fromTemplateUrl('templates/zgjidhDyqanin.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.modall = modal;
+          $scope.modall.show();
+        });
+
+        $scope.nextStepPickUp=function(adresa){
+          console.log($scope.dyqanetListaSelected.dyqani);
+
+        $scope.modall.hide();
         $ionicLoading.show({
               template: 'Loading...',
               delay:100
@@ -6136,6 +6150,7 @@ $scope.vazhdoPorosine= function(allCmimi){
         // alert("Store");
         console.log($scope.emailiDyqAfer);
         // console.log($scope.loggedInSakte);
+        var dyqaniZgjedhur=$scope.dyqanetListaSelected.dyqani;
         var klientEmer=$scope.loggedInSakte.emer;
         var klientMbiemer=$scope.loggedInSakte.mbiemer;
         var klientTel=$scope.loggedInSakte.celular;
@@ -6163,6 +6178,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             tel: klientTel,
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
+            dyqani: dyqaniZgjedhur,
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
@@ -6171,8 +6187,9 @@ $scope.vazhdoPorosine= function(allCmimi){
           console.log(response);
           if (response.sentPickUp==1) {
            // $scope.showAlertForgotPasswordSuccess();
+           var pergjigjeDyqan='Dyqani '+dyqaniZgjedhur+' u lajmerua per blerjen tuaj!';
            $ionicLoading.show({
-              template: 'Dyqani me afer jush u lajmerua per blerjen tuaj!',
+              template: pergjigjeDyqan,
               duration: 3000
             });
 
@@ -6186,7 +6203,11 @@ $scope.vazhdoPorosine= function(allCmimi){
           }       
 
         });
-        // console.log('')
+        console.log('')
+
+        }
+
+        
         
       }else if ($scope.selected=="Pay On Delivery") {
         $scope.modal.hide();
@@ -6750,7 +6771,7 @@ $scope.vazhdoPorosine= function(allCmimi){
       },
   }
 
-  $scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','QTU','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec']
+  $scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','QTU','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec'];
   console.log($scope.dyqanet);
   console.log($scope.dyqanetLista);
   $scope.dyqanetListaSelected={};
