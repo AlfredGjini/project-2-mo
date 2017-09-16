@@ -864,7 +864,7 @@ exports.getSingleProduct = function(req, res, next){
       console.log('Connected to postgresss! 9');
 
       client
-        .query('SELECT * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE products2.kodartikulli = $1',[productId])
+        .query('SELECT * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE products2.kodartikulli = $1',[productId])
         // .query('SELECT products2.grupi, products2.kodartikulli,products2.kodifikimartikulli2,products2.pershkrimartikulli, cmime2.cmimi, cmime2.monedha FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE products2.kodartikulli = $1',[productId])
          // .query('SELECT grupi,kodartikulli,kodifikimartikulli2,pershkrimartikulli FROM products2 WHERE kodartikulli = $1',[productId])
         
@@ -879,7 +879,7 @@ exports.getSingleProduct = function(req, res, next){
           //console.log(pergjigje[0].produkti.pershkrimiangartikulli);
           var pershkrim_artikulli=pergjigje[0].produkti.pershkrimiangartikulli;
           var kod_artikulli=pergjigje[0].produkti.kodartikulli;
-          var query_text_new='SELECT * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE products2.pershkrimiangartikulli =\''+pershkrim_artikulli+'\' AND products2.kodartikulli!=\''+kod_artikulli+'\'';
+          var query_text_new='SELECT * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE products2.pershkrimiangartikulli =\''+pershkrim_artikulli+'\' AND products2.kodartikulli!=\''+kod_artikulli+'\'';
 
 
 
