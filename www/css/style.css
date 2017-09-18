@@ -1905,6 +1905,7 @@ table.ui-datepicker-calendar {border-collapse: separate;}
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
+    line-height: 10px;
 }
 
 .corner-text-left{
@@ -1918,6 +1919,7 @@ table.ui-datepicker-calendar {border-collapse: separate;}
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(-90deg);
+    line-height: 10px;
 }
 
 

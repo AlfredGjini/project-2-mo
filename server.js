@@ -47,6 +47,9 @@ app.post('/login', users.getUser);
 
 app.post('/getTakim',reservation.getReservations);
 
+app.post('/getOrariDyqan',reservation.getOrariDyqan);
+
+
 app.post('/takim',reservation.setReservation);
 
 app.post('/takimOrari',reservation.getOrariTakim);

@@ -63,6 +63,41 @@ exports.getReservations = function(req, res, next){
 }
 
 
+exports.getOrariDyqan = function(req, res, next){
+
+  var oraretDyqan = [];
+  pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+      console.log('Connected to postgresss! Get oratet dyqan');
+
+      client
+        .query('SELECT * FROM oraridyqan')
+         // .query('SELECT grupi,kodartikulli,kodifikimartikulli2,pershkrimartikulli FROM products2 WHERE kodartikulli = $1',[productId])
+        
+        .on('row', function(row) {
+          oraretDyqan.push(row);
+          //console.log(row);
+          //console.log('Single item : ', productId);
+          //res.send(row);
+          // client.end();
+          done();
+        }).on('end', function(result) {
+          //rezervations.push(row);
+          //console.log(rezervations);
+          res.send(oraretDyqan);
+          // client.end();
+          done();
+        });
+    });
+  pg.end(function(err) {
+        if (err) throw err;
+    });
+}
+
+
 exports.setReservation = function(req,res,next){
   var data = req.body.date;
   var ora = req.body.ora;

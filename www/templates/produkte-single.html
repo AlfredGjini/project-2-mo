@@ -25,11 +25,16 @@
   
   <div class="row" ng-show="showSpinner"><img style="margin: 100px auto;width: 40px;height: 40px;" src="img/loadOff.gif"></div>
   <ion-content class="has-header" ng-hide="showSpinner">
-      <div class="corner-text-wrapper-left">
+      <div ng-show="shfaqGjendjenOrange" class="corner-text-wrapper-left">
         <div class="corner-text-orange">
-          <span class="corner-text-left">In Stock</span>
+          <span class="corner-text-left">Sasi e<br> limituar</span>
         </div>
-    </div>
+      </div>
+      <div ng-show="shfaqGjendjenGreen" class="corner-text-wrapper-left">
+        <div class="corner-text-green">
+          <span class="corner-text-left">Ne <br>gjendje</span>
+        </div>
+      </div>
 
 
 
