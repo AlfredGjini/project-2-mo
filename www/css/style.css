@@ -1922,4 +1922,23 @@ table.ui-datepicker-calendar {border-collapse: separate;}
     line-height: 10px;
 }
 
+.promocion{
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    z-index: 1;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(47deg);
+    font-size: 7px;
+    color: #fff;
+    text-transform: uppercase;
+    white-space: pre;
+    text-align: center;
+    line-height: 8px;
+    font-weight: 600;
+}
+
 

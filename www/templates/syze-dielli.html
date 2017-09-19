@@ -435,13 +435,20 @@ body .button-bar .button-positive:hover {
         
         <img src='http://maxoptika-app.com/maxoptikaFTP/{{syzeD[$index].kodartikulli}}_list.png' width='300'>
         <!-- <span ng-bind-html=""></span> -->
+        <div ng-show="syzeD[$index].promocioni != '' && syzeD[$index].promocioni != undefined">
+        <span class="promocion">{{syzeD[$index].promocioni}}</span>
         
-        <img ng-src='{{checkPromotion(syzeD[$index].nrpasurie)}}' width='100' class="fotoPromocion">
+          <!-- <img ng-src='{{checkPromotion(syzeD[$index].nrpasurie)}}' width='100' class="fotoPromocion"> -->
+          <img ng-src='img/promotions/promotion-default.png' width='100' class="fotoPromocion">
+        </div>
           <!-- <img src='http://maxoptika-app.com/maxoptikaFTP/{{syzeD[$index].kodartikulli}}_front.png' width='300'> -->
           <div style="position: absolute;bottom: 0px;margin-left: auto;margin-right: auto;left: 0;right: 0;">
           <p class="produkteShkrim">{{syzeD[$index].kodifikimartikulli2}} {{syzeD[$index].pershkrimiangartikulliNew}}</p>
           <!-- <p>{{syzeD[$index].grupi}}</p> -->
-          <p class="produkteShkrim"><span ng-show="shfaqLek">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></p>
+          <p class="produkteShkrim" ng-hide="syzeD[$index].cmimiPromo != '' && syzeD[$index].cmimiPromo != undefined"><span ng-show="shfaqLek">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></p>
+          <div ng-show="syzeD[$index].cmimiPromo != '' && syzeD[$index].cmimiPromo != undefined">
+          <p class="produkteShkrim"><strike style="color: #b71c1c;"><span ng-show="shfaqLek" style="color: #929292;" >{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek" style="color: #929292;">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></strike ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{syzeD[$index].cmimiPromo}} {{syzeD[$index].monedhalek}}</span></p>
+          </div>
           <!-- <button>Add to basket</button> -->
           </div>
         </div>
