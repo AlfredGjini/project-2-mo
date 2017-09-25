@@ -411,12 +411,17 @@ $scope.shfaqNgjyrat=function(){
          $scope.syze.koleksioni=cmimiriModel[0];
         if(cmimiriModel[1]==undefined || cmimiriModel[2]==undefined){
           $scope.syze.promocioni="";
-          $scope.syze.cmimiPromo="";
+          $scope.syze.cmimiPromoLek="";
+          $scope.syze.cmimiPromoEur="";
         }else{
           //var replaced = str.split(' ').join('+');
           $scope.syze.promocioni=cmimiriModel[1];
-          $scope.syze.cmimiPromo=cmimiriModel[2];
+          $scope.syze.cmimiPromoLek=cmimiriModel[2];
+          $scope.syze.cmimiPromoEur=cmimiriModel[3];
           }
+
+
+
          // $scope.syze.pershkrimartikulli=$scope.pershkrimiSakte.join(' ');
 
 
@@ -2718,11 +2723,13 @@ $scope.cleanArray= function(actual) {
         element.kodidoganorartikulli=cmimiriModel[0];
         if(cmimiriModel[1]==undefined || cmimiriModel[2]==undefined){
           element.promocioni="";
-          element.cmimiPromo="";
+          element.cmimiPromoLek="";
+          element.cmimiPromoEur="";
         }else{
           //var replaced = str.split(' ').join('+');
           element.promocioni=cmimiriModel[1];
-          element.cmimiPromo=cmimiriModel[2];
+          element.cmimiPromoLek=cmimiriModel[2];
+          element.cmimiPromoEur=cmimiriModel[3];
           }
           element.promocioni=element.promocioni.split(' ').join('\n');
 
@@ -5278,9 +5285,8 @@ $scope.cleanArray= function(actual) {
     });
 
     var posOptions = {
-      enableHighAccuracy: true,
-      timeout: 4000,
-      maximumAge: 0
+      enableHighAccuracy: false,
+      timeout: 10000
     };
     function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
       var R = 6371; // Radius of the earth in km
@@ -5299,6 +5305,50 @@ $scope.cleanArray= function(actual) {
     function deg2rad(deg) {
       return deg * (Math.PI/180)
     }
+
+        // onSuccess Callback
+    // This method accepts a Position object, which contains the
+    // current GPS coordinates
+    //
+    // var onSuccess = function(position) {
+    //     alert('Latitude: '          + position.coords.latitude          + '\n' +
+    //           'Longitude: '         + position.coords.longitude         + '\n' +
+    //           'Altitude: '          + position.coords.altitude          + '\n' +
+    //           'Accuracy: '          + position.coords.accuracy          + '\n' +
+    //           'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+    //           'Heading: '           + position.coords.heading           + '\n' +
+    //           'Speed: '             + position.coords.speed             + '\n' +
+    //           'Timestamp: '         + position.timestamp                + '\n');
+    // };
+
+    // // onError Callback receives a PositionError object
+    // //
+    // function onError(error) {
+    //     alert('code: '    + error.code    + '\n' +
+    //           'message: ' + error.message + '\n');
+    // }
+
+    // $cordovaGeolocation.getCurrentPosition(onSuccess, onError);
+
+    
+
+    // var watchId = navigator.geolocation.watchLocation();
+    // //var watchId=$cordovaGeolocation.watchLocation();
+
+    // // if (navigator.geolocation) {
+    // //   console.log('geolocation');
+    // //   navigator.geolocation.getCurrentPosition(function(position) {
+    // //   alert('navigator ok :'+lat+' '+lng);
+    // //   var lat = position.coords.latitude;
+    // //   var lng = position.coords.longitude;
+
+    // //   }, function(error) {
+    // //   alert('code: '    + error.code    + '\n' +
+    // //            'message: ' + error.message + '\n');
+    // //   });
+    // //   } else {
+    // //   alert('no geolocation');
+    // //   }
 
     $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
       var addToJson = [];
@@ -5329,10 +5379,29 @@ $scope.cleanArray= function(actual) {
       //       template: '<p align="center">Rezervimi u krye me sukses!</p>'
       //     });
 
-
-     }, function (err) {
+      //navigator.geolocation.clearWatch(watchId);
+     }, function (error) {
       $ionicLoading.hide();
-      alert("Ju lutem aktivizoni location");
+      if(error.code==1){
+        // $ionicPopup.alert({
+        //   title: 'Gabim',
+        //   template: '<p align="center">Ju lutem aktivizoni location</p>'
+        // });
+        alert('Ju lutem aktivizoni location');
+        //$ionicLoading.hide();
+      }else{
+        // $ionicPopup.alert({
+        //   title: 'Gabim',
+        //   template: '<p align="center">Nuk mund te gjendet location per momentin. Ju lutem provojeni me vone.</p>'
+        // });
+        // $ionicLoading.hide();
+        alert('Nuk mund te gjendet location per momentin. Ju lutem provojeni me vone.');
+      }
+      //$ionicLoading.hide();
+      
+      // alert('code: '    + error.code    + '\n' +
+      //         'message: ' + error.message + '\n');
+      //navigator.geolocation.clearWatch(watchId);
     });
 
     
@@ -5563,6 +5632,222 @@ $scope.cleanArray= function(actual) {
       $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
       console.log($scope.loggedInSakte);
       $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
+
+
+$scope.getShnamo=function(action,id){
+  // var action=action;
+  //console.log("u thirra kot");
+    $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/shnamo',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         action : action,
+         idd: id
+       }
+     }).success(function(response) {
+      console.log(response);
+      if (response.pergjigje1!='perditesim') {
+
+
+            var ip = 'http://79.106.161.194:3040';
+            var username = "dea";  
+            var encrypted='52f47b027746c6a9d000cb866d8b92ab446a67aea3c264cc9ea02a70ce1bbd04';
+
+            var kokaPrefiks='SHNAMO';
+            var currId=response.pergjigje1.shnamo;
+            var id_dok=kokaPrefiks+response.pergjigje1.shnamo;
+            
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            var dataS = mm+'/'+dd+'/'+yyyy;
+            //console.log(todayy);
+            //var dataS='08/25/2017';
+            // var currCmimiTvsh=$scope.syze.cmimilek;
+            // var currCmimiPaTvsh=currCmimiTvsh/1.2;
+            // currCmimiPaTvsh=currCmimiPaTvsh.toFixed(2);
+            // console.log(currCmimiTvsh);
+            // console.log(currCmimiPaTvsh);
+
+
+
+
+            var trupiEksport = new Array();
+            var kokaEksport = new Array();
+
+            var kokeNew = {
+                    'ID_DOKIMPORT':id_dok,
+                    'NENKATEGORIA':'USH',
+                    'LLOJDOKUMENTI':'USHmag',
+                    'NRDOK': id_dok,
+                    // 'NDERMARRJEKOD': vlera,
+                    'DATEDOK': dataS,
+                    'KLIENTFURNITOR': 'KL83',
+                    'MENYREPAGESE': 'Pagese',
+                    'DTREGJISTRIMI': dataS, 
+                    'EMERKLIENTI': 'Test Klienttt',
+                    'KONTAKTI': '069121212',
+               };
+
+              kokaEksport.push(kokeNew);
+
+              // Trupi eshte nje array me objetet qe do te shiten brenda
+              // for (var j = 0; j < trupi.length; j++) {
+              //     var trupNew = {
+              //         'ID_DOKIMPORTKOKA': '99999999999999999999999999999999999999999', //Këtu duhet vendosur id e kokës së dokumentit.
+              //         'LLOJVEPRIMI': 'Artikull',
+              //         'KODI': 'SD13137',  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+              //         'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+              //         'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+              //         'CMIMI': 23900,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh. 
+              //         // 'ZBRITJE': vlera,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+              //         'VLEFTAPATVSH': 23900,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+              //         'VLEFTAMETVSH': 23900,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+              //         'MAGAZINA ': 'qendra',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+              //         'SHENIME': "test nga aplikacioni",
+              //         // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+            
+              //                    };
+              //     trupiEksport.push(trupNew);
+              // }
+                      //console.log($scope.response);
+                    for (var j = 0; j < $scope.response.length; j++) {
+
+                      if($scope.response[j].cmimiPromoLek !=""){
+                        console.log('jam brenda tek cmimi promo');
+                        var currCmimi=$scope.response[j].cmimilek;
+                        var currCmimiTvsh=$scope.response[j].cmimiPromoLek;
+                        //var zbritja=0;
+                        var zbritja=($scope.response[j].cmimilek - $scope.response[j].cmimiPromoLek)/$scope.response[j].cmimilek*100;
+                        zbritja=zbritja.toFixed(2);
+
+                      }else{
+                        var currCmimi=$scope.response[j].cmimilek;
+                        var currCmimiTvsh=$scope.response[j].cmimilek;
+                        var zbritja=0;
+                      }
+                      var kodi=$scope.response[j].kodartikulli;
+
+                      //var currCmimiTvsh=$scope.response[j].cmimilek;
+                      var currCmimiPaTvsh=currCmimiTvsh/1.2;
+                      currCmimiPaTvsh=currCmimiPaTvsh.toFixed(2);
+                      // console.log(currCmimiTvsh);
+                      // console.log(currCmimiPaTvsh);
+
+
+
+                      var trupNew = {
+                      'ID_DOKIMPORTKOKA': id_dok, //Këtu duhet vendosur id e kokës së dokumentit.
+                      'LLOJVEPRIMI': 'Artikull',
+                      'KODI': kodi,  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+                      'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+                      'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+                      'CMIMI': currCmimi,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh.
+                      'LLOJZBRITJE': 'Perqindje', 
+                      'ZBRITJE': zbritja,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+                      'TVSH': 20,
+                      'VLEFTAPATVSH': currCmimiPaTvsh,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+                      'VLEFTAMETVSH': currCmimiTvsh,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+                      'MAGAZINA': 'MX83',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+                      'SHENIME': "test nga aplikacioni i sakte",
+                      // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+            
+                                 };
+                  trupiEksport.push(trupNew);
+                }
+                console.log(trupiEksport);
+
+          // }
+
+          var dokPerTeDerguar = {kokaEksport: kokaEksport, trupiEksport: trupiEksport};
+
+          var dataToSend = JSON.stringify({
+              listEksportuar: dokPerTeDerguar,
+              formatPerImport: 'ImportShitjeDEA',
+              formatObjekti: "Shitje"
+          });
+          console.log('testi 1');
+          console.log(dataToSend);
+
+
+
+
+          $.ajax({
+           beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(username +":"+encrypted));
+            },
+            url: ip + "/importoEksportin",
+            type: 'POST',
+            contentType: 'application/json',
+            data: dataToSend,
+            dataType: 'json',
+            headers: {
+            'ndermarrjaserver': 'MAXOPTIKA',
+            'eksportprefixid': 'Shitje'
+           },
+           success: function (res) {
+            $scope.$apply(function () {
+                console.log('rezultati erdhiii');
+                console.log(res);
+                $scope.getShnamo('perditeso',currId+1);
+            });
+
+            
+
+
+
+           },
+            error: function (res) {
+            
+            //console.log(res);
+            $scope.$apply(function () {
+               console.log('something went wrong');
+                console.log(res);
+            });
+          }   
+        });
+
+         }else{
+          console.log('rast perditesimi')
+         } 
+
+      });
+
+}
+
+$scope.testApi=function(){
+  //console.log('u thirra');
+
+
+  $scope.getShnamo('merr','bosh');
+  // $scope.getShnamo('perditeso',0);
+
+
+}
+
+
+
+
+
 
 
 
@@ -5823,12 +6108,19 @@ $scope.cleanArray= function(actual) {
 
       $scope.checkCurrencySelected=function(){
         if ($scope.monedhaZgjedhur=="lek") {
-          console.log('po jam brenda');
+          //console.log('po jam brenda');
+          
           var total = $scope.response.reduce(function (r, a) {
-                return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
+                if (a.cmimiPromoLek !="") {
+                  return r + Number(a.cmimiPromoLek) * Number($scope.example[a.kodartikulli]);
+                }else{
+                  return r + Number(a.cmimilek) * Number($scope.example[a.kodartikulli]);
+                }
+
+                
             }, 0);
 
-          console.log( $scope.example); 
+          //console.log( $scope.example); 
            $scope.checkoutTotal=Number(total).toFixed(2);
            console.log('shuma eshte');
            console.log($scope.checkoutTotal);
@@ -5836,10 +6128,14 @@ $scope.cleanArray= function(actual) {
         }else{
           console.log('nope jam brenda');
           var total = $scope.response.reduce(function (r, a) {
-                return r + Number(a.cmimieur) * Number($scope.example[a.kodartikulli]);
+                if (a.cmimiPromoEur !="") {
+                  return r + Number(a.cmimiPromoEur) * Number($scope.example[a.kodartikulli]);
+                }else{
+                  return r + Number(a.cmimieur) * Number($scope.example[a.kodartikulli]);
+                }
             }, 0);
 
-          console.log( $scope.example); 
+          //console.log( $scope.example); 
            $scope.checkoutTotal=Number(total).toFixed(2);
            console.log('shuma eshte');
            console.log($scope.checkoutTotal);
@@ -6074,9 +6370,33 @@ $scope.cleanArray= function(actual) {
         // console.log($scope.response[0]);
         $scope.checkoutTotal=0;
         $scope.wishbosh3=true;
+
+
+
         for (var i in $scope.response) {
           // console.log($scope.response[i].name);
+          var cmimiriModel=$scope.response[i].kodidoganorartikulli.split(';');
+        //console.log(cmimiriModel);
+         $scope.response[i].koleksioni=cmimiriModel[0];
+        if(cmimiriModel[1]==undefined || cmimiriModel[2]==undefined){
+          $scope.response[i].promocioni="";
+          $scope.response[i].cmimiPromoLek="";
+          $scope.response[i].cmimiPromoEur="";
+        }else{
+          //var replaced = str.split(' ').join('+');
+          $scope.response[i].promocioni=cmimiriModel[1];
+          $scope.response[i].cmimiPromoLek=cmimiriModel[2];
+          $scope.response[i].cmimiPromoEur=cmimiriModel[3];
+          }
+          console.log($scope.response);
+
+          if ($scope.response[i].cmimiPromoLek !="") {
+            $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimiPromoLek);
+          }else{
+
+
           $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimilek);
+          }
           $scope.checkoutTotal=Number($scope.checkoutTotal).toFixed(2);
 
 
@@ -6147,13 +6467,21 @@ $scope.vazhdoPorosine= function(allCmimi){
         // alert("paypal");
         PaypalService.initPaymentUI().then(function () {
           PaypalService.makePayment(gjithCmimi2, "Total").then(function (response) {
+            $ionicPopup.alert({
+              title: 'Sukses',
+              template: '<p align="center">Transaksioni perfundoi me sukses</p>'
+            });
 
-            alert("success"+JSON.stringify(response));
+            console.log("success"+JSON.stringify(response));
 
             }, function (error) {
-              alert(error);
+              console.log(error);
+              $ionicPopup.alert({
+                title: 'Gabim',
+                template: '<p align="center">Transaksioni deshtoi</p>'
+              });
 
-            alert("Transaction Canceled");
+            //alert("Transaction Canceled");
 
               });
           })
@@ -7089,6 +7417,7 @@ $scope.dataSelected2='01/01/2017';
 
 
   $scope.rezervo = function() {
+    
 
     //$scope.data.date=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
     console.log($scope.oraModel.checked);
@@ -7114,6 +7443,8 @@ $scope.dataSelected2='01/01/2017';
              template: '<p align="center">Ju lutemi plotesoni gjithe te dhenat!</p>'
            });
     } else {
+      $scope.shfaqLoadingRezervim=true;
+      jQuery('#butoniRezervo').prop('disabled', true);
       console.log('Success');
       $http({
         method: 'POST',
@@ -7141,6 +7472,8 @@ $scope.dataSelected2='01/01/2017';
           celular: $scope.data.celular
         }
       }).success(function(response) {
+        jQuery('#butoniRezervo').prop('disabled', false);
+        $scope.shfaqLoadingRezervim=false;
         console.log(response);
         console.log(response.success);
         //console.log(typeof response);

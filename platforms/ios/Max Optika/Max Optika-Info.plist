@@ -66,13 +66,13 @@
     <string/>
     <key>NSPhotoLibraryUsageDescription</key>
     <string/>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string/>
     <key>NSMicrophoneUsageDescription</key>
     <string/>
     <key>UIBackgroundModes</key>
     <array>
       <string>remote-notification</string>
     </array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string></string>
   </dict>
 </plist>

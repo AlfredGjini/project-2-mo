@@ -254,38 +254,6 @@ module.exports = [
         "runs": true
     },
     {
-        "id": "cordova-plugin-geolocation.Coordinates",
-        "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
-        "pluginId": "cordova-plugin-geolocation",
-        "clobbers": [
-            "Coordinates"
-        ]
-    },
-    {
-        "id": "cordova-plugin-geolocation.PositionError",
-        "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-        "pluginId": "cordova-plugin-geolocation",
-        "clobbers": [
-            "PositionError"
-        ]
-    },
-    {
-        "id": "cordova-plugin-geolocation.Position",
-        "file": "plugins/cordova-plugin-geolocation/www/Position.js",
-        "pluginId": "cordova-plugin-geolocation",
-        "clobbers": [
-            "Position"
-        ]
-    },
-    {
-        "id": "cordova-plugin-geolocation.geolocation",
-        "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
-        "pluginId": "cordova-plugin-geolocation",
-        "clobbers": [
-            "navigator.geolocation"
-        ]
-    },
-    {
         "id": "cordova-plugin-inappbrowser.inappbrowser",
         "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
         "pluginId": "cordova-plugin-inappbrowser",
@@ -435,6 +403,38 @@ module.exports = [
         "clobbers": [
             "OneSignal"
         ]
+    },
+    {
+        "id": "cordova-plugin-geolocation.Coordinates",
+        "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "Coordinates"
+        ]
+    },
+    {
+        "id": "cordova-plugin-geolocation.PositionError",
+        "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "PositionError"
+        ]
+    },
+    {
+        "id": "cordova-plugin-geolocation.Position",
+        "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "Position"
+        ]
+    },
+    {
+        "id": "cordova-plugin-geolocation.geolocation",
+        "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+        "pluginId": "cordova-plugin-geolocation",
+        "clobbers": [
+            "navigator.geolocation"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -448,19 +448,19 @@ module.exports.metadata =
     "cordova-plugin-datepicker": "0.9.3",
     "cordova-plugin-device": "1.1.3",
     "cordova-plugin-file": "4.3.0",
-    "cordova-plugin-geolocation": "2.3.0",
     "cordova-plugin-inappbrowser": "1.5.0",
     "cordova-plugin-media-capture": "1.4.0",
     "cordova-plugin-splashscreen": "4.0.0",
     "cordova-plugin-statusbar": "2.2.0",
-    "cordova-plugin-whitelist": "1.3.0",
+    "cordova-plugin-whitelist": "1.3.3-dev",
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-network-information": "1.3.1",
     "org.adlotto.cordova.recheck-screen-orientation": "0.1.0",
     "cordova-plugin-screen-orientation": "2.0.1",
     "es6-promise-plugin": "4.1.0",
     "cordova-plugin-x-socialsharing": "5.1.8",
-    "onesignal-cordova-plugin": "2.1.2"
+    "onesignal-cordova-plugin": "2.1.2",
+    "cordova-plugin-geolocation": "2.4.3"
 };
 // BOTTOM OF METADATA
 });

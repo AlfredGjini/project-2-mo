@@ -445,9 +445,9 @@ body .button-bar .button-positive:hover {
           <div style="position: absolute;bottom: 0px;margin-left: auto;margin-right: auto;left: 0;right: 0;">
           <p class="produkteShkrim">{{syzeD[$index].kodifikimartikulli2}} {{syzeD[$index].pershkrimiangartikulliNew}}</p>
           <!-- <p>{{syzeD[$index].grupi}}</p> -->
-          <p class="produkteShkrim" ng-hide="syzeD[$index].cmimiPromo != '' && syzeD[$index].cmimiPromo != undefined"><span ng-show="shfaqLek">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></p>
-          <div ng-show="syzeD[$index].cmimiPromo != '' && syzeD[$index].cmimiPromo != undefined">
-          <p class="produkteShkrim"><strike style="color: #b71c1c;"><span ng-show="shfaqLek" style="color: #929292;" >{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek" style="color: #929292;">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></strike ><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{syzeD[$index].cmimiPromo}} {{syzeD[$index].monedhalek}}</span></p>
+          <p class="produkteShkrim" ng-hide="syzeD[$index].cmimiPromoLek != '' && syzeD[$index].cmimiPromoLek != undefined"><span ng-show="shfaqLek">{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></p>
+          <div ng-show="syzeD[$index].cmimiPromoLek != '' && syzeD[$index].cmimiPromoLek != undefined">
+          <p class="produkteShkrim"><strike style="color: #b71c1c;"><span ng-show="shfaqLek" style="color: #929292;" >{{syzeD[$index].cmimilek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek" style="color: #929292;">{{syzeD[$index].cmimieur}} {{syzeD[$index].monedhaeur}}</span></strike ><span ng-show="shfaqLek">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{syzeD[$index].cmimiPromoLek}} {{syzeD[$index].monedhalek}}</span><span ng-hide="shfaqLek">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{syzeD[$index].cmimiPromoEur}} {{syzeD[$index].monedhaeur}}</span></p>
           </div>
           <!-- <button>Add to basket</button> -->
           </div>

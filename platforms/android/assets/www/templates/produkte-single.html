@@ -40,7 +40,7 @@
 
 
 
-        <ion-slide-box style="margin-top:5px;text-align: center;padding-bottom: 20px;">
+        <ion-slide-box style="margin-top:10px;text-align: center;padding-bottom: 20px;">
           <ion-slide ng-repeat="image in syzeView" ng-init="updateSlider()">
             <img src="http://maxoptika-app.com/maxoptikaFTP/{{image}}.png" style="width:80%">
           </ion-slide>
@@ -57,13 +57,26 @@
           <div class="row">
 
             <div class="col" style="margin-top: -20px;margin-bottom: -20px;">
-            <h2 class="cmimiProduktSingle" style="color: #4e5259;float: left;">Cmimi</h2>
+            <h2 class="cmimiProduktSingle" style="color: #4e5259;float: left;margin-top: 25px;margin-right: 5px;font-size: 14px !important;">Cmimi</h2>
               <h2 class="cmimiProduktSingle2" style="color: #4e5259;float: right;"><b style="font-size: 90%;">
-              <span ng-show="shfaqMonedhenTjeter">{{syze.cmimilek}} <!-- {{syze.monedha}} --> LEK</span>
-              <span ng-hide="shfaqMonedhenTjeter">{{syze.cmimieur}} EUR</span>
-              <button ng-click="ktheMonedhe()" style="background-color: #b71c1c;margin-top: -1px; margin-right: 0px;padding: 2px 15px;">
-                <i ng-show="shfaqMonedhenTjeter" style="color: #fff;" class="icon ion-social-euro"></i>
-                <i ng-hide="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;" class="">LEK</i>
+              <span ng-hide="syze.cmimiPromoLek != '' && syze.cmimiPromoLek != undefined">
+                <span ng-show="shfaqMonedhenTjeter">{{syze.cmimilek}} {{syze.monedhalek}}</span>
+                <span ng-hide="shfaqMonedhenTjeter">{{syze.cmimieur}} {{syze.monedhaeur}}</span>
+              </span>
+              </b>
+              <b style="font-size: 60%;">
+              <span ng-show="syze.cmimiPromoLek != '' && syze.cmimiPromoLek != undefined">
+                <strike style="color: #b71c1c;">
+                  <span ng-show="shfaqMonedhenTjeter" style="color: #4e5259;">{{syze.cmimilek}} {{syze.monedhalek}}</span>
+                  <span ng-hide="shfaqMonedhenTjeter" style="color: #4e5259;">{{syze.cmimieur}} {{syze.monedhaeur}}</span>
+                </strike>
+                <span ng-show="shfaqMonedhenTjeter">&nbsp;&nbsp;&nbsp;{{syze.cmimiPromoLek}} {{syze.monedhalek}}</span>
+                <span ng-hide="shfaqMonedhenTjeter">&nbsp;&nbsp;&nbsp;{{syze.cmimiPromoEur}} {{syze.monedhaeur}}</span>
+              </span>
+              
+              <button ng-click="ktheMonedhe()" style="background-color: #b71c1c;margin-top: -1px; margin-right: 0px;padding: 0px 8px;margin: 0px 0px 0px 5px;">
+                <i ng-show="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;margin: -5px;font-size: 75%;" >EUR</i>
+                <i ng-hide="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;margin: -5px;font-size: 75%;" class="">LEK</i>
               </button>
               </b></h2> 
             </div>

@@ -364,7 +364,9 @@ exports.findAllSearch = function (req, res, next) {
         }
       }
 
-    var queryTextS = 'SELECT distinct on(products2.kodartikulli) products2.kodartikulli, products2.grupi, products2.kodifikimartikulli2,products2.pershkrimartikulli, cmime2.cmimi, cmime2.monedha FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE ' + params.join(' ') + ' ORDER BY products2.kodartikulli';
+    // var queryTextS = 'SELECT distinct on(products2.kodartikulli) products2.kodartikulli, products2.grupi, products2.kodifikimartikulli2,products2.pershkrimartikulli, cmime2.cmimi, cmime2.monedha FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE ' + params.join(' ') + ' ORDER BY products2.kodartikulli';
+
+    var queryTextS = 'SELECT distinct on(products2.kodartikulli) * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) WHERE ' + params.join(' ') + ' ORDER BY products2.kodartikulli';
 
     console.log(queryTextS);
     

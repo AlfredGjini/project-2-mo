@@ -34,9 +34,6 @@
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         },
@@ -47,6 +44,9 @@
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         },
         "com.paypal.cordova.mobilesdk": {
+            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+        },
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.yourpackagename"
         }
     },
