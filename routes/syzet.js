@@ -775,6 +775,9 @@ exports.pickUpStore = function (req, res, next) {
         host: "smtp-mail.outlook.com", // hostname
         secureConnection: false, // use SSL
         port: 587, // port for secure SMTP
+        tls: {
+           ciphers:'SSLv3'
+        },
         auth: {
             user: "maxoptikasmtp@outlook.com",
             pass: "maxoptika.1A"
@@ -819,6 +822,9 @@ exports.payOnDelivery = function (req, res, next) {
         host: "smtp-mail.outlook.com", // hostname
         secureConnection: false, // use SSL
         port: 587, // port for secure SMTP
+        tls: {
+           ciphers:'SSLv3'
+        },
         auth: {
             user: "maxoptikasmtp@outlook.com",
             pass: "maxoptika.1A"
