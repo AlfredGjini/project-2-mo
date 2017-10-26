@@ -779,8 +779,8 @@ exports.pickUpStore = function (req, res, next) {
            ciphers:'SSLv3'
         },
         auth: {
-            user: "maxoptikasmtp@outlook.com",
-            pass: "maxoptika.1AB"
+            user: "maxoptikasmtpnew@outlook.com",
+            pass: "maxoptika.1A"
         }
     });
     var mailOptions = {
