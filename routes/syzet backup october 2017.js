@@ -678,12 +678,12 @@ exports.forgotPassword = function (req, res, next) {
         secureConnection: true, // use SSL
         port: 587, // port for secure SMTP
         auth: {
-            user: "maxoptikasmtpnew@outlook.com",
+            user: "maxoptikasmtp@outlook.com",
             pass: "maxoptika.1A"
         }
     });
     var mailOptions = {
-      from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
+      from: '"MaxOptika App" <maxoptikasmtp@outlook.com>', // sender address
       to: 'agjini@dea.com.al', // list of receivers
       subject: 'Rikthim Fjalekalimi!', // Subject line
       text: 'Hello world', // plaintext body
@@ -827,12 +827,12 @@ exports.payOnDelivery = function (req, res, next) {
            ciphers:'SSLv3'
         },
         auth: {
-            user: "maxoptikasmtpnew@outlook.com",
+            user: "maxoptikasmtp@outlook.com",
             pass: "maxoptika.1A"
         }
     });
     var mailOptions = {
-      from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
+      from: '"MaxOptika App" <maxoptikasmtp@outlook.com>', // sender address
       to: 'a.gjini@live.com', // list of receivers
       subject: 'pay On Delivery!', // Subject line
       text: 'Hello world', // plaintext body

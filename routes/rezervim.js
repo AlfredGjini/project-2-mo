@@ -120,12 +120,12 @@ exports.setReservation = function(req,res,next){
         secureConnection: true, // use SSL
         port: 587, // port for secure SMTP
         auth: {
-            user: "maxoptikasmtp@outlook.com",
+            user: "maxoptikasmtpnew@outlook.com",
             pass: "maxoptika.1A"
         }
     });
   var mailOptions = {
-    from: '"MaxOptika App" <maxoptikasmtp@outlook.com>', // sender address
+    from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
     to: 'alfred.gjini93@gmail.com', // list of receivers
     subject: 'Rezervim Takimi!', // Subject line
     text: 'Hello world', // plaintext body
@@ -168,11 +168,12 @@ exports.setReservation = function(req,res,next){
                           if(error){
                               console.log('1');
                               console.log(error);
-                              return console.log(error);
+                               console.log(error);
                               res.send(JSON.stringify({success:2}));
-                          }
+                          }else {
                           console.log('Message sent: ' + info.response);
                           //res.send(JSON.stringify({success:1}));
+                          }
 
                       });
 
