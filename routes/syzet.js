@@ -798,9 +798,10 @@ exports.pickUpStore = function (req, res, next) {
       if(error){
         console.log(error);
         res.send(JSON.stringify({sentPickUp:0}));
-      }
+      }else{
       console.log('Message sent: ' + info.response);
       res.send(JSON.stringify({sentPickUp:1}));
+      }
     });
 
 };
