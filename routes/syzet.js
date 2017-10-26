@@ -780,7 +780,7 @@ exports.pickUpStore = function (req, res, next) {
         },
         auth: {
             user: "maxoptikasmtp@outlook.com",
-            pass: "maxoptika.1A"
+            pass: "maxoptika.1AB"
         }
     });
     var mailOptions = {
