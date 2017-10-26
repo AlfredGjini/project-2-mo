@@ -1,5 +1,6 @@
 {
   "name": "test",
+  "type": "ionic1",
   "app_id": "",
   "gulpStartupTasks": [
     "sass",
@@ -8,5 +9,6 @@
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
-  ]
+  ],
+  "integrations": {}
 }

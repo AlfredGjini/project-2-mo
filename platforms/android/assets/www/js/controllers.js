@@ -6666,6 +6666,38 @@ $scope.vazhdoPorosine= function(allCmimi){
 
 .controller('searchCtrl', function($scope, $http, $stateParams, $rootScope, $timeout) {
 
+$scope.remove_duplicates= function(origArr) {
+      var newArr = [],
+          origLen = origArr.length,
+          found, x, y;
+
+      for (x = 0; x < origLen; x++) {
+          found = undefined;
+          for (y = 0; y < newArr.length; y++) {
+              if (origArr[x] === newArr[y]) {
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              newArr.push(origArr[x]);
+          }
+      }
+      return newArr;
+  }
+
+$scope.cleanArray= function(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+
+
+
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
       var wishlistItems=window.localStorage.getItem('wishlist');
@@ -6715,6 +6747,9 @@ $scope.vazhdoPorosine= function(allCmimi){
 
           $scope.kerkobosh3=false;
           $scope.kerkobosh2=true;
+          $scope.syzeD   = [];
+          $scope.markaSyzesh = [];
+          $scope.formaSyzesh = [];
 
           // Make an ajax call to database
 
@@ -6737,15 +6772,66 @@ $scope.vazhdoPorosine= function(allCmimi){
           }).success(function(response) {
             $scope.syzeSearch = response;
             console.log(response);
-            if ($scope.syzeSearch.length==0) {
+            if (response.length==0) {
               $scope.kerkobosh2=false;
               $scope.kerkobosh3=true;
             }else{
               $scope.kerkobosh3=false;
-            }
-            for (var i in $scope.rezultatiKerkimi) {
-              // console.log($scope.response[i].name);
-            }
+            
+
+
+       response.forEach(function(item){
+        $scope.syzeD.push(item);
+        $scope.markaSyzesh.push(item.kodifikimartikulli2);
+        $scope.formaSyzesh.push(item.zonakadastrale);
+
+        
+
+      });
+       $scope.markaSyzesh = $scope.remove_duplicates($scope.markaSyzesh);
+       $scope.formaSyzesh = $scope.remove_duplicates($scope.formaSyzesh);
+       $scope.formaSyzesh = $scope.cleanArray($scope.formaSyzesh);
+       // console.log($scope.markaSyzesh);
+       // console.log($scope.formaSyzesh);
+
+        $scope.syzeD.forEach( function(element, index) {
+        element.pershkrimiangartikulliNew=element.pershkrimiangartikulli.slice(3);
+        var cmimiriModel=element.kodidoganorartikulli.split(';');
+        //console.log(cmimiriModel);
+        element.kodidoganorartikulli=cmimiriModel[0];
+        if(cmimiriModel[1]==undefined || cmimiriModel[2]==undefined){
+          element.promocioni="";
+          element.cmimiPromoLek="";
+          element.cmimiPromoEur="";
+        }else{
+          //var replaced = str.split(' ').join('+');
+          element.promocioni=cmimiriModel[1];
+          element.cmimiPromoLek=cmimiriModel[2];
+          element.cmimiPromoEur=cmimiriModel[3];
+          }
+          element.promocioni=element.promocioni.split(' ').join('\n');
+
+
+
+       });
+
+}
+
+
+
+
+
+
+
+
+            // console.log(response);
+            // if ($scope.syzeSearch.length==0) {
+            //   $scope.kerkobosh2=false;
+            //   $scope.kerkobosh3=true;
+            // }else{
+            //   $scope.kerkobosh3=false;
+            // }
+
           });
 
 

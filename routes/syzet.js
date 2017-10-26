@@ -773,7 +773,7 @@ exports.pickUpStore = function (req, res, next) {
     // });
     var transporter = mailer.createTransport( {
         host: "smtp-mail.outlook.com", // hostname
-        secureConnection: true, // use SSL
+        secureConnection: false, // use SSL
         port: 587, // port for secure SMTP
         auth: {
             user: "maxoptikasmtp@outlook.com",
@@ -817,7 +817,7 @@ exports.payOnDelivery = function (req, res, next) {
     // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
           var transporter = mailer.createTransport( {
         host: "smtp-mail.outlook.com", // hostname
-        secureConnection: true, // use SSL
+        secureConnection: false, // use SSL
         port: 587, // port for secure SMTP
         auth: {
             user: "maxoptikasmtp@outlook.com",
