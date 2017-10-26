@@ -784,7 +784,7 @@ exports.pickUpStore = function (req, res, next) {
         }
     });
     var mailOptions = {
-      from: '"MaxOptika App" <maxoptikasmtp@outlook.com>', // sender address
+      from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
       to: 'a.gjini@live.com', // list of receivers
       subject: 'Pick Up On Store!', // Subject line
       text: 'Hello world', // plaintext body
