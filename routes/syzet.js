@@ -796,7 +796,7 @@ exports.pickUpStore = function (req, res, next) {
     mailOptions.html = 'Pershendetje <br> Klienti ' + emer + " " + mbiemer + " me nr.tel: "+tel +" dhe Email: "+email +" ka zgjedhur dyqanin " + dyqani + " per te blere produktet me ID <br><br>" + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
     transporter.sendMail(mailOptions, function(error, info){
       if(error){
-        return console.log(error);
+        console.log(error);
         res.send(JSON.stringify({sentPickUp:0}));
       }
       console.log('Message sent: ' + info.response);
