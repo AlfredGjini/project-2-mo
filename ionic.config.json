@@ -10,5 +10,7 @@
     "www/**/*",
     "!www/lib/**/*"
   ],
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

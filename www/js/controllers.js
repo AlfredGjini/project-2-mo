@@ -1033,6 +1033,7 @@ $scope.itemchecked=false;
 $scope.filterNotActivated=true;
 $scope.data.gjinia=[];
 $scope.skaRezultat=false;
+$scope.moreDataCanBeLoaded=true;
 
 
 
@@ -1458,7 +1459,17 @@ $scope.skaRezultat=false;
        }
      }).success(function(response) {
       console.log(response);
-       $scope.$broadcast('scroll.infiniteScrollComplete');
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Syze Dielli',
+          template: '<p align="center">Nuk ka me produkte ne oferte!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
+       
 
 
        response.forEach(function(item){
@@ -1496,7 +1507,7 @@ $scope.skaRezultat=false;
 
 
 
-
+       $scope.$broadcast('scroll.infiniteScrollComplete');
        // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
        // console.log($scope.treArray);
       
@@ -1504,6 +1515,7 @@ $scope.skaRezultat=false;
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+     }
      });
 
      console.log("fs");
@@ -1533,6 +1545,7 @@ $scope.itemchecked=false;
 $scope.filterNotActivated=true;
 $scope.data.gjinia=[];
 $scope.skaRezultat=false;
+$scope.moreDataCanBeLoaded=true;
 
 
 
@@ -1958,7 +1971,18 @@ $scope.skaRezultat=false;
        }
      }).success(function(response) {
       console.log(response);
-       $scope.$broadcast('scroll.infiniteScrollComplete');
+
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Syze Dielli',
+          template: '<p align="center">Nuk ka me produkte ne oferte!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
+       
 
 
        response.forEach(function(item){
@@ -1999,11 +2023,12 @@ $scope.skaRezultat=false;
 
        // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
        // console.log($scope.treArray);
-      
+      $scope.$broadcast('scroll.infiniteScrollComplete');
        // console.log(response);
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+     }
      });
 
      console.log("fs");
@@ -4323,6 +4348,7 @@ $scope.cleanArray= function(actual) {
     };
 
     $scope.login = function() {
+      $scope.data.email=$scope.data.email.toLowerCase();
       if ($scope.data.email === "" || $scope.data.fjalekalimi === "" ||
         $scope.data.email === undefined || $scope.data.fjalekalimi === undefined) {
         $scope.showAlert();
@@ -4672,6 +4698,7 @@ $scope.cleanArray= function(actual) {
 
       $scope.regjistrohu = function() {
         var sakteEmail=$scope.validateEmail($scope.dataR.email);
+        sakteEmail=sakteEmail.toLowerCase();
 
       if ($scope.dataR.emer === "" || $scope.dataR.mbiemer === "" ||
         $scope.dataR.emer === undefined || $scope.dataR.mbiemer === undefined || 
@@ -5634,7 +5661,7 @@ $scope.cleanArray= function(actual) {
       $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
 
 
-$scope.getShnamo=function(action,id){
+$scope.getShnamo=function(action,id, where){
   // var action=action;
   //console.log("u thirra kot");
     $http({
@@ -5752,8 +5779,14 @@ $scope.getShnamo=function(action,id){
                       //var currCmimiTvsh=$scope.response[j].cmimilek;
                       var currCmimiPaTvsh=currCmimiTvsh/1.2;
                       currCmimiPaTvsh=currCmimiPaTvsh.toFixed(2);
+                      var vendi;
                       // console.log(currCmimiTvsh);
                       // console.log(currCmimiPaTvsh);
+                      if (where=='Pick Up On Store') {
+                        vendi=$scope.dyqanetListaSelected.dyqani;
+                      }else{
+                        vendi='Pay On Delivery';
+                      }
 
 
 
@@ -5761,6 +5794,7 @@ $scope.getShnamo=function(action,id){
                       'ID_DOKIMPORTKOKA': id_dok, //Këtu duhet vendosur id e kokës së dokumentit.
                       'LLOJVEPRIMI': 'Artikull',
                       'KODI': kodi,  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+                      'PERSHKRIMI':vendi,         //Vendoset përshkrimi i artikullit. Fushë jo e detyrueshme pasi merret nga artikulli.
                       'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
                       'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
                       'CMIMI': currCmimi,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh.
@@ -5770,7 +5804,7 @@ $scope.getShnamo=function(action,id){
                       'VLEFTAPATVSH': currCmimiPaTvsh,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
                       'VLEFTAMETVSH': currCmimiTvsh,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
                       'MAGAZINA': 'MX83',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
-                      'SHENIME': "test nga aplikacioni i sakte",
+                      'SHENIME': where,
                       // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
             
                                  };
@@ -5840,7 +5874,7 @@ $scope.testApi=function(){
   //console.log('u thirra');
 
 
-  $scope.getShnamo('merr','bosh');
+  $scope.getShnamo('merr','bosh', "Pick Up On Store");
   // $scope.getShnamo('perditeso',0);
 
 
@@ -6040,40 +6074,40 @@ $scope.testApi=function(){
       return deg * (Math.PI/180)
     }
 
-    $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
-      var addToJson = [];
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      // console.log("lat eshte "+lat);
-      // console.log("long eshte "+long);
-      // Keto jane koordinata statike te durresit, ne telefon keto duhet te hiqen dhe te lihen ato me siper
-      // lat =41.322472;
-      // long =19.450777;
-      // lat-null;
-      // long=null;
+    // $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
+    //   var addToJson = [];
+    //   var lat = position.coords.latitude;
+    //   var long = position.coords.longitude;
+    //   // console.log("lat eshte "+lat);
+    //   // console.log("long eshte "+long);
+    //   // Keto jane koordinata statike te durresit, ne telefon keto duhet te hiqen dhe te lihen ato me siper
+    //   // lat =41.322472;
+    //   // long =19.450777;
+    //   // lat-null;
+    //   // long=null;
 
-      for (var i = 0; i < $scope.adresses.length; i++) {
-        var distanca=getDistanceFromLatLonInKm(lat,long,$scope.adresses[i].lat,$scope.adresses[i].long);
-        $scope.adresses[i].distanca=distanca;
+    //   for (var i = 0; i < $scope.adresses.length; i++) {
+    //     var distanca=getDistanceFromLatLonInKm(lat,long,$scope.adresses[i].lat,$scope.adresses[i].long);
+    //     $scope.adresses[i].distanca=distanca;
         
-      }
-      $scope.adresses.sort(function(a, b) {
-          return parseFloat(a.distanca) - parseFloat(b.distanca);
-      });
-      $scope.emailiDyqAfer=$scope.adresses[0].Email
-      console.log(typeof($scope.emailiDyqAfer));
-      // $ionicLoading.show({
-      //   template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Dyqani me afer jush u gjet!',
-      //   duration: 1500
-      // });
+    //   }
+    //   $scope.adresses.sort(function(a, b) {
+    //       return parseFloat(a.distanca) - parseFloat(b.distanca);
+    //   });
+    //   $scope.emailiDyqAfer=$scope.adresses[0].Email
+    //   console.log(typeof($scope.emailiDyqAfer));
+    //   // $ionicLoading.show({
+    //   //   template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Dyqani me afer jush u gjet!',
+    //   //   duration: 1500
+    //   // });
 
 
-    }, function (err) {
-      $scope.emailiDyqAfer="agjini@dea.com.al";
-      $ionicLoading.hide();
-      // Careful here, this is needed
-      //alert("Ju lutem aktivizoni location");
-    });
+    // }, function (err) {
+    //   $scope.emailiDyqAfer="agjini@dea.com.al";
+    //   $ionicLoading.hide();
+    //   // Careful here, this is needed
+    //   //alert("Ju lutem aktivizoni location");
+    // });
 
     
   // });
@@ -6425,7 +6459,7 @@ $scope.testApi=function(){
 
 //   }
 // }, 3000); 
-$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','QTU','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec'];
+$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','City Park','QTU','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec'];
 $scope.dyqanetListaSelected={};
 $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
@@ -6544,6 +6578,7 @@ $scope.vazhdoPorosine= function(allCmimi){
           
           // $scope.responseLoggedIn = response[0];
           console.log(response);
+          $scope.getShnamo('merr','bosh', "Pick Up On Store");
           if (response.sentPickUp==1) {
            // $scope.showAlertForgotPasswordSuccess();
            var pergjigjeDyqan='Dyqani '+dyqaniZgjedhur+' u lajmerua per blerjen tuaj!';
@@ -6624,6 +6659,7 @@ $scope.vazhdoPorosine= function(allCmimi){
           console.log(response);
           if (response.sentPayD==1) {
            // $scope.showAlertForgotPasswordSuccess();
+           $scope.getShnamo('merr','bosh', "Pay On Delivery");
            $ionicLoading.show({
               template: 'Qendra u lajmerua. Nje agjent i joni do te ju kontaktoje!',
               duration: 3000
@@ -6662,6 +6698,189 @@ $scope.vazhdoPorosine= function(allCmimi){
 
  
 
+
+  })
+
+
+.controller('historiaCtrl', function($scope, $http, $stateParams, $rootScope, $timeout, $ionicModal,PaypalService, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+
+      $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
+      $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
+      console.log($scope.loggedInSakte);
+      $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
+
+
+
+
+
+      $scope.active = 'lek';
+      $scope.monedhaZgjedhur="lek";
+      $scope.monedhaNameZgjedhur='LEK';
+
+      $scope.setActive = function(type) {
+        $scope.active = type;
+        console.log(type);
+        $scope.monedhaZgjedhur=type;
+        $scope.monedhaNameZgjedhur=type;
+        $scope.checkCurrencySelected();
+      };
+
+      $scope.isActive = function(type){
+        //console.log(type);
+        return type === $scope.active;
+      };
+
+
+
+      $scope.remBut=false;
+
+      $scope.example={};
+
+
+      // Check the number of elements in the cart and wishlist
+      $scope.pojambosh=false;
+      var numriWish=[];
+      var wishlistItems=window.localStorage.getItem('wishlist');
+      if (wishlistItems==null){
+        $scope.wishlistItemsLength=null;
+      }else {
+      numriWish=wishlistItems.split(',');
+      
+       if (numriWish[0]=="") {
+        // console.log('po jam bosh');
+        $scope.wishlistItemsLength=null;
+        
+       }else {
+         $scope.wishlistItemsLength=numriWish.length;
+       }
+
+       }
+
+
+       var numriShport=[];
+      var shportlistItems=window.localStorage.getItem('shporta');
+      $scope.shportaElem= shportlistItems;
+      if (shportlistItems==null){
+        $scope.shportlistItemsLength=null;
+        $scope.pojambosh=true;
+        $scope.pojambosh2=false;
+      }else {
+      // console.log(shportlistItems);
+      numriShport=shportlistItems.split(',');
+      // console.log(numriShport);
+      
+         if (numriShport[0]=="") {
+          $scope.shportlistItemsLength=null;
+          $scope.pojambosh=true;
+         }else {
+           $scope.shportlistItemsLength=numriShport.length;
+         }
+       }
+
+
+  $scope.response = {};
+  // localStorage.removeItem('shporta');
+  var actionK='merr';
+
+
+      $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/get-orders',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         action : actionK,
+         idd: 45
+       }
+     }).success(function(response) {
+      console.log('pergjigja eshte');
+      console.log(response);
+
+     });
+
+
+
+  $scope.getShporta = function() {
+    var data = window.localStorage.getItem('shporta') || "";
+    if ($scope.pojambosh==false) {
+      $scope.pojambosh2=true;
+      console.log('po nuk eshte thirr');
+
+    }else{
+      console.log('po nuk eshte thirr asd');
+    }
+
+    if (data !== "") {
+      $http({
+        method: 'POST',
+        url: 'https://max-optika-server.herokuapp.com/wishlist',
+        cach: false,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        transformRequest: function(obj) {
+          var str = [];
+          for (var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          return str.join("&");
+        },
+        data: {
+          wishlist: JSON.stringify(data.split(','))
+        }
+      }).success(function(response) {
+        $scope.pojambosh2=false;
+        console.log(response);
+        $scope.response = response;
+        // console.log($scope.response[0]);
+        $scope.checkoutTotal=0;
+        $scope.wishbosh3=true;
+
+
+
+        for (var i in $scope.response) {
+          // console.log($scope.response[i].name);
+          var cmimiriModel=$scope.response[i].kodidoganorartikulli.split(';');
+        //console.log(cmimiriModel);
+         $scope.response[i].koleksioni=cmimiriModel[0];
+        if(cmimiriModel[1]==undefined || cmimiriModel[2]==undefined){
+          $scope.response[i].promocioni="";
+          $scope.response[i].cmimiPromoLek="";
+          $scope.response[i].cmimiPromoEur="";
+        }else{
+          //var replaced = str.split(' ').join('+');
+          $scope.response[i].promocioni=cmimiriModel[1];
+          $scope.response[i].cmimiPromoLek=cmimiriModel[2];
+          $scope.response[i].cmimiPromoEur=cmimiriModel[3];
+          }
+          console.log($scope.response);
+
+          if ($scope.response[i].cmimiPromoLek !="") {
+            $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimiPromoLek);
+          }else{
+
+
+          $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimilek);
+          }
+          $scope.checkoutTotal=Number($scope.checkoutTotal).toFixed(2);
+
+
+        }
+        window.localStorage.setItem('cmimiFillestar', $scope.checkoutTotal);
+
+      });
+
+    };
+  }
+  $scope.getShporta();
+ 
 
   })
 

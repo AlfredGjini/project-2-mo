@@ -380,6 +380,7 @@ header i:nth-of-type(2) {
   <br><br><br>
   <!-- <br><br><br> -->
     <ion-infinite-scroll
+    ng-if="moreDataCanBeLoaded"
     on-infinite="loadNextProducts()"
     distance="1%" immediate-check="false">
   </ion-infinite-scroll>

@@ -1033,6 +1033,7 @@ $scope.itemchecked=false;
 $scope.filterNotActivated=true;
 $scope.data.gjinia=[];
 $scope.skaRezultat=false;
+$scope.moreDataCanBeLoaded=true;
 
 
 
@@ -1458,7 +1459,17 @@ $scope.skaRezultat=false;
        }
      }).success(function(response) {
       console.log(response);
-       $scope.$broadcast('scroll.infiniteScrollComplete');
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Syze Dielli',
+          template: '<p align="center">Nuk ka me produkte ne oferte!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
+       
 
 
        response.forEach(function(item){
@@ -1496,7 +1507,7 @@ $scope.skaRezultat=false;
 
 
 
-
+       $scope.$broadcast('scroll.infiniteScrollComplete');
        // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
        // console.log($scope.treArray);
       
@@ -1504,6 +1515,7 @@ $scope.skaRezultat=false;
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+     }
      });
 
      console.log("fs");
@@ -1533,6 +1545,7 @@ $scope.itemchecked=false;
 $scope.filterNotActivated=true;
 $scope.data.gjinia=[];
 $scope.skaRezultat=false;
+$scope.moreDataCanBeLoaded=true;
 
 
 
@@ -1958,7 +1971,18 @@ $scope.skaRezultat=false;
        }
      }).success(function(response) {
       console.log(response);
-       $scope.$broadcast('scroll.infiniteScrollComplete');
+
+      if (response.length==0) {
+        //$scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.moreDataCanBeLoaded=false;
+
+        var alertPopup = $ionicPopup.alert({
+          title: 'Syze Dielli',
+          template: '<p align="center">Nuk ka me produkte ne oferte!</p>'
+        });
+        //alert('Nuk ka aksesore per tu shfaqur');
+      }else{
+       
 
 
        response.forEach(function(item){
@@ -1999,11 +2023,12 @@ $scope.skaRezultat=false;
 
        // localStorage.setItem('treArray', JSON.stringify($scope.treArray));
        // console.log($scope.treArray);
-      
+      $scope.$broadcast('scroll.infiniteScrollComplete');
        // console.log(response);
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+     }
      });
 
      console.log("fs");
@@ -5634,7 +5659,7 @@ $scope.cleanArray= function(actual) {
       $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
 
 
-$scope.getShnamo=function(action,id){
+$scope.getShnamo=function(action,id, where){
   // var action=action;
   //console.log("u thirra kot");
     $http({
@@ -5738,7 +5763,9 @@ $scope.getShnamo=function(action,id){
                         var currCmimiTvsh=$scope.response[j].cmimiPromoLek;
                         //var zbritja=0;
                         var zbritja=($scope.response[j].cmimilek - $scope.response[j].cmimiPromoLek)/$scope.response[j].cmimilek*100;
+                        //console.log(zbritja);
                         zbritja=zbritja.toFixed(2);
+                        //console.log(zbritja);
 
                       }else{
                         var currCmimi=$scope.response[j].cmimilek;
@@ -5768,7 +5795,7 @@ $scope.getShnamo=function(action,id){
                       'VLEFTAPATVSH': currCmimiPaTvsh,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
                       'VLEFTAMETVSH': currCmimiTvsh,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
                       'MAGAZINA': 'MX83',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
-                      'SHENIME': "test nga aplikacioni i sakte",
+                      'SHENIME': where,
                       // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
             
                                  };
@@ -5838,7 +5865,7 @@ $scope.testApi=function(){
   //console.log('u thirra');
 
 
-  $scope.getShnamo('merr','bosh');
+  $scope.getShnamo('merr','bosh', "Pick Up On Store");
   // $scope.getShnamo('perditeso',0);
 
 
@@ -6038,40 +6065,40 @@ $scope.testApi=function(){
       return deg * (Math.PI/180)
     }
 
-    $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
-      var addToJson = [];
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      // console.log("lat eshte "+lat);
-      // console.log("long eshte "+long);
-      // Keto jane koordinata statike te durresit, ne telefon keto duhet te hiqen dhe te lihen ato me siper
-      // lat =41.322472;
-      // long =19.450777;
-      // lat-null;
-      // long=null;
+    // $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
+    //   var addToJson = [];
+    //   var lat = position.coords.latitude;
+    //   var long = position.coords.longitude;
+    //   // console.log("lat eshte "+lat);
+    //   // console.log("long eshte "+long);
+    //   // Keto jane koordinata statike te durresit, ne telefon keto duhet te hiqen dhe te lihen ato me siper
+    //   // lat =41.322472;
+    //   // long =19.450777;
+    //   // lat-null;
+    //   // long=null;
 
-      for (var i = 0; i < $scope.adresses.length; i++) {
-        var distanca=getDistanceFromLatLonInKm(lat,long,$scope.adresses[i].lat,$scope.adresses[i].long);
-        $scope.adresses[i].distanca=distanca;
+    //   for (var i = 0; i < $scope.adresses.length; i++) {
+    //     var distanca=getDistanceFromLatLonInKm(lat,long,$scope.adresses[i].lat,$scope.adresses[i].long);
+    //     $scope.adresses[i].distanca=distanca;
         
-      }
-      $scope.adresses.sort(function(a, b) {
-          return parseFloat(a.distanca) - parseFloat(b.distanca);
-      });
-      $scope.emailiDyqAfer=$scope.adresses[0].Email
-      console.log(typeof($scope.emailiDyqAfer));
-      // $ionicLoading.show({
-      //   template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Dyqani me afer jush u gjet!',
-      //   duration: 1500
-      // });
+    //   }
+    //   $scope.adresses.sort(function(a, b) {
+    //       return parseFloat(a.distanca) - parseFloat(b.distanca);
+    //   });
+    //   $scope.emailiDyqAfer=$scope.adresses[0].Email
+    //   console.log(typeof($scope.emailiDyqAfer));
+    //   // $ionicLoading.show({
+    //   //   template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Dyqani me afer jush u gjet!',
+    //   //   duration: 1500
+    //   // });
 
 
-    }, function (err) {
-      $scope.emailiDyqAfer="agjini@dea.com.al";
-      $ionicLoading.hide();
-      // Careful here, this is needed
-      //alert("Ju lutem aktivizoni location");
-    });
+    // }, function (err) {
+    //   $scope.emailiDyqAfer="agjini@dea.com.al";
+    //   $ionicLoading.hide();
+    //   // Careful here, this is needed
+    //   //alert("Ju lutem aktivizoni location");
+    // });
 
     
   // });
@@ -6542,6 +6569,7 @@ $scope.vazhdoPorosine= function(allCmimi){
           
           // $scope.responseLoggedIn = response[0];
           console.log(response);
+          $scope.getShnamo('merr','bosh', "Pick Up On Store");
           if (response.sentPickUp==1) {
            // $scope.showAlertForgotPasswordSuccess();
            var pergjigjeDyqan='Dyqani '+dyqaniZgjedhur+' u lajmerua per blerjen tuaj!';
@@ -6622,6 +6650,7 @@ $scope.vazhdoPorosine= function(allCmimi){
           console.log(response);
           if (response.sentPayD==1) {
            // $scope.showAlertForgotPasswordSuccess();
+           $scope.getShnamo('merr','bosh', "Pay On Delivery");
            $ionicLoading.show({
               template: 'Qendra u lajmerua. Nje agjent i joni do te ju kontaktoje!',
               duration: 3000

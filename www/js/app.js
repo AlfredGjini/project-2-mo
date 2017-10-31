@@ -317,6 +317,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
       }
     }
   })
+  .state('app.historia', {
+    cache: false,
+    url: '/historia',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/historia.html",
+        controller: 'historiaCtrl'
+      }
+    }
+  })
 
   .state('app.try-on', {
     cache: false,

@@ -990,4 +990,71 @@ exports.shnamo = function (req, res, next) {
 
     console.log('too earlyyt');
 
+}
+
+exports.historiku = function (req, res, next) {
+  //TODO : in localhost the response stucks at offset = 180, if the same thing happens in Heroku
+  //TODO : than it means that the function needs to be changed in  order to handle all request
+    var action = req.body.action;
+    var idRe = req.body.idd;
+    console.log('action eshte '+action);
+    console.log('id eshte '+idRe);
+    console.log(action);
+    var responseSh={};
+    if(action=='merr'){
+
+    var queryTextLente='SELECT * FROM historiku where client_id=\''+idRe+'\'';
+    pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+      console.log('Connected to postgres! 5');
+
+      client
+        .query(queryTextLente)
+        .on('end',function(end){
+          responseSh.pergjigje1=end.rows["0"];
+          responseSh.pergjigje2='sukses';
+          res.send(responseSh);
+          client.end();
+          done();
+        });
+    });
+    pg.end(function(err) {
+        if (err) throw err;
+        console.log('closed connection');
+    });
+
+    }else if(action=='perditeso'){
+      orders='SD13056';
+
+    var queryTextLente='UPDATE historiku SET orders_code=\''+orders+'\' where client_id=\''+idRe+'\'';
+    pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+      console.log('Connected to postgres! 5');
+
+      client
+        .query(queryTextLente)
+        .on('end',function(end){
+          responseSh.pergjigje1='perditesim';
+          responseSh.pergjigje2='sukses';
+          res.send(responseSh);
+          client.end();
+          done();
+        });
+    });
+    pg.end(function(err) {
+        if (err) throw err;
+        console.log('closed connection');
+    });
+
+    }
+
+
+    console.log('too earlyyt');
+
 };
