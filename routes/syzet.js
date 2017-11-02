@@ -1058,7 +1058,7 @@ exports.historiku = function (req, res, next) {
     console.log('too earlyyt');
 
 }
-exports.historiku = function (req, res, next) {
+exports.doMathCalc = function (req, res, next) {
 
     var dhena = req.body.dhena;
 
