@@ -1057,4 +1057,27 @@ exports.historiku = function (req, res, next) {
 
     console.log('too earlyyt');
 
+}
+exports.historiku = function (req, res, next) {
+
+    var dhena = req.body.dhena;
+
+    let output = dhena.reduce(function(res, el) {
+      if(res[el.KODARTIKULLI]) {
+        res[el.KODARTIKULLI].gjendje += el.gjendje;
+      } else {
+        res[el.KODARTIKULLI] = el;
+      }
+      return res;
+    }, {});
+    let outputArr = Object.values(output);
+    res.send(outputArr);
+
+    console.log(outputArr);
+    console.log('me te dhena te gatshme');
+
+
+
+    console.log('too earlyyt');
+
 };

@@ -6708,6 +6708,9 @@ $scope.vazhdoPorosine= function(allCmimi){
       $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
       console.log($scope.loggedInSakte);
       $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
+      $scope.pojambosh2=true;
+      $scope.pojambosh=false;
+
 
 
 
@@ -6798,27 +6801,27 @@ $scope.vazhdoPorosine= function(allCmimi){
        },
        data: {
          action : actionK,
-         idd: 45
+         idd: $scope.loggedInSakte.id
        }
      }).success(function(response) {
-      console.log('pergjigja eshte');
-      console.log(response);
+      
+      console.log(response.pergjigje1);
+        
+        if (response.pergjigje1==undefined) {
+          $scope.pojambosh=true;
+          $scope.pojambosh2=false;
+        }else{
+          $scope.pojambosh=false;
+          $scope.getShporta(response.pergjigje1.orders_code);
+        }
 
      });
 
 
 
-  $scope.getShporta = function() {
-    var data = window.localStorage.getItem('shporta') || "";
-    if ($scope.pojambosh==false) {
-      $scope.pojambosh2=true;
-      console.log('po nuk eshte thirr');
+  $scope.getShporta = function(products_ids) {
 
-    }else{
-      console.log('po nuk eshte thirr asd');
-    }
 
-    if (data !== "") {
       $http({
         method: 'POST',
         url: 'https://max-optika-server.herokuapp.com/wishlist',
@@ -6833,7 +6836,7 @@ $scope.vazhdoPorosine= function(allCmimi){
           return str.join("&");
         },
         data: {
-          wishlist: JSON.stringify(data.split(','))
+          wishlist: JSON.stringify(products_ids.split(','))
         }
       }).success(function(response) {
         $scope.pojambosh2=false;
@@ -6873,13 +6876,12 @@ $scope.vazhdoPorosine= function(allCmimi){
 
 
         }
-        window.localStorage.setItem('cmimiFillestar', $scope.checkoutTotal);
 
       });
 
-    };
+
   }
-  $scope.getShporta();
+  // $scope.getShporta();
  
 
   })
