@@ -1061,6 +1061,33 @@ exports.historiku = function (req, res, next) {
 exports.doMathCalc = function (req, res, next) {
 
     var dhena = req.body.dhena;
+    console.log(dhena);
+    dhena=JSON.parse(dhena);
+    console.log(dhena);
+
+    //  var mapObj = {};
+    //  for(var a of dhena){
+    //     if(mapObj[a["KODARTIKULLI"]]== undefined)
+    //       {mapObj[a["KODARTIKULLI"]] = 0;
+    //     }else{mapObj[a["KODARTIKULLI"]] += a["gjendje"]}
+    //  }
+    //  console.log('testgb');
+    //  console.log(mapObj);
+
+    // var data2 = [];
+    // for(var a of newArrMagGjendje){
+    //   if(mapObj[a["KODARTIKULLI"]] == undefined)
+    //      continue;
+    //   a["gjendje"] = mapObj[a["KODARTIKULLI"]];
+    //   data2.push(a)
+    //   delete mapObj[a["KODARTIKULLI"]];
+    // }
+    // console.log('hopefully 2');
+    // console.log(data2);
+
+
+
+
 
     let output = dhena.reduce(function(res, el) {
       if(res[el.KODARTIKULLI]) {
