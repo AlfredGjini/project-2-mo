@@ -1097,7 +1097,10 @@ exports.doMathCalc = function (req, res, next) {
       }
       return res;
     }, {});
-    let outputArr = Object.values(output);
+
+    // objKeysMap = Object.keys(obj).map((k) => obj[k]);
+    // let outputArr = Object.values(output);
+    let outputArr = Object.keys(output).map((k) => output[k]);
     res.send(outputArr);
 
     console.log(outputArr);
