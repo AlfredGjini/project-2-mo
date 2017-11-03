@@ -786,11 +786,8 @@ exports.pickUpStore = function (req, res, next) {
 
     var transporter = mailer.createTransport( {
         host: "sn3plcpnl0065.prod.ams3.secureserver.net", // hostname
-        secureConnection: false, // use SSL
+        secureConnection: true, // use SSL
         port: 465, // port for secure SMTP
-        tls: {
-           ciphers:'SSLv3'
-        },
         auth: {
             user: "agjini@dea.com.al",
             pass: "aldodea1234@rafaelo.dea"
