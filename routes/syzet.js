@@ -1061,9 +1061,9 @@ exports.historiku = function (req, res, next) {
 exports.doMathCalc = function (req, res, next) {
 
     var dhena = req.body.dhena;
-    console.log(dhena);
+    //console.log(dhena);
     dhena=JSON.parse(dhena);
-    console.log(dhena);
+    //console.log(dhena);
 
     //  var mapObj = {};
     //  for(var a of dhena){
