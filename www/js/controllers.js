@@ -6582,6 +6582,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
+          window.localStorage.removeItem('shporta');
           
           // $scope.responseLoggedIn = response[0];
           console.log(response);
@@ -6593,6 +6594,8 @@ $scope.vazhdoPorosine= function(allCmimi){
               template: pergjigjeDyqan,
               duration: 3000
             });
+           //window.localStorage.removeItem('shporta');
+           window.localStorage.setItem('shporta', '');
 
           }else if (response.sentPickUp==0) {
             // $scope.showAlertNotEmail();

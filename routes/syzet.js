@@ -771,16 +771,29 @@ exports.pickUpStore = function (req, res, next) {
     //         pass: "maxoptika.1A"
     //     }
     // });
+    // var transporter = mailer.createTransport( {
+    //     host: "smtp-mail.outlook.com", // hostname
+    //     secureConnection: false, // use SSL
+    //     port: 587, // port for secure SMTP
+    //     tls: {
+    //        ciphers:'SSLv3'
+    //     },
+    //     auth: {
+    //         user: "maxoptikasmtpnew@outlook.com",
+    //         pass: "maxoptika.1A"
+    //     }
+    // });
+
     var transporter = mailer.createTransport( {
-        host: "smtp-mail.outlook.com", // hostname
+        host: "sn3plcpnl0065.prod.ams3.secureserver.net", // hostname
         secureConnection: false, // use SSL
-        port: 587, // port for secure SMTP
+        port: 465, // port for secure SMTP
         tls: {
            ciphers:'SSLv3'
         },
         auth: {
-            user: "maxoptikasmtpnew@outlook.com",
-            pass: "maxoptika.1A"
+            user: "agjini@dea.com.al",
+            pass: "aldodea1234@rafaelo.dea"
         }
     });
     var mailOptions = {
