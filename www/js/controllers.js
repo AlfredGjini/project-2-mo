@@ -5653,7 +5653,7 @@ $scope.cleanArray= function(actual) {
   })
 
 
-.controller('shportaCtrl', function($scope, $http, $stateParams, $rootScope, $timeout, $ionicModal,PaypalService, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+.controller('shportaCtrl', function($scope, $http, $stateParams, $rootScope, $timeout, $ionicModal,PaypalService, $cordovaGeolocation, $ionicLoading, $ionicPlatform, $ionicPopup) {
 
       $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
       $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
@@ -6531,6 +6531,13 @@ $scope.vazhdoPorosine= function(allCmimi){
         });
 
         $scope.nextStepPickUp=function(adresa){
+          if($scope.dyqanetListaSelected.dyqani=='Zgjidhni nje dyqan'){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Gabim',
+              template: '<p align="center">Ju lutem zgjidhni nje dyqan!</p>'
+            });
+          }else{
+
           console.log($scope.dyqanetListaSelected.dyqani);
 
         $scope.modall.hide();
@@ -6600,6 +6607,7 @@ $scope.vazhdoPorosine= function(allCmimi){
         console.log('')
 
         }
+      }
 
         
         
@@ -6613,6 +6621,14 @@ $scope.vazhdoPorosine= function(allCmimi){
         });
         // alert("Delivery");
         $scope.nextStepPayD=function(item){
+          if(item=='' || item==undefined){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Gabim',
+              template: '<p align="center">Ju lutem vendosni adresen tuaj!</p>'
+            });
+          }else{
+
+
           $scope.modall.hide();
           $ionicLoading.show({
               template: 'Loading...',
@@ -6678,7 +6694,7 @@ $scope.vazhdoPorosine= function(allCmimi){
 
 
 
-
+      }
 
 
 

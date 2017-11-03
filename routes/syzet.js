@@ -844,11 +844,12 @@ exports.payOnDelivery = function (req, res, next) {
     mailOptions.html = "Pershendetje <br> Klienti " + emer + " " + mbiemer + " me te dhena si me poshte: <br>Tel: "+tel +"<br> Email: "+email +"<br>Adrese: "+adresa +"<br> Ka zgjedhur per te blere produktet me ID: " + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
     transporter.sendMail(mailOptions, function(error, info){
       if(error){
-        return console.log(error);
+        console.log(error);
         res.send(JSON.stringify({sentPayD:0}));
-      }
+      }else {
       console.log('Message sent: ' + info.response);
       res.send(JSON.stringify({sentPayD:1}));
+      }
     });
 
 };
