@@ -6,9 +6,11 @@ var express     = require('express'),
     reservation = require('./routes/rezervim'),
     clinic      = require('./routes/clinic-card');
 var bodyParser  = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.json({limit: '50mb'})); // support json encoded bodies
 app.use(bodyParser.urlencoded({
-    extended: true
+    limit: "50mb",
+    extended: true,
+    parameterLimit:50000
 })); // support encoded bodies
 app.use(express.static('www')); 
 
