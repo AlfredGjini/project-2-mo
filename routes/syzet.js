@@ -1057,7 +1057,7 @@ exports.historiku = function (req, res, next) {
 
     }else if(action=='perditeso'){
       var newOrders = req.body.orders;
-      var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+orders+'\' where client_id=\''+idRe+'\'';
+      
 
     var queryTextLente='SELECT * FROM historiku where client_id=\''+idRe+'\'';
     pg.connect(connectionStr, function(err, client, done) {
@@ -1072,6 +1072,7 @@ exports.historiku = function (req, res, next) {
         .on('end',function(end){
           var oldOrders=end.rows["0"];
           var allOrders=oldOrders+','+newOrders;
+          var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+allOrders+'\' where client_id=\''+idRe+'\'';
             client.query(queryTextupdateOrders, function(err, result, done) {
               if (err) {
                 console.log(err);
