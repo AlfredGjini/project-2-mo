@@ -785,9 +785,9 @@ exports.pickUpStore = function (req, res, next) {
     // });
 
     var transporter = mailer.createTransport( {
-        host: "sn3plcpnl0065.prod.ams3.secureserver.net", // hostname
-        secureConnection: true, // use SSL
-        port: 995, // port for secure SMTP
+        host: "mail.dea.com.al", // hostname
+        //secureConnection: true, // use SSL
+        port: 25, // port for secure SMTP
         auth: {
             user: "agjini@dea.com.al",
             pass: "aldodea1234@rafaelo.dea"
