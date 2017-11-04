@@ -1074,6 +1074,15 @@ exports.historiku = function (req, res, next) {
           console.log(oldOrders);
           console.log(end);
           var allOrders=oldOrders+','+newOrders;
+          allOrders=allOrders.split(',');
+
+
+          var uniqueOrders = allOrders.filter(function(item, pos) {
+              return allOrders.indexOf(item) == pos;
+          })
+          console.log('unique orders');
+          console.log(uniqueOrders);
+          
           var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+allOrders+'\' where client_id=\''+idRe+'\'';
             client.query(queryTextupdateOrders, function(err, result, done) {
               if (err) {
