@@ -6467,6 +6467,7 @@ $scope.dyqanetListaSelected={};
 $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
 $scope.vazhdoPorosine= function(allCmimi){
+  $scope.wishbosh3=true;
   $scope.gjejVendodhjen();
    // console.log(allCmimi);
    // var gjithCmimi=parseInt(allCmimi);
@@ -6585,20 +6586,66 @@ $scope.vazhdoPorosine= function(allCmimi){
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
-          window.localStorage.removeItem('shporta');
+          //window.localStorage.removeItem('shporta');
           
           // $scope.responseLoggedIn = response[0];
           console.log(response);
-          $scope.getShnamo('merr','bosh', "Pick Up On Store");
+          
           if (response.sentPickUp==1) {
+
            // $scope.showAlertForgotPasswordSuccess();
            var pergjigjeDyqan='Dyqani '+dyqaniZgjedhur+' u lajmerua per blerjen tuaj!';
            $ionicLoading.show({
               template: pergjigjeDyqan,
               duration: 3000
             });
+           var actionK='perditeso';
+           var shportaOrders=window.localStorage.getItem('shporta');
+
+            $http({
+               method: 'POST',
+               //url: 'https://tarzantest.herokuapp.com/login',
+               url: 'https://max-optika-server.herokuapp.com/get-orders',
+               headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded'
+               },
+               transformRequest: function(obj) {
+                 var str = [];
+                 for (var p in obj)
+                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                 return str.join("&");
+               },
+               data: {
+                 action : actionK,
+                 idd: $scope.loggedInSakte.id,
+                 orders:shportaOrders
+
+               }
+             }).success(function(response) {
+
+              console.log(response);
+            //$scope.getShnamo('merr','bosh', "Pick Up On Store");
            //window.localStorage.removeItem('shporta');
+           $scope.wishbosh3=false;
+           $scope.response="";
+           $scope.shportlistItemsLength=0;
+           $scope.pojambosh=true;
+           
+
            window.localStorage.setItem('shporta', '');
+              
+              console.log(response.pergjigje1);
+                
+                // if (response.pergjigje1==undefined) {
+                //   $scope.pojambosh=true;
+                //   $scope.pojambosh2=false;
+                // }else{
+                //   $scope.pojambosh=false;
+                //   $scope.getShporta(response.pergjigje1.orders_code);
+                // }
+
+             });
+
 
           }else if (response.sentPickUp==0) {
             // $scope.showAlertNotEmail();

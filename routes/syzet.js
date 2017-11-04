@@ -263,7 +263,7 @@ exports.findAllKoleksion = function (req, res, next) {
       console.log('Connected to postgres! 4');
 
       client
-        .query('SELECT DISTINCT ON (products2.pershkrimiangartikulli) * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE magazina.sasia>0 AND products2.grupi=\'Aksesore\'  limit 20 offset ' + offset)
+        .query('SELECT DISTINCT ON (products2.pershkrimiangartikulli) * FROM products2 INNER JOIN cmime2 ON (products2.kodartikulli=cmime2.idprodukti) INNER JOIN magazina ON (products2.kodartikulli=magazina.kodartikull) WHERE magazina.sasia>0 AND products2.grupi=\'Aksesorë\'  limit 20 offset ' + offset)
         .on('row', function(row) {
           syzetK.push(row);
           console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
@@ -1056,9 +1056,10 @@ exports.historiku = function (req, res, next) {
     });
 
     }else if(action=='perditeso'){
-      orders='SD13056';
+      var newOrders = req.body.orders;
+      var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+orders+'\' where client_id=\''+idRe+'\'';
 
-    var queryTextLente='UPDATE historiku SET orders_code=\''+orders+'\' where client_id=\''+idRe+'\'';
+    var queryTextLente='SELECT * FROM historiku where client_id=\''+idRe+'\'';
     pg.connect(connectionStr, function(err, client, done) {
       if (err) {
         //console.log();
@@ -1069,9 +1070,22 @@ exports.historiku = function (req, res, next) {
       client
         .query(queryTextLente)
         .on('end',function(end){
-          responseSh.pergjigje1='perditesim';
-          responseSh.pergjigje2='sukses';
-          res.send(responseSh);
+          var oldOrders=end.rows["0"];
+          var allOrders=oldOrders+','+newOrders;
+            client.query(queryTextupdateOrders, function(err, result, done) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("mbaroi e dyta");
+                responseSh.pergjigje1=end.rows["0"];
+                responseSh.pergjigje2='sukses';
+                res.send(responseSh);
+
+
+              }
+
+            });
+
           client.end();
           done();
         });
