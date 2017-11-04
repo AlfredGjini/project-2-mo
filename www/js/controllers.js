@@ -5655,7 +5655,7 @@ $scope.cleanArray= function(actual) {
 
 .controller('shportaCtrl', function($scope, $http, $stateParams, $rootScope, $timeout, $ionicModal,PaypalService, $cordovaGeolocation, $ionicLoading, $ionicPlatform, $ionicPopup) {
 
-       //window.localStorage.setItem('shporta', 'SD13139');
+       window.localStorage.setItem('shporta', 'SD13139');
       $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
       $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
       console.log($scope.loggedInSakte);
