@@ -1080,7 +1080,9 @@ exports.historiku = function (req, res, next) {
           var uniqueOrders = allOrders.filter(function(item, pos) {
               return allOrders.indexOf(item) == pos;
           })
+          console.log(uniqueOrders);
           console.log('unique orders');
+          uniqueOrders=JSON.stringify(uniqueOrders);
           console.log(uniqueOrders);
           
           var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+allOrders+'\' where client_id=\''+idRe+'\'';
