@@ -1070,7 +1070,7 @@ exports.historiku = function (req, res, next) {
       client
         .query(queryTextLente)
         .on('end',function(end){
-          var oldOrders=end.rows["0"];
+          var oldOrders=end.rows["0"]orders_code;
           console.log(oldOrders);
           console.log(end);
           var allOrders=oldOrders+','+newOrders;
