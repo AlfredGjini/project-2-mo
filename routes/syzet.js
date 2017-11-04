@@ -771,28 +771,28 @@ exports.pickUpStore = function (req, res, next) {
     //         pass: "maxoptika.1A"
     //     }
     // });
-    // var transporter = mailer.createTransport( {
-    //     host: "smtp-mail.outlook.com", // hostname
-    //     secureConnection: false, // use SSL
-    //     port: 587, // port for secure SMTP
-    //     tls: {
-    //        ciphers:'SSLv3'
-    //     },
-    //     auth: {
-    //         user: "maxoptikasmtpnew@outlook.com",
-    //         pass: "maxoptika.1A"
-    //     }
-    // });
-
     var transporter = mailer.createTransport( {
-        host: "mail.dea.com.al", // hostname
-        //secureConnection: true, // use SSL
-        port: 25, // port for secure SMTP
+        host: "smtp-mail.outlook.com", // hostname
+        secureConnection: false, // use SSL
+        port: 587, // port for secure SMTP
+        tls: {
+           ciphers:'SSLv3'
+        },
         auth: {
-            user: "agjini@dea.com.al",
-            pass: "aldodea1234@rafaelo.dea"
+            user: "maxoptikasmtp@outlook.com",
+            pass: "maxoptika.1A"
         }
     });
+
+    // var transporter = mailer.createTransport( {
+    //     host: "smtp-mail.outlook.com", // hostname
+    //     //secureConnection: true, // use SSL
+    //     port: 25, // port for secure SMTP
+    //     auth: {
+    //         user: "agjini@dea.com.al",
+    //         pass: "aldodea1234@rafaelo.dea"
+    //     }
+    // });
     var mailOptions = {
       from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
       to: 'a.gjini@live.com', // list of receivers
