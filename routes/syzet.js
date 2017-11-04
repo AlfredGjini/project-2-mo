@@ -1081,6 +1081,12 @@ exports.historiku = function (req, res, next) {
               return allOrders.indexOf(item) == pos;
           })
           console.log(uniqueOrders);
+          var allOrderString='';
+          for (var i = 0; i < uniqueOrders.length; i++) {
+              allOrderString=allOrderString+','+uniqueOrders[i];
+              //Do something
+          }
+          console.log(allOrderString);
           console.log('unique orders');
           uniqueOrders=JSON.stringify(uniqueOrders);
           console.log(uniqueOrders);
