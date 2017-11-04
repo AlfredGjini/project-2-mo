@@ -115,15 +115,24 @@ exports.setReservation = function(req,res,next){
   var id_clienti;
   //console.log('Saving data....');
   // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
-    var transporter = mailer.createTransport( {
-        host: "smtp-mail.outlook.com", // hostname
-        secureConnection: false, // use SSL
-        port: 587, // port for secure SMTP
+          var transporter = mailer.createTransport( {
+        host: "smtp.gmail.com", // hostname
+        secureConnection: true, // use SSL
+        port: 465, // port for secure SMTP
         auth: {
-            user: "maxoptikasmtpnew@outlook.com",
+            user: "maxoptikasmtp@gmail.com",
             pass: "maxoptika.1A"
         }
     });
+    // var transporter = mailer.createTransport( {
+    //     host: "smtp-mail.outlook.com", // hostname
+    //     secureConnection: false, // use SSL
+    //     port: 587, // port for secure SMTP
+    //     auth: {
+    //         user: "maxoptikasmtpnew@outlook.com",
+    //         pass: "maxoptika.1A"
+    //     }
+    // });
   var mailOptions = {
     from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
     to: 'alfred.gjini93@gmail.com', // list of receivers
