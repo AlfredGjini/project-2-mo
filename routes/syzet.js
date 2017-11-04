@@ -762,27 +762,27 @@ exports.pickUpStore = function (req, res, next) {
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+emailTo+' '+shportaElem+' '+dyqani);
 
     // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
-    //   var transporter = mailer.createTransport( {
-    //     host: "smtp.gmail.com", // hostname
-    //     secureConnection: true, // use SSL
-    //     port: 465, // port for secure SMTP
-    //     auth: {
-    //         user: "maxoptikasmtp@gmail.com",
-    //         pass: "maxoptika.1A"
-    //     }
-    // });
-    var transporter = mailer.createTransport( {
-        host: "smtp-mail.outlook.com", // hostname
-        secureConnection: false, // use SSL
-        port: 587, // port for secure SMTP
-        tls: {
-           ciphers:'SSLv3'
-        },
+      var transporter = mailer.createTransport( {
+        host: "smtp.gmail.com", // hostname
+        secureConnection: true, // use SSL
+        port: 465, // port for secure SMTP
         auth: {
-            user: "maxoptikasmtp@outlook.com",
+            user: "maxoptikasmtp@gmail.com",
             pass: "maxoptika.1A"
         }
     });
+    // var transporter = mailer.createTransport( {
+    //     host: "smtp-mail.outlook.com", // hostname
+    //     secureConnection: false, // use SSL
+    //     port: 587, // port for secure SMTP
+    //     tls: {
+    //        ciphers:'SSLv3'
+    //     },
+    //     auth: {
+    //         user: "maxoptikasmtp@outlook.com",
+    //         pass: "maxoptika.1A"
+    //     }
+    // });
 
     // var transporter = mailer.createTransport( {
     //     host: "smtp-mail.outlook.com", // hostname
