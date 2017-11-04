@@ -1070,6 +1070,7 @@ exports.historiku = function (req, res, next) {
       client
         .query(queryTextLente)
         .on('end',function(end){
+          if(end.rows.length!=0){
           var oldOrders=end.rows["0"].orders_code;
           console.log(oldOrders);
           console.log(end);
@@ -1083,15 +1084,16 @@ exports.historiku = function (req, res, next) {
           console.log(uniqueOrders);
           var allOrderString='';
           for (var i = 0; i < uniqueOrders.length; i++) {
+            if (i==0) {
+              allOrderString=allOrderString+uniqueOrders[i];
+            }else{
               allOrderString=allOrderString+','+uniqueOrders[i];
+              }
               //Do something
           }
           console.log(allOrderString);
-          console.log('unique orders');
-          uniqueOrders=JSON.stringify(uniqueOrders);
-          console.log(uniqueOrders);
           
-          var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+allOrders+'\' where client_id=\''+idRe+'\'';
+          var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+allOrderString+'\' where client_id=\''+idRe+'\'';
             client.query(queryTextupdateOrders, function(err, result, done) {
               if (err) {
                 console.log(err);
@@ -1108,6 +1110,38 @@ exports.historiku = function (req, res, next) {
 
           client.end();
           done();
+        }else{
+          newOrders
+
+          console.log(allOrderString);
+          var queryTextupdateOrders='insert into historiku (client_id,orders_code) values('+idRe+',\''+newOrders+'\')';
+          
+            client.query(queryTextupdateOrders, function(err, result, done) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log("mbaroi e treta");
+                responseSh.pergjigje1=end.rows["0"];
+                responseSh.pergjigje2='sukses';
+                res.send(responseSh);
+
+
+              }
+
+            });
+
+          client.end();
+          done();
+
+
+
+
+
+
+
+
+
+        }
         });
     });
     pg.end(function(err) {
