@@ -1071,6 +1071,8 @@ exports.historiku = function (req, res, next) {
         .query(queryTextLente)
         .on('end',function(end){
           var oldOrders=end.rows["0"];
+          console.log(oldOrders);
+          console.log(end);
           var allOrders=oldOrders+','+newOrders;
           var queryTextupdateOrders='UPDATE historiku SET orders_code=\''+allOrders+'\' where client_id=\''+idRe+'\'';
             client.query(queryTextupdateOrders, function(err, result, done) {
