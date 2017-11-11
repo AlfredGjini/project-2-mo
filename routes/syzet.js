@@ -667,7 +667,7 @@ exports.forgotPassword = function (req, res, next) {
     var email = req.body.email;
 
 
-    var queryEmailCheck = 'SELECT * FROM users2 WHERE email = \''+email+'\'';
+    var queryEmailCheck = 'SELECT * FROM users WHERE email = \''+email+'\'';
     // console.log(queryTextRegister);
     console.log(queryEmailCheck);
     var passData = [];
@@ -1072,8 +1072,8 @@ exports.historiku = function (req, res, next) {
         .on('end',function(end){
           if(end.rows.length!=0){
           var oldOrders=end.rows["0"].orders_code;
-          console.log(oldOrders);
-          console.log(end);
+          //console.log(oldOrders);
+          //console.log(end);
           var allOrders=oldOrders+','+newOrders;
           allOrders=allOrders.split(',');
 
@@ -1111,9 +1111,9 @@ exports.historiku = function (req, res, next) {
           client.end();
           done();
         }else{
-          newOrders
+          //newOrders
 
-          console.log(allOrderString);
+          console.log(newOrders);
           var queryTextupdateOrders='insert into historiku (client_id,orders_code) values('+idRe+',\''+newOrders+'\')';
           
             client.query(queryTextupdateOrders, function(err, result, done) {

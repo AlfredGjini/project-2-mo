@@ -1464,7 +1464,7 @@ $scope.moreDataCanBeLoaded=true;
         $scope.moreDataCanBeLoaded=false;
 
         var alertPopup = $ionicPopup.alert({
-          title: 'Syze Dielli',
+          title: 'Oferte',
           template: '<p align="center">Nuk ka me produkte ne oferte!</p>'
         });
         //alert('Nuk ka aksesore per tu shfaqur');
@@ -1977,7 +1977,7 @@ $scope.moreDataCanBeLoaded=true;
         $scope.moreDataCanBeLoaded=false;
 
         var alertPopup = $ionicPopup.alert({
-          title: 'Syze Dielli',
+          title: 'Oferte',
           template: '<p align="center">Nuk ka me produkte ne oferte!</p>'
         });
         //alert('Nuk ka aksesore per tu shfaqur');
@@ -4698,7 +4698,8 @@ $scope.cleanArray= function(actual) {
 
       $scope.regjistrohu = function() {
         var sakteEmail=$scope.validateEmail($scope.dataR.email);
-        sakteEmail=sakteEmail.toLowerCase();
+        console.log(typeof $scope.dataR.email)
+        $scope.dataR.email=$scope.dataR.email.toLowerCase();
 
       if ($scope.dataR.emer === "" || $scope.dataR.mbiemer === "" ||
         $scope.dataR.emer === undefined || $scope.dataR.mbiemer === undefined || 
@@ -5655,7 +5656,7 @@ $scope.cleanArray= function(actual) {
 
 .controller('shportaCtrl', function($scope, $http, $stateParams, $rootScope, $timeout, $ionicModal,PaypalService, $cordovaGeolocation, $ionicLoading, $ionicPlatform, $ionicPopup) {
 
-       window.localStorage.setItem('shporta', 'SD13139');
+       //window.localStorage.setItem('shporta', 'SD13139');
       $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
       $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
       console.log($scope.loggedInSakte);
@@ -6635,14 +6636,6 @@ $scope.vazhdoPorosine= function(allCmimi){
            window.localStorage.setItem('shporta', '');
               
               console.log(response.pergjigje1);
-                
-                // if (response.pergjigje1==undefined) {
-                //   $scope.pojambosh=true;
-                //   $scope.pojambosh2=false;
-                // }else{
-                //   $scope.pojambosh=false;
-                //   $scope.getShporta(response.pergjigje1.orders_code);
-                // }
 
              });
 
@@ -6733,6 +6726,44 @@ $scope.vazhdoPorosine= function(allCmimi){
               template: 'Qendra u lajmerua. Nje agjent i joni do te ju kontaktoje!',
               duration: 3000
             });
+          var actionK='perditeso';
+           var shportaOrders=window.localStorage.getItem('shporta');
+
+            $http({
+               method: 'POST',
+               //url: 'https://tarzantest.herokuapp.com/login',
+               url: 'https://max-optika-server.herokuapp.com/get-orders',
+               headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded'
+               },
+               transformRequest: function(obj) {
+                 var str = [];
+                 for (var p in obj)
+                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                 return str.join("&");
+               },
+               data: {
+                 action : actionK,
+                 idd: $scope.loggedInSakte.id,
+                 orders:shportaOrders
+
+               }
+             }).success(function(response) {
+
+              console.log(response);
+            //$scope.getShnamo('merr','bosh', "Pick Up On Store");
+           //window.localStorage.removeItem('shporta');
+           $scope.wishbosh3=false;
+           $scope.response="";
+           $scope.shportlistItemsLength=0;
+           $scope.pojambosh=true;
+           
+
+           window.localStorage.setItem('shporta', '');
+              
+              console.log(response.pergjigje1);
+
+             });
 
           }else if (response.sentPayD==0) {
             // $scope.showAlertNotEmail();
@@ -7157,7 +7188,7 @@ $scope.cleanArray= function(actual) {
   });
 })
 
-.controller('kartelaCtrl', function($scope, $stateParams, $http, $timeout) {
+.controller('kartelaCtrl', function($scope, $stateParams, $http, $timeout, $location, $ionicScrollDelegate) {
 
       $scope.showSpinner=true;
 
@@ -7207,6 +7238,10 @@ $scope.cleanArray= function(actual) {
 
   $scope.fshi= function(numer){
     console.log(numer);
+    var hashName='takim'+numer;
+    $location.hash(hashName);   //set the location hash
+    var handle = $ionicScrollDelegate.$getByHandle('myPageDelegate');
+    handle.anchorScroll(true);  // 'true' for animation
     //$scope.vizita1=!$scope.vizita1;
     $scope['vizita'+numer]=!$scope['vizita'+numer];
   }
