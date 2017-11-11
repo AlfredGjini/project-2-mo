@@ -4529,6 +4529,13 @@ $scope.cleanArray= function(actual) {
       });
     };
 
+    $scope.showAlertPassExistEmailError = function() {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Gabim',
+        template: '<p align="center">Emaili juaj eshte i sakte por pati nje problem me dergimin e emailit. Ju lutem provojeni me vone!</p>'
+      });
+    };
+
 
     $scope.prepareStr = function(str) {
       return str.substring(0, 3).split("").reverse().join("").toUpperCase();
@@ -4588,7 +4595,10 @@ $scope.cleanArray= function(actual) {
           }else if (response.forgot==0) {
             $scope.showAlertNotEmail();
 
-          }       
+          }else if (response.forgot==2) {
+            $scope.showAlertPassExistEmailError();
+
+          }  
 
         });
       }

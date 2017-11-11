@@ -732,7 +732,7 @@ exports.forgotPassword = function (req, res, next) {
             mailOptions.html = 'Pershendetje ' + passData[0].name  + " <br>Fjalekalimi juaj eshte si me poshte.<br><br>"+ "<b>Fjalekalimi</b> : " + passData[0].password + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
             transporter.sendMail(mailOptions, function(error, info){
                 if(error){
-                  res.send(JSON.stringify({forgot:0}));
+                  res.send(JSON.stringify({forgot:2}));
                   console.log(error);
                 }else{
                   res.send(JSON.stringify({forgot:1}));
