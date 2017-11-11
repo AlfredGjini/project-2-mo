@@ -732,12 +732,16 @@ exports.forgotPassword = function (req, res, next) {
             mailOptions.html = 'Pershendetje ' + passData[0].emer + " " + passData[0].mbiemer + " <br>Fjalekalimi juaj eshte si me poshte.<br><br>"+ "<b>Fjalekalimi</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
             transporter.sendMail(mailOptions, function(error, info){
                 if(error){
-                    return console.log(error);
+                  res.send(JSON.stringify({forgot:0}));
+                  console.log(error);
+                }else{
+                  res.send(JSON.stringify({forgot:1}));
+                  console.log('Message sent: ' + info.response);
                 }
-                console.log('Message sent: ' + info.response);
+                
             });
 
-            res.send(JSON.stringify({forgot:1}));
+            // res.send(JSON.stringify({forgot:1}));
             client.end();
             console.log('Ky user ekziston');
           }
