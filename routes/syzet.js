@@ -727,9 +727,9 @@ exports.forgotPassword = function (req, res, next) {
             console.log(passData);
             // Send Email
             // mailOptions.to='\''+passData[0].email+'\'';
-            mailOptions.to=passData[0].email;
+            mailOptions.to=passData[0].emailval;
             // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-            mailOptions.html = 'Pershendetje ' + passData[0].emer + " " + passData[0].mbiemer + " <br>Fjalekalimi juaj eshte si me poshte.<br><br>"+ "<b>Fjalekalimi</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
+            mailOptions.html = 'Pershendetje ' + passData[0].name  + " <br>Fjalekalimi juaj eshte si me poshte.<br><br>"+ "<b>Fjalekalimi</b> : " + passData[0].password + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
             transporter.sendMail(mailOptions, function(error, info){
                 if(error){
                   res.send(JSON.stringify({forgot:0}));
