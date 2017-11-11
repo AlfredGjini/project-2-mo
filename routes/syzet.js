@@ -770,9 +770,62 @@ exports.pickUpStore = function (req, res, next) {
     var tel = req.body.tel;
     var email = req.body.email;
     var emailTo = req.body.emailTo;
+    var eailToCorrect='';
     var shportaElem = req.body.shportaElem;
     var dyqani=req.body.dyqani;
-    console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+emailTo+' '+shportaElem+' '+dyqani);
+
+    if (dyqani=="21 Dhjetori") {
+      eailToCorrect='21dhjetori@maxoptika.al';
+    }else if(dyqani=="Sheshi Willson") {
+      eailToCorrect='sheshi.wilson@maxoptika.al';
+    }else if(dyqani=="Myslym Shyri") {
+      eailToCorrect='m.shyri@maxoptika.al';
+    }else if(dyqani=="City Park") {
+      eailToCorrect='citypark@maxoptika.al';
+    }else if(dyqani=="QTU") {
+      eailToCorrect='qtu@maxoptika.al';
+    }else if(dyqani=="Durres") {
+      eailToCorrect='durres@maxoptika.al';
+    }else if(dyqani=="Shkoder") {
+      eailToCorrect='shkoder@maxoptika.al';
+    }else if(dyqani=="Vlore") {
+      eailToCorrect='vlore@maxoptika.al';
+    }else if(dyqani=="Fier") {
+      eailToCorrect='fier@maxoptika.al';
+    }else if(dyqani=="Sarandë") {
+      eailToCorrect='maxoptika.sarande@gmail.com';
+    }else if(dyqani=="Lushnje") {
+      eailToCorrect='lushnje@maxoptika.al';
+    }else if(dyqani=="Pogradec") {
+      eailToCorrect='maxoptika.pogradec@gmail.com';
+    }else if(dyqani=="Medrese") {
+      eailToCorrect='medrese@maxoptika.al';
+    }else if(dyqani=="Prishtine") {
+      eailToCorrect='prishtine@maxoptika.al';
+    }else if(dyqani=="Minimax") {
+      eailToCorrect='prishtine@maxoptika.al';
+    }else if(dyqani=="Lezhe") {
+      eailToCorrect='lezhe@maxoptika.al';
+    }else if(dyqani=="Kruje") {
+      eailToCorrect='maxoptika.kruje@gmail.com';
+    }else if(dyqani=="Korce") {
+      eailToCorrect='korce@maxoptika.al';
+    }else if(dyqani=="test") {
+      eailToCorrect='alfred.gjini93@gmail.com';
+    }else{
+      eailToCorrect='agjini@dea.com.al';
+    }
+    console.log(eailToCorrect);
+    // var qendraMax="j.rrumbullaku@maxoptika.al";
+    var qendraMax="a.gjini@live.com";
+    var toAllCorrectEmails=qendraMax+","+eailToCorrect+","+email;
+    console.log(toAllCorrectEmails);
+
+
+
+
+
+    console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+eailToCorrect+' '+shportaElem+' '+dyqani);
 
     // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
       var transporter = mailer.createTransport( {
@@ -808,7 +861,7 @@ exports.pickUpStore = function (req, res, next) {
     // });
     var mailOptions = {
       from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
-      to: 'a.gjini@live.com', // list of receivers
+      to: toAllCorrectEmails, // list of receivers
       subject: 'Pick Up On Store!', // Subject line
       text: 'Hello world', // plaintext body
       html: 'First Html body!'// html body

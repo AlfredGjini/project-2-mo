@@ -4690,10 +4690,11 @@ $scope.cleanArray= function(actual) {
             template: '<p align="center">Regjistrimi Perfundoi Me Sukses, Ju Lutem beni login</p>'
           });
         };
+
         $scope.showAlertEmailEkziston = function() {
           var alertPopup = $ionicPopup.alert({
             title: 'Regjistrimi Deshtoi',
-            template: '<p align="center">Ky email ekziston njehere! Ju lutem perdorni nje tjeter.</p>'
+            template: '<p align="center">Kjo adresë e-maili është regjistruar më parë. Klikoni <a style="text-decoration: none;" href="#/app/forgotPassword"><b>ketu</b></a> nëse nuk mbani mend passwordin</p>'
           });
         };
 
@@ -6473,7 +6474,7 @@ $scope.testApi=function(){
 
 //   }
 // }, 3000); 
-$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','City Park','QTU','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec'];
+$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','City Park','QTU','Medrese','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec','Prishtine','Minimax','Lezhe','Kruje','Korce','test'];
 $scope.dyqanetListaSelected={};
 $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
