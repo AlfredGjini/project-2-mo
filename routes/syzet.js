@@ -667,7 +667,7 @@ exports.forgotPassword = function (req, res, next) {
     var email = req.body.email;
 
 
-    var queryEmailCheck = 'SELECT * FROM users WHERE email = \''+email+'\'';
+    var queryEmailCheck = 'SELECT * FROM users WHERE emailval = \''+email+'\'';
     // console.log(queryTextRegister);
     console.log(queryEmailCheck);
     var passData = [];
