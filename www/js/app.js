@@ -7,6 +7,13 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
    payPalShopName : 'MyShopName',
    payPalMerchantPrivacyPolicyURL : 'url to policy',
    payPalMerchantUserAgreementURL : ' url to user agreement '
+
+   // payPalSandboxId : 'AWIjQqXmg-ZjHpDvFAy9Io027QrYa9808nm0N603sJQFeC6ij0EKNuFMyHKkDJRWipnSl0Y7OfP0xjFM',
+   // payPalProductionId : 'AQAw7nPSUU_uQmjfmL6oQBBBagKM2SKPDJeg5MjYqUNqT6LCLXDEgRgM3iABOigpmnr4PrTmqovip1t-',
+   // payPalEnv: 'PayPalEnvironmentProduction',   // for testing  production for production
+   // payPalShopName : 'MaxOptika',
+   // payPalMerchantPrivacyPolicyURL : 'url to policy',
+   // payPalMerchantUserAgreementURL : ' url to user agreement '
    
    
    

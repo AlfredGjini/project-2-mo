@@ -35,6 +35,7 @@ app.post('/login-real', syzet.loginUser);
 app.post('/forgot-password', syzet.forgotPassword);
 app.post('/pick-up-store', syzet.pickUpStore);
 app.post('/pay-on-delivery', syzet.payOnDelivery);
+app.post('/pay-paypal', syzet.payByPayPal);
 app.post('/getCmimiFilter', syzet.getCmimiFilter);
 app.post('/shnamo', syzet.shnamo);
 app.post('/get-orders', syzet.historiku);

@@ -6474,7 +6474,7 @@ $scope.testApi=function(){
 
 //   }
 // }, 3000); 
-$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','City Park','QTU','Medrese','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec','Prishtine','Minimax','Lezhe','Kruje','Korce','test'];
+$scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','City Park','QTU','Medrese','Durres','Shkoder','Vlore','Fier','Sarandë','Lushnje','Pogradec','Prishtine','Minimax','Lezhe','Kruje','Korce'];
 $scope.dyqanetListaSelected={};
 $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
@@ -6490,7 +6490,7 @@ $scope.vazhdoPorosine= function(allCmimi){
    // console.log(gjithCmimi2);
    // gjithCmimi2=gjithCmimi2-1;
    // console.log(gjithCmimi2);
-   var gjithCmimi2=359;
+   //var gjithCmimi2=359;
 
    //alert(typeof(gjithCmimi));
     $ionicModal.fromTemplateUrl('templates/vazhdoPorosine.html', {
@@ -6516,27 +6516,169 @@ $scope.vazhdoPorosine= function(allCmimi){
     }
     $scope.nextStep=function(){
       if ($scope.selected=="PayPal") {
-        // alert("paypal");
+
+        $scope.modal.hide();
+        $ionicModal.fromTemplateUrl('templates/insertAdresaPayPal.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.modall = modal;
+          $scope.modall.show();
+        });
+
+        $scope.nextStepPayPal=function(item){
+          if(item=='' || item==undefined){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Gabim',
+              template: '<p align="center">Ju lutem vendosni adresen tuaj!</p>'
+            });
+          }else{
+
+
+        $scope.setActive('eur');
+        var gjithCmimi2=Number($scope.checkoutTotal);
+        // alert("gjithCmimi2");
         PaypalService.initPaymentUI().then(function () {
           PaypalService.makePayment(gjithCmimi2, "Total").then(function (response) {
-            $ionicPopup.alert({
-              title: 'Sukses',
-              template: '<p align="center">Transaksioni perfundoi me sukses</p>'
-            });
+
 
             console.log("success"+JSON.stringify(response));
 
+
+
+
+
+
+
+        var klientAdresa=item;
+        var klientEmer=$scope.loggedInSakte.emer;
+        var klientMbiemer=$scope.loggedInSakte.mbiemer;
+        var klientTel=$scope.loggedInSakte.celular;
+        var klientEmail=$scope.loggedInSakte.email;
+        console.log(klientEmer+" "+klientMbiemer+" "+klientTel+" "+klientEmail);
+        console.log($scope.shportaElem);
+
+
+          $http({
+          method: 'POST',
+          //url: 'https://tarzantest.herokuapp.com/login',
+          url: 'https://max-optika-server.herokuapp.com/pay-paypal',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          transformRequest: function(obj) {
+            var str = [];
+            for (var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+          data: {
+            emer: klientEmer,
+            mbiemer: klientMbiemer,
+            tel: klientTel,
+            email: klientEmail,
+            emailTo: $scope.emailiDyqAfer,
+            adresa: klientAdresa,
+            shportaElem: $scope.shportaElem.toString()
+          }
+        }).success(function(response) {
+          
+          // $scope.responseLoggedIn = response[0];
+          console.log(response);
+          if (response.sentPayD==1) {
+           // $scope.showAlertForgotPasswordSuccess();
+           $scope.getShnamo('merr','bosh', "PayPal Successful Payment");
+           // $ionicLoading.show({
+           //    template: 'Qendra u lajmerua. Nje agjent i joni do te ju kontaktoje!',
+           //    duration: 3000
+           //  });
+            $ionicPopup.alert({
+              title: 'Sukses',
+              template: '<p align="center">Transaksioni perfundoi me sukses.</p>'
+            });
+          var actionK='perditeso';
+           var shportaOrders=window.localStorage.getItem('shporta');
+
+            $http({
+               method: 'POST',
+               //url: 'https://tarzantest.herokuapp.com/login',
+               url: 'https://max-optika-server.herokuapp.com/get-orders',
+               headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded'
+               },
+               transformRequest: function(obj) {
+                 var str = [];
+                 for (var p in obj)
+                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                 return str.join("&");
+               },
+               data: {
+                 action : actionK,
+                 idd: $scope.loggedInSakte.id,
+                 orders:shportaOrders
+
+               }
+             }).success(function(response) {
+
+              console.log(response);
+            //$scope.getShnamo('merr','bosh', "Pick Up On Store");
+           //window.localStorage.removeItem('shporta');
+           $scope.wishbosh3=false;
+           $scope.response="";
+           $scope.shportlistItemsLength=0;
+           $scope.pojambosh=true;
+           
+
+           window.localStorage.setItem('shporta', '');
+              
+              console.log(response.pergjigje1);
+
+             });
+
+          }else if (response.sentPayD==0) {
+            // $scope.showAlertNotEmail();
+            $ionicLoading.show({
+              template: 'Lajmerimi i qendres deshtoi,<br> ju lutemi provojeni perseri!',
+              duration: 3000
+            });
+
+          }       
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }, function (error) {
-              console.log(error);
-              $ionicPopup.alert({
-                title: 'Gabim',
-                template: '<p align="center">Transaksioni deshtoi</p>'
-              });
+              alert(error);
+              // $ionicPopup.alert({
+              //   title: 'Gabim',
+              //   template: '<p align="center">Transaksioni deshtoi</p>'
+              // });
 
             //alert("Transaction Canceled");
 
               });
           })
+      }
+    }
       }else if ($scope.selected=="Pick Up On Store") {
         $scope.modal.hide();
         $ionicModal.fromTemplateUrl('templates/zgjidhDyqanin.html', {
@@ -6636,7 +6778,7 @@ $scope.vazhdoPorosine= function(allCmimi){
              }).success(function(response) {
 
               console.log(response);
-            //$scope.getShnamo('merr','bosh', "Pick Up On Store");
+            $scope.getShnamo('merr','bosh', "Pick Up On Store");
            //window.localStorage.removeItem('shporta');
            $scope.wishbosh3=false;
            $scope.response="";
@@ -8316,15 +8458,16 @@ $scope.scrollEnd = function () {
 
         $scope.takeImage = function() {
         var options = {
-            quality: 100,
+            quality: 80,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 800,
+            targetWidth: 720,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: true,
-            cameraDirection:1
+            cameraDirection:1,
+            correctOrientation: true
         };
          
         $cordovaCamera.getPicture(options).then(function(imageData) {
@@ -8335,14 +8478,15 @@ $scope.scrollEnd = function () {
     }
     $scope.loadImage = function() {
         var options = {
-            quality: 100,
+            quality: 80,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 800,
+            targetWidth: 720,
             popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false
+            saveToPhotoAlbum: false,
+            correctOrientation: true
         };
          
         $cordovaCamera.getPicture(options).then(function(imageData) {
@@ -8620,44 +8764,44 @@ $scope.scrollEnd = function () {
     //     });
     // }
 
-      $scope.takeImage = function() {
-        var options = {
-            quality: 100,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            allowEdit: false,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 800,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: true,
-            cameraDirection:1
-        };
+    //   $scope.takeImage = function() {
+    //     var options = {
+    //         quality: 100,
+    //         destinationType: Camera.DestinationType.DATA_URL,
+    //         sourceType: Camera.PictureSourceType.CAMERA,
+    //         allowEdit: false,
+    //         encodingType: Camera.EncodingType.JPEG,
+    //         targetWidth: 800,
+    //         popoverOptions: CameraPopoverOptions,
+    //         saveToPhotoAlbum: true,
+    //         cameraDirection:1
+    //     };
          
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            $scope.srcImage = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
-            // error
-        });
-    }
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //         $scope.srcImage = "data:image/jpeg;base64," + imageData;
+    //     }, function(err) {
+    //         // error
+    //     });
+    // }
 
-    $scope.loadImage = function() {
-        var options = {
-            quality: 100,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            allowEdit: false,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 800,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false
-        };
+    // $scope.loadImage = function() {
+    //     var options = {
+    //         quality: 100,
+    //         destinationType: Camera.DestinationType.DATA_URL,
+    //         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+    //         allowEdit: false,
+    //         encodingType: Camera.EncodingType.JPEG,
+    //         targetWidth: 800,
+    //         popoverOptions: CameraPopoverOptions,
+    //         saveToPhotoAlbum: false
+    //     };
          
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-            $scope.srcImage = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
-            // error
-        });
-    }
+    //     $cordovaCamera.getPicture(options).then(function(imageData) {
+    //         $scope.srcImage = "data:image/jpeg;base64," + imageData;
+    //     }, function(err) {
+    //         // error
+    //     });
+    // }
 
         $scope.$on('$stateChangeSuccess', function () {
             $ionicSideMenuDelegate.canDragContent(false);

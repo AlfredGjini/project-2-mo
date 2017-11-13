@@ -145,7 +145,8 @@ angular.module('directory.services', ['ngResource'])
 
 
             var defer = $q.defer();
-            total = $filter('number')(total, 2);
+            //total = $filter('number')(total, 2);
+            //total = total.parseInt();
             $ionicPlatform.ready().then(function () {
                 PayPalMobile.renderSinglePaymentUI(createPayment(total, name), function (result) {
                     $timeout(function () {
