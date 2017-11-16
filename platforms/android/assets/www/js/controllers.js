@@ -301,12 +301,26 @@ $scope.testApi=function(){
 
 
 $scope.shfaqNgjyrat=function(){
-  $ionicModal.fromTemplateUrl('templates/ngjyrat.html', {
-        scope: $scope
-      }).then(function(modal) {
-        $scope.modal = modal;
-        $scope.modal.show();
+  if ($scope.ngjyratSyze.length==0) {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Ngjyra',
+        template: '<p align="center">Per kete produkt nuk ka ngjyra te tjera!</p>'
       });
+  }else if($scope.ngjyratSyze.length!=0 && $scope.syze.pershkrimiangartikulli==''){
+      var alertPopup = $ionicPopup.alert({
+        title: 'Ngjyra',
+        template: '<p align="center">Per kete produkt nuk ka ngjyra te tjera!</p>'
+      });
+  }else{
+
+
+    $ionicModal.fromTemplateUrl('templates/ngjyrat.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.modal = modal;
+          $scope.modal.show();
+        });
+      }
 }
 
         $scope.$on('$stateChangeStart', function () {
@@ -1421,6 +1435,7 @@ $scope.moreDataCanBeLoaded=true;
   $scope.offsetD = 0;
   $scope.syzeD   = [];
   $scope.countForBackUp   = 1;
+  countNew=1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
       // $scope.fshihFormaVar=false;
@@ -1459,6 +1474,13 @@ $scope.moreDataCanBeLoaded=true;
        }
      }).success(function(response) {
       console.log(response);
+      
+      // Check if its the first call and if the number of products is under 20, and if yes disable infinitescroller
+      if (response.length<20 && countNew==1) {
+        $scope.moreDataCanBeLoaded=false;
+      }
+
+
       if (response.length==0) {
         //$scope.$broadcast('scroll.infiniteScrollComplete');
         $scope.moreDataCanBeLoaded=false;
@@ -1503,6 +1525,7 @@ $scope.moreDataCanBeLoaded=true;
         $scope.syzeDOriginalBackup=$scope.syzeD;
         console.log("First and only call");
        }
+       countNew++;
        
 
 
@@ -1933,6 +1956,7 @@ $scope.moreDataCanBeLoaded=true;
   $scope.offsetD = 0;
   $scope.syzeD   = [];
   $scope.countForBackUp   = 1;
+  countNew=1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
       // $scope.fshihFormaVar=false;
@@ -1971,6 +1995,11 @@ $scope.moreDataCanBeLoaded=true;
        }
      }).success(function(response) {
       console.log(response);
+
+      // Check if its the first call and if the number of products is under 20, and if yes disable infinitescroller
+      if (response.length<20 && countNew==1) {
+        $scope.moreDataCanBeLoaded=false;
+      }
 
       if (response.length==0) {
         //$scope.$broadcast('scroll.infiniteScrollComplete');
@@ -2016,6 +2045,7 @@ $scope.moreDataCanBeLoaded=true;
         $scope.syzeDOriginalBackup=$scope.syzeD;
         console.log("First and only call");
        }
+       countNew++;
        
 
 
@@ -2675,6 +2705,7 @@ $scope.cleanArray= function(actual) {
   $scope.markaSyzesh = [];
   $scope.formaSyzesh = [];
   $scope.countForBackUp   = 1;
+  countNew=1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
       // $scope.fshihFormaVar=false;
@@ -2714,6 +2745,13 @@ $scope.cleanArray= function(actual) {
      }).success(function(response) {
       console.log(response);
 
+      // Check if its the first call and if the number of products is under 20, and if yes disable infinitescroller
+      if (response.length<20 && countNew==1) {
+        $scope.moreDataCanBeLoaded=false;
+      }
+
+
+
       if (response.length==0) {
         //$scope.$broadcast('scroll.infiniteScrollComplete');
         $scope.moreDataCanBeLoaded=false;
@@ -2724,6 +2762,7 @@ $scope.cleanArray= function(actual) {
         });
         //alert('Nuk ka aksesore per tu shfaqur');
       }else{
+
        
 
 
@@ -2788,6 +2827,7 @@ $scope.cleanArray= function(actual) {
         $scope.syzeDOriginalBackup=$scope.syzeD;
         console.log("First and only call");
        }
+      countNew++;
        
 
 
@@ -3318,6 +3358,7 @@ $scope.cleanArray= function(actual) {
   $scope.markaSyzesh = [];
   $scope.formaSyzesh = [];
   $scope.countForBackUp   = 1;
+  countNew=1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
       // $scope.fshihFormaVar=false;
@@ -3356,6 +3397,11 @@ $scope.cleanArray= function(actual) {
        }
      }).success(function(response) {
       console.log(response);
+      
+      // Check if its the first call and if the number of products is under 20, and if yes disable infinitescroller
+      if (response.length<20 && countNew==1) {
+        $scope.moreDataCanBeLoaded=false;
+      }
 
       if (response.length==0) {
         //$scope.$broadcast('scroll.infiniteScrollComplete');
@@ -3401,6 +3447,7 @@ $scope.cleanArray= function(actual) {
         $scope.syzeOOriginalBackup=$scope.syzeO;
         console.log("First and only call");
        }
+       countNew++;
        
 
 
@@ -3484,8 +3531,8 @@ $scope.cleanArray= function(actual) {
 
 
 $scope.checkPromotion=function(promo){
-  console.log(promo);
-  console.log('blag');
+  // console.log(promo);
+  // console.log('blag');
 
   if (promo==undefined || promo =='') {
     // Do nothing
@@ -4048,6 +4095,7 @@ $scope.cleanArray= function(actual) {
   $scope.markaSyzesh = [];
   $scope.formaSyzesh = [];
   $scope.countForBackUp   = 1;
+  countNew=1;
   $scope.loadNextProducts = function(){
       // $scope.fshihCmimeVar=false;
       // $scope.fshihFormaVar=false;
@@ -4086,6 +4134,12 @@ $scope.cleanArray= function(actual) {
        }
      }).success(function(response) {
       console.log(response);
+      
+      // Check if its the first call and if the number of products is under 20, and if yes disable infinitescroller
+      if (response.length<20 && countNew==1) {
+        $scope.moreDataCanBeLoaded=false;
+      }
+
       if (response.length==0) {
         //$scope.$broadcast('scroll.infiniteScrollComplete');
         $scope.moreDataCanBeLoaded=false;
@@ -4155,6 +4209,7 @@ $scope.cleanArray= function(actual) {
        //gets another limt data
        $scope.offsetD += 20;
        console.log($scope.offsetD);
+       countNew++;
 
          }
      });
@@ -4177,6 +4232,7 @@ $scope.cleanArray= function(actual) {
       
       $scope.lenteMarke=$stateParams.lenteMarke;
       console.log($scope.lenteMarke);
+      $scope.moreDataCanBeLoaded=true;
 
       // Check the number of elements in the cart and wishlist
       var numriWish=[];
@@ -4221,6 +4277,7 @@ $scope.cleanArray= function(actual) {
   $scope.limit  = 20; //gets 20 objects the first time
   $scope.offsetL = 0;
   $scope.syzeL   = [];
+  countNew=1;
   $scope.loadNextProducts = function(){
     console.log($scope.data.search);
     console.log('t');
@@ -4255,6 +4312,11 @@ $scope.cleanArray= function(actual) {
        }
      }).success(function(response) {
        $scope.$broadcast('scroll.infiniteScrollComplete');
+      
+      // Check if its the first call and if the number of products is under 20, and if yes disable infinitescroller
+      if (response.length<20 && countNew==1) {
+        $scope.moreDataCanBeLoaded=false;
+      }
       response.forEach(function(item){
         $scope.syzeL.push(item);
         console.log('tttttt');
@@ -4262,6 +4324,7 @@ $scope.cleanArray= function(actual) {
        console.log(response);
        //gets another limt data
        $scope.offsetL += 20;
+       countNew++;
      });
 
   };
@@ -6517,19 +6580,113 @@ $scope.vazhdoPorosine= function(allCmimi){
     $scope.nextStep=function(){
       if ($scope.selected=="PayPal") {
 
+        $scope.modal.hide();
+        $ionicModal.fromTemplateUrl('templates/insertAdresaPayPal.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.modall = modal;
+          $scope.modall.show();
+        });
+
+        $scope.nextStepPayPal=function(item){
+          if(item=='' || item==undefined){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Gabim',
+              template: '<p align="center">Ju lutem vendosni adresen tuaj!</p>'
+            });
+          }else{
+
+
 
         $scope.setActive('eur');
         var gjithCmimi2=Number($scope.checkoutTotal);
         // alert("gjithCmimi2");
         PaypalService.initPaymentUI().then(function () {
           PaypalService.makePayment(gjithCmimi2, "Total").then(function (response) {
-            $scope.getShnamo('merr','bosh', "PayPal Successful Payment");
 
+
+            console.log("success"+JSON.stringify(response));
+
+
+
+
+
+
+
+        var klientAdresa=item;
+        var klientEmer=$scope.loggedInSakte.emer;
+        var klientMbiemer=$scope.loggedInSakte.mbiemer;
+        var klientTel=$scope.loggedInSakte.celular;
+        var klientEmail=$scope.loggedInSakte.email;
+        console.log(klientEmer+" "+klientMbiemer+" "+klientTel+" "+klientEmail);
+        console.log($scope.shportaElem);
+
+
+          $http({
+          method: 'POST',
+          //url: 'https://tarzantest.herokuapp.com/login',
+          url: 'https://max-optika-server.herokuapp.com/pay-paypal',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          transformRequest: function(obj) {
+            var str = [];
+            for (var p in obj)
+              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+          },
+          data: {
+            emer: klientEmer,
+            mbiemer: klientMbiemer,
+            tel: klientTel,
+            email: klientEmail,
+            emailTo: $scope.emailiDyqAfer,
+            adresa: klientAdresa,
+            shportaElem: $scope.shportaElem.toString()
+          }
+        }).success(function(response) {
+          $scope.modall.hide();
+          
+          // $scope.responseLoggedIn = response[0];
+          console.log(response);
+          if (response.sentPayD==1) {
+           // $scope.showAlertForgotPasswordSuccess();
+           $scope.getShnamo('merr','bosh', "PayPal Successful Payment");
+           // $ionicLoading.show({
+           //    template: 'Qendra u lajmerua. Nje agjent i joni do te ju kontaktoje!',
+           //    duration: 3000
+           //  });
             $ionicPopup.alert({
               title: 'Sukses',
               template: '<p align="center">Transaksioni perfundoi me sukses.</p>'
             });
+          var actionK='perditeso';
+           var shportaOrders=window.localStorage.getItem('shporta');
 
+            $http({
+               method: 'POST',
+               //url: 'https://tarzantest.herokuapp.com/login',
+               url: 'https://max-optika-server.herokuapp.com/get-orders',
+               headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded'
+               },
+               transformRequest: function(obj) {
+                 var str = [];
+                 for (var p in obj)
+                   str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                 return str.join("&");
+               },
+               data: {
+                 action : actionK,
+                 idd: $scope.loggedInSakte.id,
+                 orders:shportaOrders
+
+               }
+             }).success(function(response) {
+
+              console.log(response);
+            //$scope.getShnamo('merr','bosh', "Pick Up On Store");
+           //window.localStorage.removeItem('shporta');
            $scope.wishbosh3=false;
            $scope.response="";
            $scope.shportlistItemsLength=0;
@@ -6537,20 +6694,56 @@ $scope.vazhdoPorosine= function(allCmimi){
            
 
            window.localStorage.setItem('shporta', '');
+              
+              console.log(response.pergjigje1);
 
-            console.log("success"+JSON.stringify(response));
+             });
+
+          }else if (response.sentPayD==0) {
+            // $scope.showAlertNotEmail();
+            $ionicLoading.show({
+              template: 'Lajmerimi i qendres deshtoi,<br> ju lutemi provojeni perseri!',
+              duration: 3000
+            });
+
+          }       
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             }, function (error) {
-              alert(error);
-              // $ionicPopup.alert({
-              //   title: 'Gabim',
-              //   template: '<p align="center">Transaksioni deshtoi</p>'
-              // });
+              //alert(error);
+              $ionicPopup.alert({
+                title: 'Gabim',
+                template: '<p align="center">Transaksioni deshtoi: '+error+'</p>'
+              });
 
             //alert("Transaction Canceled");
 
               });
           })
+      }
+    }
       }else if ($scope.selected=="Pick Up On Store") {
         $scope.modal.hide();
         $ionicModal.fromTemplateUrl('templates/zgjidhDyqanin.html', {

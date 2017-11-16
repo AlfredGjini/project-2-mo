@@ -84,6 +84,7 @@
     <!-- </div> -->
        <!-- <br><br><br> --><br><br><br> 
     <ion-infinite-scroll
+    ng-if="moreDataCanBeLoaded"
     on-infinite="loadNextProducts()"
     distance="1%">
   </ion-infinite-scroll>

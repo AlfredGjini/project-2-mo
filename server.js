@@ -40,6 +40,7 @@ app.post('/getCmimiFilter', syzet.getCmimiFilter);
 app.post('/shnamo', syzet.shnamo);
 app.post('/get-orders', syzet.historiku);
 app.post('/rasti3', syzet.doMathCalc);
+app.post('/payLente', syzet.payLente);
 
 
 app.post('/kartela-klinike', clinic.getClinicCard);
