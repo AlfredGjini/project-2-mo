@@ -952,7 +952,7 @@ exports.payLente = function (req, res, next) {
     var email = req.body.email;
     var emailTo = req.body.emailTo;
     var produkti = req.body.produkti;
-    var lente = req.body.lente.parse();
+    var lente = req.body.lente;
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+adresa+' '+shportaElem);
     var qendraMax="j.rrumbullaku@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
@@ -991,15 +991,15 @@ exports.payLente = function (req, res, next) {
     // mailOptions.to=passData[0].email;
     // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
     mailOptions.html = "Pershendetje <br> Klienti " + emer + " " + mbiemer + " me te dhena si me poshte: <br>Tel: "+tel +"<br> Email: "+email +"<br>Adrese: "+adresa +"<br> Ka zgjedhur per te blere produktet me ID: " + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log(error);
-        res.send(JSON.stringify({sentPayD:0}));
-      }else {
-      console.log('Message sent: ' + info.response);
-      res.send(JSON.stringify({sentPayD:1}));
-      }
-    });
+    // transporter.sendMail(mailOptions, function(error, info){
+    //   if(error){
+    //     console.log(error);
+    //     res.send(JSON.stringify({sentPayD:0}));
+    //   }else {
+    //   console.log('Message sent: ' + info.response);
+    //   res.send(JSON.stringify({sentPayD:1}));
+    //   }
+    // });
 
 };
 

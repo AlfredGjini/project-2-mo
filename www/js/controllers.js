@@ -703,7 +703,7 @@ $scope.shfaqNgjyrat=function(){
         $http({
         method: 'POST',
         //url: 'https://tarzantest.herokuapp.com/login',
-        url: 'https://max-optika-server.herokuapp.com/payLentee',
+        url: 'https://max-optika-server.herokuapp.com/payLente',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
@@ -719,12 +719,11 @@ $scope.shfaqNgjyrat=function(){
           tel: klientTel,
           email: klientEmail,
           emailTo: $scope.emailiDyqAfer,
-          adresa: klientAdresa,
           produkti: $scope.syze.idprodukti,
-          lente: $scope.lente;
+          lente: $scope.lente
         }
       }).success(function(response) {
-
+        console.log(response);
       });
 
 
