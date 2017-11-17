@@ -953,7 +953,8 @@ exports.payLente = function (req, res, next) {
     var emailTo = req.body.emailTo;
     var produkti = req.body.produkti;
     var lente = req.body.lente;
-    console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+shportaElem);
+    console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+produkti);
+    console.log(lente);
     var qendraMax="j.rrumbullaku@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
