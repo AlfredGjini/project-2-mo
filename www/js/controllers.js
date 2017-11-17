@@ -720,7 +720,7 @@ $scope.shfaqNgjyrat=function(){
           email: klientEmail,
           emailTo: $scope.emailiDyqAfer,
           produkti: $scope.syze.idprodukti,
-          lente: $scope.lente.toString()
+          lente: JSON.stringify($scope.lente)
         }
       }).success(function(response) {
         console.log(response);
