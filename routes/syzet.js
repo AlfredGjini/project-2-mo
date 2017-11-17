@@ -954,7 +954,8 @@ exports.payLente = function (req, res, next) {
     var produkti = req.body.produkti;
     var lente = req.body.lente;
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+produkti);
-    console.log(lente.toString());
+    console.log(lente);
+    //console.log(lente.parse());
     var qendraMax="j.rrumbullaku@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
