@@ -922,7 +922,7 @@ exports.payOnDelivery = function (req, res, next) {
     var mailOptions = {
       from: '"MaxOptika App" <maxoptikasmtp@gmail.com>', // sender address
       to: 'a.gjini@live.com', // list of receivers
-      subject: 'Porosi per Lente', // Subject line
+      subject: 'Pay On Delivery!', // Subject line
       text: 'Hello world', // plaintext body
       html: 'First Html body!'// html body
     };
@@ -986,7 +986,7 @@ exports.payLente = function (req, res, next) {
     var mailOptions = {
       from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
       to: 'a.gjini@live.com', // list of receivers
-      subject: 'Pay On Delivery!', // Subject line
+      subject: 'Porosi per Lente', // Subject line
       text: 'Hello world', // plaintext body
       html: 'First Html body!'// html body
     };

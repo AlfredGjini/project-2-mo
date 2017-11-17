@@ -692,9 +692,12 @@ $scope.shfaqNgjyrat=function(){
     $ionicLoading.show({
       template: 'Loading...',
     });
+    if (tab==2) {
+      $scope.lente=$scope.lente2;
+    }
     
 
-    if (tab==1) {
+    // if (tab==1) {
       var klientEmer=$scope.loggedInSakte.emer;
       var klientMbiemer=$scope.loggedInSakte.mbiemer;
       var klientTel=$scope.loggedInSakte.celular;
@@ -748,12 +751,12 @@ $scope.shfaqNgjyrat=function(){
 
 
 
-      console.log('sy te ndryshem');
-      console.log($scope.lente);
-    }else if (tab==2) {
-      console.log('sy te njejte');
-      console.log($scope.lente2);
-    }
+    //   console.log('sy te ndryshem');
+    //   console.log($scope.lente);
+    // }else if (tab==2) {
+    //   console.log('sy te njejte');
+    //   console.log($scope.lente2);
+    // }
   }
 
         
