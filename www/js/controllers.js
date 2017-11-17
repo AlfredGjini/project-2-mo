@@ -637,7 +637,7 @@ $scope.shfaqNgjyrat=function(){
 })
 
 
-.controller('lenteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal,$ionicScrollDelegate, $location){
+.controller('lenteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal,$ionicScrollDelegate, $location, $ionicLoading){
 
       $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
       $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
@@ -689,6 +689,9 @@ $scope.shfaqNgjyrat=function(){
 
 
   $scope.rezervo=function(tab){
+    $ionicLoading.show({
+      template: 'Loading...',
+    });
     
 
     if (tab==1) {
@@ -723,7 +726,21 @@ $scope.shfaqNgjyrat=function(){
           lente: JSON.stringify($scope.lente)
         }
       }).success(function(response) {
+        $ionicLoading.hide();
         console.log(response);
+        if (response.sentPayL==1) {
+          $ionicPopup.alert({
+              title: 'Sukses',
+              template: '<p align="center">Porosia u dergua me sukses.</p>'
+            });
+        }else{
+           $ionicPopup.alert({
+              title: 'Gabim',
+              template: '<p align="center">Ju lutem provojeni me vone!</p>'
+            });
+        }
+
+
       });
 
 
@@ -6616,7 +6633,7 @@ $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
 $scope.vazhdoPorosine= function(allCmimi){
   $scope.wishbosh3=true;
-  $scope.gjejVendodhjen();
+  //$scope.gjejVendodhjen();
    // console.log(allCmimi);
    // var gjithCmimi=parseInt(allCmimi);
    // var gjithCmimi2=Number(allCmimi);
