@@ -778,6 +778,9 @@ exports.pickUpStore = function (req, res, next) {
     console.log(elementet);
     console.log('hapsireeee');
     console.log(sasiaBlerjes);
+    elementet=JSON.parse(elementet);
+    sasiaBlerjes=JSON.parse(sasiaBlerjes);
+    console.log(typeof elementet);
 
     elementet.forEach( function(element, index) {
       element.sasia=element.sasia-sasiaBlerjes[element.kodartikull];
