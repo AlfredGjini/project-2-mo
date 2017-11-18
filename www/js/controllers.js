@@ -6989,8 +6989,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             dyqani: dyqaniZgjedhur,
-            response: $scope.response,
-            example:$scope.example,
+            response: JSON.stringify($scope.response),
+            example:JSON.stringify($scope.example),
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
