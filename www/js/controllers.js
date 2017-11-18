@@ -652,7 +652,7 @@ $scope.shfaqNgjyrat=function(){
 
 
         $scope.$on('$stateChangeStart', function () {
-            $scope.modal.hide();
+            //$scope.modal.hide();
           });
 
 
