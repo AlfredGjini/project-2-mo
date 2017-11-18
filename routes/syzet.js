@@ -953,6 +953,7 @@ exports.payLente = function (req, res, next) {
     var emailTo = req.body.emailTo;
     var produkti = req.body.produkti;
     var lente = req.body.lente;
+    var sasia=req.body.sasia-1;
     lente=lente.slice(1, -1);
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+produkti);
     console.log(lente);
@@ -961,48 +962,94 @@ exports.payLente = function (req, res, next) {
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
 
-    // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
-          var transporter = mailer.createTransport( {
-            host: "smtp.gmail.com", // hostname
-            secureConnection: true, // use SSL
-            port: 465, // port for secure SMTP
-            auth: {
-                user: "maxoptikasmtp@gmail.com",
-                pass: "maxoptika.1A"
-            }
-        });
-    //       var transporter = mailer.createTransport( {
-    //     host: "smtp-mail.outlook.com", // hostname
-    //     secureConnection: false, // use SSL
-    //     port: 587, // port for secure SMTP
-    //     tls: {
-    //        ciphers:'SSLv3'
-    //     },
-    //     auth: {
-    //         user: "maxoptikasmtpnew@outlook.com",
-    //         pass: "maxoptika.1A"
-    //     }
-    // });
-    var mailOptions = {
-      from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
-      to: 'a.gjini@live.com', // list of receivers
-      subject: 'Porosi per Lente', // Subject line
-      text: 'Hello world', // plaintext body
-      html: 'First Html body!'// html body
-    };
-    
-    // mailOptions.to=passData[0].email;
-    // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    mailOptions.html = "Pershendetje <br> Klienti " + emer + " " + mbiemer + " me te dhena si me poshte: <br>Tel: "+tel +"<br> Email: "+email +"<br> Ka zgjedhur per te blere lenten me ID: " + produkti + "<br> Specifikimet: "+lente+"<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log(error);
-        res.send(JSON.stringify({sentPayL:0}));
-      }else {
-      console.log('Message sent: ' + info.response);
-      res.send(JSON.stringify({sentPayL:1}));
+
+      pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
       }
-    });
+
+
+      var queryTextupdateOrders='UPDATE magazina SET sasia='+sasia+' where kodartikull=\''+produkti+'\'';
+      client.query(queryTextupdateOrders, function(err, result, done) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("mbaroi e dyta");
+          // responseSh.pergjigje1=end.rows["0"];
+          // responseSh.pergjigje2='sukses';
+          console.log(end.rows["0"]);
+
+
+
+
+
+    // // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
+    //       var transporter = mailer.createTransport( {
+    //         host: "smtp.gmail.com", // hostname
+    //         secureConnection: true, // use SSL
+    //         port: 465, // port for secure SMTP
+    //         auth: {
+    //             user: "maxoptikasmtp@gmail.com",
+    //             pass: "maxoptika.1A"
+    //         }
+    //     });
+    // //       var transporter = mailer.createTransport( {
+    // //     host: "smtp-mail.outlook.com", // hostname
+    // //     secureConnection: false, // use SSL
+    // //     port: 587, // port for secure SMTP
+    // //     tls: {
+    // //        ciphers:'SSLv3'
+    // //     },
+    // //     auth: {
+    // //         user: "maxoptikasmtpnew@outlook.com",
+    // //         pass: "maxoptika.1A"
+    // //     }
+    // // });
+    // var mailOptions = {
+    //   from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
+    //   to: 'a.gjini@live.com', // list of receivers
+    //   subject: 'Porosi per Lente', // Subject line
+    //   text: 'Hello world', // plaintext body
+    //   html: 'First Html body!'// html body
+    // };
+    
+    // // mailOptions.to=passData[0].email;
+    // // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
+    // mailOptions.html = "Pershendetje <br> Klienti " + emer + " " + mbiemer + " me te dhena si me poshte: <br>Tel: "+tel +"<br> Email: "+email +"<br> Ka zgjedhur per te blere lenten me ID: " + produkti + "<br> Specifikimet: "+lente+"<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
+    // transporter.sendMail(mailOptions, function(error, info){
+    //   if(error){
+    //     console.log(error);
+    //     res.send(JSON.stringify({sentPayL:0}));
+    //   }else {
+    //   console.log('Message sent: ' + info.response);
+    //   res.send(JSON.stringify({sentPayL:1}));
+    //   }
+    // });
+
+
+
+
+
+
+
+          //res.send(responseSh);
+
+
+            }
+
+          });
+
+        client.end();
+        done();
+
+      });
+
+      pg.end(function(err) {
+      if (err) throw err;
+      });
+
+
 
 };
 

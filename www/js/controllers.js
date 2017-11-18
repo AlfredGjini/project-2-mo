@@ -746,17 +746,6 @@ $scope.shfaqNgjyrat=function(){
 
       });
 
-
-
-
-
-
-    //   console.log('sy te ndryshem');
-    //   console.log($scope.lente);
-    // }else if (tab==2) {
-    //   console.log('sy te njejte');
-    //   console.log($scope.lente2);
-    // }
   }
 
         
@@ -6895,6 +6884,7 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             dyqani: dyqaniZgjedhur,
+            sasia:$scope.syze.sasia,
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
