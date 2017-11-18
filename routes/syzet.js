@@ -1038,7 +1038,7 @@ exports.payLente = function (req, res, next) {
 
             
             client.end();
-            done();
+            //done();
             }
 
           });
