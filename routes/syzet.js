@@ -779,6 +779,12 @@ exports.pickUpStore = function (req, res, next) {
     console.log('hapsireeee');
     console.log(sasiaBlerjes);
 
+    elementet.forEach( function(element, index) {
+      element.sasia=element.sasia-sasiaBlerjes[element.kodartikull];
+    });
+    elementet=JSON.stringify(elementet);
+    console.log(elementet);
+
     if (dyqani=="21 Dhjetori") {
       eailToCorrect='21dhjetori@maxoptika.al';
     }else if(dyqani=="Sheshi Willson") {
