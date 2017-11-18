@@ -726,6 +726,7 @@ $scope.shfaqNgjyrat=function(){
           email: klientEmail,
           emailTo: $scope.emailiDyqAfer,
           produkti: $scope.syze.idprodukti,
+          sasia:$scope.syze.sasia,
           lente: JSON.stringify($scope.lente)
         }
       }).success(function(response) {
@@ -6884,7 +6885,6 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             dyqani: dyqaniZgjedhur,
-            sasia:$scope.syze.sasia,
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {

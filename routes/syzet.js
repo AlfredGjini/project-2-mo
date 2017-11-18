@@ -978,7 +978,7 @@ exports.payLente = function (req, res, next) {
           console.log("mbaroi e dyta");
           // responseSh.pergjigje1=end.rows["0"];
           // responseSh.pergjigje2='sukses';
-          console.log(end.rows["0"]);
+          console.log(result);
 
 
 
