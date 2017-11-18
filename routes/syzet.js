@@ -773,6 +773,11 @@ exports.pickUpStore = function (req, res, next) {
     var eailToCorrect='';
     var shportaElem = req.body.shportaElem;
     var dyqani=req.body.dyqani;
+    var elementet=req.body.response;
+    var sasiaBlerjes=req.body.example;
+    console.log(elementet);
+    console.log('hapsireeee');
+    console.log(sasiaBlerjes);
 
     if (dyqani=="21 Dhjetori") {
       eailToCorrect='21dhjetori@maxoptika.al';
