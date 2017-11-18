@@ -1040,14 +1040,14 @@ exports.payLente = function (req, res, next) {
 
           });
 
-        client.end();
-        done();
+        // client.end();
+        // done();
 
       });
 
-      pg.end(function(err) {
-      if (err) throw err;
-      });
+      // pg.end(function(err) {
+      // if (err) throw err;
+      // });
 
 
 
