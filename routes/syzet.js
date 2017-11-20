@@ -805,6 +805,10 @@ exports.pickUpStore = function (req, res, next) {
     } 
   }
 
+
+
+  console.log(result);
+  result=result.slice(0, -2);
   console.log(result);
   sasiaBlerjes=JSON.stringify(sasiaBlerjes);
   console.log(sasiaBlerjes);
