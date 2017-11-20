@@ -801,7 +801,7 @@ exports.pickUpStore = function (req, res, next) {
 
     for (var p in sasiaBlerjes) {
     if( sasiaBlerjes.hasOwnProperty(p) ) {
-      result += sasiaBlerjes[p] + " , " + p + "),";
+      result += "'"+p + "' , " + sasiaBlerjes[p] + "),(";
     } 
   }
 
@@ -947,15 +947,15 @@ exports.pickUpStore = function (req, res, next) {
     // mailOptions.to=passData[0].email;
     // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
     mailOptions.html = 'Pershendetje <br> Klienti ' + emer + " " + mbiemer + " me nr.tel: "+tel +" dhe Email: "+email +" ka zgjedhur dyqanin " + dyqani + " per te blere produktet me ID <br><br>" + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log(error);
-        res.send(JSON.stringify({sentPickUp:0}));
-      }else{
-      console.log('Message sent: ' + info.response);
-      res.send(JSON.stringify({sentPickUp:1}));
-      }
-    });
+    // transporter.sendMail(mailOptions, function(error, info){
+    //   if(error){
+    //     console.log(error);
+    //     res.send(JSON.stringify({sentPickUp:0}));
+    //   }else{
+    //   console.log('Message sent: ' + info.response);
+    //   res.send(JSON.stringify({sentPickUp:1}));
+    //   }
+    // });
 
 };
 
