@@ -812,6 +812,8 @@ exports.pickUpStore = function (req, res, next) {
   console.log(result);
   sasiaBlerjes=JSON.stringify(sasiaBlerjes);
   console.log(sasiaBlerjes);
+  var query_text="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
+  console.log(query_text);
 
 
 
