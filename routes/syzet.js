@@ -785,8 +785,8 @@ exports.pickUpStore = function (req, res, next) {
     elementet.forEach( function(element, index) {
       sasiaBlerjes[element.kodartikull]=element.sasia-sasiaBlerjes[element.kodartikull];
     });
-    elementet=JSON.stringify(elementet);
-    console.log(elementet);
+    //elementet=JSON.stringify(elementet);
+    //console.log(elementet);
     //sasiaBlerjes=JSON.stringify(sasiaBlerjes);
     //console.log(sasiaBlerjes);
 
@@ -810,10 +810,10 @@ exports.pickUpStore = function (req, res, next) {
   console.log(result);
   result=result.slice(0, -2);
   console.log(result);
-  sasiaBlerjes=JSON.stringify(sasiaBlerjes);
-  console.log(sasiaBlerjes);
-  var query_text="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
-  console.log(query_text);
+  //sasiaBlerjes=JSON.stringify(sasiaBlerjes);
+  //console.log(sasiaBlerjes);
+  //var query_text="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
+  //console.log(query_text);
 
 
 
@@ -864,7 +864,7 @@ exports.pickUpStore = function (req, res, next) {
     var toAllCorrectEmails=qendraMax+","+eailToCorrect+","+email;
     console.log(toAllCorrectEmails);
 
-          pg.connect(connectionStr, function(err, client, done) {
+    pg.connect(connectionStr, function(err, client, done) {
       if (err) {
         //console.log();
         throw err;
@@ -987,49 +987,134 @@ exports.payOnDelivery = function (req, res, next) {
     var qendraMax="j.rrumbullaku@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
+    var elementet=req.body.response;
+    var sasiaBlerjes=req.body.example;
+    console.log(elementet);
+    console.log('hapsireeee');
+    console.log(sasiaBlerjes);
+    elementet=JSON.parse(elementet);
+    sasiaBlerjes=JSON.parse(sasiaBlerjes);
+    console.log(typeof elementet);
 
-    // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
-          var transporter = mailer.createTransport( {
-            host: "smtp.gmail.com", // hostname
-            secureConnection: true, // use SSL
-            port: 465, // port for secure SMTP
-            auth: {
-                user: "maxoptikasmtp@gmail.com",
-                pass: "maxoptika.1A"
-            }
-        });
-    //       var transporter = mailer.createTransport( {
-    //     host: "smtp-mail.outlook.com", // hostname
-    //     secureConnection: false, // use SSL
-    //     port: 587, // port for secure SMTP
-    //     tls: {
-    //        ciphers:'SSLv3'
-    //     },
-    //     auth: {
-    //         user: "maxoptikasmtpnew@outlook.com",
-    //         pass: "maxoptika.1A"
-    //     }
-    // });
-    var mailOptions = {
-      from: '"MaxOptika App" <maxoptikasmtp@gmail.com>', // sender address
-      to: 'a.gjini@live.com', // list of receivers
-      subject: 'Pay On Delivery!', // Subject line
-      text: 'Hello world', // plaintext body
-      html: 'First Html body!'// html body
-    };
-    
-    // mailOptions.to=passData[0].email;
-    // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    mailOptions.html = "Pershendetje <br> Klienti " + emer + " " + mbiemer + " me te dhena si me poshte: <br>Tel: "+tel +"<br> Email: "+email +"<br>Adrese: "+adresa +"<br> Ka zgjedhur per te blere produktet me ID: " + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log(error);
-        res.send(JSON.stringify({sentPayD:0}));
-      }else {
-      console.log('Message sent: ' + info.response);
-      res.send(JSON.stringify({sentPayD:1}));
-      }
+    elementet.forEach( function(element, index) {
+      sasiaBlerjes[element.kodartikull]=element.sasia-sasiaBlerjes[element.kodartikull];
     });
+    //elementet=JSON.stringify(elementet);
+    //console.log(elementet);
+    //sasiaBlerjes=JSON.stringify(sasiaBlerjes);
+    //console.log(sasiaBlerjes);
+
+    //     update test as t set
+    //     column_a = c.column_a
+    // from (values
+    //     ('123', 1),
+    //     ('345', 2)  
+    // ) as c(column_b, column_a) 
+    // where c.column_b = t.column_b;
+    var result = "(";
+
+    for (var p in sasiaBlerjes) {
+    if( sasiaBlerjes.hasOwnProperty(p) ) {
+      result += "'"+p + "' , " + sasiaBlerjes[p] + "),(";
+    } 
+  }
+
+
+
+  console.log(result);
+  result=result.slice(0, -2);
+  console.log(result);
+
+
+
+  pg.connect(connectionStr, function(err, client, done) {
+      if (err) {
+        //console.log();
+        throw err;
+      }
+
+  //var query_text="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
+  console.log(query_text);
+
+
+      var queryTextupdateOrders="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
+      console.log(queryTextupdateOrders);
+      client.query(queryTextupdateOrders, function(err, result, done) {
+        if (err) {
+          console.log(err);
+        } else {
+          //console.log("mbaroi e dyta");
+          // responseSh.pergjigje1=end.rows["0"];
+          // responseSh.pergjigje2='sukses';
+          //console.log(result);
+
+            // var transporter = mailer.createTransport('smtps://tarzanprenga17%40gmail.com:M3tall1ca!@smtp.gmail.com');
+                  var transporter = mailer.createTransport( {
+                    host: "smtp.gmail.com", // hostname
+                    secureConnection: true, // use SSL
+                    port: 465, // port for secure SMTP
+                    auth: {
+                        user: "maxoptikasmtp@gmail.com",
+                        pass: "maxoptika.1A"
+                    }
+                });
+            //       var transporter = mailer.createTransport( {
+            //     host: "smtp-mail.outlook.com", // hostname
+            //     secureConnection: false, // use SSL
+            //     port: 587, // port for secure SMTP
+            //     tls: {
+            //        ciphers:'SSLv3'
+            //     },
+            //     auth: {
+            //         user: "maxoptikasmtpnew@outlook.com",
+            //         pass: "maxoptika.1A"
+            //     }
+            // });
+            var mailOptions = {
+              from: '"MaxOptika App" <maxoptikasmtp@gmail.com>', // sender address
+              to: 'a.gjini@live.com', // list of receivers
+              subject: 'Pay On Delivery!', // Subject line
+              text: 'Hello world', // plaintext body
+              html: 'First Html body!'// html body
+            };
+            
+            // mailOptions.to=passData[0].email;
+            // mailOptions.html = 'Pershendetje!</b><br>Klienti ' + passData[0].emer + " " + passData[0].mbiemer + " kerkon te rezervoje nje takim si meposhte.<br><br>"+ "<b>Data</b> : " + passData[0].fjalekalimi + "<br><b>Ora</b> : "+ passData[0].fjalekalimi + "<br>" + "<b>Dyqani</b> : " + passData[0].fjalekalimi + "<br><b>Shenime</b> : " + passData[0].fjalekalimi + "<br><b>Celular</b> : " + passData[0].fjalekalimi + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
+            mailOptions.html = "Pershendetje <br> Klienti " + emer + " " + mbiemer + " me te dhena si me poshte: <br>Tel: "+tel +"<br> Email: "+email +"<br>Adrese: "+adresa +"<br> Ka zgjedhur per te blere produktet me ID: " + shportaElem + "<br><br><br><i>Powered by <a href='http://dea.com.al'>DEA</a><i>"// html body
+            transporter.sendMail(mailOptions, function(error, info){
+              if(error){
+                console.log(error);
+                res.send(JSON.stringify({sentPayD:0}));
+              }else {
+              console.log('Message sent: ' + info.response);
+              res.send(JSON.stringify({sentPayD:1}));
+              }
+            });
+
+
+
+          //res.send(responseSh);
+
+
+            
+            client.end();
+            //done();
+            }
+
+          });
+
+        // client.end();
+        // done();
+
+      });
+
+      pg.end(function(err) {
+      if (err) throw err;
+      });
+
+
+
+
 
 };
 

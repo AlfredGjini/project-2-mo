@@ -6829,6 +6829,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             adresa: klientAdresa,
+            response: JSON.stringify($scope.response),
+            example:JSON.stringify($scope.example),
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
@@ -7032,17 +7034,17 @@ $scope.vazhdoPorosine= function(allCmimi){
              }).success(function(response) {
 
               console.log(response);
-           //  $scope.getShnamo('merr','bosh', "Pick Up On Store");
-           // //window.localStorage.removeItem('shporta');
-           // $scope.wishbosh3=false;
-           // $scope.response="";
-           // $scope.shportlistItemsLength=0;
-           // $scope.pojambosh=true;
+            $scope.getShnamo('merr','bosh', "Pick Up On Store");
+           //window.localStorage.removeItem('shporta');
+           $scope.wishbosh3=false;
+           $scope.response="";
+           $scope.shportlistItemsLength=0;
+           $scope.pojambosh=true;
            
 
-           // window.localStorage.setItem('shporta', '');
+           window.localStorage.setItem('shporta', '');
               
-           //    console.log(response.pergjigje1);
+              console.log(response.pergjigje1);
 
              });
 
@@ -7120,6 +7122,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             adresa: klientAdresa,
+            response: JSON.stringify($scope.response),
+            example:JSON.stringify($scope.example),
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
