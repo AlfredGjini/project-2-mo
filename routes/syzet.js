@@ -787,8 +787,29 @@ exports.pickUpStore = function (req, res, next) {
     });
     elementet=JSON.stringify(elementet);
     console.log(elementet);
-    sasiaBlerjes=JSON.stringify(sasiaBlerjes);
-    console.log(sasiaBlerjes);
+    //sasiaBlerjes=JSON.stringify(sasiaBlerjes);
+    //console.log(sasiaBlerjes);
+
+    //     update test as t set
+    //     column_a = c.column_a
+    // from (values
+    //     ('123', 1),
+    //     ('345', 2)  
+    // ) as c(column_b, column_a) 
+    // where c.column_b = t.column_b;
+    var result = "(";
+
+    for (var p in sasiaBlerjes) {
+    if( sasiaBlerjes.hasOwnProperty(p) ) {
+      result += sasiaBlerjes[p] + " , " + p + "),";
+    } 
+  }
+
+  console.log(response);
+  sasiaBlerjes=JSON.stringify(sasiaBlerjes);
+  console.log(sasiaBlerjes);
+
+
 
     if (dyqani=="21 Dhjetori") {
       eailToCorrect='21dhjetori@maxoptika.al';
@@ -836,6 +857,46 @@ exports.pickUpStore = function (req, res, next) {
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+eailToCorrect+","+email;
     console.log(toAllCorrectEmails);
+
+      //     pg.connect(connectionStr, function(err, client, done) {
+      // if (err) {
+      //   //console.log();
+      //   throw err;
+      // }
+
+
+      // var queryTextupdateOrders='UPDATE magazina SET sasia='+sasia+' where kodartikull=\''+produkti+'\'';
+      // client.query(queryTextupdateOrders, function(err, result, done) {
+      //   if (err) {
+      //     console.log(err);
+      //   } else {
+      //     //console.log("mbaroi e dyta");
+      //     // responseSh.pergjigje1=end.rows["0"];
+      //     // responseSh.pergjigje2='sukses';
+      //     //console.log(result);
+
+
+
+      //     //res.send(responseSh);
+
+
+            
+      //       client.end();
+      //       //done();
+      //       }
+
+      //     });
+
+      //   // client.end();
+      //   // done();
+
+      // });
+
+      // pg.end(function(err) {
+      // if (err) throw err;
+      // });
+
+
 
 
 
