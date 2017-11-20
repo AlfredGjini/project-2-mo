@@ -805,7 +805,7 @@ exports.pickUpStore = function (req, res, next) {
     } 
   }
 
-  console.log(response);
+  console.log(result);
   sasiaBlerjes=JSON.stringify(sasiaBlerjes);
   console.log(sasiaBlerjes);
 
