@@ -637,7 +637,12 @@ $scope.shfaqNgjyrat=function(){
 })
 
 
-.controller('lenteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal,$ionicScrollDelegate, $location){
+.controller('lenteSingleCtrl',function($scope, $state,$stateParams,$http, $ionicPopup, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $ionicModal,$ionicScrollDelegate, $location, $ionicLoading){
+
+      $scope.loggedInSakte=window.localStorage.getItem('loggedInSakte');
+      $scope.loggedInSakte=JSON.parse($scope.loggedInSakte);
+      console.log($scope.loggedInSakte);
+      $scope.loggedInSakte2=window.localStorage.getItem('loggedInSakte2');
 
     $scope.showSpinner=true;
     $scope.shfaqMonedhenTjeter=true;
@@ -647,7 +652,7 @@ $scope.shfaqNgjyrat=function(){
 
 
         $scope.$on('$stateChangeStart', function () {
-            $scope.modal.hide();
+            //$scope.modal.hide();
           });
 
 
@@ -664,6 +669,84 @@ $scope.shfaqNgjyrat=function(){
       var handle = $ionicScrollDelegate.$getByHandle('lenteDelegate');
       handle.anchorScroll(true);  // 'true' for animation
     }
+  }
+
+  $scope.lente={
+    smcurb:2,
+    sdcurb:4,
+    smdiopter:2,
+    sddiopter:2,
+    smbox:2,
+    sdbox:2
+  }
+
+  $scope.lente2={
+    curb:2,
+    diopter:4,
+    box:6,
+  }
+  // $scope.smcurb.vlera='option-1';
+
+
+  $scope.rezervo=function(tab){
+    $ionicLoading.show({
+      template: 'Loading...',
+    });
+    if (tab==2) {
+      $scope.lente=$scope.lente2;
+    }
+    
+
+    // if (tab==1) {
+      var klientEmer=$scope.loggedInSakte.emer;
+      var klientMbiemer=$scope.loggedInSakte.mbiemer;
+      var klientTel=$scope.loggedInSakte.celular;
+      var klientEmail=$scope.loggedInSakte.email;
+      console.log(klientEmer+" "+klientMbiemer+" "+klientTel+" "+klientEmail);
+      console.log($scope.syze.idprodukti);
+
+
+        $http({
+        method: 'POST',
+        //url: 'https://tarzantest.herokuapp.com/login',
+        url: 'https://max-optika-server.herokuapp.com/payLente',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        transformRequest: function(obj) {
+          var str = [];
+          for (var p in obj)
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          return str.join("&");
+        },
+        data: {
+          emer: klientEmer,
+          mbiemer: klientMbiemer,
+          tel: klientTel,
+          email: klientEmail,
+          emailTo: $scope.emailiDyqAfer,
+          produkti: $scope.syze.idprodukti,
+          sasia:$scope.syze.sasia,
+          lente: JSON.stringify($scope.lente)
+        }
+      }).success(function(response) {
+        $ionicLoading.hide();
+        console.log(response);
+        if (response.sentPayL==1) {
+          $ionicPopup.alert({
+              title: 'Sukses',
+              template: '<p align="center">Porosia u dergua me sukses.</p>'
+            });
+        }else{
+           $ionicPopup.alert({
+              title: 'Gabim',
+              template: '<p align="center">Ju lutem provojeni me vone!</p>'
+            });
+        }
+
+
+      });
+
   }
 
         
@@ -6221,10 +6304,30 @@ $scope.testApi=function(){
       $scope.example={};
 
       $scope.checkCurrencySelected=function(){
+        console.log($scope.example);
         if ($scope.monedhaZgjedhur=="lek") {
           //console.log('po jam brenda');
           
           var total = $scope.response.reduce(function (r, a) {
+                // if (Number($scope.example[a.kodartikulli])>a.sasia) {
+                //   var alertPopup = $ionicPopup.alert({
+                //     title: 'Gabim',
+                //     template: '<p align="center">Ky produkt nuk ka me gjendje!</p>'
+                //   });
+                //   console.log('madhe');
+                //   //$scope.example[a.kodartikulli]=Number($scope.example[a.kodartikulli])-1;
+                // }else if(Number($scope.example[a.kodartikulli])==a.sasia){
+                //   $scope.example[a.kodartikulli]=a.sasia;
+                //   a.sasia=0;
+                //   console.log('baraz');
+                // }else{
+                //   a.sasia=a.sasia-Number($scope.example[a.kodartikulli]);
+                //   console.log('vogel');
+                // }
+
+                
+                // console.log(a);
+                // console.log('kaq eshte');
                 if (a.cmimiPromoLek !="") {
                   return r + Number(a.cmimiPromoLek) * Number($scope.example[a.kodartikulli]);
                 }else{
@@ -6236,8 +6339,8 @@ $scope.testApi=function(){
 
           //console.log( $scope.example); 
            $scope.checkoutTotal=Number(total).toFixed(2);
-           console.log('shuma eshte');
-           console.log($scope.checkoutTotal);
+           //console.log('shuma eshte');
+           //console.log($scope.checkoutTotal);
 
         }else{
           console.log('nope jam brenda');
@@ -6262,7 +6365,31 @@ $scope.testApi=function(){
       $scope.minusElement=function (item, index, cmimi, monedha){
         
         
-        $scope.example[item]=Number($scope.example[item])-1;
+        //$scope.example[item]=Number($scope.example[item])-1;
+
+        $scope.response.forEach( function(a, index) {
+          //a.sasia=a.sasia-$scope.example[item];
+          if (item==a.kodartikulli) {
+            if ($scope.example[item]>=a.sasia) {
+              console.log($scope.example[item]);
+              console.log(a);
+              console.log('tek 1');
+              var alertPopup = $ionicPopup.alert({
+                template: '<p align="center">Ky produkt nuk ka me gjendje!</p>'
+              });
+              $scope.example[item]=a.sasia;
+              //a.sasia=a.sasia-$scope.example[item];
+            }else{
+              console.log('tek 2');
+              $scope.example[item]=Number($scope.example[item])-1;
+              //a.sasia=a.sasia-$scope.example[item];
+            }
+          }
+        });
+        //console.log($scope.example);
+
+
+
         if ($scope.example[item]<=0 ) {
         // not allowed to go below 1
         $scope.example[item]=1;
@@ -6288,8 +6415,33 @@ $scope.testApi=function(){
           console.log('jam lek');
           console.log(cmimiLek);
         }
+        console.log('test response');
+        console.log(item);
 
-        $scope.example[item]=Number($scope.example[item])+1;
+        $scope.response.forEach( function(a, index) {
+          //a.sasia=a.sasia-$scope.example[item];
+          if (item==a.kodartikulli) {
+            if ($scope.example[item]>=a.sasia) {
+              console.log($scope.example[item]);
+              console.log(a);
+              console.log('tek 1');
+              var alertPopup = $ionicPopup.alert({
+                template: '<p align="center">Ky produkt nuk ka me gjendje!</p>'
+              });
+              $scope.example[item]=a.sasia;
+              //a.sasia=a.sasia-$scope.example[item];
+            }else{
+              console.log('tek 2');
+              $scope.example[item]=Number($scope.example[item])+1;
+              //a.sasia=a.sasia-$scope.example[item];
+            }
+          }
+        });
+
+
+
+
+        //$scope.example[item]=Number($scope.example[item])+1;
 
         if ($scope.example[item]<=0 ) {
         // $scope.checkoutTotal=$scope.checkoutTotal*Number($scope.example[item]);
@@ -6460,6 +6612,7 @@ $scope.testApi=function(){
     // };
     // console.log(wishi);
     // console.log("id :"+data);
+    $scope.count=1;
     if (data !== "") {
       $http({
         method: 'POST',
@@ -6480,6 +6633,13 @@ $scope.testApi=function(){
       }).success(function(response) {
         $scope.pojambosh2=false;
         console.log(response);
+        if ($scope.count==1) {
+          $scope.responseOriginalCopy2=response;
+          console.log($scope.responseOriginalCopy2);
+          $scope.count++;
+          console.log($scope.count);
+        }
+        
         $scope.response = response;
         // console.log($scope.response[0]);
         $scope.checkoutTotal=0;
@@ -6502,7 +6662,8 @@ $scope.testApi=function(){
           $scope.response[i].cmimiPromoLek=cmimiriModel[2];
           $scope.response[i].cmimiPromoEur=cmimiriModel[3];
           }
-          console.log($scope.response);
+          //console.log($scope.response);
+          $scope.responseOriginalCopyBackup=response;
 
           if ($scope.response[i].cmimiPromoLek !="") {
             $scope.checkoutTotal=Number($scope.checkoutTotal)+Number($scope.response[i].cmimiPromoLek);
@@ -6541,9 +6702,35 @@ $scope.dyqanetLista=['21 Dhjetori','Sheshi Willson','Myslym Shyri','City Park','
 $scope.dyqanetListaSelected={};
 $scope.dyqanetListaSelected.dyqani='Zgjidhni nje dyqan';
 
+// $scope.responseOriginalCopy=$scope.response;
 $scope.vazhdoPorosine= function(allCmimi){
+  console.log('ghj');
+  console.log($scope.response);
+  console.log($scope.example);
+
+  // var responsetoBeChnaged=$scope.responseOriginalCopy2;
+  // console.log(responsetoBeChnaged);
+  // var variablekoti=[];
+
+  // // for(var i=0;i<responsetoBeChnaged.length;i++){
+  // //   responsetoBeChnaged[i].sasia=responsetoBeChnaged[i].sasia-$scope.example[responsetoBeChnaged[i].kodartikull]
+  // // }
+
+
+  // responsetoBeChnaged.forEach( function(element, index) {
+
+  //         element.sasia=element.sasia-$scope.example[element.kodartikull];
+  //         variablekoti.push(element)
+  // });
+  // console.log('fundit, shiko sasine');
+  // console.log(variablekoti);
+  
+
+
+
+
   $scope.wishbosh3=true;
-  $scope.gjejVendodhjen();
+  //$scope.gjejVendodhjen();
    // console.log(allCmimi);
    // var gjithCmimi=parseInt(allCmimi);
    // var gjithCmimi2=Number(allCmimi);
@@ -6642,6 +6829,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             adresa: klientAdresa,
+            response: JSON.stringify($scope.response),
+            example:JSON.stringify($scope.example),
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
@@ -6802,6 +6991,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             dyqani: dyqaniZgjedhur,
+            response: JSON.stringify($scope.response),
+            example:JSON.stringify($scope.example),
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {
@@ -6931,6 +7122,8 @@ $scope.vazhdoPorosine= function(allCmimi){
             email: klientEmail,
             emailTo: $scope.emailiDyqAfer,
             adresa: klientAdresa,
+            response: JSON.stringify($scope.response),
+            example:JSON.stringify($scope.example),
             shportaElem: $scope.shportaElem.toString()
           }
         }).success(function(response) {

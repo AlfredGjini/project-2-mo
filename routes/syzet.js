@@ -871,7 +871,7 @@ exports.pickUpStore = function (req, res, next) {
       }
 
   //var query_text="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
-  console.log(query_text);
+  //console.log(query_text);
 
 
       var queryTextupdateOrders="update magazina as t set sasia=c.sasia from (values "+result+" ) as c(kodartikull, sasia) where c.kodartikull=t.kodartikull";
@@ -1389,7 +1389,7 @@ exports.payByPayPal = function (req, res, next) {
 
 
 
-    
+
 
  
 

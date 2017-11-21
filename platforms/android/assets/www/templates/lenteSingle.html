@@ -284,10 +284,10 @@ a {
                             <label for="sphLD" class="syriNamee">Curb (BC)</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente.smcurb'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
@@ -296,36 +296,10 @@ a {
                             <label for="sphLD" class="syriNamee">Curb (BC)</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
-                                              </select>
-                                        </div>
-                                      </div>
-                        </div>
-                      </div>
-                                            <div class="row resposive-sm">
-                        <div class="col">
-                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
-                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
-                                       <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
-                                              </select>
-                                        </div>
-                                      </div>
-                        </div>
-                        <div class="col">
-                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
-                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
-                                       <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente.sdcurb'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
@@ -333,25 +307,51 @@ a {
                       </div>
                                             <div class="row resposive-sm">
                         <div class="col">
-                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                            <label for="sphLD" class="syriNamee">Diopter (PWR)</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente.smdiopter'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
                         </div>
                         <div class="col">
-                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                            <label for="sphLD" class="syriNamee">Diopter (PWR)</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente.sddiopter'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                      </div>
+                                            <div class="row resposive-sm">
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Box</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select ng-model='lente.smbox'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                        </div>
+                        <div class="col">
+                            <label for="sphLD" class="syriNamee">Box</label>
+                                    <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
+                                       <div class="select" style="padding-left: 0px;">
+                                              <select ng-model='lente.sdbox'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
@@ -361,7 +361,7 @@ a {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam in cupiditate ex et, dicta accusantium non enim quisquam fuga repudiandae, ducimus illo neque vel, reiciendis beatae, esse cumque facilis deleniti sunt voluptas rerum expedita!
                     </div>
                     <div style="width: 100%;margin-top:10px;margin-bottom:10px;text-align: center;">
-                      <button class="button button-dark" id="butoniRezervo" ng-click="rezervo()">Rezervo</button>
+                      <button class="button button-dark" id="butoniRezervo" ng-click="rezervo(1)">Rezervo</button>
                     </div>
                   </div>
                   <div ng-switch-when="2">
@@ -378,10 +378,10 @@ a {
                             <label for="sphLD" class="syriNamee">Curb (BC)</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente2.curb'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
@@ -401,13 +401,13 @@ a {
                       </div>
                         <div class="row resposive-sm">
                         <div class="col">
-                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                            <label for="sphLD" class="syriNamee">Diopter (PWR)</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente2.diopter'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
@@ -427,13 +427,13 @@ a {
                       </div>
                                             <div class="row resposive-sm">
                         <div class="col">
-                            <label for="sphLD" class="syriNamee">Curb (BC)</label>
+                            <label for="sphLD" class="syriNamee">Box</label>
                                     <div class="item item-text-wrap" style="padding-left: 0px;margin-top: -5px;">
                                        <div class="select" style="padding-left: 0px;">
-                                              <select>
-                                                <option>Blue</option>
-                                                <option selected>Green</option>
-                                                <option>Red</option>
+                                              <select ng-model='lente2.box'>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
                                               </select>
                                         </div>
                                       </div>
@@ -455,7 +455,7 @@ a {
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam in cupiditate ex et, dicta accusantium non enim quisquam fuga repudiandae, ducimus illo neque vel, reiciendis beatae, esse cumque facilis deleniti sunt voluptas rerum expedita!
                     </div>
                     <div style="width: 100%;margin-top:10px;margin-bottom:10px;text-align: center;">
-                      <button class="button button-dark" id="butoniRezervo" ng-click="rezervo()">Rezervo</button>
+                      <button class="button button-dark" id="butoniRezervo" ng-click="rezervo(2)">Rezervo</button>
                     </div>
                   </div>
 
