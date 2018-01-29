@@ -1,3 +1,13 @@
+<style type="text/css">
+  .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
+    display: inline-block;
+    padding: 0 0 1px 0;
+    vertical-align: inherit;
+    font-size: 20px;
+    line-height: 41px;
+    pointer-events: none;
+}
+</style>
 <ion-view title="{{syze.kodifikimartikulli2}}">
   <ion-nav-buttons side="left">
     <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
@@ -5,60 +15,172 @@
     <!-- <button  class="button button-icon icon ion-navicon"></button> -->
     <!-- <i class="icon ion-ios-heart-outline"></i> -->
   </ion-nav-buttons>
-  <ion-nav-buttons side="right">
-    <button style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i style="color: #eee;" id='{{syze}}' class="icon ion-heart" s></i></button>
+  
+  <ion-nav-buttons side="right" >
+  <div ng-hide="showSpinner">
+    <button ng-hide="alreadyExistWishlist" style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i style="color: #eee;" id='{{syze}}' class="icon ion-heart" s></i></button>
+    <button ng-show="alreadyExistWishlist" style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i style="color: #a4a1a5;" id='{{syze}}' class="icon ion-heart" s></i></button>
+    </div>
   </ion-nav-buttons>
-  <ion-content class="has-header">
-        <!-- <ion-scroll zooming="true" direction="x" scrollbar-x="true" paging="true" show-pager="true" style="white-space: nowrap;padding: 10px;margin-top:40px;">
-             <img src="img/SD12203_front.png" style="width:100%">
-             <img src="img/SD12203_left.png" style="width:100%">
-             <img src="img/SD12203_right.png" style="width:100%">
-        </ion-scroll> -->
-        <ion-slide-box style="margin-top:40px;text-align: center;">
-          <ion-slide>
-            <img src="img/SD12203_front.png" style="width:90%;">
-          </ion-slide>
-          <ion-slide>
-            <img src="img/SD12203_left.png" style="width:90%">
-          </ion-slide>
-          <ion-slide>
-            <img src="img/SD12203_right.png" style="width:90%">
+  
+  <div class="row" ng-show="showSpinner"><img style="margin: 100px auto;width: 40px;height: 40px;" src="img/loadOff.gif"></div>
+  <ion-content class="has-header" ng-hide="showSpinner">
+      <div ng-show="shfaqGjendjenOrange" class="corner-text-wrapper-left">
+        <div class="corner-text-orange">
+          <span class="corner-text-left">Sasi e<br> limituar</span>
+        </div>
+      </div>
+      <div ng-show="shfaqGjendjenGreen" class="corner-text-wrapper-left">
+        <div class="corner-text-green">
+          <span class="corner-text-left">Ne <br>gjendje</span>
+        </div>
+      </div>
+
+
+
+
+
+        <ion-slide-box style="margin-top:10px;text-align: center;padding-bottom: 20px;">
+          <ion-slide ng-repeat="image in syzeView" ng-init="updateSlider()">
+            <img src="http://maxoptika-app.com/maxoptikaFTP/{{image}}.png" style="width:80%">
           </ion-slide>
         </ion-slide-box>
+
+
 
     <div class="list card pSingleContainer" style="height:auto;">
         <div class="item item-body">
         
           <!-- <img class="full-image" src="pics/1.jpg"/ > -->
-          <h2 class="produktSingleTitle" align="center" style="color: #333333;"><b>{{syze.kodifikimartikulli2}} {{syze.kodartikulli}}</b></h2>
+          <h2 class="produktSingleTitle" align="center" style="color: #333333;"><b>{{syze.kodifikimartikulli2}} {{syze.pershkrimiangartikulli}}</b></h2>
           <hr style="opacity: 0.3;">
           <div class="row">
-            <div class="col" style="margin-top: -20px;">
-              <h2 class="ngjyraProduktSingle" style="color: #4e5259;">Ngjyra</h2>
-              <div class="zgjidhNgjyre1"></div>
-              <div class="zgjidhNgjyre2"></div>
-              <div class="zgjidhNgjyre3"></div>
-            </div>
-            <div class="col" style="margin-top: -20px;">
-            <h2 class="cmimiProduktSingle" style="color: #4e5259;">Cmimi</h2>
-              <h2 class="cmimiProduktSingle2" style="color: #4e5259;"><b style="font-size: 90%;">{{syze.cmimi}} {{syze.monedha}}</b></h2> 
+
+            <div class="col" style="margin-top: -20px;margin-bottom: -20px;">
+            <h2 class="cmimiProduktSingle" style="color: #4e5259;float: left;margin-top: 25px;margin-right: 5px;font-size: 14px !important;">Cmimi</h2>
+              <h2 class="cmimiProduktSingle2" style="color: #4e5259;float: right;"><b style="font-size: 90%;">
+              <span ng-hide="syze.cmimiPromoLek != '' && syze.cmimiPromoLek != undefined">
+                <span ng-show="shfaqMonedhenTjeter">{{syze.cmimilek}} {{syze.monedhalek}}</span>
+                <span ng-hide="shfaqMonedhenTjeter">{{syze.cmimieur}} {{syze.monedhaeur}}</span>
+              </span>
+              </b>
+              <b style="font-size: 60%;">
+              <span ng-show="syze.cmimiPromoLek != '' && syze.cmimiPromoLek != undefined">
+                <strike style="color: #b71c1c;">
+                  <span ng-show="shfaqMonedhenTjeter" style="color: #4e5259;">{{syze.cmimilek}} {{syze.monedhalek}}</span>
+                  <span ng-hide="shfaqMonedhenTjeter" style="color: #4e5259;">{{syze.cmimieur}} {{syze.monedhaeur}}</span>
+                </strike>
+                <span ng-show="shfaqMonedhenTjeter">&nbsp;&nbsp;&nbsp;{{syze.cmimiPromoLek}} {{syze.monedhalek}}</span>
+                <span ng-hide="shfaqMonedhenTjeter">&nbsp;&nbsp;&nbsp;{{syze.cmimiPromoEur}} {{syze.monedhaeur}}</span>
+              </span>
+              
+              <button ng-click="ktheMonedhe()" style="background-color: #b71c1c;margin-top: -1px; margin-right: 0px;padding: 0px 8px;margin: 0px 0px 0px 5px;">
+                <i ng-show="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;margin: -5px;font-size: 75%;" >EUR</i>
+                <i ng-hide="shfaqMonedhenTjeter" style="color: #fff;padding-left: 0px;margin: -5px;font-size: 75%;" class="">LEK</i>
+              </button>
+              </b></h2> 
             </div>
           </div>
           <br>
+          <hr style="opacity: 0.3;margin-top:-10px;">
+          <!-- <h2 class="ngjyraProduktSingle" style="color: #4e5259;margin-bottom: -10px;">Ngjyra</h2> -->
+          <button ng-click="shfaqNgjyrat()" class="button button-full button-positive" style="background-color: #b71c1c;min-height: 40px;font-size: 15px;margin-bottom: -10px;">Ngjyrat e tjera<i class="icon ion-chevron-right" style="float: right;"></i></button>
+            </div>
+          </div>
+
+          <!-- <ion-scroll zooming="true" direction="x" scrollbar-x="true" style=" white-space: nowrap;padding-left: 20px;margin-top:-5px;margin-bottom: -5px;">
+            <span ng-repeat="image in ngjyratSyze" style="width: 100px;"> 
+            <a href="#/app/produkte/{{image.kodartikulli}}"><img  ng-src="http://maxoptika-app.com/maxoptikaFTP/{{image.kodartikulli}}_list.png" style="width: 110px;"></a>
+            </span>
+
+          </ion-scroll> -->
+          <div class="list card pSingleContainer" style="height:auto;">
+        <div class="item item-body">
           <hr style="opacity: 0.3;margin-top:-10px;">
           <!-- <h2 align="center">{{syze.pershkrimartikulli}}{{gjinia}}</h2>
           <p align="center">{{syze.grupi}}</p>
           <p align="center">{{syze.cmimi}} {{syze.monedha}}</p> -->
           <!-- <button style="background:none;border:none;display:block;margin:0 auto;" data-ng-click="addToWishlist($event)"><i id='{{syze}}' class="icon ion-heart" s></i></button> -->
           <!-- <button class="shtoNeShporte" data-ng-click="shtoNeShporte($event)"><i id='{{syze}}' class="icon ion-heart" s></i>Shto ne shporte</button> -->
-          <div id='{{syze}}' class="shtoNeShporte" ></i>Prove virtuale</div>
+          <div id='{{syze}}' class="shtoNeShporte" data-ng-click="provoVirtual(syze.kodartikulli)"></i>Prove virtuale</div>
           <div id='{{syze}}' class="shtoNeShporte" data-ng-click="shtoNeShporte($event)"></i>Shto ne shporte</div>
           <hr style="opacity: 0.3;margin-top:20px;">
 
           <div>
-          <h2 align="center">{{syze.pershkrimartikulli}}</h2>
+          <h2 class="cmimiProduktSingle" style="color: #4e5259;text-align: center;margin-bottom: 0px;">Info</h2>
+          <h2 align="center" style='font-family: arial;padding: 10px;color: #444;'>{{syze.pershkrimartikulli}} Humanly readable product description Lorem ipsum Humanly readable product description Lorem ipsumHumanly readable product description Lorem ipsum</h2>
             <!-- <p align="justify">{{syze.pershkrimartikulli}}</p> -->
           </div>
+          <hr style="opacity: 0.3;margin-top:20px;">
+
+            <div class="list">
+
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Kategoria
+                  <span class="item-note" style="color:#444">
+                    {{syze.grupi || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Gjinia
+                  <span class="item-note" style="color:#444">
+                    {{syze.vitprodhimi || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Forma
+                  <span class="item-note" style="color:#444">
+                    {{syze.zonakadastrale || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Tipi
+                  <span class="item-note" style="color:#444">
+                    {{syze.marka || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Koleksioni
+                  <span class="item-note" style="color:#444">
+                    {{syze.koleksioni || '-'}}
+                  </span>
+                </div>
+
+            </div>
+            <hr style="opacity: 0.3;margin-top:20px;">
+            <h2 class="cmimiProduktSingle" style="color: #4e5259;text-align: center;">Detaje teknike</h2>
+
+              <div class="list">
+
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Modeli
+                  <span class="item-note" style="color:#444">
+                    {{syze.pershkrimiangartikulli || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Kolori
+                  <span class="item-note" style="color:#444">
+                    {{syze.origjineartikulli || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Masa A
+                  <span class="item-note" style="color:#444">
+                    {{syze.shasia || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Masa B
+                  <span class="item-note" style="color:#444">
+                    {{syze.masaA || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Bridge
+                  <span class="item-note" style="color:#444">
+                    {{syze.bridge || '-'}}
+                  </span>
+                </div>
+                <div class="item item-icon-left" style="padding-left: 15px;color: #aaa;">Bishti
+                  <span class="item-note" style="color:#444">
+                    {{syze.bishti || '-'}}
+                  </span>
+                </div>
+
+            </div>
+            <hr style="opacity: 0.3;margin-top:20px;">
+            <!-- <div ng-click="testApi()" >Test Thirrje API</div> -->
 
 
           <!-- <div>
@@ -74,7 +196,7 @@
           
       </div>
     </div>
-          <div style="width: 100%;background-color: #e4e9ee;">
+          <!-- <div style="width: 100%;background-color: #e4e9ee;display: none;">
           <h2 class="prodtjeraTitle">Produkte te tjera</h2>
             <div class="row" style="width: 95%;margin: 15px auto;" ng-repeat="syz in treArrayAll">
             
@@ -84,14 +206,12 @@
                 <img src="img/SD12203_front.png" style="width: 80%;" />
                 </a>
                 </div>
-                <!-- <hr style="opacity: 0.3;width: 102%;margin-left:-1%;"> -->
                 <h3 class="prodtjeraTitle2" align="center"><span style="float: left;font-size:16px;">{{syz.kodifikimartikulli2}} {{syz.kodartikulli}}</span><span style="float: right;font-size:16px;">{{syz.cmimi}} {{syz.monedha}}</span></h3>
-                <!-- <h3 class="prodtjeraTitle3"></h3> -->
               </div>
               
             </div>
-          </div>
-    
+          </div> -->
+    <br><br><br><br>
   </ion-content>
   <!--<div class="bar bar-footer bar-balanced">
     <div class="title" style="text-align: left;">
@@ -102,26 +222,38 @@
     </div>
   </div>-->
   <div class="tabs tabs-icon-top">
-    <a class="tab-item active" href="#/app/kreu" >
+    <a class="tab-item active" href="#/app/kreu">
       <i class="icon ion-ios-home-outline"></i>
       Kreu
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
     <a class="tab-item active" href="#/app/sherbime">
       <i class="icon ion-ios-briefcase-outline"></i>
       Sherbime
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
-    <a class="tab-item active" href="#/app/shporta">
-      <i class="icon ion-ios-cart-outline badge-container"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
       Shporta
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
-    <a class="tab-item active" href="#/app/wishlist">
-      <i class="icon ion-ios-heart-outline badge-container"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
       Wishlist
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
     <a class="tab-item active" href="#/app/profile">
       <i class="icon ion-ios-person-outline"></i>
       Profili

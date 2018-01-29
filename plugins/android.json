@@ -1,64 +1,67 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
     },
-    "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "org.adlotto.cordova.recheck-screen-orientation": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-screen-orientation": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "onesignal-cordova-plugin": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "com.paypal.cordova.mobilesdk": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        }
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
     },
-    "dependent_plugins": {
-        "es6-promise-plugin": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        },
-        "card.io.cordova.mobilesdk": {
-            "PACKAGE_NAME": "com.ionicframework.yourpackagename"
-        }
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "org.adlotto.cordova.recheck-screen-orientation": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "com.paypal.cordova.mobilesdk": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.dea.maxoptika"
     }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    },
+    "card.io.cordova.mobilesdk": {
+      "PACKAGE_NAME": "com.ionicframework.yourpackagename"
+    }
+  }
 }

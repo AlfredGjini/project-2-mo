@@ -859,7 +859,7 @@ exports.pickUpStore = function (req, res, next) {
       eailToCorrect='agjini@dea.com.al';
     }
     console.log(eailToCorrect);
-    var qendraMax="j.rrumbullaku@maxoptika.al";
+    var qendraMax="online@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+eailToCorrect+","+email;
     console.log(toAllCorrectEmails);
@@ -900,7 +900,7 @@ exports.pickUpStore = function (req, res, next) {
 
           var mailOptions = {
             from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
-            to: 'a.gjini@live.com', // list of receivers
+            to: toAllCorrectEmails, // list of receivers
             subject: 'Pick Up On Store!', // Subject line
             text: 'Hello world', // plaintext body
             html: 'First Html body!'// html body
@@ -984,7 +984,7 @@ exports.payOnDelivery = function (req, res, next) {
     var adresa = req.body.adresa;
     var shportaElem = req.body.shportaElem;
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+adresa+' '+shportaElem);
-    var qendraMax="j.rrumbullaku@maxoptika.al";
+    var qendraMax="online@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
     var elementet=req.body.response;
@@ -1072,7 +1072,7 @@ exports.payOnDelivery = function (req, res, next) {
             // });
             var mailOptions = {
               from: '"MaxOptika App" <maxoptikasmtp@gmail.com>', // sender address
-              to: 'a.gjini@live.com', // list of receivers
+              to: toAllCorrectEmails, // list of receivers
               subject: 'Pay On Delivery!', // Subject line
               text: 'Hello world', // plaintext body
               html: 'First Html body!'// html body
@@ -1134,7 +1134,7 @@ exports.payLente = function (req, res, next) {
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+produkti);
     console.log(lente);
     //console.log(lente.parse());
-    var qendraMax="j.rrumbullaku@maxoptika.al";
+    var qendraMax="online@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
 
@@ -1184,7 +1184,7 @@ exports.payLente = function (req, res, next) {
     // });
     var mailOptions = {
       from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
-      to: 'a.gjini@live.com', // list of receivers
+      to: toAllCorrectEmails, // list of receivers
       subject: 'Porosi per Lente', // Subject line
       text: 'Hello world', // plaintext body
       html: 'First Html body!'// html body
@@ -1247,7 +1247,7 @@ exports.payByPayPal = function (req, res, next) {
     var adresa = req.body.adresa;
     var shportaElem = req.body.shportaElem;
     console.log(emer+' '+mbiemer+' '+tel+' '+email+' '+adresa+' '+shportaElem);
-    var qendraMax="j.rrumbullaku@maxoptika.al";
+    var qendraMax="online@maxoptika.al";
     //var qendraMax="a.gjini@live.com";
     var toAllCorrectEmails=qendraMax+","+email;
 
@@ -1331,7 +1331,7 @@ exports.payByPayPal = function (req, res, next) {
             // });
             var mailOptions = {
               from: '"MaxOptika App" <maxoptikasmtpnew@outlook.com>', // sender address
-              to: 'a.gjini@live.com', // list of receivers
+              to: toAllCorrectEmails, // list of receivers
               subject: 'PayPal Successful Payment!', // Subject line
               text: 'Hello world', // plaintext body
               html: 'First Html body!'// html body

@@ -2180,7 +2180,7 @@ module.directive('dndResizable', ['$parse', '$timeout', function($parse, $timeou
 
     function createHandleElement(side) {
         if (side=="se") {
-            return angular.element('<div><img style="width:20px;padding:0;position:absolute;bottom: 0px;right: 0px;" src="img/resize2.png" /></div>').addClass('angular-dnd-resizable-handle angular-dnd-resizable-handle-' + side);
+            return angular.element('<div><img style="width:30px;padding:0;position:absolute;bottom: 0px;right: 0px;" src="img/resize2.png" /></div>').addClass('angular-dnd-resizable-handle angular-dnd-resizable-handle-' + side);
         }else {
             return angular.element('<div></div>').addClass('angular-dnd-resizable-handle angular-dnd-resizable-handle-' + side);
         }
@@ -2408,6 +2408,267 @@ module.directive('dndSortableList', ['$parse', '$compile', function($parse, $com
         link: link,
         controller: controller
     };
+}]);
+
+
+module.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit(attr.onFinishRender);
+                });
+            }
+        }
+    }
+});
+
+
+module.directive("showOnLoad", function() {
+    return {
+        link: function(scope, element) {
+            element.on("load", function() {
+                console.log('loading complete');
+                scope.$apply(function() {
+                    scope.artist.visible = true;
+                });
+            });
+        }
+    };
+});
+
+module.directive('simpleAccordion', function () {
+    return {
+        // attribute
+        restrict: 'A',
+        scope: {
+            // default: '400ms'
+            // options: 'milliseconds', 'slow', or 'fast'
+            toggleSpeed: '@toggleSpeed',
+            slideUpSpeed: '@slideUpSpeed',
+            // default: 'swing'
+            // options: 'swing', 'linear'
+            toggleEasing: '@toggleEasing',
+            slideUpEasing: '@slideUpEasing'
+        },
+        link: function (scope, element, attrs) {
+            element.find('.accordion-toggle').click(function () {
+                var elem = $(this);
+                var femijet=elem.children().toggleClass( "ion-ios-arrow-up" );
+                elem.next().slideToggle(scope.toggleSpeed, scope.toggleEasing);
+                $(".accordion-content").not($(this).next()).slideUp(scope.slideUpSpeed, scope.slideUpEasing);
+            });
+        }
+    };
+});
+
+
+// module.directive('multidates', function() {
+//     return {
+//         // Restrict it to be an attribute in this case
+//         restrict: 'E',
+//         // responsible for registering DOM listeners as well as updating the DOM
+//         link: function(scope, el, attrs) {
+//             // console.log(el);
+//             el.multiDatesPicker();
+//         }
+//     };
+// });
+
+module.directive('multidatess', ['$http',function($http) {
+
+
+
+     
+
+    function link($scope, $element, $attrs){
+        //console.log('test nga angular dnd');
+        //$scope.oretBllok=[];
+        $scope.maxP=1;
+        $element.multiDatesPicker({
+                        'maxPicks': 1,
+                        'disabled': false,
+                        'changeMonth': true,
+                        'changeYear': true
+
+                    });
+
+    $scope.deSelectDate=function(datee){
+        $element.multiDatesPicker('removeDates', datee);;
+        console.log('deselect');
+        console.log(datee);
+    };
+
+    $scope.disableDays=function(dyqani){
+
+        if(dyqani=='Fier'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 1 && day != 3 && day != 5 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Sarandë'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 1 && day != 2 && day != 4 && day != 5 && day != 6 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Vlore'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 2 && day != 3 && day != 4 && day != 6 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Lushnje'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 1 && day != 2 && day != 3 && day != 5 && day != 6 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Shkoder'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 1 && day != 3 && day != 4 && day != 5 && day != 6 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Pogradec'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 1 && day != 2 && day != 4 && day != 5 && day != 6 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='21 Dhjetori'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 3 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Sheshi Willson'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            var day = date.getDay();
+                            return [(day != 2 && day != 3 && day != 6 && day != 0), ''];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Durres'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            return [true, ""];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Myslym Shyri'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            return [true, ""];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='QTU'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            return [true, ""];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }else if(dyqani=='Zgjidhni nje dyqan'){
+
+          $element.multiDatesPicker({
+                        beforeShowDay: function(date) {
+                            return [false, ""];
+                        },onSelect: function() {
+                            $scope.testdates();
+                       }
+                    });
+
+        }
+
+    }
+        $scope.getDateSelected=function(){
+            return $element.multiDatesPicker('value');
+        }
+
+
+        // Get all the reserved dates from db and disable them in the calendar
+        $http.post('https://max-optika-server.herokuapp.com/takimOrari')
+                .success(function(response) {
+                    var oraret=response.rows[0].oraret;
+                     oraret=JSON.parse(oraret);
+                     console.log(oraret);
+                     console.log('tesg');
+                     $element.multiDatesPicker({
+                        'addDisabledDates': oraret,
+                        'beforeShowDay': function(date) {
+                            return [false, ""];
+                        },
+
+
+                    });
+
+
+                })
+                .error(function(response) {
+                    alert(response);
+                    console.log('Error: ' + response);
+                });   
+
+                
+        
+    }
+    return {
+       restrict: 'AE',
+       link: link,
+       controller: 'takimCtrl',
+    }
 }]);
 
 module.directive('dndSortable', ['$parse', '$compile', function($parse, $compile) {

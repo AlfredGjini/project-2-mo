@@ -1,0 +1,111 @@
+<ion-view title="Lente">
+  <ion-nav-buttons side="left">
+  </ion-nav-buttons>
+
+  <ion-content style="background:#fff;padding-top: 20px;">
+
+    <ion-slide-box auto-play="true" does-continue="true" slide-interval="5000" class="kreuuu" style="text-align: center;background:#eef0f2;">
+          <ion-slide>
+            <img src="img/lenteB1.jpg" style="width:100%;">
+          </ion-slide>
+          <ion-slide>
+            <img src="img/lenteB1.jpg" style="width:100%;">
+          </ion-slide>
+          <ion-slide>
+            <img src="img/lenteB1.jpg" style="width:100%;">
+          </ion-slide>
+        </ion-slide-box>
+
+<div style="margin-top: 0px;background:#eef0f2;">
+<div class="row" style="text-align: center;padding: 0px;">
+      <div class="col">
+      <a href="#/app/lente/Acuve">
+        <img  src="img/lente-acuve.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/lente/airoptix">
+        <img src="img/lente-airoptix.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;padding: 0px;">
+      <div class="col">
+      <a href="#/app/lente/biofinity">
+        <img src="img/lente-biofinity.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/lente/purevision">
+        <img  src="img/lente-purevision.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;padding: 0px;">
+      <div class="col">
+      <a href="#/app/lente/Soflens"> 
+        <img  src="img/lente-softlens.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/lente/biomedics">
+        <img src="img/lente-biomedics.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+        <div class="row" style="text-align: center;margin-bottom: 40px;padding: 0px;">
+      <div class="col">
+      <a href="#/app/lente/dailies"> 
+        <img  src="img/lente-dailies.jpg" style="width:100%">
+        </a>
+      </div>
+      <div class="col">
+      <a href="#/app/lente/proclear">
+        <img src="img/lente-proclear.jpg" style="width:100%">
+        </a>
+      </div>
+    </div>
+    </div>
+  </ion-content>
+
+
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu" style="color: #d12127">
+      <i class="icon ion-ios-home" style="color: #d12127"></i>
+      Kreu
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/sherbime">
+      <i class="icon ion-ios-briefcase-outline"></i>
+      Sherbime
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a class="tab-item active" href="#/app/profile">
+      <i class="icon ion-ios-person-outline"></i>
+      Profili
+    </a>
+  </div>
+
+</ion-view>

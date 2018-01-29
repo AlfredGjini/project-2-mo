@@ -1,19 +1,19 @@
 angular.module('directory', ['ionic', 'directory.controllers', 'directory.services','angCamera', 'ngCordova', 'ngOpenFB', 'ionMdInput', 'ionic-material','dnd']).constant('shopSettings',{
    
    
-   payPalSandboxId : 'AWI-LUYyIkI87pMWNYZ7zm4mIoEtJU0EZnh7zTiZLo76jpzxU4g-3ZOABwmcZ2ntHktPrLoMeR2YQaLO',
-   payPalProductionId : 'AUmyx6mOYuPW8G2TgEODuwwzPWEY7jZ5IiKBX2vHTuXHvwymPC1GoICNvel7AG7mYAt24KifG6TpOarx',
-   payPalEnv: 'PayPalEnvironmentSandbox',   // for testing  production for production
-   payPalShopName : 'MyShopName',
-   payPalMerchantPrivacyPolicyURL : 'url to policy',
-   payPalMerchantUserAgreementURL : ' url to user agreement '
-
-   // payPalSandboxId : 'AWIjQqXmg-ZjHpDvFAy9Io027QrYa9808nm0N603sJQFeC6ij0EKNuFMyHKkDJRWipnSl0Y7OfP0xjFM',
-   // payPalProductionId : 'AQAw7nPSUU_uQmjfmL6oQBBBagKM2SKPDJeg5MjYqUNqT6LCLXDEgRgM3iABOigpmnr4PrTmqovip1t-',
-   // payPalEnv: 'PayPalEnvironmentProduction',   // for testing  production for production
-   // payPalShopName : 'MaxOptika',
+   // payPalSandboxId : 'AWI-LUYyIkI87pMWNYZ7zm4mIoEtJU0EZnh7zTiZLo76jpzxU4g-3ZOABwmcZ2ntHktPrLoMeR2YQaLO',
+   // payPalProductionId : 'AUmyx6mOYuPW8G2TgEODuwwzPWEY7jZ5IiKBX2vHTuXHvwymPC1GoICNvel7AG7mYAt24KifG6TpOarx',
+   // payPalEnv: 'PayPalEnvironmentSandbox',   // for testing  production for production
+   // payPalShopName : 'MyShopName',
    // payPalMerchantPrivacyPolicyURL : 'url to policy',
    // payPalMerchantUserAgreementURL : ' url to user agreement '
+
+   payPalSandboxId : 'AWIjQqXmg-ZjHpDvFAy9Io027QrYa9808nm0N603sJQFeC6ij0EKNuFMyHKkDJRWipnSl0Y7OfP0xjFM',
+   payPalProductionId : 'AQAw7nPSUU_uQmjfmL6oQBBBagKM2SKPDJeg5MjYqUNqT6LCLXDEgRgM3iABOigpmnr4PrTmqovip1t-',
+   payPalEnv: 'PayPalEnvironmentProduction',   // for testing  production for production
+   payPalShopName : 'MaxOptika',
+   payPalMerchantPrivacyPolicyURL : 'url to policy',
+   payPalMerchantUserAgreementURL : ' url to user agreement '
    
    
    
@@ -24,14 +24,14 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   $ionicPlatform.ready(function() {
 
 
-  //   var notificationOpenedCallback = function(jsonData) {
-  //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-  // };
+    var notificationOpenedCallback = function(jsonData) {
+    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  };
 
-  // window.plugins.OneSignal
-  //   .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
-  //   .handleNotificationOpened(notificationOpenedCallback)
-  //   .endInit();
+  window.plugins.OneSignal
+    .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
+    .handleNotificationOpened(notificationOpenedCallback)
+    .endInit();
 
 
 

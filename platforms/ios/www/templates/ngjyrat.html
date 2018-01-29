@@ -1,0 +1,28 @@
+<ion-content>
+<div style="text-align: center; background-color: #fff;margin:65px 7%;">
+<div style="padding-top: 15px;">
+<span style="font-size: 16px;color: #565a63;font-weight: bold;">Zgjidhini Ngjyrat e Tjera</span>
+<i ng-click="modal.hide()" class="ion-close-circled" style="color: #b71c1c;right: 9%;margin-top:-10px"></i>
+
+
+    <div ng-repeat="image in ngjyratSyze" class="list card" style="box-shadow: 0 1px 4px 1px rgba(0,0,0,.2);margin:20px;">
+    <a href="#/app/produkte/{{image.kodartikulli}}">
+      <div class="item item-image">
+        <img ng-src="http://maxoptika-app.com/maxoptikaFTP/{{image.kodartikulli}}_list.png">
+      </div>
+
+      <a class="item item-icon-left" style="color: #565a63;" href="#">
+        <i class="icon ion-paintbucket"></i>
+        <span style="font-size: 16px;color: #565a63;font-weight: bold;">{{syze.origjineartikulli || '-'}}</span>
+      </a>
+      </a>
+
+    </div>
+
+    <!-- <h2 style="color: #fff;text-transform: uppercase;padding-bottom:5px;" ng-click="nextStep()">Next <i style="padding-left: 5px;" class="ion-arrow-right-b"></i></h2> -->
+    <div class="padding">
+        <!-- <button class="button button-block button-positive" ng-click="nextStep()" style="font-size:20px;">Next <i style="padding-left: 5px;" class="ion-arrow-right-b"></i></button> -->
+      </div>
+</div>
+</div>
+</ion-content>

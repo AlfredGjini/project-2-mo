@@ -31,7 +31,7 @@
       </div> -->
       <div >
       <div class="row">
-        <img style="margin:20px auto 0px;" class="profilFoto2" src="{{data.img || 'img/general-user.jpg'}}" /><br>
+        <img style="margin:20px auto 0px;display: none;" class="profilFoto2" src="{{data.img || 'img/general-user.jpg'}}" /><br>
         
       </div>
       <h3 class="emriProfili">{{ loggedInSakte.emer}} {{ loggedInSakte.mbiemer }}</h3>
@@ -39,10 +39,10 @@
       <h4 class="emriProfili3">Llogaria ime</h4>
       </div>
       <div style="background-color: #fff;padding-top:10px;padding-bottom:5px;">
-      <a href="#/app/historia" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Blerjet e mia</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;"></i></div></a>
-      <a href="#/app/wishlist" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Produktet e dëshiruara</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;"></i></div></a>
+      <a href="#/app/historia" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Blerjet e mia</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: #333;"></i></div></a>
+      <a href="#/app/wishlist" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Produktet e dëshiruara</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: #333;"></i></div></a>
       <a style="text-decoration: none;" href="#/app/sherbime/kartela-klinike">
-      <div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Kartela Klinike</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: black;"></i></div>
+      <div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Kartela Klinike</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: #333;"></i></div>
       </a>
       <div ng-click="logout()" style="margin:5px auto;width: 90%;cursor:pointer;"><span class="profiliSection3Left" ><b>Log Out</b></span></div>
       </div>
@@ -50,14 +50,16 @@
       <h4 class="emriProfili3" style="padding-top:30px;">Menyrat e pageses dhe termat ligjore</h4>
       </div>
       <div style="background-color: #fff;padding-top:10px;padding-bottom:5px;">
-      <a href="#/app/pagesat" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Menyrat e pageses</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;"></i></div></a>
-      <a href="#/app/kontakt" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Kontakto</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;"></i></div></a>
+      <a href="#/app/pagesat" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Menyrat e pageses</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: #333;"></i></div></a>
+      <a href="#/app/kontakt" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Kontakto</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: #333;"></i></div></a>
       <!-- <div style="margin:5px auto;width: 90%;border-bottom: 2px solid #ebeef2;"><span class="profiliSection2Left">Termat Ligjore</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;"></i></div> -->
-      <a href="#/app/privacyPolicy" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;"><span class="profiliSection2Left">Privacy Policy</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;"></i></div></a>
+      <a href="#/app/privacyPolicy" style="text-decoration: none;"><div style="margin:5px auto;width: 90%;"><span class="profiliSection2Left">Privacy Policy</span><i class="icon ion-chevron-right" class="profiliSection2Right" style="float:right;color: #333;"></i></div></a>
       </div>
       <!-- <h2 ng-click="logout()">Log Out</h2>
       <h2>{{ loggedInSakte.emer || "Guest" }} {{ loggedInSakte.mbiemer || "Guest" }}</h2> -->
-      <br><br><br><br>
+      <br><br><br>
+
+      <a href="#" onclick="window.open('http://dea.com.al/', '_system', 'location=yes'); return false;" target="_blank" style="text-decoration: none;"><h3 class="emriProfili deapowered" >Powered by DEA<span style="margin-top: -1px;position: absolute;font-size: 12px;">&reg;</span></h3></a>
     </div>
     
   </ion-content>

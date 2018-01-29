@@ -1,35 +1,106 @@
 <ion-view title="Prenoto Takim">
-  <ion-nav-buttons side="left">
-    <!-- <button menu-toggle="left" class="button button-icon icon ion-navicon"></button> -->
+  <ion-nav-buttons side="right">
+    <!-- <button style="background:none;border:none;display:block;margin: -2px -10px;" data-ng-click="shfaqRezervim()"><i style="color: #fff;font-size: 25px;" class="icon ion-plus-circled" s></i></button> -->
   </ion-nav-buttons>
-  <ion-content class="has-header">
-    <div class="list takim">
-      <label class="item item-input">
-        <span class="input-label">Data</span>
-        <input placeholder="Zgjidhni Daten"  type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="data.date"/>
-      </label>
-      <div class="padding-bottom"></div>
-      <label class="item item-input">
-        <span class="input-label">Ora</span>
-        <input placeholder="Zgjidhni Orarin"  type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="data.ora"/>
-      </label>
-      <div class="padding-bottom"></div>
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Dyqani
+  <ion-content class="has-header" delegate-handle="myPageDelegate">
+  <div class="list" >
+  <div class="row" ng-show="showSpinner"><img style="margin: 100px auto;width: 40px;height: 40px;" src="img/loadOff.gif"></div>
+  <div ng-hide="showSpinner">
+      <div class="row">
+        <div class="col rezervimetGia">Rezervimet</div>
+      </div>
+      <div class="row">
+        <h4 align="center" ng-show="userPaPrenotim">Ju nuk keni bere asnje rezervim. Ju lutemi klikoni butonin "plus" per te rezervuar nje takim.</h4></div>
+        <div class="row">
+        <button align="center" style="background:none;border:none;display:block;margin: 0px auto;text-align: center;" data-ng-click="shfaqRezervim()"><i style="color:#b71c1c;font-size: 35px;" class="icon ion-plus-circled" s></i></button>
+      </div>
+    </div>
+      <div ng-repeat="rezervim in rezervimeGjitha">
+      <div class="card">
+        <div class="item item-divider" style="">
+          <span style="float: left;">Orari: {{rezervim.data | limitTo:10}} {{rezervim.ora}}</span> <span style="float: right;">Dyqani: {{rezervim.dyqani}}</span>
         </div>
-        <select style="text-align: right;" name="dyqan" ng-model="data.dyqan" >
-        <option value="">Zgjidhni nje qytet</option>
-          <option value="Durres">Durres</option>
-          <option value="Tirane">Tirane</option>
-          <option value="Prishtine">Prishtine</option>
-        </select>
-      </label>
-      <div class="padding-bottom"></div>
+        <div class="item item-divider">
+           <span style="float: left;margin-top: -8px;">{{rezervim.shenime}}</span> <span ng-show="rezervim.aprovuar=='po'" style="float: right;color: #00a65a;margin-top: -8px;">Aprovuar: {{rezervim.aprovuar | uppercase}}</span><span ng-show="rezervim.aprovuar=='jo'" style="float: right;color: #dd4b39;margin-top: -8px;">Aprovuar: {{rezervim.aprovuar | uppercase}}</span>
+        </div>
+      </div>
+<!--           <div class="card">
+        <div class="item item-divider" style="">
+          <span style="float: left;">Orari: 2017-05-06 12:59:00</span> <span style="float: right;">Dyqani: Tirane</span>
+        </div>
+        <div class="item item-divider">
+           <span style="float: left;margin-top: -8px;">Shenime</span> <span style="float: right;color: #dd4b39;margin-top: -8px;">Aprovuar: JO</span>
+        </div>
+      </div> -->
+    </div>
+    </div>
+    <div class="list takim" ng-show="showtakim" id="rezervimi">
+
+    <div class="card" style="text-align: center;">
+    <div class="row">
+      <div class="col rezervimetGia" style="border-bottom: 0">Prenoto rezervim te ri</div>
+    </div>
+        
+        <!-- Dyqani -->
+        <div class="item item-divider" style="text-align: center;font-size: 18px;margin-bottom: -20px;padding-top: 0px;">
+         Dyqani
+        </div>
+        <div class="item item-text-wrap" style="text-align: center;">
+         <div class="select">
+            <select name="dyqan" id="slct" ng-change="dyqaniNdryshoi(dyqanetListaSelected.dyqani)" ng-model="dyqanetListaSelected.dyqani"  >
+              <option value="Zgjidhni nje dyqan">Zgjidhni nje dyqan</option>
+              <option ng-repeat="dyqani in dyqanetLista" value="{{dyqani}}">Max Optika {{dyqani}}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Data -->
+        <div class="item item-divider" style="text-align: center;font-size: 18px;margin-bottom: -10px;">
+         Data
+        </div>
+        <div class="item item-text-wrap" style="text-align: center;padding-left: 0px;padding-right: 0px;">
+         <div id="mdp-demo2" multidatess style="display: inline-block;"></div>
+         <!-- <multidates></multidates> -->
+        </div>
+
+        
+
+        <!-- Ora -->
+        <div class="item item-divider" style="text-align: center;font-size: 18px;margin-bottom: -20px;padding-top: 0px;">
+         <span ng-show="shfaqLoadingOraret" class="loadingOraret" style="padding-top: 15px;float: left;margin-left: -10px;margin-top: -5px;"><img src="img/loading.gif" style="width: 20px;"></span><span style="margin-left: -10px;">Ora</span>
+        </div>
+        <div class="item item-text-wrap" style="text-align: center;">
+         <div class="radios">
+         <div style="text-align: center;" ng-show="showNoDate">Nuk ka vizita per kete date.</div>
+         <span ng-repeat="orari in listaOrareve" ng-show="shfaqOrett">
+              <input type="radio" name="rGroup" value="{{orari}}" id="r{{$index+1}}" ng-model="oraModel.checked"/>
+              <label class="radio" class="{{orari}}" name="{{orari}}" for="r{{$index+1}}">{{orari}}</label>
+         </span>
+
+          </div>
+        </div>
+        <!-- {{oraModel}} -->
+        <!-- Shenime -->
+        <div class="item item-divider" style="text-align: center;font-size: 18px;margin-bottom: -20px;padding-top: 0px;">
+         Shenime
+        </div>
+        <div class="item item-text-wrap" style="text-align: center;">
+         <textarea rows="6" placeholder="Shenime" ng-model="data.shenime" style="padding: 5px;border:1px solid #eee;width: 100%;"></textarea>
+        </div>
+        <div style="width: 100%;margin-top:10px;margin-bottom:10px;text-align: center;">
+          <button class="button button-dark" id="butoniRezervo" ng-click="rezervo()">Rezervo</button><span ng-show="shfaqLoadingRezervim" class="loadingOraret" style="padding-top: 10px;float: right;right: 30px;position: absolute;"><img src="img/loading.gif" style="width: 25px;">
+        </div>
+        <div class="padding-bottom" style="margin-bottom: 35px;"></div>
+    </div>
+
+
+
+
+<!--       <div class="padding-bottom"></div>
       <textarea rows="6" placeholder="Shenime" ng-model="data.shenime"></textarea>
       <div style="width: 100%;margin-top:10px;margin-bottom:10px;text-align: center;">
       <button class="button button-dark" ng-click="rezervo()">Rezervo</button>
-      </div>
+      </div> -->
     </div>
   </ion-content>
 <!--   <div class="bar bar-footer bar-balanced">
@@ -40,30 +111,190 @@
       DEA
     </div>
   </div> -->
-    <div class="tabs tabs-icon-top">
-    <a class="tab-item active" href="#/app/kreu" >
+  <div class="tabs tabs-icon-top">
+    <a class="tab-item active" href="#/app/kreu">
       <i class="icon ion-ios-home-outline"></i>
       Kreu
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
     <a class="tab-item active" href="#/app/sherbime">
       <i class="icon ion-ios-briefcase-outline"></i>
       Sherbime
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
-    <a class="tab-item active" href="#/app/shporta">
-      <i class="icon ion-ios-cart-outline badge-container"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <a ng-show="shportlistItemsLength != null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
       Shporta
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
-    <a class="tab-item active" href="#/app/wishlist">
-      <i class="icon ion-ios-heart-outline badge-container"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+    <a ng-show="shportlistItemsLength == null" class="tab-item active" href="#/app/shporta">
+      <i class="icon ion-ios-cart-outline badge-container" ><span class="badge badge-assertive">{{shportlistItemsLength}}</span></i>
+      Shporta
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
+    <!-- <a ng-show="wishlistItemsLength != null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" style="margin-left: -10px;"><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
       Wishlist
     </a>
-    <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div>
+    <a ng-show="wishlistItemsLength == null" class="tab-item active" href="#/app/wishlist">
+      <i class="icon ion-ios-heart-outline badge-container" ><span class="badge badge-assertive">{{wishlistItemsLength}}</span></i>
+      Wishlist
+    </a> -->
+    <a class="tab-item active" href="#/app/sherbime/try-on">
+      <i class="icon ion-ios-glasses-outline" style="font-size: 35px;margin-top: 2px;"></i>
+      <p style="margin-top: 8px;">Try On</p>
+    </a>
+    <!-- <div style="border-right:1px solid #d12127;height: 70%;margin: auto 0px;opacity: 0.5;"></div> -->
     <a class="tab-item active" href="#/app/profile">
       <i class="icon ion-ios-person-outline"></i>
       Profili
     </a>
   </div>
+
+  <script type="text/javascript">
+
+
+  // $.ajax({
+  //   url: "https://max-optika-server.herokuapp.com/takimOrari",
+  //   type: "post",
+  //   success: function (response) {
+  //     //response = JSON.parse(response);
+  //     //console.log(response);
+  //     //updateDashboard(response);
+  //     var oraret=response.rows[0].oraret;
+  //     oraret=JSON.parse(oraret);
+  //     //console.log(oraret);
+  //     jQuery('#mdp-demo').multiDatesPicker({
+  //       // disable the 1st and 3rd of the current month
+
+  //       addDisabledDates: oraret,
+  //       maxPicks: 1,
+  //       disabled: false,
+  //       changeMonth: true,
+  //       changeYear: true,
+  //       onSelect: function() {
+  //       //angular.scope().dyqaniNdryshoi();
+  //       //takimCtrl.$dyqaniNdryshoi('test');
+  //     }
+  //     });
+  //     // var selMDate=jQuery('#mdp-demo').multiDatesPicker('getDates');
+
+  //     },
+  //     error: function(jqXHR, textStatus, errorThrown) {
+  //       console.log(textStatus, errorThrown);
+  //     }
+  // });
+
+  // function checkDate(){
+  //   var currData=jQuery('#mdp-demo').multiDatesPicker('getDates')[0];
+  //   console.log(currData);
+    
+  //   if (currData!=null){
+  //     console.log("jo null brenda checkDate");
+  //     jQuery('.loadingOraret').show();
+
+  //     $.ajax({
+  //       url: "https://max-optika-server.herokuapp.com/oraretZene",
+  //       type: "post",
+  //       data: {dataZgjdhur:currData},
+  //       success: function (response) {
+  //         console.log(response);
+  //         //var pergjigje=response.rows[0];
+  //         if(response.rows.length==0){
+  //           console.log("all oraret are free");
+  //           $('#butoniRezervo').prop('disabled', false);
+  //           // Hide the loading gif
+  //           jQuery('.loadingOraret').hide();
+  //           // Show all hidden labels
+  //           $('.radios label').show();
+  //           // On the ajax call from angular just insert it as a new row
+  //           window.dataExists = false;
+  //         }else{
+  //         var pergjigje=response.rows[0];
+  //         // Get oraret and convert them to array
+  //         var oraret=pergjigje.oraret.split(",");
+  //         // Get klientet and convert them to array
+  //         var klientet=pergjigje.klientet.split(",");
+
+  //         // Get the current id of the loggined client
+  //         var loggedInSakte=window.localStorage.getItem('loggedInSakte');
+  //         loggedInSakte=JSON.parse(loggedInSakte)
+  //         var loginId=loggedInSakte.id;
+
+  //         // Check if this client has already made a reservation to this specific day
+  //         // klientet.forEach( function(element, index) {
+  //         //   // statements
+  //         //   if(loginId==element){
+  //         //     console.log("e gjetem man");
+  //         //     console.log(element);
+  //         //      $('#butoniRezervo').prop('disabled', true);
+  //         //      alert("Ju nuk mund te beni me shume se 1 rezervim ne dite");
+  //         //   }
+  //         // });
+
+  //         // Loop through orare and disable the times that are inside
+  //         oraret.forEach( function(element, index) {
+
+  //           //$('input[value="'+element+'"]').hide();
+  //           $('[name="'+element+'"]').hide();
+
+  //         });
+  //         // On the ajax call from angular update the existing row
+  //         window.dataExists = true;
+  //         // Hide the loading gif
+  //         jQuery('.loadingOraret').hide();
+
+  //         }
+
+
+
+
+  //         // console.log(response.rows[0]);
+  //         // jQuery('.loadingOraret').hide();
+  //         // var loggedInSakte=window.localStorage.getItem('loggedInSakte');
+  //         // loggedInSakte=JSON.parse(loggedInSakte)
+  //         // console.log(loggedInSakte);
+  //         // loginId=loggedInSakte.id;
+  //         // // Check Klientet Part
+  //         // var klientet=pergjigje.klientet;
+  //         // var klientArr=klientet.split(",");
+
+  //         // klientArr.forEach( function(element, index) {
+  //         //   // statements
+  //         //   if(loginId==element){
+  //         //     console.log("e gjetem man");
+  //         //     console.log(element);
+  //         //   }
+  //         // });
+  //         // //console.log(typeof(klientArr));
+  //         // console.log(klientArr);
+
+
+  //         //var oraret=response.rows[0].oraret;
+  //         //oraret=JSON.parse(oraret);
+  //         //console.log(oraret);
+
+  //         // var selMDate=jQuery('#mdp-demo').multiDatesPicker('getDates');
+
+  //         },
+  //         error: function(jqXHR, textStatus, errorThrown) {
+  //           console.log(textStatus, errorThrown);
+  //         }
+  //     });
+
+
+
+
+
+  //   }else{
+  //     console.log("null");
+  //   }
+  //   console.log('u thirra');
+  //   //console.log(date);
+
+  // }
+
+
+
+
+  </script>
 </ion-view>

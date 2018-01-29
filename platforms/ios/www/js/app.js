@@ -1,7 +1,40 @@
-angular.module('directory', ['ionic', 'directory.controllers', 'directory.services','angCamera', 'ngCordova', 'ngOpenFB', 'ionMdInput', 'ionic-material','dnd'])
+angular.module('directory', ['ionic', 'directory.controllers', 'directory.services','angCamera', 'ngCordova', 'ngOpenFB', 'ionMdInput', 'ionic-material','dnd']).constant('shopSettings',{
+   
+   
+   // payPalSandboxId : 'AWI-LUYyIkI87pMWNYZ7zm4mIoEtJU0EZnh7zTiZLo76jpzxU4g-3ZOABwmcZ2ntHktPrLoMeR2YQaLO',
+   // payPalProductionId : 'AUmyx6mOYuPW8G2TgEODuwwzPWEY7jZ5IiKBX2vHTuXHvwymPC1GoICNvel7AG7mYAt24KifG6TpOarx',
+   // payPalEnv: 'PayPalEnvironmentSandbox',   // for testing  production for production
+   // payPalShopName : 'MyShopName',
+   // payPalMerchantPrivacyPolicyURL : 'url to policy',
+   // payPalMerchantUserAgreementURL : ' url to user agreement '
 
-.run(function($ionicPlatform, ngFB) {
+   payPalSandboxId : 'AWIjQqXmg-ZjHpDvFAy9Io027QrYa9808nm0N603sJQFeC6ij0EKNuFMyHKkDJRWipnSl0Y7OfP0xjFM',
+   payPalProductionId : 'AQAw7nPSUU_uQmjfmL6oQBBBagKM2SKPDJeg5MjYqUNqT6LCLXDEgRgM3iABOigpmnr4PrTmqovip1t-',
+   payPalEnv: 'PayPalEnvironmentProduction',   // for testing  production for production
+   payPalShopName : 'MaxOptika',
+   payPalMerchantPrivacyPolicyURL : 'url to policy',
+   payPalMerchantUserAgreementURL : ' url to user agreement '
+   
+   
+   
+    
+})
+
+.run(function($ionicPlatform, ngFB, $ionicPopup) {
   $ionicPlatform.ready(function() {
+
+
+  //   var notificationOpenedCallback = function(jsonData) {
+  //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+  // };
+
+  // window.plugins.OneSignal
+  //   .startInit("cba74850-c49e-447a-bdf2-c71cbe7ce09a")
+  //   .handleNotificationOpened(notificationOpenedCallback)
+  //   .endInit();
+
+
+
     ngFB.init({
       appId: '1791859544427676'
     });
@@ -14,6 +47,29 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    if (window.Connection) {
+
+                if (navigator.connection.type == Connection.NONE) {
+
+                  var alertPopup = $ionicPopup.alert({
+                    title: 'Internet',
+                    template: '<p align="center">Ju lutemi lidhuni me internet qe programi te punoje plotesisht!</p>'
+                  });
+
+        //             $ionicPopup.confirm({
+
+        //                 title: "Internet is not working",
+
+        //                 content: "Internet is not working on your device."
+
+        // });
+        //alert("Ju lutemi lidhuni me internet qe programi te punoje plotesisht");
+
+      }
+
+    }
+
+
   });
 })
 
@@ -82,7 +138,7 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
     }
   })
   .state('app.lente', {
-    url: "/lente",
+    url: "/lente/:lenteMarke",
     views: {
       'menuContent': {
         templateUrl: "templates/lente.html",
@@ -97,6 +153,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         'menuContent': {
             templateUrl: 'templates/produkte-single.html',
             controller: 'produkteSingleCtrl'
+          }
+    }
+  })
+
+  .state('app.lenteSingle', {
+    url: "/lenteSingle/:productId",
+    views: {
+        'menuContent': {
+            templateUrl: 'templates/lenteSingle.html',
+            controller: 'lenteSingleCtrl'
           }
     }
   })
@@ -156,6 +222,62 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
     }
   })
 
+  .state('app.modifikoProfilin', {
+    url: '/modifikoProfilin',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/modifikoProfilin.html",
+        controller: 'modifikoProfilinCtrl'
+      }
+    }
+  })
+  .state('app.kontakt', {
+    url: '/kontakt',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/kontakt.html",
+        controller: 'kontaktCtrl'
+      }
+    }
+  })
+  .state('app.pagesat', {
+    url: '/pagesat',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/pagesat.html",
+        controller: 'pagesatCtrl'
+      }
+    }
+  })
+  .state('app.privacyPolicy', {
+    url: '/privacyPolicy',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/privacyPolicy.html",
+        controller: 'privacyPolicyCtrl'
+      }
+    }
+  })
+  .state('app.slider1', {
+    url: '/slider1',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/slider1.html",
+        controller: 'slider1Ctrl'
+      }
+    }
+  })
+
+    .state('app.slider2', {
+    url: '/slider2',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/slider2.html",
+        controller: 'slider2Ctrl'
+      }
+    }
+  })
+
   .state('app.forgotPassword', {
     url: '/forgotPassword',
     views: {
@@ -199,6 +321,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
       'menuContent': {
         templateUrl: "templates/shporta.html",
         controller: 'shportaCtrl'
+      }
+    }
+  })
+  .state('app.historia', {
+    cache: false,
+    url: '/historia',
+    views: {
+      'menuContent': {
+        templateUrl: "templates/historia.html",
+        controller: 'historiaCtrl'
       }
     }
   })
@@ -248,6 +380,16 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         }
       }
     })
+  .state('app.lenteBallore', {
+      url: "/lenteBallore",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/lenteBallore.html",
+          controller: 'lenteBalloreCtrl'
+        }
+      }
+    })
+  
 
   .state('app.search-results', {
       url: "/search-results",
@@ -271,5 +413,8 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
   $urlRouterProvider.otherwise('/app/kreu');
 
 })
+
+
+      
 
 

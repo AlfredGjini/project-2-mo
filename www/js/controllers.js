@@ -389,6 +389,8 @@ $scope.shfaqNgjyrat=function(){
        }
 
   console.log($stateParams.productId);
+$scope.defaultPershkrimNJerzor='Pershkrimi mungon.';
+
   $http({
        method: 'POST',
        //url: 'https://tarzantest.herokuapp.com/login',
@@ -418,6 +420,7 @@ $scope.shfaqNgjyrat=function(){
          $scope.syze.masaA=$scope.pershkrimiSakte[0];
          $scope.syze.bridge=$scope.pershkrimiSakte[1];
          $scope.syze.bishti=$scope.pershkrimiSakte[2];
+         $scope.syze.pershkrimiNjerzor=$scope.pershkrimiSakte[3];
          console.log($scope.syze);
 
         var cmimiriModel=$scope.syze.kodidoganorartikulli.split(';');
@@ -648,6 +651,229 @@ $scope.shfaqNgjyrat=function(){
     $scope.shfaqMonedhenTjeter=true;
     $scope.showlentePorosi=false;
 
+  $scope.getShnamo=function(action,id, where, specifikimet){
+  // var action=action;
+  //console.log("u thirra kot");
+    $http({
+       method: 'POST',
+       //url: 'https://tarzantest.herokuapp.com/login',
+       url: 'https://max-optika-server.herokuapp.com/shnamo',
+       headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+       },
+       transformRequest: function(obj) {
+         var str = [];
+         for (var p in obj)
+           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+         return str.join("&");
+       },
+       data: {
+         action : action,
+         idd: id
+       }
+     }).success(function(response) {
+      console.log(response);
+      if (response.pergjigje1!='perditesim') {
+
+
+            var ip = 'http://79.106.161.194:3040';
+            var username = "dea";  
+            var encrypted='52f47b027746c6a9d000cb866d8b92ab446a67aea3c264cc9ea02a70ce1bbd04';
+
+            var kokaPrefiks='SHNAMO';
+            var currId=response.pergjigje1.shnamo;
+            var id_dok=kokaPrefiks+response.pergjigje1.shnamo;
+            
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            var dataS = mm+'/'+dd+'/'+yyyy;
+            //console.log(todayy);
+            //var dataS='08/25/2017';
+            // var currCmimiTvsh=$scope.syze.cmimilek;
+            // var currCmimiPaTvsh=currCmimiTvsh/1.2;
+            // currCmimiPaTvsh=currCmimiPaTvsh.toFixed(2);
+            // console.log(currCmimiTvsh);
+            // console.log(currCmimiPaTvsh);
+
+
+
+
+            var trupiEksport = new Array();
+            var kokaEksport = new Array();
+
+            var kokeNew = {
+                    'ID_DOKIMPORT':id_dok,
+                    'NENKATEGORIA':'USH',
+                    'LLOJDOKUMENTI':'USHmag',
+                    'NRDOK': id_dok,
+                    // 'NDERMARRJEKOD': vlera,
+                    'DATEDOK': dataS,
+                    'KLIENTFURNITOR': 'KL83',
+                    'MENYREPAGESE': 'Pagese',
+                    'DTREGJISTRIMI': dataS, 
+                    'EMERKLIENTI': 'Test Klienttt',
+                    'KONTAKTI': '069121212',
+               };
+
+              kokaEksport.push(kokeNew);
+
+              // Trupi eshte nje array me objetet qe do te shiten brenda
+              // for (var j = 0; j < trupi.length; j++) {
+              //     var trupNew = {
+              //         'ID_DOKIMPORTKOKA': '99999999999999999999999999999999999999999', //Këtu duhet vendosur id e kokës së dokumentit.
+              //         'LLOJVEPRIMI': 'Artikull',
+              //         'KODI': 'SD13137',  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+              //         'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+              //         'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+              //         'CMIMI': 23900,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh. 
+              //         // 'ZBRITJE': vlera,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+              //         'VLEFTAPATVSH': 23900,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+              //         'VLEFTAMETVSH': 23900,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+              //         'MAGAZINA ': 'qendra',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+              //         'SHENIME': "test nga aplikacioni",
+              //         // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+            
+              //                    };
+              //     trupiEksport.push(trupNew);
+              // }
+                      //console.log($scope.response);
+                    //for (var j = 0; j < $scope.response.length; j++) {
+
+                      // if($scope.syze.cmimiPromoLek !=""){
+                      //   console.log('jam brenda tek cmimi promo');
+                      //   var currCmimi=$scope.syze.cmimilek;
+                      //   var currCmimiTvsh=$scope.syze.cmimiPromoLek;
+                      //   //var zbritja=0;
+                      //   var zbritja=($scope.syze.cmimilek - $scope.syze.cmimiPromoLek)/$scope.syze.cmimilek*100;
+                      //   //console.log(zbritja);
+                      //   zbritja=zbritja.toFixed(2);
+                      //   //console.log(zbritja);
+
+                      // }else{
+                      //   var currCmimi=$scope.syze.cmimilek;
+                      //   var currCmimiTvsh=$scope.syze.cmimilek;
+                      //   var zbritja=0;
+                      // }
+                      var currCmimi=$scope.syze.cmimilek;
+                      var currCmimiTvsh=$scope.syze.cmimilek;
+                      var zbritja=0;
+                      console.log(currCmimi);
+                      console.log(currCmimiTvsh);
+                      var kodi=$scope.syze.kodartikulli;
+
+                      //var currCmimiTvsh=$scope.response[j].cmimilek;
+                      var currCmimiPaTvsh=currCmimiTvsh/1.2;
+                      currCmimiPaTvsh=currCmimiPaTvsh.toFixed(2);
+                      var vendi;
+                      // console.log(currCmimiTvsh);
+                      // console.log(currCmimiPaTvsh);
+                      if (where=='Pick Up On Store') {
+                        vendi=$scope.dyqanetListaSelected.dyqani;
+                      }else if(where=='Pay On Delivery'){
+                        vendi='Pay On Delivery';
+                      }else if(where=='PayPal Successful Payment'){
+                        vendi='PayPal Successful Payment';
+                      }else{
+                        vendi='Porosi Per Lente';
+                        specifikimet=specifikimet.slice(1,-1);
+                        specifikimet=specifikimet.replace(/['"]+/g, '');
+                        console.log(specifikimet);
+                        var shenimeTeSakta=where+" Me specifikime si me poshte: "+specifikimet;
+                      }
+                      
+
+
+
+                      var trupNew = {
+                      'ID_DOKIMPORTKOKA': id_dok, //Këtu duhet vendosur id e kokës së dokumentit.
+                      'LLOJVEPRIMI': 'Artikull',
+                      'KODI': kodi,  //Duhet të vendoset kodi i artikullit. Fushë e detyrueshme.
+                      'PERSHKRIMI':vendi,         //Vendoset përshkrimi i artikullit. Fushë jo e detyrueshme pasi merret nga artikulli.
+                      'NJESIA': 'cope', //Duhet të vendoset njësia matëse e artikullit. Fushë e detyrueshme.
+                      'SASIA': 1,  //Duhet të vendoset sasia e artikullit. Fushë e detyrueshme.
+                      'CMIMI': currCmimi,  //Nëse përdoren cmime pa TVSH për artikujt, duhet të vendoset cmimi pa tvsh.
+                      'LLOJZBRITJE': 'Perqindje', 
+                      'ZBRITJE': zbritja,  //Nëse ka zbritje analitike duhet të vendoset përqindja e zbritjes. Fushë jo e detyrueshme.
+                      'TVSH': 20,
+                      'VLEFTAPATVSH': currCmimiPaTvsh,  //Duhet të vendoset vlefta pa tvsh e artkullit. Fushë e detyrueshme.
+                      'VLEFTAMETVSH': currCmimiTvsh,  //Duhet të vendoset vlefta me tvsh e artkullit. Fushë e detyrueshme.
+                      'SHENIME': specifikimet,
+                      'MAGAZINA': 'MX83',  //Duhet të vendoset magazina nga po behet veprimi. Fushë e detyrueshme.
+                      // 'CMIMIMETVSH': vlera  //Nëse përdoren cmime me TVSH duhet të vendoset cmimi i artikullit te kjo fushë, fushë jo e detyrueshme.
+            
+                                 };
+                  trupiEksport.push(trupNew);
+                //}
+                console.log(trupiEksport);
+
+          // }
+
+          var dokPerTeDerguar = {kokaEksport: kokaEksport, trupiEksport: trupiEksport};
+
+          var dataToSend = JSON.stringify({
+              listEksportuar: dokPerTeDerguar,
+              formatPerImport: 'ImportShitjeDEA',
+              formatObjekti: "Shitje"
+          });
+          console.log('testi 1');
+          console.log(dataToSend);
+
+
+
+
+          $.ajax({
+           beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(username +":"+encrypted));
+            },
+            url: ip + "/importoEksportin",
+            type: 'POST',
+            contentType: 'application/json',
+            data: dataToSend,
+            dataType: 'json',
+            headers: {
+            'ndermarrjaserver': 'MAXOPTIKA',
+            'eksportprefixid': 'Shitje'
+           },
+           success: function (res) {
+            $scope.$apply(function () {
+                console.log('rezultati erdhiii');
+                console.log(res);
+                $scope.getShnamo('perditeso',currId+1);
+            });
+
+            
+
+
+
+           },
+            error: function (res) {
+            
+            console.log(res);
+            $scope.$apply(function () {
+               console.log('something went wrong');
+                console.log(res);
+            });
+          }   
+        });
+
+         }else{
+          console.log('rast perditesimi')
+         } 
+
+      });
+
+}
+
 
 
 
@@ -672,18 +898,18 @@ $scope.shfaqNgjyrat=function(){
   }
 
   $scope.lente={
-    smcurb:2,
-    sdcurb:4,
-    smdiopter:2,
-    sddiopter:2,
-    smbox:2,
-    sdbox:2
+    smcurb:0,
+    sdcurb:0,
+    smdiopter:0,
+    sddiopter:0,
+    smbox:0,
+    sdbox:0
   }
 
   $scope.lente2={
-    curb:2,
-    diopter:4,
-    box:6,
+    curb:0,
+    diopter:0,
+    box:0,
   }
   // $scope.smcurb.vlera='option-1';
 
@@ -733,9 +959,10 @@ $scope.shfaqNgjyrat=function(){
         $ionicLoading.hide();
         console.log(response);
         if (response.sentPayL==1) {
+          $scope.getShnamo('merr','bosh', "Porosi Per Lente", JSON.stringify($scope.lente));
           $ionicPopup.alert({
               title: 'Sukses',
-              template: '<p align="center">Porosia u dergua me sukses.</p>'
+              template: '<p align="center">Porosia u dergua me sukses. Ju do te lajmeroheni kur ajo te jete.</p>'
             });
         }else{
            $ionicPopup.alert({
@@ -6365,27 +6592,27 @@ $scope.testApi=function(){
       $scope.minusElement=function (item, index, cmimi, monedha){
         
         
-        //$scope.example[item]=Number($scope.example[item])-1;
+        $scope.example[item]=Number($scope.example[item])-1;
 
-        $scope.response.forEach( function(a, index) {
-          //a.sasia=a.sasia-$scope.example[item];
-          if (item==a.kodartikulli) {
-            if ($scope.example[item]>=a.sasia) {
-              console.log($scope.example[item]);
-              console.log(a);
-              console.log('tek 1');
-              var alertPopup = $ionicPopup.alert({
-                template: '<p align="center">Ky produkt nuk ka me gjendje!</p>'
-              });
-              $scope.example[item]=a.sasia;
-              //a.sasia=a.sasia-$scope.example[item];
-            }else{
-              console.log('tek 2');
-              $scope.example[item]=Number($scope.example[item])-1;
-              //a.sasia=a.sasia-$scope.example[item];
-            }
-          }
-        });
+        // $scope.response.forEach( function(a, index) {
+        //   //a.sasia=a.sasia-$scope.example[item];
+        //   if (item==a.kodartikulli) {
+        //     if ($scope.example[item]>=a.sasia) {
+        //       console.log($scope.example[item]);
+        //       console.log(a);
+        //       console.log('tek 1');
+        //       var alertPopup = $ionicPopup.alert({
+        //         template: '<p align="center">Ky produkt nuk ka me gjendje!</p>'
+        //       });
+        //       $scope.example[item]=a.sasia;
+        //       //a.sasia=a.sasia-$scope.example[item];
+        //     }else{
+        //       console.log('tek 2');
+        //       $scope.example[item]=Number($scope.example[item])-1;
+        //       //a.sasia=a.sasia-$scope.example[item];
+        //     }
+        //   }
+        // });
         //console.log($scope.example);
 
 
